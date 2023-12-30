@@ -1,0 +1,41 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/default/default_button.dart';
+import 'package:hasad_app/common/default/loading_widget.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
+
+import '../../../../../../../../utils/app_strings.dart';
+import '../../../../../../../../utils/routes_manager.dart';
+import '../../../../../data/network/auth_requests.dart';
+import '../../../../controller/signup/user/sign_up_cubit.dart';
+
+class UserSignupButton extends StatelessWidget {
+  const UserSignupButton({super.key, required this.formKey, required this.userSignUpRequest});
+  final GlobalKey<FormState> formKey;
+  final UserSignUpRequest userSignUpRequest;
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<UserSignUpCubit, UserSignUpState>(
+      listener: (context, state) {
+        if (state is UserSignUpErrorState) {
+          showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+        }
+        if (state is UserSignUpSuccessState) {
+          Navigator.pushNamed(context, Routes.homeScreenRoutes);
+          showSnackbar(
+              context: context, text: AppStrings.signupSuccess.tr(), state: ToastStates.SUCCESS);
+        }
+      },
+      builder: (context, state) => state is UserSignUpLoadingState
+          ? const LoadingWidget()
+          : DefaultButton(
+              buttonName: "تسجيل جديد",
+              buttonFunction: () {
+                if (formKey.currentState!.validate()) {
+                  UserSignUpCubit.get(context).userSignup(userSignUpRequest);
+                }
+              }),
+    );
+  }
+}
