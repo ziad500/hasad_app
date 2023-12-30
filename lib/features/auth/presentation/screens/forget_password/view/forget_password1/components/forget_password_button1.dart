@@ -1,7 +1,7 @@
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 
-import '../../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +27,7 @@ class ForgetPasswordButton1 extends StatelessWidget {
         }
       },
       builder: (context, state) => DefaultButton(
-          buttonName: AppStrings.send.tr(),
+          buttonName: LocaleKeys.done.tr(),
           buttonFunction: () {
             ForgetPasswordCubit.get(context)
                 .pageController

@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../../core/di.dart' as di;
-import '../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import '../../../../../../../../utils/routes_manager.dart';
 import '../../../../../../../../utils/validation.dart';
 import '../../../../../data/network/auth_requests.dart';
@@ -59,7 +59,7 @@ class UserSignUp extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: DefaultText(
-                            text: "تسجيل جديد",
+                            text: LocaleKeys.newRegister.tr(),
                             textStyle: Theme.of(context)
                                 .textTheme
                                 .headlineLarge
@@ -71,7 +71,7 @@ class UserSignUp extends StatelessWidget {
                         ),
                         DefaultFormField(
                             controller: nameController,
-                            hint: "اسم المستخدم",
+                            hint: LocaleKeys.username.tr(),
                             prefix: SvgPicture.asset(SVGManager.user),
                             validator: defaultValidation),
                         SizedBox(
@@ -79,7 +79,7 @@ class UserSignUp extends StatelessWidget {
                         ),
                         DefaultFormField(
                             controller: phoneController,
-                            hint: "رقم الجوال",
+                            hint: LocaleKeys.phoneNumber.tr(),
                             prefix: const IconCall(),
                             validator: defaultPhoneNumberValidation),
                         SizedBox(
@@ -87,7 +87,7 @@ class UserSignUp extends StatelessWidget {
                         ),
                         DefaultFormField(
                             controller: stcController,
-                            hint: "رقم STC الخاص بك",
+                            hint: LocaleKeys.yourStcNumber.tr(),
                             prefix: SvgPicture.asset(SVGManager.circle),
                             validator: defaultValidation),
                         SizedBox(
@@ -102,10 +102,10 @@ class UserSignUp extends StatelessWidget {
                               obscureText: UserSignUpCubit.get(context).obscured,
                               onSuffixTap: () => UserSignUpCubit.get(context).toggleObscured(),
                               suffix: UserSignUpCubit.get(context).suffix,
-                              hint: AppStrings.password.tr(),
+                              hint: LocaleKeys.password.tr(),
                               validator: (value) {
                                 if (!validatePassword(value)) {
-                                  return AppStrings.pleaseEnterAValidPassword.tr();
+                                  return LocaleKeys.pleaseEnterAValidPassword.tr();
                                 }
                                 return null;
                               },
@@ -125,10 +125,10 @@ class UserSignUp extends StatelessWidget {
                               onSuffixTap: () =>
                                   UserSignUpCubit.get(context).confirmToggleObscured(),
                               suffix: UserSignUpCubit.get(context).confirmSuffix,
-                              hint: AppStrings.confirmPassword.tr(),
+                              hint: LocaleKeys.retypePassword.tr(),
                               validator: (value) {
                                 if (value != passwordController.text) {
-                                  return AppStrings.passwordNotMatched.tr();
+                                  return LocaleKeys.passwordNotMatched.tr();
                                 }
                                 return null;
                               },
@@ -157,7 +157,7 @@ class UserSignUp extends StatelessWidget {
                         ),
                         Center(
                           child: DefaultTextButton(
-                            text: "تمتلك حسابا بالفعل؟",
+                            text: LocaleKeys.alreadyHaveAccount.tr(),
                             color: AppColors.blue,
                             onPressed: () {
                               Navigator.pushReplacementNamed(context, Routes.signUpScreenRoutes);

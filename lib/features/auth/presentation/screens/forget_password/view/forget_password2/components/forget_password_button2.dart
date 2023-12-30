@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 
-import '../../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import '../../../../../../data/network/auth_requests.dart';
 import '../../../../../controller/forget_password_cubit/forget_password_cubit.dart';
 
@@ -32,13 +32,14 @@ class ForgetPasswordButton2 extends StatelessWidget {
               .pageController
               .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
         } else if (state is RequestResetPasswordSuccessState) {
-          showSnackbar(context: context, text: "code sent", state: ToastStates.SUCCESS);
+          showSnackbar(
+              context: context, text: LocaleKeys.codeSent.tr(), state: ToastStates.SUCCESS);
         } else if (state is RequestResetPasswordErrorState) {
           showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
         }
       },
       builder: (context, state) => DefaultButton(
-          buttonName: AppStrings.confirm.tr(),
+          buttonName: LocaleKeys.confirm.tr(),
           buttonFunction: () {
             ForgetPasswordCubit.get(context)
                 .pageController
@@ -56,7 +57,7 @@ class ForgetPasswordButton2 extends StatelessWidget {
             } else {
               showSnackbar(
                   context: context,
-                  text: AppStrings.pleaseEnterValidCode.tr(),
+                  text: LocaleKeys.pleaseEnterValidCode.tr(),
                   state: ToastStates.ERROR);
             }
           }),

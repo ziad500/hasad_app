@@ -1,8 +1,8 @@
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
-import '../../../../../../../utils/app_strings.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../data/network/auth_requests.dart';
@@ -32,7 +32,7 @@ class LoginButton extends StatelessWidget {
 
           showSnackbar(
               context: context,
-              text: AppStrings.loginSuccessfully.tr(),
+              text: LocaleKeys.loginSuccessfully.tr(),
               state: ToastStates.SUCCESS);
         } else if (state is UserLoginSuccessState) {
           /*  Navigator.pushReplacementNamed(context, Routes.homeRoutes);
@@ -40,7 +40,7 @@ class LoginButton extends StatelessWidget {
             passwordController.clear(); */
           showSnackbar(
               context: context,
-              text: AppStrings.loginSuccessfully.tr(),
+              text: LocaleKeys.loginSuccessfully.tr(),
               state: ToastStates.SUCCESS);
         }
       },
@@ -50,7 +50,7 @@ class LoginButton extends StatelessWidget {
                 child: LoadingWidget(),
               )
             : DefaultButton(
-                buttonName: AppStrings.login.tr(),
+                buttonName: LocaleKeys.login.tr(),
                 buttonFunction: () {
                   if (formKey.currentState!.validate()) {
                     LoginCubit.get(context)

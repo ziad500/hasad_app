@@ -1,0 +1,65 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+abstract class  LocaleKeys {
+  static const success = 'success';
+  static const bad_request_error = 'bad_request_error';
+  static const forbidden_error = 'forbidden_error';
+  static const unauthorized_error = 'unauthorized_error';
+  static const not_found_error = 'not_found_error';
+  static const conflict_error = 'conflict_error';
+  static const internal_server_error = 'internal_server_error';
+  static const unknown_error = 'unknown_error';
+  static const timeout_error = 'timeout_error';
+  static const default_error = 'default_error';
+  static const cache_error = 'cache_error';
+  static const no_internet_error = 'no_internet_error';
+  static const search = 'search';
+  static const internetRestored = 'internetRestored';
+  static const passwordNotMatched = 'passwordNotMatched';
+  static const oldNewPasswordError = 'oldNewPasswordError';
+  static const pleaseEnterAValidPassword = 'pleaseEnterAValidPassword';
+  static const password = 'password';
+  static const forgetPassword = 'forgetPassword';
+  static const loginSuccessfully = 'loginSuccessfully';
+  static const dontHaveAnAccount = 'dontHaveAnAccount';
+  static const resetPassword = 'resetPassword';
+  static const enterYouPhoneNumber = 'enterYouPhoneNumber';
+  static const pleaseEnterValidNumber = 'pleaseEnterValidNumber';
+  static const pleaseEnterValidCode = 'pleaseEnterValidCode';
+  static const confirmPassword = 'confirmPassword';
+  static const enterYourName = 'enterYourName';
+  static const enterYourEmail = 'enterYourEmail';
+  static const pleaseEnterValidEmail = 'pleaseEnterValidEmail';
+  static const doneDelete = 'doneDelete';
+  static const doneEdited = 'doneEdited';
+  static const doneAdd = 'doneAdd';
+  static const done = 'done';
+  static const loginSuccess = 'loginSuccess';
+  static const signUpSuccess = 'signUpSuccess';
+  static const forgotPassword = 'forgotPassword';
+  static const noAccount = 'noAccount';
+  static const login = 'login';
+  static const username = 'username';
+  static const phoneNumber = 'phoneNumber';
+  static const yourStcNumber = 'yourStcNumber';
+  static const retypePassword = 'retypePassword';
+  static const alreadyHaveAccount = 'alreadyHaveAccount';
+  static const enterVerificationCode = 'enterVerificationCode';
+  static const verificationCodeSent = 'verificationCodeSent';
+  static const resendCodeIn = 'resendCodeIn';
+  static const confirm = 'confirm';
+  static const newPassword = 'newPassword';
+  static const enterNewPassword = 'enterNewPassword';
+  static const confirmNewPassword = 'confirmNewPassword';
+  static const retypeNewPassword = 'retypeNewPassword';
+  static const enterValidPassword = 'enterValidPassword';
+  static const enterValidPhoneNumber = 'enterValidPhoneNumber';
+  static const phoneNumberMinimumLength = 'phoneNumberMinimumLength';
+  static const enterValidStcNumber = 'enterValidStcNumber';
+  static const thisFieldIsRequired = 'thisFieldIsRequired';
+  static const newRegister = 'newRegister';
+  static const enterPhoneResetPassword = 'enterPhoneResetPassword';
+  static const codeSent = 'codeSent';
+  static const resendCode = 'resendCode';
+
+}

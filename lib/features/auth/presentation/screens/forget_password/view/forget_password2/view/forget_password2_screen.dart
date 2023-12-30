@@ -5,7 +5,7 @@ import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/core/timer/cubit/presentation/timer_view.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
-import '../../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,14 +59,14 @@ class ForgetPassword2 extends StatelessWidget {
                   height: 20.h,
                 ),
                 DefaultText(
-                  text: AppStrings.enterVerificationCode.tr(),
+                  text: LocaleKeys.enterVerificationCode.tr(),
                   textStyle: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
                 DefaultText(
-                  text: "تم ارسال رمز تأكيد الي رقم الجوال الخاص بك",
+                  text: LocaleKeys.verificationCodeSent.tr(),
                   textStyle: Theme.of(context).textTheme.labelMedium,
                 ),
                 SizedBox(

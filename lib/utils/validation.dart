@@ -1,4 +1,5 @@
-import 'app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 
 bool validatePhoneNumber(String phoneNumber) {
@@ -60,46 +61,46 @@ bool containsNumber(String input) {
 
 String? defaultValidation(dynamic value) {
   if (value == null || value.toString().isEmpty) {
-    return AppStrings.thisFieldIsRequired.tr();
+    return LocaleKeys.thisFieldIsRequired.tr();
   }
   return null;
 }
 
 String? defaultPhoneNumberValidation(dynamic value) {
   if (value == null || value.toString().isEmpty) {
-    return AppStrings.thisFieldIsRequired.tr();
+    return LocaleKeys.thisFieldIsRequired.tr();
   } else if (!validatePhoneNumber(value)) {
-    return AppStrings.pleaseEnterValidNumber.tr();
+    return LocaleKeys.pleaseEnterValidNumber.tr();
   }
   return null;
 }
 
 String? defaultEmailValidation(dynamic value) {
   if (value == null || value.toString().isEmpty) {
-    return AppStrings.thisFieldIsRequired.tr();
+    return LocaleKeys.thisFieldIsRequired.tr();
   } else if (!validateEmail(value)) {
-    return AppStrings.pleaseEnterValidEmail.tr();
+    return LocaleKeys.pleaseEnterValidEmail.tr();
   }
   return null;
 }
 
 String? defaultPasswordValidation(dynamic value) {
   if (value.isEmpty) {
-    return AppStrings.thisFieldIsRequired.tr();
+    return LocaleKeys.thisFieldIsRequired.tr();
   } else if (!validatePassword(value)) {
-    return AppStrings.pleaseEnterAValidPassword.tr();
+    return LocaleKeys.pleaseEnterAValidPassword.tr();
   }
   return null;
 }
 
 String? defaultConfirmPasswordValidation(dynamic value, String password) {
   if (value.isEmpty) {
-    return AppStrings.thisFieldIsRequired.tr();
+    return LocaleKeys.thisFieldIsRequired.tr();
   } else if (value != password) {
-    return AppStrings.passwordNotMatched.tr();
+    return LocaleKeys.passwordNotMatched.tr();
   }
   if (!validatePassword(value)) {
-    return AppStrings.pleaseEnterAValidPassword.tr();
+    return LocaleKeys.pleaseEnterAValidPassword.tr();
   }
   return null;
 }

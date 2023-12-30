@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
-
-import '../../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import '../../../../../../../../../utils/routes_manager.dart';
 import '../../../../../../data/network/auth_requests.dart';
 import '../../../../../controller/forget_password_cubit/forget_password_cubit.dart';
@@ -34,7 +33,7 @@ class ForgetPasswordButton3 extends StatelessWidget {
         }
       },
       builder: (context, state) => DefaultButton(
-          buttonName: AppStrings.done.tr(),
+          buttonName: LocaleKeys.done.tr(),
           buttonFunction: () {
             if (formKey3.currentState!.validate() && formKey4.currentState!.validate()) {
               ForgetPasswordCubit.get(context).resetPasswod(ResetPasswordRequest(

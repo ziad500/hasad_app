@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import '../../../../../../../../../utils/font_manager.dart';
 import '../../../../../../../../../utils/values_manager.dart';
 
@@ -17,7 +17,7 @@ class ForgetPassword1Appbar extends StatelessWidget {
         FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
-            AppStrings.resetPassword.tr(),
+            LocaleKeys.resetPassword.tr(),
             style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: FontSize.s28),
           ),
         ),
@@ -27,7 +27,7 @@ class ForgetPassword1Appbar extends StatelessWidget {
         FittedBox(
           fit: BoxFit.scaleDown,
           child: Text(
-            AppStrings.enterYourEmail.tr(),
+            LocaleKeys.enterYourEmail.tr(),
             style: Theme.of(context).textTheme.titleMedium,
           ),
         )

@@ -46,7 +46,7 @@ class DefaultDragableButton extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                                 child: Center(
                                   child: Text(
-                                    AppStrings.dragToStartvisit.tr,
+                                    LocaleKeys.dragToStartvisit.tr,
                                     style: const TextStyle(color: AppColors.white, fontSize: 20.00),
                                   ),
                                 ),

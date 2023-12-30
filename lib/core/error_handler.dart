@@ -2,8 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
-import '../utils/app_strings.dart';
 import 'failure.dart';
 
 class ErrorHandler implements Exception {
@@ -20,9 +20,9 @@ class ErrorHandler implements Exception {
 // Function to handle response errors
 Failure hangdleResponseError(DioException error) {
   if (error.type == DioExceptionType.connectionTimeout) {
-    return Failure(500, AppStrings.internalServerError.tr());
+    return Failure(500, LocaleKeys.internal_server_error.tr());
   } else if (error.response?.statusCode == 500) {
-    return Failure(500, AppStrings.internalServerError.tr());
+    return Failure(500, LocaleKeys.internal_server_error.tr());
   }
   if (error.response?.data is Map<String, dynamic>) {
     Map<String, dynamic> errors = error.response!.data;
@@ -173,24 +173,24 @@ class ResponseCode {
 }
 
 class ResponseMessage {
-  static const String SUCCESS = AppStrings.success; // success with data
-  static const String NO_CONTENT = AppStrings.success; // success with no data
-  static const String BAD_REQUEST = AppStrings.badRequestError; // failure, API rejected request
+  static const String SUCCESS = LocaleKeys.success; // success with data
+  static const String NO_CONTENT = LocaleKeys.success; // success with no data
+  static const String BAD_REQUEST = LocaleKeys.bad_request_error; // failure, API rejected request
   static const String UNAUTHORISED =
-      AppStrings.unauthorizedError; // failure, user is not authorised
-  static const String FORBIDDEN = AppStrings.forbiddenError; // failure, API rejected request
+      LocaleKeys.unauthorized_error; // failure, user is not authorised
+  static const String FORBIDDEN = LocaleKeys.forbidden_error; // failure, API rejected request
   static const String INTERNAL_SERVER_ERROR =
-      AppStrings.internalServerError; // failure, crash in server side
-  static const String NOT_FOUND = AppStrings.notFoundError; // failure, Not Found
+      LocaleKeys.internal_server_error; // failure, crash in server side
+  static const String NOT_FOUND = LocaleKeys.not_found_error; // failure, Not Found
 
   // local status code
-  static const String CONNECT_TIMEOUT = AppStrings.timeoutError;
-  static const String CANCEL = AppStrings.defaultError;
-  static const String RECIEVE_TIMEOUT = AppStrings.timeoutError;
-  static const String SEND_TIMEOUT = AppStrings.timeoutError;
-  static const String CACHE_ERROR = AppStrings.cacheError;
-  static const String NO_INTERNET_CONNECTION = AppStrings.noInternetError;
-  static const String DEFAULT = AppStrings.defaultError;
+  static const String CONNECT_TIMEOUT = LocaleKeys.timeout_error;
+  static const String CANCEL = LocaleKeys.default_error;
+  static const String RECIEVE_TIMEOUT = LocaleKeys.timeout_error;
+  static const String SEND_TIMEOUT = LocaleKeys.timeout_error;
+  static const String CACHE_ERROR = LocaleKeys.cache_error;
+  static const String NO_INTERNET_CONNECTION = LocaleKeys.no_internet_error;
+  static const String DEFAULT = LocaleKeys.default_error;
 }
 
 class ApiInternalStatus {

@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
 import '../../utils/app_colors.dart';
-import '../../utils/app_strings.dart';
 
 class DefaultSearchBar extends StatelessWidget {
   const DefaultSearchBar(
@@ -34,7 +34,7 @@ class DefaultSearchBar extends StatelessWidget {
             horizontal: 10,
             vertical: 8,
           ),
-          hintText: AppStrings.search.tr(),
+          hintText: LocaleKeys.search.tr(),
           suffixIcon: const Icon(
             Icons.search,
             color: AppColors.iconColor,

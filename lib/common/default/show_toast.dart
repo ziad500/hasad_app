@@ -1,4 +1,5 @@
-import '../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -27,7 +28,7 @@ import 'package:fluttertoast/fluttertoast.dart';
       children: [
         Expanded(
           child: Text(
-            text!.contains("null") ? AppStrings.internalServerError.tr() : text,
+            text!.contains("null") ? LocaleKeys.internalServerError.tr() : text,
             style: const TextStyle(color: Colors.white, fontSize: 14.0, height: 1.5),
           ),
         ),
@@ -66,7 +67,7 @@ void showSnackbar(
         required ToastStates state,
         ToastGravity? gravity}) =>
     Fluttertoast.showToast(
-        msg: text!.contains("null") ? AppStrings.internalServerError.tr() : text,
+        msg: text!.contains("null") ? LocaleKeys.internal_server_error.tr() : text,
         toastLength: Toast.LENGTH_LONG,
         gravity: gravity ?? ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

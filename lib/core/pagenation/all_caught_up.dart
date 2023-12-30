@@ -1,6 +1,4 @@
 import '../../utils/app_colors.dart';
-import '../../utils/app_strings.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,9 +14,9 @@ class AllCaughtUpWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "AppStrings.allCaughtUp.tr()",
-            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryColor),
+          const Text(
+            "LocaleKeys.allCaughtUp.tr()",
+            style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryColor),
           ),
           SizedBox(width: 2.w),
           CircleAvatar(

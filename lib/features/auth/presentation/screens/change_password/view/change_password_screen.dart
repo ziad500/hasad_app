@@ -41,7 +41,7 @@ class ChangePasswordScreen extends StatelessWidget {
             appbarTitle: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               child: Text(
-                AppStrings.resetPassword.tr(),
+                LocaleKeys.resetPassword.tr(),
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -56,7 +56,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     Navigator.pop(context);
                     showSnackbar(
                         context: context,
-                        text: AppStrings.doneEdited.tr(),
+                        text: LocaleKeys.doneEdited.tr(),
                         state: ToastStates.SUCCESS);
                   }
                 },
@@ -104,11 +104,11 @@ class ChangePasswordScreen extends StatelessWidget {
                             obscureText: ChangePasswordCubit.get(context).oldObscured,
                             onSuffixTap: () => ChangePasswordCubit.get(context).toggleOldObscured(),
                             suffix: ChangePasswordCubit.get(context).oldSuffix,
-                            hint: AppStrings.currentPassword.tr(),
+                            hint: LocaleKeys.currentPassword.tr(),
                             validator: (value) {
                               if (value !=
                                   CacheHelper.getData(key: CacheKeys.password).toString()) {
-                                return AppStrings.oldPasswordIncorrect.tr();
+                                return LocaleKeys.oldPasswordIncorrect.tr();
                               }
                               return null;
                             },
@@ -120,7 +120,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       height: 16,
                     ),
                     FadeAnimation(
-                        child: Text(AppStrings.newPassword.tr(),
+                        child: Text(LocaleKeys.newPassword.tr(),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16))),
                     const SizedBox(
                       height: 5,
@@ -135,7 +135,7 @@ class ChangePasswordScreen extends StatelessWidget {
                             obscureText: ChangePasswordCubit.get(context).obscured,
                             onSuffixTap: () => ChangePasswordCubit.get(context).toggleObscured(),
                             suffix: ChangePasswordCubit.get(context).suffix,
-                            hint: AppStrings.newPassword.tr(),
+                            hint: LocaleKeys.newPassword.tr(),
                             onChanged: (p0) {
                               if (confirmPasswordController.text != "") {
                                 formKey2.currentState?.validate();
@@ -144,9 +144,9 @@ class ChangePasswordScreen extends StatelessWidget {
                             validator: (value) {
                               if (value ==
                                   CacheHelper.getData(key: CacheKeys.password).toString()) {
-                                return AppStrings.oldNewPasswordError.tr();
+                                return LocaleKeys.oldNewPasswordError.tr();
                               } else if (!validatePassword(value)) {
-                                return AppStrings.pleaseEnterAValidPassword.tr();
+                                return LocaleKeys.pleaseEnterAValidPassword.tr();
                               }
                               return null;
                             },
@@ -158,7 +158,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       height: 16,
                     ),
                     FadeAnimation(
-                        child: Text(AppStrings.confirmPassword.tr(),
+                        child: Text(LocaleKeys.confirmPassword.tr(),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16))),
                     const SizedBox(
                       height: 5,
@@ -174,13 +174,13 @@ class ChangePasswordScreen extends StatelessWidget {
                             onSuffixTap: () =>
                                 ChangePasswordCubit.get(context).confirmToggleObscured(),
                             suffix: ChangePasswordCubit.get(context).confirmSuffix,
-                            hint: AppStrings.confirmPassword.tr(),
+                            hint: LocaleKeys.confirmPassword.tr(),
                             validator: (value) {
                               if (value != passwordController.text) {
-                                return AppStrings.passwordNotMatched.tr();
+                                return LocaleKeys.passwordNotMatched.tr();
                               }
                               if (!validatePassword(value)) {
-                                return AppStrings.pleaseEnterAValidPassword.tr();
+                                return LocaleKeys.pleaseEnterAValidPassword.tr();
                               }
                               return null;
                             },

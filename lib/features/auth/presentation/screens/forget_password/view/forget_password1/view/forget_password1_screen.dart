@@ -9,7 +9,7 @@ import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/icons/call_icon.dart';
 
-import '../../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import '../../../../../../../../../utils/routes_manager.dart';
 import '../../../../../../../../../utils/validation.dart';
 import '../../../../../controller/forget_password_cubit/forget_password_cubit.dart';
@@ -46,7 +46,7 @@ class ForgetPassword1 extends StatelessWidget {
                   height: 20.h,
                 ),
                 DefaultText(
-                  text: AppStrings.enterEmailResetPassword.tr(),
+                  text: LocaleKeys.enterPhoneResetPassword.tr(),
                   textStyle: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(
@@ -56,11 +56,11 @@ class ForgetPassword1 extends StatelessWidget {
                   key: formKey,
                   child: DefaultFormField(
                     controller: ForgetPasswordCubit.get(context).emailController,
-                    hint: AppStrings.phoneNumber.tr(),
+                    hint: LocaleKeys.phoneNumber.tr(),
                     prefix: const IconCall(),
                     validator: (value) {
                       if (!validateEmail(value)) {
-                        return AppStrings.pleaseEnterValidEmail.tr();
+                        return LocaleKeys.pleaseEnterValidEmail.tr();
                       }
                       return null;
                     },

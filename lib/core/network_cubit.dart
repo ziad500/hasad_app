@@ -52,11 +52,11 @@ class InternetCubit extends Cubit<InternetState> {
     {
       if (state == InternetState.gained) {
         /*    showSnackbar(
-            context: context, text: AppStrings.internetRestored.tr(), state: ToastStates.SUCCESS);
+            context: context, text: LocaleKeys.internetRestored.tr(), state: ToastStates.SUCCESS);
       */
       } else if (state == InternetState.lost) {
         /*    showSnackbar(
-            context: context, text: AppStrings.noInternetError.tr(), state: ToastStates.ERROR);
+            context: context, text: LocaleKeys.noInternetError.tr(), state: ToastStates.ERROR);
       */
       }
     }

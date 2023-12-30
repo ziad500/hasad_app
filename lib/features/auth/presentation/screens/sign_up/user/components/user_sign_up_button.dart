@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
-import '../../../../../../../../utils/app_strings.dart';
 import '../../../../../../../../utils/routes_manager.dart';
 import '../../../../../data/network/auth_requests.dart';
 import '../../../../controller/signup/user/sign_up_cubit.dart';
@@ -24,13 +24,13 @@ class UserSignupButton extends StatelessWidget {
         if (state is UserSignUpSuccessState) {
           Navigator.pushNamed(context, Routes.homeScreenRoutes);
           showSnackbar(
-              context: context, text: AppStrings.signupSuccess.tr(), state: ToastStates.SUCCESS);
+              context: context, text: LocaleKeys.signUpSuccess.tr(), state: ToastStates.SUCCESS);
         }
       },
       builder: (context, state) => state is UserSignUpLoadingState
           ? const LoadingWidget()
           : DefaultButton(
-              buttonName: "تسجيل جديد",
+              buttonName: LocaleKeys.newRegister.tr(),
               buttonFunction: () {
                 if (formKey.currentState!.validate()) {
                   UserSignUpCubit.get(context).userSignup(userSignUpRequest);

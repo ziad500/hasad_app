@@ -1,7 +1,8 @@
+import 'package:hasad_app/generated/app_strings.g.dart';
+
 import '../../utils/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-import '../../utils/app_strings.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -118,7 +119,7 @@ class CustomDropDown extends StatelessWidget {
                       validator: validator ??
                           (value) {
                             if (value == null) {
-                              return AppStrings.thisFieldIsRequired.tr();
+                              return LocaleKeys.thisFieldIsRequired.tr();
                             }
                             return null;
                           },
@@ -151,7 +152,7 @@ class CustomDropDown extends StatelessWidget {
                                 horizontal: 10,
                                 vertical: 8,
                               ),
-                              hintText: AppStrings.search.tr(),
+                              hintText: LocaleKeys.search.tr(),
                               hintStyle: Theme.of(context)
                                   .textTheme
                                   .bodySmall

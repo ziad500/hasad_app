@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 
-import '../../../../../../../../../utils/app_strings.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import '../../../../../../../../../utils/validation.dart';
 import '../../../../../controller/forget_password_cubit/forget_password_cubit.dart';
 
@@ -35,7 +35,7 @@ class ForgetPasswordFields3 extends StatelessWidget {
                 obscureText: ForgetPasswordCubit.get(context).obscured,
                 onSuffixTap: () => ForgetPasswordCubit.get(context).toggleObscured(),
                 suffix: ForgetPasswordCubit.get(context).suffix,
-                hint: "كلمة المرور الجديدة",
+                hint: LocaleKeys.confirmNewPassword.tr(),
                 onChanged: (p0) {
                   if (confirmPasswordController.text != "") {
                     formKey4.currentState?.validate();
@@ -43,7 +43,7 @@ class ForgetPasswordFields3 extends StatelessWidget {
                 },
                 validator: (value) {
                   if (!validatePassword(value)) {
-                    return AppStrings.pleaseEnterAValidPassword.tr();
+                    return LocaleKeys.pleaseEnterAValidPassword.tr();
                   }
                   return null;
                 },
@@ -65,10 +65,10 @@ class ForgetPasswordFields3 extends StatelessWidget {
                 obscureText: ForgetPasswordCubit.get(context).confirmObscured,
                 onSuffixTap: () => ForgetPasswordCubit.get(context).confirmToggleObscured(),
                 suffix: ForgetPasswordCubit.get(context).confirmSuffix,
-                hint: "إعادة كتابة كلمة المرور الجديدة",
+                hint: LocaleKeys.retypeNewPassword.tr(),
                 validator: (value) {
                   if (value != passwordController.text) {
-                    return AppStrings.passwordNotMatched.tr();
+                    return LocaleKeys.passwordNotMatched.tr();
                   }
                   return null;
                 },

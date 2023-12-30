@@ -23,7 +23,7 @@ class ImageView extends StatelessWidget {
                         .then((value) => showSnackbar(
                             context: context,
                             state: ToastStates.SUCCESS,
-                            text: AppStrings.done.tr)); */
+                            text: LocaleKeys.done.tr)); */
                   },
                   icon: const Icon(
                     Icons.download,
