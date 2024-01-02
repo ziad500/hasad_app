@@ -57,6 +57,15 @@ class TimerrCubit extends Cubit<TimerrState> {
     return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
+  String get biddingDisplay {
+    Duration duration = Duration(seconds: start);
+    int days = duration.inDays;
+    int hours = duration.inHours % 24; // Adjust for remaining hours after subtracting days
+    int minutes = duration.inMinutes % 60;
+    int seconds = duration.inSeconds % 60;
+    return '${days.toString()}:${hours.toString()}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+
   void cancelTimer() {
     _timer.cancel();
     emit(CancelTimerState(TimerState('0:00', true)));

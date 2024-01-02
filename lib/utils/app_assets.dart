@@ -18,6 +18,12 @@ class SVGManager {
   static String bid = "$svgPath/bid.svg";
   static String chats = "$svgPath/chats.svg";
   static String profile = "$svgPath/profile.svg";
+  static String notification = "$svgPath/notification.svg";
+  static String search = "$svgPath/search.svg";
+  static String favorite = "$svgPath/favorite.svg";
+  static String bidding = "$svgPath/bidding.svg";
+  static String clock = "$svgPath/clock.svg";
+  static String location = "$svgPath/location.svg";
 }
 
 String gifPath = "assets/gif";

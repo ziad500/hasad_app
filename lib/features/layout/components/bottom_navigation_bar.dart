@@ -11,23 +11,31 @@ class BottomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.locale;
-    return BottomAppBar(
-      elevation: 10,
-      height: 70,
-      notchMargin: 10,
-      child: SizedBox(
+    return ClipRRect(
+      borderRadius:
+          const BorderRadius.only(topLeft: Radius.circular(30.5), topRight: Radius.circular(30.5)),
+      child: BottomAppBar(
+        elevation: 10,
         height: 70,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BottomNavBarItem(icon: SVGManager.bid, index: 0, cubit: cubit),
-            BottomNavBarItem(index: 1, icon: SVGManager.home, cubit: cubit),
-            const SizedBox(
-              width: 50,
-            ),
-            BottomNavBarItem(icon: SVGManager.chats, index: 2, cubit: cubit),
-            BottomNavBarItem(icon: SVGManager.profile, fontSize: 13, index: 3, cubit: cubit),
-          ],
+        notchMargin: 10,
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius:
+                BorderRadius.only(topLeft: Radius.circular(30.5), topRight: Radius.circular(30.5)),
+          ),
+          height: 70,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BottomNavBarItem(icon: SVGManager.bid, index: 0, cubit: cubit),
+              BottomNavBarItem(index: 1, icon: SVGManager.home, cubit: cubit),
+              const SizedBox(
+                width: 50,
+              ),
+              BottomNavBarItem(icon: SVGManager.chats, index: 2, cubit: cubit),
+              BottomNavBarItem(icon: SVGManager.profile, fontSize: 13, index: 3, cubit: cubit),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
 import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
+import 'package:device_preview/device_preview.dart';
 
 import 'utils/bloc_observer.dart';
 import 'utils/cache_helper.dart';
@@ -35,7 +36,9 @@ void main() async {
     saveLocale: true,
     startLocale: ARABIC_LOCAL,
     fallbackLocale: ENGLISH_LOCAL,
-    child: const MyApp(),
+    child: DevicePreview(
+      builder: (context) => MyApp(), // Wrap your app
+    ),
   ));
 }
 

@@ -8,6 +8,7 @@ class AppColors {
   static const Color blue = Color(0xff176AEE);
   static const Color scaffoldColor = Color(0xffF5F5F5);
   static const Color buttonColorSecondary = Color(0xffE9E9F7);
+  static const Color blueAccent = Color(0xff34628C);
 
   static const Color textButtonColor = Color(0xff6A3DCA);
 
@@ -33,4 +34,5 @@ class AppColors {
 
   static const Color pickImageColor = Color(0xffF1F4FA);
   static const Color starIconColor = Color(0xffE9862B);
+  static const Color orangeColor = Color(0xffF96C05);
 }
