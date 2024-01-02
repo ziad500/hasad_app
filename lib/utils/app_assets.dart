@@ -14,6 +14,10 @@ class SVGManager {
   static String circle = "$svgPath/circle.svg";
   static String lock = "$svgPath/lock.svg";
   static String user = "$svgPath/user.svg";
+  static String home = "$svgPath/home.svg";
+  static String bid = "$svgPath/bid.svg";
+  static String chats = "$svgPath/chats.svg";
+  static String profile = "$svgPath/profile.svg";
 }
 
 String gifPath = "assets/gif";

@@ -1,5 +1,6 @@
 import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
+import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
 
 import 'utils/bloc_observer.dart';
 import 'utils/cache_helper.dart';
@@ -71,6 +72,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
           create: (context) => di.sl<UserSignUpCubit>(),
         ),
+        BlocProvider(
+          create: (context) => LayoutCubit(),
+        ),
       ],
       child: BlocConsumer<InternetCubit, InternetState>(
         buildWhen: (previous, current) => false,
@@ -94,7 +98,7 @@ class _MyAppState extends State<MyApp> {
               locale: context.locale,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: RouteGenerator.getRoute,
-              initialRoute: Routes.splashRoutes,
+              initialRoute: Routes.homeScreenRoutes,
             ),
           );
         },

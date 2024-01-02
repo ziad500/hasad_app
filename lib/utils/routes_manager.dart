@@ -1,5 +1,6 @@
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
 import 'package:hasad_app/features/home/home_screen.dart';
+import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
 
 import '../features/auth/presentation/screens/forget_password/view/forget_password_screen.dart';
@@ -41,7 +42,7 @@ class RouteGenerator {
       case Routes.homeScreenRoutes:
         return MaterialPageRoute(
           builder: (context) {
-            return const HomeScreen();
+            return const LayoutScreen();
           },
         );
       case Routes.signUpScreenRoutes:
