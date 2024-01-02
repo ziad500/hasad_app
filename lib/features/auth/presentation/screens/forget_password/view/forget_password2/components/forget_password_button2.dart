@@ -41,9 +41,6 @@ class ForgetPasswordButton2 extends StatelessWidget {
       builder: (context, state) => DefaultButton(
           buttonName: LocaleKeys.confirm.tr(),
           buttonFunction: () {
-            ForgetPasswordCubit.get(context)
-                .pageController
-                .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
             if (code1Controller.text != "" ||
                 code2Controller.text != "" ||
                 code3Controller.text != "" ||

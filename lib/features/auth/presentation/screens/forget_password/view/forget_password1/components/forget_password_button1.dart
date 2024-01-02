@@ -29,9 +29,6 @@ class ForgetPasswordButton1 extends StatelessWidget {
       builder: (context, state) => DefaultButton(
           buttonName: LocaleKeys.done.tr(),
           buttonFunction: () {
-            ForgetPasswordCubit.get(context)
-                .pageController
-                .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
             if (formKey.currentState!.validate()) {
               ForgetPasswordCubit.get(context).requestResetPasswod(RequestChangePasswordRequest(
                   ForgetPasswordCubit.get(context).emailController.text));

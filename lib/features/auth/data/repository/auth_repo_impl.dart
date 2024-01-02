@@ -5,7 +5,6 @@ import '../../../../../core/error_handler.dart';
 import '../../../../../core/failure.dart';
 import '../../domain/Repository/auth_repo.dart';
 import '../../domain/models/login_model.dart';
-import '../../domain/models/sign_up_model.dart';
 import '../data_source.dart/auth_remote_data_source.dart';
 import '../mapper/auth_mapper.dart';
 import '../network/auth_requests.dart';
@@ -50,35 +49,6 @@ class AuthRepositoryImpl implements AuthRepository {
       final response =
           await _authRemoteDataSource.requestChangePassword(requestChangePasswordRequest);
       return right(response);
-    } catch (error) {
-      if (error is DioException) {
-        return left(hangdleResponseError(error));
-      } else {
-        return left(Failure(100, error.toString()));
-      }
-    }
-  }
-
-  @override
-  Future<Either<Failure, MainUserAuthModel>> inspectorLogin(LoginRequest loginRequest) async {
-    try {
-      final response = await _authRemoteDataSource.inspectorLogin(loginRequest);
-      return right(response.toDomain());
-    } catch (error) {
-      if (error is DioException) {
-        return left(hangdleResponseError(error));
-      } else {
-        return left(Failure(100, error.toString()));
-      }
-    }
-  }
-
-  @override
-  Future<Either<Failure, InespectorSignUpModel>> inspectorSignUp(
-      InspectorSignUpRequest inspectorSignUpRequest) async {
-    try {
-      final response = await _authRemoteDataSource.inspectorSignUp(inspectorSignUpRequest);
-      return right(response.toDomain());
     } catch (error) {
       if (error is DioException) {
         return left(hangdleResponseError(error));

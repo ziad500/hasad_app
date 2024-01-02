@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
             body: SafeArea(
                 child: Column(
               children: [
-                SizedBox(height: 250.h, child: const Logo()),
+                SizedBox(height: 230.h, child: const Logo()),
                 const SizedBox(
                   height: 20,
                 ),
@@ -60,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20).w,
                                       child: DefaultText(
                                         text: LocaleKeys.login.tr(),
                                         textStyle: Theme.of(context)
@@ -86,14 +86,14 @@ class LoginScreen extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 20.h,
+                                      height: 10.h,
                                     ),
                                     LoginButton(
                                         emailController: emailController,
                                         passwordController: passwordController,
                                         formKey: loginFormKey),
                                     const SizedBox(
-                                      height: 20,
+                                      height: 10,
                                     ),
                                     Center(
                                       child: DefaultTextButton(

@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
 
 class Constants {
-  static const String baseUrl = "https://electrobile-souq.onrender.com/api/v1/";
-  static const String imagesUrl = "https://electrobile-souq.onrender.com";
+  static const String baseUrl = "https://alhasad.sa/api/";
+  static const String imagesUrl = "https://alhasad.sa/";
   static int limit = 5;
   static String userId = "";
 

@@ -1,88 +1,22 @@
-// ignore_for_file: public_member_api_docs; sort_constructors_first
-import 'dart:io';
-
 class LoginRequest {
-  String email;
+  String phone;
   String password;
-  LoginRequest(this.email, this.password);
-}
-
-class InspectorSignUpRequest {
-  String firstName;
-  String lastName;
-  String email;
-  int phoneKey;
-  int phoneNumber;
-  int region;
-  int city;
-  int district;
-  String addressDetails;
-  String fullName;
-  String password;
-  String passwordConfirmation;
-  int nationalIdNumber;
-  File nationalIdFrontFace;
-  File nationalIdBackFace;
-  File personalPhoto;
-  String stc;
-  List<String> departments;
-  List<String> departmentsTypes;
-  List<String> regions;
-  List<String> cities;
-  List<String> districts;
-  List<String> inspectionTypes;
-  InspectorSignUpRequest(
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phoneKey,
-    this.phoneNumber,
-    this.region,
-    this.city,
-    this.district,
-    this.fullName,
-    this.password,
-    this.passwordConfirmation,
-    this.nationalIdNumber,
-    this.nationalIdFrontFace,
-    this.nationalIdBackFace,
-    this.personalPhoto,
-    this.stc,
-    this.departments,
-    this.departmentsTypes,
-    this.regions,
-    this.cities,
-    this.districts,
-    this.addressDetails,
-    this.inspectionTypes,
-  );
+  LoginRequest(this.phone, this.password);
 }
 
 class UserSignUpRequest {
-  String firstName;
-  String lastName;
-  String email;
-  int phoneKey;
-  int phoneNumber;
-  int region;
-  int city;
-  int district;
-  String addressDetails;
+  String name;
+  int phone;
+  int stc;
   String password;
   String passwordConfirmation;
-  UserSignUpRequest(
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phoneKey,
-    this.phoneNumber,
-    this.region,
-    this.city,
-    this.district,
-    this.addressDetails,
-    this.password,
-    this.passwordConfirmation,
-  );
+  UserSignUpRequest({
+    required this.name,
+    required this.phone,
+    required this.stc,
+    required this.password,
+    required this.passwordConfirmation,
+  });
 }
 
 class ChangePasswordRequest {

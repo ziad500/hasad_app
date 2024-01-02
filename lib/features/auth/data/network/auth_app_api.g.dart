@@ -13,7 +13,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://adeal.alhasad.sa/api/';
+    baseUrl ??= 'https://alhasad.sa/api/';
   }
 
   final Dio _dio;
@@ -22,7 +22,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
 
   @override
   Future<MainUserAuthResponse> userLogin(
-    String email,
+    String phone,
     String password,
   ) async {
     const _extra = <String, dynamic>{};
@@ -30,22 +30,22 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
-      'email',
-      email,
+      'phone',
+      phone,
     ));
     _data.fields.add(MapEntry(
       'password',
       password,
     ));
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MainUserAuthResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MainUserAuthResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'user/login',
+              'login',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -55,204 +55,14 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
               baseUrl,
             ))));
     final value = MainUserAuthResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<MainUserAuthResponse> inspectorLogin(
-    String email,
-    String password,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = FormData();
-    _data.fields.add(MapEntry(
-      'email',
-      email,
-    ));
-    _data.fields.add(MapEntry(
-      'password',
-      password,
-    ));
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MainUserAuthResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'inspector/login',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = MainUserAuthResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<InespectorSignUpResponse> inspectorSignUp(
-    String firstName,
-    String lastName,
-    String email,
-    int phoneKey,
-    int phoneNumber,
-    int region,
-    int city,
-    int district,
-    String addressDetails,
-    String fullName,
-    String password,
-    String passwordConfirmation,
-    int nationalIdNumber,
-    File nationalIdFrontFace,
-    File nationalIdBackFace,
-    File personalPhoto,
-    String stc,
-    List<String> departments,
-    List<String> departmentsTypes,
-    List<String> regions,
-    List<String> cities,
-    List<String> districts,
-    List<String> inspectionTypes,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = FormData();
-    _data.fields.add(MapEntry(
-      'first_name',
-      firstName,
-    ));
-    _data.fields.add(MapEntry(
-      'last_name',
-      lastName,
-    ));
-    _data.fields.add(MapEntry(
-      'email',
-      email,
-    ));
-    _data.fields.add(MapEntry(
-      'phone_key',
-      phoneKey.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'phone_number',
-      phoneNumber.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'region',
-      region.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'city',
-      city.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'district',
-      district.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'address_details',
-      addressDetails,
-    ));
-    _data.fields.add(MapEntry(
-      'full_name',
-      fullName,
-    ));
-    _data.fields.add(MapEntry(
-      'password',
-      password,
-    ));
-    _data.fields.add(MapEntry(
-      'password_confirmation',
-      passwordConfirmation,
-    ));
-    _data.fields.add(MapEntry(
-      'national_id_number',
-      nationalIdNumber.toString(),
-    ));
-    _data.files.add(MapEntry(
-      'national_id_front_face',
-      MultipartFile.fromFileSync(
-        nationalIdFrontFace.path,
-        filename: nationalIdFrontFace.path.split(Platform.pathSeparator).last,
-      ),
-    ));
-    _data.files.add(MapEntry(
-      'national_id_back_face',
-      MultipartFile.fromFileSync(
-        nationalIdBackFace.path,
-        filename: nationalIdBackFace.path.split(Platform.pathSeparator).last,
-      ),
-    ));
-    _data.files.add(MapEntry(
-      'personal_photo',
-      MultipartFile.fromFileSync(
-        personalPhoto.path,
-        filename: personalPhoto.path.split(Platform.pathSeparator).last,
-      ),
-    ));
-    _data.fields.add(MapEntry(
-      'stc',
-      stc,
-    ));
-    for (var i in departments) {
-      _data.fields.add(MapEntry('departments[]', i));
-    }
-    for (var i in departmentsTypes) {
-      _data.fields.add(MapEntry('departments_types[]', i));
-    }
-    for (var i in regions) {
-      _data.fields.add(MapEntry('regions[]', i));
-    }
-    for (var i in cities) {
-      _data.fields.add(MapEntry('cities[]', i));
-    }
-    for (var i in districts) {
-      _data.fields.add(MapEntry('districts[]', i));
-    }
-    for (var i in inspectionTypes) {
-      _data.fields.add(MapEntry('inspection_types[]', i));
-    }
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<InespectorSignUpResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'inspector/register',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = InespectorSignUpResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
   Future<MainUserAuthResponse> userSignUp(
-    String firstName,
-    String lastName,
-    String email,
-    int phoneKey,
-    int phoneNumber,
-    int region,
-    int city,
-    int district,
-    String addressDetails,
+    String name,
+    int phone,
+    int stc,
     String password,
     String passwordConfirmation,
   ) async {
@@ -261,40 +71,16 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
-      'first_name',
-      firstName,
+      'name',
+      name,
     ));
     _data.fields.add(MapEntry(
-      'last_name',
-      lastName,
+      'phone',
+      phone.toString(),
     ));
     _data.fields.add(MapEntry(
-      'email',
-      email,
-    ));
-    _data.fields.add(MapEntry(
-      'phone_key',
-      phoneKey.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'phone_number',
-      phoneNumber.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'region',
-      region.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'city',
-      city.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'district',
-      district.toString(),
-    ));
-    _data.fields.add(MapEntry(
-      'address_details',
-      addressDetails,
+      'stc',
+      stc.toString(),
     ));
     _data.fields.add(MapEntry(
       'password',
@@ -304,15 +90,15 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
       'password_confirmation',
       passwordConfirmation,
     ));
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MainUserAuthResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MainUserAuthResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'user/register',
+              'register',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -326,14 +112,14 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
   }
 
   @override
-  Future<dynamic> requestChangePassword(String email) async {
+  Future<dynamic> requestChangePassword(String phone) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
-      'email',
-      email,
+      'phone',
+      phone,
     ));
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
@@ -342,7 +128,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     )
         .compose(
           _dio.options,
-          'reset/password',
+          'send-reset-password-code',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -357,7 +143,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
 
   @override
   Future<dynamic> verifyOtp(
-    String email,
+    String phone,
     String code,
   ) async {
     const _extra = <String, dynamic>{};
@@ -365,8 +151,8 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
-      'email',
-      email,
+      'phone',
+      phone,
     ));
     _data.fields.add(MapEntry(
       'code',
@@ -379,7 +165,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     )
         .compose(
           _dio.options,
-          'code/confirm',
+          'check-reset-password-code',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -394,7 +180,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
 
   @override
   Future<dynamic> resetPassword(
-    String email,
+    String phone,
     String password,
     String confirmPassword,
   ) async {
@@ -403,8 +189,8 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
-      'email',
-      email,
+      'phone',
+      phone,
     ));
     _data.fields.add(MapEntry(
       'password',
@@ -421,7 +207,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     )
         .compose(
           _dio.options,
-          'reset/password/confirm',
+          'reset-password',
           queryParameters: queryParameters,
           data: _data,
         )

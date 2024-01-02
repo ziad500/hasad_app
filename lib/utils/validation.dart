@@ -75,6 +75,15 @@ String? defaultPhoneNumberValidation(dynamic value) {
   return null;
 }
 
+String? defaultStcValidation(dynamic value) {
+  if (value == null || value.toString().isEmpty) {
+    return LocaleKeys.thisFieldIsRequired.tr();
+  } else if (value.length < 10) {
+    return LocaleKeys.enterValidStcNumber.tr();
+  }
+  return null;
+}
+
 String? defaultEmailValidation(dynamic value) {
   if (value == null || value.toString().isEmpty) {
     return LocaleKeys.thisFieldIsRequired.tr();

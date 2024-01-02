@@ -26,18 +26,21 @@ Failure hangdleResponseError(DioException error) {
   }
   if (error.response?.data is Map<String, dynamic>) {
     Map<String, dynamic> errors = error.response!.data;
+    if (errors.values.elementAt(0) is String) {
+      return Failure(error.response?.statusCode ?? 400, errors.values.elementAt(0));
+    }
     if (errors.values.elementAt(1) is String) {
-      return Failure(400, errors.values.elementAt(1));
+      return Failure(error.response?.statusCode ?? 400, errors.values.elementAt(1));
     } else if (errors.values.first is String) {
-      return Failure(400, errors.values.first);
+      return Failure(error.response?.statusCode ?? 400, errors.values.first);
     } else if (errors.values.first[1] is String) {
-      return Failure(400, errors.values.first[1]);
+      return Failure(error.response?.statusCode ?? 400, errors.values.first[1]);
     } else if (errors.values.first == null && errors.values.first[1] == null) {
       return ErrorHandler.handle(error).failure;
     }
   } else if (error.response?.data is List) {
     List errors = error.response!.data;
-    return Failure(400, errors[1]);
+    return Failure(error.response?.statusCode ?? 400, errors[1]);
   } else {
     return ErrorHandler.handle(error).failure;
   }

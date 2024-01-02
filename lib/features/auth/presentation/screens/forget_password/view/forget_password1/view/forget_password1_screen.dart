@@ -55,16 +55,11 @@ class ForgetPassword1 extends StatelessWidget {
                 Form(
                   key: formKey,
                   child: DefaultFormField(
-                    controller: ForgetPasswordCubit.get(context).emailController,
-                    hint: LocaleKeys.phoneNumber.tr(),
-                    prefix: const IconCall(),
-                    validator: (value) {
-                      if (!validateEmail(value)) {
-                        return LocaleKeys.pleaseEnterValidEmail.tr();
-                      }
-                      return null;
-                    },
-                  ),
+                      controller: ForgetPasswordCubit.get(context).emailController,
+                      hint: LocaleKeys.phoneNumber.tr(),
+                      textInputType: TextInputType.number,
+                      prefix: const IconCall(),
+                      validator: defaultPhoneNumberValidation),
                 ),
                 SizedBox(
                   height: 40.h,
