@@ -17,6 +17,8 @@ class AppColors {
   static const Color itemBorderColor = Color(0xff97C1E8);
 
   static const Color black = Colors.black;
+  static const Color grey = Color(0xffD9D9D9);
+
   static const Color white = Colors.white;
 
   static const Color unSelectedColor = Color(0xffB0F5AA);
