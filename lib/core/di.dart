@@ -1,4 +1,5 @@
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
+import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 
 import 'dio_factory.dart';
 import '../features/auth/data/data_source.dart/auth_remote_data_source.dart';
@@ -20,6 +21,7 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<DioFactory>(() => DioFactory());
   iniLogin();
   iniForgetPassword();
+  initAddRequest();
 }
 
 iniLogin() async {
@@ -74,5 +76,11 @@ iniForgetPassword() async {
   if (!GetIt.I.isRegistered<RequestChangePasswordUseCase>()) {
     sl.registerLazySingleton<RequestChangePasswordUseCase>(
         () => RequestChangePasswordUseCase(sl.call()));
+  }
+}
+
+initAddRequest() {
+  if (!GetIt.I.isRegistered<AddRequestCubit>()) {
+    sl.registerFactory<AddRequestCubit>(() => AddRequestCubit());
   }
 }

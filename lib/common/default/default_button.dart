@@ -15,7 +15,7 @@ class DefaultButton extends StatelessWidget {
       this.iconLeft = false,
       this.isSubButton = false,
       this.borderColor = Colors.transparent,
-      this.borderRAdius = 43,
+      this.borderRAdius = 12,
       this.icon,
       this.widget,
       this.isSecondary = false})

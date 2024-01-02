@@ -1,6 +1,7 @@
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
 import 'package:hasad_app/features/home/home_screen.dart';
 import 'package:hasad_app/features/layout/layout.dart';
+import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
 
 import '../features/auth/presentation/screens/forget_password/view/forget_password_screen.dart';
@@ -14,7 +15,7 @@ class Routes {
   static const String forgetPassword = "/forgetPassword";
   static const String signUpScreenRoutes = "/signUpScreen";
   static const String homeScreenRoutes = "/homeScreen";
-  static const String appointmentsDetailsRoutes = "/appointmentsDetailsScreen";
+  static const String addRequestScreen = "/AddRequestScreen";
   static const String bigDealsScreenRoutes = "/bigDealsScreenRoutes";
   static const String bestSellingScreenRoutes = "/bestSellingScreenRoutes";
   static const String brandsScreenRoutes = "/brandsScreenRoutes";
@@ -39,6 +40,12 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.addRequestScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const AddRequestScreen();
+          },
+        );
       case Routes.homeScreenRoutes:
         return MaterialPageRoute(
           builder: (context) {

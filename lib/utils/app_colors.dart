@@ -35,4 +35,5 @@ class AppColors {
   static const Color pickImageColor = Color(0xffF1F4FA);
   static const Color starIconColor = Color(0xffE9862B);
   static const Color orangeColor = Color(0xffF96C05);
+  static const Color addRequestContainerColor = Color(0xff49AB86);
 }

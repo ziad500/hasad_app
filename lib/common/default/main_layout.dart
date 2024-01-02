@@ -23,7 +23,8 @@ class DefaultScaffold extends StatelessWidget {
       this.appbarBottom,
       this.scaffoldColor,
       this.leadingWidth,
-      this.withAppbar = true});
+      this.withAppbar = true,
+      this.titleWidget});
   final String? appbarTitle;
   final Widget? body;
   final List<Widget>? appbaractions;
@@ -41,6 +42,7 @@ class DefaultScaffold extends StatelessWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
   final PreferredSizeWidget? appbarBottom;
   final double? leadingWidth;
+  final Widget? titleWidget;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,15 +57,16 @@ class DefaultScaffold extends StatelessWidget {
               bottom: appbarBottom,
               leadingWidth: leadingWidth,
               systemOverlayStyle: Constants.constSytemStatusBar,
-              title: appbarTitle != null
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: DefaultText(
-                        text: appbarTitle!,
-                        textStyle: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                    )
-                  : null,
+              title: titleWidget ??
+                  (appbarTitle != null
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: DefaultText(
+                            text: appbarTitle!,
+                            textStyle: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                        )
+                      : null),
               backgroundColor: appbarColor ?? AppColors.scaffoldColor,
               elevation: appbarElevation ?? 0,
               shadowColor: Colors.grey.withOpacity(0.4),

@@ -30,6 +30,7 @@ class UserSignupButton extends StatelessWidget {
       builder: (context, state) => state is UserSignUpLoadingState
           ? const LoadingWidget()
           : DefaultButton(
+              borderRAdius: 43,
               buttonName: LocaleKeys.newRegister.tr(),
               buttonFunction: () {
                 if (formKey.currentState!.validate()) {

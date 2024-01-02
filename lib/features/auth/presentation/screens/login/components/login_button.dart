@@ -50,6 +50,7 @@ class LoginButton extends StatelessWidget {
                 child: LoadingWidget(),
               )
             : DefaultButton(
+                borderRAdius: 43,
                 buttonName: LocaleKeys.login.tr(),
                 buttonFunction: () {
                   if (formKey.currentState!.validate()) {
