@@ -1,5 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hasad_app/features/home/home_screen.dart';
+import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/splash_screen/splash_background.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 
@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      nextScreen: Constants.token != "" ? const HomeScreen() : const LoginScreen(),
+      nextScreen: Constants.token != "" ? const LayoutScreen() : const LoginScreen(),
       centered: true,
       backgroundColor: Colors.white,
       splashIconSize: MediaQuery.of(context).size.height,

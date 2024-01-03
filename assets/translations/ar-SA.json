@@ -58,7 +58,15 @@
     "newRegister":"تسجيل جديد",
     "enterPhoneResetPassword":"أدخل رقم هاتفك لإرسال رمز إعادة تعيين كلمة المرور.",
     "codeSent":"تم إرسال الرمز",
-"resendCode":"إعادة إرسال الرمز"
+"resendCode":"إعادة إرسال الرمز",
+"pleaseEnsureToAttachImages":"من فضلك تأكد من ارفاق صور",
+"camera":"الكاميرة",
+"gallary":"المعرض",
+"advertisementLocation": "موقع الإعلان",
+"auctionLocation": "موقع المزاد",
+"city": "المدينة",
+"province": "المحافظة",
+"district":"المركز"
 
 
 

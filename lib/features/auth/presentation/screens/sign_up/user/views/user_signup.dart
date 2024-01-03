@@ -89,7 +89,7 @@ class UserSignUp extends StatelessWidget {
                             controller: stcController,
                             hint: LocaleKeys.yourStcNumber.tr(),
                             prefix: SvgPicture.asset(SVGManager.circle),
-                            validator: defaultValidation),
+                            validator: defaultStcValidation),
                         SizedBox(
                           height: 10.h,
                         ),

@@ -1,4 +1,12 @@
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
+import 'package:hasad_app/features/lists/data/data_source/lists_data_source.dart';
+import 'package:hasad_app/features/lists/data/network/lists_api.dart';
+import 'package:hasad_app/features/lists/data/repository/lists_repo_impl.dart';
+import 'package:hasad_app/features/lists/domain/repository/lists_repo.dart';
+import 'package:hasad_app/features/lists/domain/use_cases/get_cities_list_usecase.dart';
+import 'package:hasad_app/features/lists/domain/use_cases/get_districts_list_usecase.dart';
+import 'package:hasad_app/features/lists/domain/use_cases/get_list_by_endpoint_usecase.dart';
+import 'package:hasad_app/features/lists/presentation/controller/cubit/lists_cubit.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 
 import 'dio_factory.dart';
@@ -22,6 +30,7 @@ Future<void> initAppModule() async {
   iniLogin();
   iniForgetPassword();
   initAddRequest();
+  iniLists();
 }
 
 iniLogin() async {
@@ -82,5 +91,40 @@ iniForgetPassword() async {
 initAddRequest() {
   if (!GetIt.I.isRegistered<AddRequestCubit>()) {
     sl.registerFactory<AddRequestCubit>(() => AddRequestCubit());
+  }
+}
+
+iniLists() async {
+  //cubit
+  if (!GetIt.I.isRegistered<ListsCubit>()) {
+    sl.registerFactory<ListsCubit>(() => ListsCubit(sl.call(), sl.call(), sl.call()));
+  }
+  //app service client instance
+  if (!GetIt.I.isRegistered<ListsAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<ListsAppServiceClient>(() => ListsAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<ListsRepository>()) {
+    sl.registerLazySingleton<ListsRepository>(() => ListsRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<ListsRemoteDataSource>()) {
+    sl.registerLazySingleton<ListsRemoteDataSource>(() => ListsRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetCitiesListUseCase>()) {
+    sl.registerLazySingleton<GetCitiesListUseCase>(() => GetCitiesListUseCase(sl.call()));
+  }
+
+  if (!GetIt.I.isRegistered<GetDistrictsListUseCase>()) {
+    sl.registerLazySingleton<GetDistrictsListUseCase>(() => GetDistrictsListUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<GetListByEndPointUseCase>()) {
+    sl.registerLazySingleton<GetListByEndPointUseCase>(() => GetListByEndPointUseCase(sl.call()));
   }
 }

@@ -29,8 +29,8 @@ class ChooseTypeOfRequest extends StatelessWidget {
                     SharedListTile(
                       dense: true,
                       title: "بيع مباشر",
-                      isSelected: cubit.selectedType == 0,
-                      onTap: () => cubit.selectType(0),
+                      isSelected: cubit.selectedType == 1,
+                      onTap: () => cubit.selectType(1),
                     ),
                     SizedBox(
                       height: 10.h,
@@ -38,8 +38,8 @@ class ChooseTypeOfRequest extends StatelessWidget {
                     SharedListTile(
                       dense: true,
                       title: "مزاد",
-                      isSelected: cubit.selectedType == 1,
-                      onTap: () => cubit.selectType(1),
+                      isSelected: cubit.selectedType == 2,
+                      onTap: () => cubit.selectType(2),
                     )
                   ],
                 ));

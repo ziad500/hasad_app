@@ -4,6 +4,7 @@ import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 
 import '../../../../data/network/auth_requests.dart';
 import '../../../controller/login_cubit/login_cubit.dart';
@@ -25,19 +26,10 @@ class LoginButton extends StatelessWidget {
       listener: (context, state) {
         if (state is LoginErrorState) {
           showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
-        } else if (state is InspectorLoginSuccessState) {
-          /*   Navigator.pushReplacementNamed(context, Routes.homeRoutes);
-              emailController.clear();
-              passwordController.clear(); */
-
-          showSnackbar(
-              context: context,
-              text: LocaleKeys.loginSuccessfully.tr(),
-              state: ToastStates.SUCCESS);
         } else if (state is UserLoginSuccessState) {
-          /*  Navigator.pushReplacementNamed(context, Routes.homeRoutes);
-            emailController.clear();
-            passwordController.clear(); */
+          Navigator.pushReplacementNamed(context, Routes.homeScreenRoutes);
+          emailController.clear();
+          passwordController.clear();
           showSnackbar(
               context: context,
               text: LocaleKeys.loginSuccessfully.tr(),

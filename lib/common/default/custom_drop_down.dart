@@ -54,170 +54,150 @@ class CustomDropDown extends StatelessWidget {
         if (title != null) ...[
           Text(
             title!,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           )
         ],
-        Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: SizedBox(
-                width: width,
-                child: Stack(
-                  children: [
-                    DropdownButtonFormField2<OptionItem>(
-                      isExpanded: true,
+        SizedBox(
+          width: width,
+          child: Stack(
+            children: [
+              DropdownButtonFormField2<OptionItem>(
+                isExpanded: true,
+                decoration: InputDecoration(
+                    prefixIcon: prefix,
+                    prefixIconConstraints: BoxConstraints(
+                        maxHeight: 25, maxWidth: 35.w, minHeight: 25, minWidth: 35.w),
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(3).w,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(3).w,
+                        borderSide: BorderSide(color: borderColor ?? AppColors.borderColor))
+                    // Add more decoration..
+                    ),
+                hint: Text(
+                  hint,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: AppColors.hintColor, fontSize: 16),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                items: items ??
+                    list
+                        .map((item) => DropdownMenuItem(
+                              value: OptionItem(
+                                  id: item.id,
+                                  title: item.title,
+                                  subtitle: item.subtitle,
+                                  description: item.description,
+                                  image: item.image),
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  item.title,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.grey, fontSize: 16),
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                validator: validator ??
+                    (value) {
+                      if (value == null) {
+                        return LocaleKeys.thisFieldIsRequired.tr();
+                      }
+                      return null;
+                    },
+                onChanged: (value) {
+                  onOptionSelected(value);
+                },
+                onSaved: (value) {
+                  selectedValue = value.toString();
+                },
+                dropdownSearchData: DropdownSearchData(
+                  searchController: textEditingController,
+                  searchInnerWidgetHeight: 50,
+                  searchInnerWidget: Container(
+                    height: 50,
+                    padding: const EdgeInsets.only(
+                      top: 8,
+                      bottom: 4,
+                      right: 8,
+                      left: 8,
+                    ),
+                    child: TextFormField(
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: Colors.grey, fontSize: 16),
+                      controller: textEditingController,
                       decoration: InputDecoration(
-                          prefixIcon: prefix,
-                          prefixIconConstraints: BoxConstraints(
-                              maxHeight: 25, maxWidth: 35.w, minHeight: 25, minWidth: 35.w),
-                          isDense: true,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                          fillColor: Colors.white,
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16).w,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16).w,
-                              borderSide: BorderSide(color: borderColor ?? AppColors.borderColor))
-                          // Add more decoration..
-                          ),
-                      hint: Text(
-                        hint,
-                        style: Theme.of(context)
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 8,
+                        ),
+                        hintText: LocaleKeys.search.tr(),
+                        hintStyle: Theme.of(context)
                             .textTheme
                             .bodySmall
-                            ?.copyWith(color: AppColors.hintColor, fontSize: 16),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      items: items ??
-                          list
-                              .map((item) => DropdownMenuItem(
-                                    value: OptionItem(
-                                        id: item.id,
-                                        title: item.title,
-                                        subtitle: item.subtitle,
-                                        description: item.description,
-                                        image: item.image),
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Text(
-                                        item.title,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(color: Colors.grey, fontSize: 16),
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                      validator: validator ??
-                          (value) {
-                            if (value == null) {
-                              return LocaleKeys.thisFieldIsRequired.tr();
-                            }
-                            return null;
-                          },
-                      onChanged: (value) {
-                        onOptionSelected(value);
-                      },
-                      onSaved: (value) {
-                        selectedValue = value.toString();
-                      },
-                      dropdownSearchData: DropdownSearchData(
-                        searchController: textEditingController,
-                        searchInnerWidgetHeight: 50,
-                        searchInnerWidget: Container(
-                          height: 50,
-                          padding: const EdgeInsets.only(
-                            top: 8,
-                            bottom: 4,
-                            right: 8,
-                            left: 8,
-                          ),
-                          child: TextFormField(
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(color: Colors.grey, fontSize: 16),
-                            controller: textEditingController,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 8,
-                              ),
-                              hintText: LocaleKeys.search.tr(),
-                              hintStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(color: Colors.grey, fontSize: 16),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8).w,
-                              ),
-                            ),
-                          ),
+                            ?.copyWith(color: Colors.grey, fontSize: 16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(3).w,
                         ),
-                        searchMatchFn: (DropdownMenuItem<OptionItem?> item, searchValue) {
-                          return item.value!.title
-                              .toString()
-                              .toLowerCase()
-                              .contains(searchValue.toLowerCase());
-                        },
-                      ),
-                      buttonStyleData: ButtonStyleData(
-                          padding: const EdgeInsets.only(right: 0), height: height ?? 55),
-                      iconStyleData: IconStyleData(
-                        icon: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            color: iconColor ?? Colors.black,
-                          ),
-                        ),
-                        iconSize: iconSize,
-                      ),
-                      dropdownStyleData: DropdownStyleData(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15).w,
-                        ),
-                      ),
-                      menuItemStyleData: const MenuItemStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
                       ),
                     ),
-                    isEmpty == true
-                        ? InkWell(
-                            onTap: onTap,
-                            child: SizedBox(
-                              width: width,
-                              height: height ?? 55,
-                            ),
-                          )
-                        : const SizedBox()
-                  ],
+                  ),
+                  searchMatchFn: (DropdownMenuItem<OptionItem?> item, searchValue) {
+                    return item.value!.title
+                        .toString()
+                        .toLowerCase()
+                        .contains(searchValue.toLowerCase());
+                  },
+                ),
+                buttonStyleData:
+                    ButtonStyleData(padding: const EdgeInsets.only(right: 0), height: height ?? 45),
+                iconStyleData: IconStyleData(
+                  icon: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(
+                      Icons.keyboard_arrow_down_outlined,
+                      color: iconColor ?? Colors.black,
+                    ),
+                  ),
+                  iconSize: iconSize,
+                ),
+                dropdownStyleData: DropdownStyleData(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3).w,
+                  ),
+                ),
+                menuItemStyleData: const MenuItemStyleData(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                 ),
               ),
-            ),
-            if (label != null)
-              Container(
-                //position label
-                margin: const EdgeInsets.fromLTRB(7, 0, 15, 0),
-                padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                color: Colors
-                    .white, // input outline default seems using 4.0 as padding from their source
-                child: Text(label!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: AppColors.black)), //just to cover the intercepted border
-              )
-          ],
+              isEmpty == true
+                  ? InkWell(
+                      onTap: onTap,
+                      child: SizedBox(
+                        width: width,
+                        height: height ?? 55,
+                      ),
+                    )
+                  : const SizedBox()
+            ],
+          ),
         ),
       ],
     );

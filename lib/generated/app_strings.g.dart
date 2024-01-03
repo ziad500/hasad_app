@@ -61,5 +61,13 @@ abstract class  LocaleKeys {
   static const enterPhoneResetPassword = 'enterPhoneResetPassword';
   static const codeSent = 'codeSent';
   static const resendCode = 'resendCode';
+  static const pleaseEnsureToAttachImages = 'pleaseEnsureToAttachImages';
+  static const camera = 'camera';
+  static const gallary = 'gallary';
+  static const advertisementLocation = 'advertisementLocation';
+  static const auctionLocation = 'auctionLocation';
+  static const city = 'city';
+  static const province = 'province';
+  static const district = 'district';
 
 }

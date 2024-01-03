@@ -35,8 +35,9 @@ class SelectHarvestDateScreen extends StatelessWidget {
                         Icons.date_range_outlined,
                         color: AppColors.primaryColor,
                       ),
-                      onTap: () => showDatePickerFunction(context).then(
-                          (value) => cubit.selectHarvestDate(formatDateString(value.toString()))),
+                      onTap: () => showDatePickerFunction(context).then((value) => value == null
+                          ? null
+                          : cubit.selectHarvestDate(formatDateString(value.toString()))),
                     ),
                   ],
                 ));

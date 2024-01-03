@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
 part 'auth_response.g.dart';
@@ -36,38 +37,22 @@ class UserData {
 
 @JsonSerializable()
 class User {
-  @JsonKey(name: "first_name")
-  String? firstName;
-  @JsonKey(name: "last_name")
-  String? lastName;
-  @JsonKey(name: "email")
-  String? email;
-  @JsonKey(name: "phone_key")
-  String? phoneKey;
-  @JsonKey(name: "phone_number")
-  int? phoneNumber;
-  @JsonKey(name: "region")
-  String? region;
-  @JsonKey(name: "city")
-  String? city;
-  @JsonKey(name: "district")
-  String? district;
-  @JsonKey(name: "address_details")
-  String? addressDetails;
-  @JsonKey(name: "photo")
-  String? photo;
-
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "name")
+  String? name;
+  @JsonKey(name: "phone")
+  int? phone;
+  @JsonKey(name: "stc")
+  int? stc;
+  @JsonKey(name: "image")
+  String? image;
   User({
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phoneKey,
-    this.phoneNumber,
-    this.region,
-    this.city,
-    this.district,
-    this.addressDetails,
-    this.photo,
+    this.id,
+    this.name,
+    this.phone,
+    this.stc,
+    this.image,
   });
 
   // from json

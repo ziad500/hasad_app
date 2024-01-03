@@ -27,16 +27,10 @@ class LoginFormFields extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10).w,
             child: DefaultFormField(
-              controller: phoneController,
-              hint: "966+",
-              prefix: const IconCall(),
-              validator: (value) {
-                if (!validateEmail(value)) {
-                  return LocaleKeys.pleaseEnterValidEmail.tr();
-                }
-                return null;
-              },
-            ),
+                controller: phoneController,
+                hint: "966+",
+                prefix: const IconCall(),
+                validator: defaultPhoneNumberValidation),
           ),
           const DefaultDivider(indent: 20),
           Padding(

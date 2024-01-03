@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/features/requests/presentation/components/base/done_request_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_department_request.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_of_agriculture_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_of_packaging.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_of_product.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_request.dart';
+import 'package:hasad_app/features/requests/presentation/components/screens/more_details.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/price_including_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/select_harvest_date_screen.dart';
+import 'package:hasad_app/features/requests/presentation/components/screens/upload_images_screen.dart';
 
 part 'add_request_state.dart';
 
@@ -34,13 +37,16 @@ class AddRequestCubit extends Cubit<AddRequestState> {
     const PriceIncludingScreen(),
     const TypeOfAgricultureScreen(),
     const TypeOfPackagingScreen(),
-    const SelectHarvestDateScreen()
+    const SelectHarvestDateScreen(),
+    const UploadImagesScreen(),
+    const MoreDetailsScreen(),
+    const DoneRequestScreen()
   ];
 
   PageController pageController = PageController();
 
   //////////// 1 //////////////
-  int selectedType = 0;
+  int selectedType = 1;
   void selectType(int value) {
     selectedType = value;
     emit(SelectTypeState());
@@ -101,4 +107,18 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   }
 
   //////////// 8 //////////////
+  //////////// 9 //////////////
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController provinceController = TextEditingController();
+  final TextEditingController districtController = TextEditingController();
+  final TextEditingController biddingPriceController = TextEditingController();
+  final TextEditingController defaultPriceController = TextEditingController();
+  final TextEditingController biddingLongController = TextEditingController();
+  String? selectedbiddingDate;
+  void selectbiddingDate(String value) {
+    selectedbiddingDate = value;
+    emit(SelectBiddingDateState());
+  }
 }

@@ -14,27 +14,16 @@ class UserDataModel {
 }
 
 class UserModel {
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? phoneKey;
-  int? phoneNumber;
-  String? region;
-  String? city;
-  String? district;
-  String? addressDetails;
-  String? photo;
-
+  int? id;
+  String? name;
+  int? phone;
+  int? stc;
+  String? image;
   UserModel(
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.phoneKey,
-    this.phoneNumber,
-    this.region,
-    this.city,
-    this.district,
-    this.addressDetails,
-    this.photo,
+    this.id,
+    this.name,
+    this.phone,
+    this.stc,
+    this.image,
   );
 }

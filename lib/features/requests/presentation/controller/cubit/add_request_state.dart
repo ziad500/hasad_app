@@ -21,3 +21,5 @@ final class SelectAgricultureState extends AddRequestState {}
 final class SelectPackagingState extends AddRequestState {}
 
 final class SelectHarvestDateState extends AddRequestState {}
+
+final class SelectBiddingDateState extends AddRequestState {}

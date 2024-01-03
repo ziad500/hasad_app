@@ -61,6 +61,14 @@
 "newRegister":"New Register",
 "enterPhoneResetPassword":"Enter your phone number to receive a reset code.",
 "codeSent":"Code sent",
-"resendCode":"Resend code"
+"resendCode":"Resend code",
+"pleaseEnsureToAttachImages":"please ensure to attach images",
+"camera":"Camera",
+"gallary":"Gallary",
+"advertisementLocation": "Advertisement Location",
+"auctionLocation": "Auction Location",
+"city": "City",
+"province": "Province",
+"district": "District"
    
 }

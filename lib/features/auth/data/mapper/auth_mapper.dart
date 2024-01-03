@@ -16,17 +16,7 @@ extension UserDataMapper on UserData? {
 
 extension UserMapper on User? {
   UserModel toDomain() {
-    return UserModel(
-        this?.firstName,
-        this?.lastName,
-        this?.email,
-        this?.phoneKey,
-        this?.phoneNumber,
-        this?.region,
-        this?.city,
-        this?.district,
-        this?.addressDetails,
-        this?.photo);
+    return UserModel(this?.id, this?.name, this?.phone, this?.stc, this?.image);
   }
 }
 

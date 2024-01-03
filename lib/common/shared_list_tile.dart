@@ -12,6 +12,7 @@ class SharedListTile extends StatelessWidget {
       this.onTap,
       this.isSelected = false,
       this.dense = false,
+      this.borderRadius = 20,
       this.large = false});
   final String title;
   final Widget? trailing;
@@ -20,18 +21,20 @@ class SharedListTile extends StatelessWidget {
   final bool isSelected;
   final bool? dense;
   final bool large;
+  final double borderRadius;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
       decoration: BoxDecoration(
           color: isSelected ? AppColors.darkBlue : Colors.transparent,
-          borderRadius: BorderRadius.circular(20).w),
+          borderRadius: BorderRadius.circular(borderRadius + 3).w),
       child: Container(
           height: large ? 70 : null,
           margin: const EdgeInsets.all(3).w,
           width: double.maxFinite,
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(17).w),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(borderRadius).w),
           child: Center(
             child: DefaultListTile(
               dense: dense,

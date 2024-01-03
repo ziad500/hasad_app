@@ -24,6 +24,8 @@ class SVGManager {
   static String bidding = "$svgPath/bidding.svg";
   static String clock = "$svgPath/clock.svg";
   static String location = "$svgPath/location.svg";
+  static String infinity = "$svgPath/infinity.svg";
+  static String doneRequest = "$svgPath/doneRequest.svg";
 }
 
 String gifPath = "assets/gif";
