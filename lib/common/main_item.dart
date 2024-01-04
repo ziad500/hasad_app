@@ -4,12 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/network_image.dart';
 import 'package:hasad_app/common/icon_and_text_widget.dart';
+import 'package:hasad_app/common/price_widget.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/timer/cubit/presentation/bidding_timer.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 
 class MainItemWidget extends StatelessWidget {
   const MainItemWidget({super.key, required this.isbidding});
@@ -17,23 +19,26 @@ class MainItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      // height: 145.h,
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25)),
-      child: Row(
-        children: [
-          /* Image.network(
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s",
-            fit: BoxFit.cover,
-            width: 70.w,
-          ), */
-          _NetowrkImage(),
-          SizedBox(
-            width: 10,
-          ),
-          _Description(isbidding)
-        ],
+    return InkWell(
+      onTap: () => Navigator.pushNamed(context, Routes.itemDetailsRoutes),
+      child: Container(
+        width: double.maxFinite,
+        // height: 145.h,
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25)),
+        child: Row(
+          children: [
+            /* Image.network(
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s",
+              fit: BoxFit.cover,
+              width: 70.w,
+            ), */
+            _NetowrkImage(),
+            SizedBox(
+              width: 10,
+            ),
+            _Description(isbidding)
+          ],
+        ),
       ),
     );
   }
@@ -184,23 +189,7 @@ class LocationAndPrice extends StatelessWidget {
           ),
         ),
         if (!isBidding)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                DefaultText(
-                  text: "500",
-                  textStyle:
-                      Theme.of(context).textTheme.titleMedium?.copyWith(color: AppColors.darkBlue),
-                ),
-                DefaultText(
-                  text: "ريال سعودي",
-                  textStyle:
-                      Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.darkBlue),
-                )
-              ],
-            ),
-          )
+          const Padding(padding: EdgeInsets.all(8.0), child: PriceWidget(price: "500"))
       ],
     );
   }

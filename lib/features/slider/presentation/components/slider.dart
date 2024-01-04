@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/network_image.dart';
+import 'package:hasad_app/utils/app_colors.dart';
 import '../controller/cubit/slider_cubit.dart';
 import 'page_indicator_widget.dart';
 
@@ -88,6 +89,7 @@ class _OffersSliderState extends State<OffersSlider> {
                       Padding(
                         padding: const EdgeInsets.all(2),
                         child: PageIndicatorWidget(
+                          color: AppColors.orangeColor,
                           index: i,
                           currentIndex: SliderCubit.get(context).currentIndex,
                         ),
