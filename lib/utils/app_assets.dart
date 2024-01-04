@@ -26,6 +26,7 @@ class SVGManager {
   static String location = "$svgPath/location.svg";
   static String infinity = "$svgPath/infinity.svg";
   static String doneRequest = "$svgPath/doneRequest.svg";
+  static String filter = "$svgPath/filter.svg";
 }
 
 String gifPath = "assets/gif";

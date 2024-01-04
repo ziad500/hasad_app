@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_list_view.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/network_image.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 
 class CategoriesList extends StatelessWidget {
   const CategoriesList({super.key});
@@ -13,22 +14,25 @@ class CategoriesList extends StatelessWidget {
       child: DefaultListView(
           height: 110.h,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                width: 95.w,
-                decoration:
-                    BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25)),
-                child: Column(
-                  children: [
-                    const Expanded(child: _NetowrkImage()),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    DefaultText(
-                      text: "خضار",
-                      textStyle: Theme.of(context).textTheme.bodyMedium,
-                    )
-                  ],
+          itemBuilder: (context, index) => InkWell(
+                onTap: () => Navigator.pushNamed(context, Routes.directSellingListScreen),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  width: 95.w,
+                  decoration:
+                      BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25)),
+                  child: Column(
+                    children: [
+                      const Expanded(child: _NetowrkImage()),
+                      const SizedBox(
+                        height: 7,
+                      ),
+                      DefaultText(
+                        text: "خضار",
+                        textStyle: Theme.of(context).textTheme.bodyMedium,
+                      )
+                    ],
+                  ),
                 ),
               ),
           count: 3),
