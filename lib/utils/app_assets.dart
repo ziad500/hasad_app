@@ -27,6 +27,14 @@ class SVGManager {
   static String infinity = "$svgPath/infinity.svg";
   static String doneRequest = "$svgPath/doneRequest.svg";
   static String filter = "$svgPath/filter.svg";
+
+  static String shield = "$svgPath/shield.svg";
+  static String archive = "$svgPath/archive.svg";
+  static String flag = "$svgPath/flag.svg";
+  static String heart = "$svgPath/heart.svg";
+  static String ads = "$svgPath/ads.svg";
+  static String wallet = "$svgPath/wallet.svg";
+  static String note = "$svgPath/note.svg";
 }
 
 String gifPath = "assets/gif";

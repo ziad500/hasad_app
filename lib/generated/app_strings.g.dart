@@ -115,5 +115,6 @@ abstract class  LocaleKeys {
   static const advertisementTitle = 'advertisementTitle';
   static const addBriefDescription = 'addBriefDescription';
   static const describeAdvertisementHere = 'describeAdvertisementHere';
+  static const hour = 'hour';
 
 }

@@ -10,7 +10,7 @@ class UserRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       children: [
-        UserImageWidget(image: null),
+        UserImageWidget(imageUrl: null),
         SizedBox(
           width: 15,
         ),

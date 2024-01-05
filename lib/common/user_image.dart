@@ -6,13 +6,13 @@ import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class UserImageWidget extends StatelessWidget {
-  const UserImageWidget({super.key, this.image});
-  final String? image;
+  const UserImageWidget({super.key, this.imageUrl});
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
     return NetworkImageWidget(
-      image: image,
+      image: imageUrl,
       imageBuilder: (_, image) => CircleAvatar(
         radius: 25.sp,
         backgroundImage: image,

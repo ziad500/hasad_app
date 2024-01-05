@@ -14,6 +14,13 @@ import 'package:hasad_app/features/lists/domain/use_cases/get_cities_list_usecas
 import 'package:hasad_app/features/lists/domain/use_cases/get_districts_list_usecase.dart';
 import 'package:hasad_app/features/lists/domain/use_cases/get_list_by_endpoint_usecase.dart';
 import 'package:hasad_app/features/lists/presentation/controller/cubit/lists_cubit.dart';
+import 'package:hasad_app/features/profile/data/data_source/profile_remote_data_source.dart';
+import 'package:hasad_app/features/profile/data/network/profile_api.dart';
+import 'package:hasad_app/features/profile/data/repository/profile_repo_impl.dart';
+import 'package:hasad_app/features/profile/domain/repository/profile_repo.dart';
+import 'package:hasad_app/features/profile/domain/use_cases/edit_profile_usecase.dart';
+import 'package:hasad_app/features/profile/domain/use_cases/get_profile_usecase.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/features/requests/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/requests/data/network/request_api.dart';
 import 'package:hasad_app/features/requests/data/repository/repo_impl.dart';
@@ -44,6 +51,7 @@ Future<void> initAppModule() async {
   initAddRequest();
   iniLists();
   iniCategories();
+  iniProfile();
 }
 
 iniLogin() async {
@@ -195,5 +203,37 @@ iniCategories() async {
 
   if (!GetIt.I.isRegistered<GetCategoriesTypesUseCase>()) {
     sl.registerLazySingleton<GetCategoriesTypesUseCase>(() => GetCategoriesTypesUseCase(sl.call()));
+  }
+}
+
+iniProfile() async {
+  //cubit
+  if (!GetIt.I.isRegistered<ProfileCubit>()) {
+    sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl.call(), sl.call()));
+  }
+  //app service client instance
+  if (!GetIt.I.isRegistered<ProfileAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<ProfileAppServiceClient>(() => ProfileAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<ProfileRepository>()) {
+    sl.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<ProfileRemoteDataSource>()) {
+    sl.registerLazySingleton<ProfileRemoteDataSource>(() => ProfileRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetProfileUseCase>()) {
+    sl.registerLazySingleton<GetProfileUseCase>(() => GetProfileUseCase(sl.call()));
+  }
+
+  if (!GetIt.I.isRegistered<EditProfileUseCase>()) {
+    sl.registerLazySingleton<EditProfileUseCase>(() => EditProfileUseCase(sl.call()));
   }
 }

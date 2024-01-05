@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/common/default/loading_frame.dart';
 import 'package:hasad_app/common/default/loading_page.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/shared_list_tile.dart';
+import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/features/lists/presentation/components/address_drop_down.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
@@ -39,6 +41,9 @@ class MoreDetailsScreen extends StatelessWidget {
           body: BlocConsumer<AddRequestCubit, AddRequestState>(
             buildWhen: (a, b) => b is SelectBiddingDateState,
             listener: (context, state) {
+              if (state is AddRequestErrorState) {
+                showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+              }
               if (state is AddRequestSuccessState) {
                 AddRequestCubit.get(context)
                     .pageController
@@ -106,13 +111,23 @@ class MoreDetailsScreen extends StatelessWidget {
                             const SizedBox(
                               height: 16,
                             ),
-                            DefaultFormField(
-                              controller: cubit.biddingLongController,
-                              hint: LocaleKeys.auctionDuration.tr(),
-                              title: LocaleKeys.auctionDuration.tr(),
-                              validator: defaultValidation,
-                              width: 150.w,
-                            )
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                DefaultFormField(
+                                  borderRadius: 3,
+                                  controller: cubit.biddingLongController,
+                                  hint: LocaleKeys.auctionDuration.tr(),
+                                  title: LocaleKeys.auctionDuration.tr(),
+                                  validator: defaultValidation,
+                                  width: 150.w,
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Center(child: TitleWidget(title: LocaleKeys.hour.tr()))
+                              ],
+                            ),
                           ],
                         ],
                       ),
