@@ -5,7 +5,7 @@ import 'package:hasad_app/common/main_item.dart';
 import 'package:hasad_app/common/row_of_text.dart';
 import 'package:hasad_app/common/search_bar.dart';
 import 'package:hasad_app/common/title_widget.dart';
-import 'package:hasad_app/features/bidding/presentation/components/category_list.dart';
+import 'package:hasad_app/features/categories/presentation/components/category_list.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 5.h,
             ),
-            const CategoriesList(),
+            const CategoriesList(type: 2),
             SizedBox(
               height: 20.h,
             ),

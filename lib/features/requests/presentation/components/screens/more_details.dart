@@ -22,14 +22,14 @@ class MoreDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoadingFrame(
       loadingStates: [
-        /*   BlocBuilder<AddRequestCubit, AddRequestState>(
+        BlocBuilder<AddRequestCubit, AddRequestState>(
           builder: (context, state) {
             if (state is AddRequestLoadingState) {
               return const LoadingPage();
             }
             return const SizedBox();
           },
-        ) */
+        )
       ],
       child: AddRequestBaseScaffold(
           number: "9",
