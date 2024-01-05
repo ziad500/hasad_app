@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_button.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class AddRequestBaseContainer extends StatelessWidget {
@@ -28,7 +30,8 @@ class AddRequestBaseContainer extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          DefaultButton(buttonName: buttonText ?? "التالي", buttonFunction: buttonFunction),
+          DefaultButton(
+              buttonName: buttonText ?? LocaleKeys.next.tr(), buttonFunction: buttonFunction),
           SizedBox(
             height: 20.h,
           )

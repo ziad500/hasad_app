@@ -13,9 +13,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImagesWidget extends StatefulWidget {
-  const PickImagesWidget({Key? key, required this.text, required this.onUpload}) : super(key: key);
+  const PickImagesWidget({Key? key, this.text, required this.onUpload}) : super(key: key);
 
-  final String text;
+  final String? text;
   final Function(List<XFile>) onUpload;
 
   @override

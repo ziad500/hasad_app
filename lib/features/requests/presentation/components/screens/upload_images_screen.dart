@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
@@ -6,6 +7,7 @@ import 'package:hasad_app/common/pick_images_widget.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
 class UploadImagesScreen extends StatelessWidget {
   const UploadImagesScreen({super.key});
@@ -14,7 +16,7 @@ class UploadImagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AddRequestBaseScaffold(
         number: "8",
-        title: "الصور",
+        title: LocaleKeys.images.tr(),
         body: BlocBuilder<AddRequestCubit, AddRequestState>(
           buildWhen: (a, b) => b is SelectHarvestDateState,
           builder: (context, state) {
@@ -22,10 +24,15 @@ class UploadImagesScreen extends StatelessWidget {
             return AddRequestBaseContainer(
                 buttonFunction: () {
                   if (cubit.images.length < 3) {
-                    showSnackbar(context: context, text: "يجب رفع 3 صور", state: ToastStates.ERROR);
+                    showSnackbar(
+                        context: context,
+                        text: LocaleKeys.uploadThreeImages.tr(),
+                        state: ToastStates.ERROR);
                   } else if (cubit.videoPath == null) {
                     showSnackbar(
-                        context: context, text: "يجب رفع فيديو واحد ", state: ToastStates.ERROR);
+                        context: context,
+                        text: LocaleKeys.uploadOneVideo.tr(),
+                        state: ToastStates.ERROR);
                   } else {
                     cubit.pageController
                         .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
@@ -34,11 +41,9 @@ class UploadImagesScreen extends StatelessWidget {
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    PickImagesWidget(
-                        text: "text",
-                        onUpload: (value) {
-                          cubit.images = value;
-                        }),
+                    PickImagesWidget(onUpload: (value) {
+                      cubit.images = value;
+                    }),
                     PickMediaWidget(
                         mediaType: MediaType.video,
                         onUpload: (value) {

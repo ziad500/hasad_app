@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:hasad_app/common/shared_list_tile.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
 class ChooseTypeOfRequest extends StatelessWidget {
   const ChooseTypeOfRequest({super.key});
@@ -14,7 +16,7 @@ class ChooseTypeOfRequest extends StatelessWidget {
     return AddRequestBaseScaffold(
         backFunction: () => Navigator.pop(context),
         number: "1",
-        title: "الاختيار بين",
+        title: LocaleKeys.chooseBetween.tr(),
         body: BlocBuilder<AddRequestCubit, AddRequestState>(
           buildWhen: (a, b) => b is SelectTypeState,
           builder: (context, state) {
@@ -28,7 +30,7 @@ class ChooseTypeOfRequest extends StatelessWidget {
                   children: [
                     SharedListTile(
                       dense: true,
-                      title: "بيع مباشر",
+                      title: LocaleKeys.directSale.tr(),
                       isSelected: cubit.selectedType == 1,
                       onTap: () => cubit.selectType(1),
                     ),
@@ -37,7 +39,7 @@ class ChooseTypeOfRequest extends StatelessWidget {
                     ),
                     SharedListTile(
                       dense: true,
-                      title: "مزاد",
+                      title: LocaleKeys.auction.tr(),
                       isSelected: cubit.selectedType == 2,
                       onTap: () => cubit.selectType(2),
                     )

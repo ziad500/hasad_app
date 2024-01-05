@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,6 +12,7 @@ import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
 class ChooseDepartmentRequestScreen extends StatelessWidget {
   const ChooseDepartmentRequestScreen({super.key});
@@ -19,7 +21,7 @@ class ChooseDepartmentRequestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AddRequestBaseScaffold(
         number: "2",
-        title: "يرجي تحديد القسم",
+        title: LocaleKeys.pleaseSelectSection.tr(),
         body: BlocBuilder<AddRequestCubit, AddRequestState>(
           buildWhen: (a, b) => b is SelectDepartmentState,
           builder: (context, state) {
@@ -35,14 +37,16 @@ class ChooseDepartmentRequestScreen extends StatelessWidget {
                     height: 10.h,
                   ),
                   DefaultButton(
-                      buttonName: "التالي",
+                      buttonName: LocaleKeys.next.tr(),
                       buttonFunction: () {
                         if (cubit.selectedDepartment != null) {
                           cubit.pageController.nextPage(
                               duration: const Duration(milliseconds: 500), curve: Curves.ease);
                         } else {
                           showSnackbar(
-                              context: context, text: "من فضلك اختر قسم", state: ToastStates.ERROR);
+                              context: context,
+                              text: LocaleKeys.pleaseSelectSection.tr(),
+                              state: ToastStates.ERROR);
                         }
                       }),
                   SizedBox(

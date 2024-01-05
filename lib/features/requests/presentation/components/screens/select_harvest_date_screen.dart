@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
@@ -5,6 +6,7 @@ import 'package:hasad_app/common/shared_list_tile.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/date_helper.dart';
 
@@ -15,7 +17,7 @@ class SelectHarvestDateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AddRequestBaseScaffold(
         number: "7",
-        title: "تاريخ القطف",
+        title: LocaleKeys.harvestDate.tr(),
         body: BlocBuilder<AddRequestCubit, AddRequestState>(
           buildWhen: (a, b) => b is SelectHarvestDateState,
           builder: (context, state) {
@@ -28,7 +30,7 @@ class SelectHarvestDateScreen extends StatelessWidget {
                   } else {
                     showSnackbar(
                         context: context,
-                        text: "من فضلك اختر تاريخ القطف",
+                        text: LocaleKeys.selectHarvestDate.tr(),
                         state: ToastStates.ERROR);
                   }
                 },
@@ -36,7 +38,7 @@ class SelectHarvestDateScreen extends StatelessWidget {
                   children: [
                     SharedListTile(
                       dense: true,
-                      title: cubit.selectedHarvestDate ?? "اختر تاريخ",
+                      title: cubit.selectedHarvestDate ?? LocaleKeys.selectDate.tr(),
                       isSelected: false,
                       trailing: const SizedBox(),
                       leading: const Icon(

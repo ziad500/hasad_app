@@ -34,8 +34,8 @@ class MoreDetailsScreen extends StatelessWidget {
       child: AddRequestBaseScaffold(
           number: "9",
           title: AddRequestCubit.get(context).selectedType == 2
-              ? "باقى تفاصيل المزاد"
-              : "باقى تفاصيل الإعلان",
+              ? LocaleKeys.auctionRemainingDetails.tr()
+              : LocaleKeys.remainingAdvertisementDetails.tr(),
           body: BlocConsumer<AddRequestCubit, AddRequestState>(
             buildWhen: (a, b) => b is SelectBiddingDateState,
             listener: (context, state) {
@@ -48,7 +48,7 @@ class MoreDetailsScreen extends StatelessWidget {
             builder: (context, state) {
               AddRequestCubit cubit = AddRequestCubit.get(context);
               return AddRequestBaseContainer(
-                  buttonText: "إرسال للمراجعة",
+                  buttonText: LocaleKeys.sendForReview.tr(),
                   buttonFunction: () {
                     if (formKey.currentState!.validate()) {
                       cubit.addRequest();
@@ -63,8 +63,12 @@ class MoreDetailsScreen extends StatelessWidget {
                           DefaultFormField(
                               borderRadius: 3,
                               controller: cubit.titleController,
-                              title: "أضف عنوان للمزاد",
-                              hint: "أضف عنوان مختصر للمزاد .... ",
+                              title: cubit.selectedType == 2
+                                  ? LocaleKeys.addAuctionTitle.tr()
+                                  : LocaleKeys.advertisementTitle.tr(),
+                              hint: cubit.selectedType == 2
+                                  ? LocaleKeys.addBriefAuctionTitle.tr()
+                                  : LocaleKeys.addBriefDescription.tr(),
                               validator: defaultValidation),
                           const SizedBox(
                             height: 16,
@@ -72,9 +76,11 @@ class MoreDetailsScreen extends StatelessWidget {
                           DefaultFormField(
                               borderRadius: 3,
                               controller: cubit.descriptionController,
-                              title: "الوصف",
+                              title: LocaleKeys.description.tr(),
                               maxLines: 3,
-                              hint: "يمكنك وصف المزاد هنا ...",
+                              hint: cubit.selectedType == 2
+                                  ? LocaleKeys.describeAuctionHere.tr()
+                                  : LocaleKeys.describeAdvertisementHere.tr(),
                               validator: defaultValidation),
                           const SizedBox(
                             height: 16,
@@ -102,8 +108,8 @@ class MoreDetailsScreen extends StatelessWidget {
                             ),
                             DefaultFormField(
                               controller: cubit.biddingLongController,
-                              hint: "يستمر المزاد لمدة",
-                              title: "يستمر المزاد لمدة",
+                              hint: LocaleKeys.auctionDuration.tr(),
+                              title: LocaleKeys.auctionDuration.tr(),
                               validator: defaultValidation,
                               width: 150.w,
                             )
@@ -128,7 +134,7 @@ class _SelectDate extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "تاريخ المزاد",
+          LocaleKeys.auctionDate.tr(),
           style: Theme.of(context).textTheme.bodySmall,
         ),
         const SizedBox(
@@ -137,7 +143,7 @@ class _SelectDate extends StatelessWidget {
         SharedListTile(
           borderRadius: 3,
           dense: true,
-          title: cubit.selectedbiddingDate ?? "تاريخ المزاد",
+          title: cubit.selectedbiddingDate ?? LocaleKeys.auctionDate.tr(),
           isSelected: false,
           trailing: const SizedBox(),
           leading: const Icon(
@@ -165,8 +171,8 @@ class _BiddingPriceWidget extends StatelessWidget {
                   child: DefaultFormField(
                       borderRadius: 3,
                       controller: cubit.startPriceController,
-                      title: "السعر الإبتدائى للمزاد",
-                      hint: "سعر بداية المزاد",
+                      title: LocaleKeys.initialPriceForAuction.tr(),
+                      hint: LocaleKeys.startingPriceForAuction.tr(),
                       textInputType: TextInputType.number,
                       validator: defaultValidation),
                 ),
@@ -193,8 +199,8 @@ class _SelectPrice extends StatelessWidget {
             width: 150.w,
             controller: cubit.defaultPriceController,
             textInputType: TextInputType.number,
-            title: "السعر",
-            hint: "سعر البيع",
+            title: LocaleKeys.price.tr(),
+            hint: LocaleKeys.sellingPrice.tr(),
             validator: defaultValidation)
         : Expanded(
             child: DefaultFormField(
@@ -202,8 +208,8 @@ class _SelectPrice extends StatelessWidget {
                 width: double.infinity,
                 controller: cubit.defaultPriceController,
                 textInputType: TextInputType.number,
-                title: "سعر الشراء المباشر",
-                hint: "سعر الشراءالمباشر",
+                title: LocaleKeys.directPurchasePrice.tr(),
+                hint: LocaleKeys.directPurchasePrice.tr(),
                 validator: defaultValidation),
           );
   }

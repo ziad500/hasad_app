@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_list_view.dart';
@@ -11,6 +12,7 @@ import 'package:hasad_app/features/requests/presentation/components/base/add_req
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/network_image.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
 class PriceIncludingScreen extends StatelessWidget {
@@ -20,7 +22,7 @@ class PriceIncludingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AddRequestBaseScaffold(
         number: "4",
-        title: "يشمل السعر",
+        title: LocaleKeys.priceIncludes.tr(),
         body: BlocBuilder<AddRequestCubit, AddRequestState>(
           buildWhen: (a, b) => b is SelectPriceIncludingState,
           builder: (context, state) {
@@ -33,7 +35,7 @@ class PriceIncludingScreen extends StatelessWidget {
                   } else {
                     showSnackbar(
                         context: context,
-                        text: "من فضلك اختر ما يشملة السعر",
+                        text: LocaleKeys.selectPriceIncludes.tr(),
                         state: ToastStates.ERROR);
                   }
                 },

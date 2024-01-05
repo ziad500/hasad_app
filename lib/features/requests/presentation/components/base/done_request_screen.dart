@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
@@ -30,15 +32,15 @@ class DoneRequestScreen extends StatelessWidget {
             height: 30.h,
           ),
           DefaultText(
-            text: "شكرًا ،",
+            text: "${LocaleKeys.thankYou.tr()} ،",
             textStyle: Theme.of(context).textTheme.bodyLarge,
           ),
           DefaultText(
-              text: " سنقوم بالمراجعة وإدراج إعلانك.",
+              text: LocaleKeys.weWillReviewAndInsertYourAdvertisement.tr(),
               textStyle: Theme.of(context).textTheme.bodyLarge),
           const Spacer(),
           DefaultButton(
-              buttonName: "الصفحة الرئيسية",
+              buttonName: LocaleKeys.home.tr(),
               buttonFunction: () {
                 Navigator.pushReplacementNamed(context, Routes.homeScreenRoutes);
               })
