@@ -1,4 +1,11 @@
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
+import 'package:hasad_app/features/categories/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/categories/data/network/categories_api.dart';
+import 'package:hasad_app/features/categories/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/categories/domain/repository/repo.dart';
+import 'package:hasad_app/features/categories/domain/use_cases/get_categories_types_usecase.dart';
+import 'package:hasad_app/features/categories/domain/use_cases/get_categories_usecase.dart';
+import 'package:hasad_app/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:hasad_app/features/lists/data/data_source/lists_data_source.dart';
 import 'package:hasad_app/features/lists/data/network/lists_api.dart';
 import 'package:hasad_app/features/lists/data/repository/lists_repo_impl.dart';
@@ -31,6 +38,7 @@ Future<void> initAppModule() async {
   iniForgetPassword();
   initAddRequest();
   iniLists();
+  iniCategories();
 }
 
 iniLogin() async {
@@ -126,5 +134,38 @@ iniLists() async {
   }
   if (!GetIt.I.isRegistered<GetListByEndPointUseCase>()) {
     sl.registerLazySingleton<GetListByEndPointUseCase>(() => GetListByEndPointUseCase(sl.call()));
+  }
+}
+
+iniCategories() async {
+  //cubit
+  if (!GetIt.I.isRegistered<CategoriesCubit>()) {
+    sl.registerFactory<CategoriesCubit>(() => CategoriesCubit(sl.call(), sl.call()));
+  }
+  //app service client instance
+  if (!GetIt.I.isRegistered<CategoriesAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<CategoriesAppServiceClient>(() => CategoriesAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<CategoriesRepository>()) {
+    sl.registerLazySingleton<CategoriesRepository>(() => CategoriesRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<CategoriesRemoteDataSource>()) {
+    sl.registerLazySingleton<CategoriesRemoteDataSource>(
+        () => CategoriesRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetCategoriesUseCase>()) {
+    sl.registerLazySingleton<GetCategoriesUseCase>(() => GetCategoriesUseCase(sl.call()));
+  }
+
+  if (!GetIt.I.isRegistered<GetCategoriesTypesUseCase>()) {
+    sl.registerLazySingleton<GetCategoriesTypesUseCase>(() => GetCategoriesTypesUseCase(sl.call()));
   }
 }

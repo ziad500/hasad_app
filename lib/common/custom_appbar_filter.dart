@@ -26,10 +26,20 @@ class CustomAppbarWithFilter extends StatelessWidget {
                 Icons.arrow_back,
                 color: Colors.black,
               )),
-          DefaultText(
-            text: name,
-            textStyle:
-                Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.primaryColor),
+          SizedBox(
+            width: 10.w,
+          ),
+          Expanded(
+            child: Center(
+              child: DefaultText(
+                text: name,
+                textStyle:
+                    Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.primaryColor),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 10.w,
           ),
           _FilterIcon(onTap)
         ],

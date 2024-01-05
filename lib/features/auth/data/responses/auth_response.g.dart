@@ -6,14 +6,18 @@ part of 'auth_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MainUserAuthResponse _$MainUserAuthResponseFromJson(Map<String, dynamic> json) =>
+MainUserAuthResponse _$MainUserAuthResponseFromJson(
+        Map<String, dynamic> json) =>
     MainUserAuthResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      data: json['data'] == null ? null : UserData.fromJson(json['data'] as Map<String, dynamic>),
+      data: json['data'] == null
+          ? null
+          : UserData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$MainUserAuthResponseToJson(MainUserAuthResponse instance) =>
+Map<String, dynamic> _$MainUserAuthResponseToJson(
+        MainUserAuthResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
@@ -22,7 +26,9 @@ Map<String, dynamic> _$MainUserAuthResponseToJson(MainUserAuthResponse instance)
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       token: json['token'] as String?,
-      user: json['user'] == null ? null : User.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
@@ -46,13 +52,15 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'image': instance.image,
     };
 
-InespectorSignUpResponse _$InespectorSignUpResponseFromJson(Map<String, dynamic> json) =>
+InespectorSignUpResponse _$InespectorSignUpResponseFromJson(
+        Map<String, dynamic> json) =>
     InespectorSignUpResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$InespectorSignUpResponseToJson(InespectorSignUpResponse instance) =>
+Map<String, dynamic> _$InespectorSignUpResponseToJson(
+        InespectorSignUpResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
