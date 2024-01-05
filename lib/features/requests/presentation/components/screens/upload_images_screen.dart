@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/pick_image_widget.dart';
 import 'package:hasad_app/common/pick_images_widget.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
@@ -20,14 +21,29 @@ class UploadImagesScreen extends StatelessWidget {
             AddRequestCubit cubit = AddRequestCubit.get(context);
             return AddRequestBaseContainer(
                 buttonFunction: () {
-                  cubit.pageController
-                      .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                  if (cubit.images.length < 3) {
+                    showSnackbar(context: context, text: "يجب رفع 3 صور", state: ToastStates.ERROR);
+                  } else if (cubit.videoPath == null) {
+                    showSnackbar(
+                        context: context, text: "يجب رفع فيديو واحد ", state: ToastStates.ERROR);
+                  } else {
+                    cubit.pageController
+                        .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                  }
                 },
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    PickImagesWidget(text: "text", onUpload: (value) {}),
-                    PickMediaWidget(text: "text", mediaType: MediaType.video, onUpload: (value) {})
+                    PickImagesWidget(
+                        text: "text",
+                        onUpload: (value) {
+                          cubit.images = value;
+                        }),
+                    PickMediaWidget(
+                        mediaType: MediaType.video,
+                        onUpload: (value) {
+                          cubit.videoPath = value;
+                        })
                   ],
                 ));
           },

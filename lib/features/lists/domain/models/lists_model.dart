@@ -9,6 +9,7 @@ class ListsModel {
 class ListsDataModel {
   int? id;
   String? name;
+  String? image;
 
-  ListsDataModel(this.id, this.name);
+  ListsDataModel(this.id, this.name, this.image);
 }

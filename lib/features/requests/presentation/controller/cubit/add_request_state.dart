@@ -23,3 +23,12 @@ final class SelectPackagingState extends AddRequestState {}
 final class SelectHarvestDateState extends AddRequestState {}
 
 final class SelectBiddingDateState extends AddRequestState {}
+
+final class AddRequestLoadingState extends AddRequestState {}
+
+final class AddRequestSuccessState extends AddRequestState {}
+
+final class AddRequestErrorState extends AddRequestState {
+  final String error;
+  AddRequestErrorState(this.error);
+}

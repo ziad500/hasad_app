@@ -2,34 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/network_image.dart';
+import 'package:hasad_app/features/categories/domain/models/categories_model.dart';
+import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/helpers.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, this.isSelcted = false});
-  final bool isSelcted;
+  const CategoryItem({super.key, required this.categoryListModel});
+  final CategoryListModel categoryListModel;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(3).w,
-      decoration: BoxDecoration(
-          color: isSelcted ? AppColors.darkBlue : Colors.transparent,
-          borderRadius: BorderRadius.circular(28).w),
+    bool isSelected = AddRequestCubit.get(context).selectedDepartment == categoryListModel.id;
+    return InkWell(
+      onTap: () {
+        AddRequestCubit.get(context).selectDepartment(int.parse(categoryListModel.id.toString()));
+      },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10).w,
-        width: 80.w,
-        height: 150.h,
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25).w),
-        child: Column(
-          children: [
-            const Expanded(child: _NetowrkImage()),
-            const SizedBox(
-              height: 7,
-            ),
-            DefaultText(
-              text: "خضار",
-              textStyle: Theme.of(context).textTheme.bodyMedium,
-            )
-          ],
+        padding: const EdgeInsets.all(3).w,
+        decoration: BoxDecoration(
+            color: isSelected ? AppColors.darkBlue : Colors.transparent,
+            borderRadius: BorderRadius.circular(28).w),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10).w,
+          width: 80.w,
+          height: 150.h,
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25).w),
+          child: Column(
+            children: [
+              Expanded(child: _NetowrkImage(categoryListModel.image)),
+              const SizedBox(
+                height: 7,
+              ),
+              DefaultText(
+                text: isEmpty(categoryListModel.name),
+                textStyle: Theme.of(context).textTheme.bodyMedium,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -37,16 +46,17 @@ class CategoryItem extends StatelessWidget {
 }
 
 class _NetowrkImage extends StatelessWidget {
-  const _NetowrkImage({super.key});
+  const _NetowrkImage(this.image);
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
     return NetworkImageWidget(
-      image: null,
+      image: image,
       imageBuilder: (_, image) => Container(
         width: 230.w - 20.w,
         decoration: BoxDecoration(
-            image: DecorationImage(image: image),
+            image: DecorationImage(image: image, fit: BoxFit.cover),
             color: Colors.white,
             borderRadius: BorderRadius.circular(25)),
       ),

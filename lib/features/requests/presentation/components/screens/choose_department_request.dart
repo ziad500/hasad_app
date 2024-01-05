@@ -4,6 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/category_item.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_list_view.dart';
+import 'package:hasad_app/common/default/empty_list.dart';
+import 'package:hasad_app/common/default/loading_widget.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/core/di.dart';
+import 'package:hasad_app/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 
@@ -24,26 +29,21 @@ class ChooseDepartmentRequestScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  Expanded(
-                    child: Container(
-                        width: 200.w,
-                        padding: const EdgeInsets.all(20),
-                        child: DefaultListView(
-                            itemBuilder: (context, index) => InkWell(
-                                onTap: () {
-                                  cubit.selectDepartment(index);
-                                },
-                                child: CategoryItem(isSelcted: cubit.selectedDepartment == index)),
-                            count: 10)),
-                  ),
+                  // ignore: prefer_const_constructors
+                  _CategoriesList(),
                   SizedBox(
                     height: 10.h,
                   ),
                   DefaultButton(
                       buttonName: "التالي",
                       buttonFunction: () {
-                        cubit.pageController.nextPage(
-                            duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                        if (cubit.selectedDepartment != null) {
+                          cubit.pageController.nextPage(
+                              duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                        } else {
+                          showSnackbar(
+                              context: context, text: "من فضلك اختر قسم", state: ToastStates.ERROR);
+                        }
                       }),
                   SizedBox(
                     height: 20.h,
@@ -53,5 +53,36 @@ class ChooseDepartmentRequestScreen extends StatelessWidget {
             );
           },
         ));
+  }
+}
+
+class _CategoriesList extends StatelessWidget {
+  const _CategoriesList();
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: BlocProvider(
+        create: (context) => sl<CategoriesCubit>()..getCategories(),
+        child: BlocBuilder<CategoriesCubit, CategoriesState>(
+          builder: (context, state) {
+            CategoriesCubit cubit = CategoriesCubit.get(context);
+            if (state is GetCategoriesLoadingState) {
+              return const LoadingWidget();
+            }
+            if (cubit.categories.isEmpty) {
+              return const EmptyList();
+            }
+            return Container(
+                width: 200.w,
+                padding: const EdgeInsets.all(20),
+                child: DefaultListView(
+                    itemBuilder: (context, index) =>
+                        CategoryItem(categoryListModel: cubit.categories[index]),
+                    count: cubit.categories.length));
+          },
+        ),
+      ),
+    );
   }
 }

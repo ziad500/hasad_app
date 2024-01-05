@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/shared_list_tile.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
@@ -21,14 +22,21 @@ class SelectHarvestDateScreen extends StatelessWidget {
             AddRequestCubit cubit = AddRequestCubit.get(context);
             return AddRequestBaseContainer(
                 buttonFunction: () {
-                  cubit.pageController
-                      .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                  if (cubit.selectedHarvestDate != null) {
+                    cubit.pageController
+                        .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                  } else {
+                    showSnackbar(
+                        context: context,
+                        text: "من فضلك اختر تاريخ القطف",
+                        state: ToastStates.ERROR);
+                  }
                 },
                 body: Column(
                   children: [
                     SharedListTile(
                       dense: true,
-                      title: cubit.selectedHarvestDate ?? "بيع مباشر",
+                      title: cubit.selectedHarvestDate ?? "اختر تاريخ",
                       isSelected: false,
                       trailing: const SizedBox(),
                       leading: const Icon(

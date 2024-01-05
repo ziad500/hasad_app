@@ -14,6 +14,11 @@ import 'package:hasad_app/features/lists/domain/use_cases/get_cities_list_usecas
 import 'package:hasad_app/features/lists/domain/use_cases/get_districts_list_usecase.dart';
 import 'package:hasad_app/features/lists/domain/use_cases/get_list_by_endpoint_usecase.dart';
 import 'package:hasad_app/features/lists/presentation/controller/cubit/lists_cubit.dart';
+import 'package:hasad_app/features/requests/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/requests/data/network/request_api.dart';
+import 'package:hasad_app/features/requests/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/requests/domain/repository/repo.dart';
+import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 
 import 'dio_factory.dart';
@@ -96,9 +101,32 @@ iniForgetPassword() async {
   }
 }
 
-initAddRequest() {
+initAddRequest() async {
+  //cubit
   if (!GetIt.I.isRegistered<AddRequestCubit>()) {
-    sl.registerFactory<AddRequestCubit>(() => AddRequestCubit());
+    sl.registerFactory<AddRequestCubit>(() => AddRequestCubit(sl.call()));
+  }
+  //app service client instance
+  if (!GetIt.I.isRegistered<RequestAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<RequestAppServiceClient>(() => RequestAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<RequestsRepo>()) {
+    sl.registerLazySingleton<RequestsRepo>(() => RequestsRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<RequestsRemoteDataSource>()) {
+    sl.registerLazySingleton<RequestsRemoteDataSource>(
+        () => RequestsRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<AddRequestUseCase>()) {
+    sl.registerLazySingleton<AddRequestUseCase>(() => AddRequestUseCase(sl.call()));
   }
 }
 

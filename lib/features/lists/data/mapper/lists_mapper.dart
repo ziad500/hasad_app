@@ -10,6 +10,6 @@ extension ListsResponseMapper on ListsResponse? {
 
 extension ListsDataResponseMapper on ListsDataResponse? {
   ListsDataModel toDomain() {
-    return ListsDataModel(this?.id, this?.name);
+    return ListsDataModel(this?.id, this?.name, this?.image);
   }
 }

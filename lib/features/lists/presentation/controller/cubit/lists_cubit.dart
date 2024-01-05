@@ -125,4 +125,17 @@ class ListsCubit extends Cubit<ListsState> {
               emit(GetIncpectionIncludesSuccessState());
             }));
   }
+
+  List<ListsDataModel> unKnownList = [];
+  Future<void> getUnKnownList(String endPoint) async {
+    emit(GetUnKnownListLoadingState());
+    await getListByEndPointUseCase
+        .execude(AllListsRequest(endPoint))
+        .then((value) => value.fold((l) {
+              emit(GetUnKnownListErrorState(l.message));
+            }, (r) {
+              unKnownList = r.data ?? [];
+              emit(GetUnKnownListSuccessState());
+            }));
+  }
 }

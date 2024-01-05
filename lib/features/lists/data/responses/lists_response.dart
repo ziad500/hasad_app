@@ -25,8 +25,10 @@ class ListsDataResponse {
   int? id;
   @JsonKey(name: "name")
   String? name;
+  @JsonKey(name: "image")
+  String? image;
 
-  ListsDataResponse({this.id, this.name});
+  ListsDataResponse({this.id, this.name, this.image});
 
   // from json
   factory ListsDataResponse.fromJson(Map<String, dynamic> json) =>

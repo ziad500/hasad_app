@@ -26,10 +26,12 @@ ListsDataResponse _$ListsDataResponseFromJson(Map<String, dynamic> json) =>
     ListsDataResponse(
       id: json['id'] as int?,
       name: json['name'] as String?,
+      image: json['image'] as String?,
     );
 
 Map<String, dynamic> _$ListsDataResponseToJson(ListsDataResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'image': instance.image,
     };

@@ -19,12 +19,8 @@ enum MediaType {
 
 class PickMediaWidget extends StatefulWidget {
   const PickMediaWidget(
-      {super.key,
-      required this.text,
-      required this.mediaType,
-      required this.onUpload,
-      this.widget});
-  final String text;
+      {super.key, this.text, required this.mediaType, required this.onUpload, this.widget});
+  final String? text;
   final Function(String?) onUpload;
   final MediaType? mediaType;
   final Widget? widget;
@@ -78,7 +74,7 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: Text(
-                        'upload video +',
+                        widget.text ?? 'upload video +',
                         style: TextStyle(fontSize: 24.sp, color: AppColors.iconColor),
                       ),
                     ),

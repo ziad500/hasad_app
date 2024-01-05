@@ -75,3 +75,12 @@ final class GetIncpectionIncludesErrorState extends ListsState {
   final String error;
   GetIncpectionIncludesErrorState(this.error);
 }
+
+final class GetUnKnownListLoadingState extends ListsState {}
+
+final class GetUnKnownListSuccessState extends ListsState {}
+
+final class GetUnKnownListErrorState extends ListsState {
+  final String error;
+  GetUnKnownListErrorState(this.error);
+}

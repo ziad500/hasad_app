@@ -2,8 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hasad_app/common/default/custom_drop_down.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
+import 'package:hasad_app/common/default/loading_frame.dart';
+import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/shared_list_tile.dart';
 import 'package:hasad_app/features/lists/presentation/components/address_drop_down.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
@@ -16,80 +17,104 @@ import 'package:hasad_app/utils/validation.dart';
 
 class MoreDetailsScreen extends StatelessWidget {
   const MoreDetailsScreen({super.key});
-
+  static GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return AddRequestBaseScaffold(
-        number: "9",
-        title: AddRequestCubit.get(context).selectedType == 2
-            ? "باقى تفاصيل المزاد"
-            : "باقى تفاصيل الإعلان",
-        body: BlocBuilder<AddRequestCubit, AddRequestState>(
-          buildWhen: (a, b) => b is SelectBiddingDateState,
+    return LoadingFrame(
+      loadingStates: [
+        /*   BlocBuilder<AddRequestCubit, AddRequestState>(
           builder: (context, state) {
-            AddRequestCubit cubit = AddRequestCubit.get(context);
-            return AddRequestBaseContainer(
-                buttonText: "إرسال للمراجعة",
-                buttonFunction: () {
-                  cubit.pageController
-                      .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
-                },
-                body: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      DefaultFormField(
-                          borderRadius: 3,
-                          controller: cubit.titleController,
-                          title: "أضف عنوان للمزاد",
-                          hint: "أضف عنوان مختصر للمزاد .... ",
-                          validator: defaultValidation),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      DefaultFormField(
-                          borderRadius: 3,
-                          controller: cubit.descriptionController,
-                          title: "الوصف",
-                          maxLines: 3,
-                          hint: "يمكنك وصف المزاد هنا ...",
-                          validator: defaultValidation),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      AddressDropDown(
-                          title: cubit.selectedType == 1
-                              ? LocaleKeys.advertisementLocation.tr()
-                              : LocaleKeys.auctionLocation.tr(),
-                          provinceController: cubit.provinceController,
-                          cityController: cubit.cityController,
-                          districtController: cubit.districtController),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      _BiddingPriceWidget(cubit: cubit),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      if (cubit.selectedType == 2) ...[
-                        _SelectDate(
-                          cubit: cubit,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        CustomDropDown(
-                            list: [],
-                            title: "يستمر المزاد لمدة",
-                            hint: "يستمر المزاد لمدة",
-                            width: 150.w,
-                            onOptionSelected: (value) {})
-                      ],
-                    ],
-                  ),
-                ));
+            if (state is AddRequestLoadingState) {
+              return const LoadingPage();
+            }
+            return const SizedBox();
           },
-        ));
+        ) */
+      ],
+      child: AddRequestBaseScaffold(
+          number: "9",
+          title: AddRequestCubit.get(context).selectedType == 2
+              ? "باقى تفاصيل المزاد"
+              : "باقى تفاصيل الإعلان",
+          body: BlocConsumer<AddRequestCubit, AddRequestState>(
+            buildWhen: (a, b) => b is SelectBiddingDateState,
+            listener: (context, state) {
+              if (state is AddRequestSuccessState) {
+                AddRequestCubit.get(context)
+                    .pageController
+                    .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+              }
+            },
+            builder: (context, state) {
+              AddRequestCubit cubit = AddRequestCubit.get(context);
+              return AddRequestBaseContainer(
+                  buttonText: "إرسال للمراجعة",
+                  buttonFunction: () {
+                    if (formKey.currentState!.validate()) {
+                      cubit.addRequest();
+                    }
+                  },
+                  body: SingleChildScrollView(
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          DefaultFormField(
+                              borderRadius: 3,
+                              controller: cubit.titleController,
+                              title: "أضف عنوان للمزاد",
+                              hint: "أضف عنوان مختصر للمزاد .... ",
+                              validator: defaultValidation),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          DefaultFormField(
+                              borderRadius: 3,
+                              controller: cubit.descriptionController,
+                              title: "الوصف",
+                              maxLines: 3,
+                              hint: "يمكنك وصف المزاد هنا ...",
+                              validator: defaultValidation),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          AddressDropDown(
+                              title: cubit.selectedType == 1
+                                  ? LocaleKeys.advertisementLocation.tr()
+                                  : LocaleKeys.auctionLocation.tr(),
+                              provinceController: cubit.provinceController,
+                              cityController: cubit.cityController,
+                              districtController: cubit.districtController),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          _BiddingPriceWidget(cubit: cubit),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          if (cubit.selectedType == 2) ...[
+                            _SelectDate(
+                              cubit: cubit,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            DefaultFormField(
+                              controller: cubit.biddingLongController,
+                              hint: "يستمر المزاد لمدة",
+                              title: "يستمر المزاد لمدة",
+                              validator: defaultValidation,
+                              width: 150.w,
+                            )
+                          ],
+                        ],
+                      ),
+                    ),
+                  ));
+            },
+          )),
+    );
   }
 }
 
@@ -139,7 +164,7 @@ class _BiddingPriceWidget extends StatelessWidget {
                 Expanded(
                   child: DefaultFormField(
                       borderRadius: 3,
-                      controller: cubit.biddingPriceController,
+                      controller: cubit.startPriceController,
                       title: "السعر الإبتدائى للمزاد",
                       hint: "سعر بداية المزاد",
                       textInputType: TextInputType.number,

@@ -22,6 +22,16 @@ String formatDateString(String inputDate) {
   return formattedDate;
 }
 
+String convertDateFormat(String inputDate) {
+  DateFormat originalFormat = DateFormat('EEE, d MMM yyyy', Constants.isArabic ? 'ar' : 'en');
+  DateFormat desiredFormat = DateFormat('yyyy-MM-dd', "en");
+
+  DateTime dateTime = originalFormat.parse(inputDate);
+  String formattedDate = desiredFormat.format(dateTime);
+
+  return formattedDate;
+}
+
 Future<DateTime?> showDatePickerFunction(BuildContext context) async {
   final DateTime? picked = await showDatePicker(
     context: context,
