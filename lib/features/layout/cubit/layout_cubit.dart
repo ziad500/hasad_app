@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hasad_app/features/bidding/presentation/screens/bidding_screen.dart';
+import 'package:hasad_app/features/bidding/main_screen/presentation/screens/bidding_screen.dart';
 import 'package:hasad_app/features/chat/presentation/screens/chat_screen.dart';
-import 'package:hasad_app/features/home/home_screen.dart';
+import 'package:hasad_app/features/direct_selling/main_screen/presentation/screens/home_screen.dart';
 import 'package:hasad_app/features/profile/presentation/screens/profile_screen.dart';
 
 part 'layout_state.dart';

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_divider.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/core/di.dart';
+import 'package:hasad_app/features/bidding/details/presentation/components/bidding_widget.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/base/body.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/description_item.dart';
@@ -51,10 +53,22 @@ class BiddingDetailsScreen extends StatelessWidget {
                   BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
                     buildWhen: (a, b) => b is ChangeIndexSliderstate,
                     builder: (context, state) {
-                      return ItemDetailsSlider(
-                          currentIndex: cubit.currentIndex,
-                          list: cubit.directSellingDataModel?.images,
-                          onPageChanged: (index, _) => cubit.onSliderChanged(index));
+                      return Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          ItemDetailsSlider(
+                              height: 250.h,
+                              borderRadius: 0,
+                              currentIndex: cubit.currentIndex,
+                              list: cubit.directSellingDataModel?.images,
+                              onPageChanged: (index, _) => cubit.onSliderChanged(index)),
+                          BiddingNumbersWidget(
+                            number: cubit.directSellingDataModel?.numberOfAuctions == null
+                                ? "0"
+                                : cubit.directSellingDataModel!.numberOfAuctions.toString(),
+                          ),
+                        ],
+                      );
                     },
                   ),
                   const SizedBox(

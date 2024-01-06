@@ -6,10 +6,18 @@ import 'package:hasad_app/common/default/network_image.dart';
 import 'package:hasad_app/features/slider/presentation/components/page_indicator_widget.dart';
 
 class ItemDetailsSlider extends StatefulWidget {
-  const ItemDetailsSlider({super.key, this.list, this.onPageChanged, required this.currentIndex});
+  const ItemDetailsSlider(
+      {super.key,
+      this.list,
+      this.onPageChanged,
+      required this.currentIndex,
+      this.borderRadius,
+      this.height});
   final List? list;
   final dynamic Function(int, CarouselPageChangedReason)? onPageChanged;
   final int currentIndex;
+  final double? borderRadius;
+  final double? height;
 
   @override
   State<ItemDetailsSlider> createState() => _ItemDetailsSliderState();
@@ -34,36 +42,36 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                           (offer) => NetworkImageWidget(
                             image: offer,
                             errorWidget: Container(
-                              height: 240.h,
+                              height: widget.height ?? 240.h,
                               width: double.maxFinite,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(25),
-                                      bottomRight: Radius.circular(25))),
+                                      bottomLeft: Radius.circular(widget.borderRadius ?? 25),
+                                      bottomRight: Radius.circular(widget.borderRadius ?? 25))),
                               child: const Center(
                                 child: Icon(Icons.error),
                               ),
                             ),
                             placeholder: (p0, p1) => Container(
-                              height: 240.h,
+                              height: widget.height ?? 240.h,
                               width: double.maxFinite,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(25),
-                                      bottomRight: Radius.circular(25))),
+                                      bottomLeft: Radius.circular(widget.borderRadius ?? 25),
+                                      bottomRight: Radius.circular(widget.borderRadius ?? 25))),
                               child: const Center(
                                 child: LoadingWidget(),
                               ),
                             ),
                             imageBuilder: (context, imageProvider) {
                               return Container(
-                                height: 240.h,
+                                height: widget.height ?? 240.h,
                                 width: double.maxFinite,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-                                    borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(25),
-                                        bottomRight: Radius.circular(25))),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(widget.borderRadius ?? 25),
+                                        bottomRight: Radius.circular(widget.borderRadius ?? 25))),
                               );
                             },
                           ),
@@ -71,7 +79,7 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                         .toList(),
                 options: CarouselOptions(
                     viewportFraction: 1,
-                    height: 240.h,
+                    height: widget.height ?? 240.h,
                     onPageChanged: widget.onPageChanged,
                     autoPlay: true,
                     autoPlayAnimationDuration: const Duration(seconds: 1),

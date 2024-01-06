@@ -53,7 +53,12 @@ class ItemDetailsTitleAndPrice extends StatelessWidget {
             ],
           ),
         ),
-        const PriceWidget(price: "600")
+        PriceWidget(
+            price: directSellingDataModel?.purchasingPrice == null
+                ? directSellingDataModel?.price == null
+                    ? ""
+                    : directSellingDataModel!.price.toString()
+                : directSellingDataModel!.purchasingPrice.toString())
       ],
     );
   }

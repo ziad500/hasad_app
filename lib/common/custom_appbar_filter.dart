@@ -15,8 +15,8 @@ class CustomAppbarWithFilter extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2).w,
       width: double.maxFinite,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30), color: const Color(0xff0A8554).withOpacity(0.2)),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.mainOpacity),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -9,6 +9,7 @@ class AppColors {
   static const Color scaffoldColor = Color(0xffF5F5F5);
   static const Color buttonColorSecondary = Color(0xffE9E9F7);
   static const Color blueAccent = Color(0xff34628C);
+  static Color mainOpacity = const Color(0xff0A8554).withOpacity(0.2);
 
   static const Color textButtonColor = Color(0xff6A3DCA);
 
