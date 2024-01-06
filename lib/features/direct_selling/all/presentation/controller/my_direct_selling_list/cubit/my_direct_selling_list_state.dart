@@ -17,7 +17,7 @@ final class MyGetDirectSellingListSuccessState extends MyDirectSellingListState 
 
 final class MyGetDirectSellingListErrorState extends MyDirectSellingListState {
   final String error;
-  MyGetDirectSellingListErrorState(this.error);
+  const MyGetDirectSellingListErrorState(this.error);
 }
 
 final class MyDirectSellingListAllCaughtState extends MyDirectSellingListState {}

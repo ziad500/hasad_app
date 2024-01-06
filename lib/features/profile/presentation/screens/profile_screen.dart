@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +13,7 @@ import 'package:hasad_app/features/profile/presentation/controller/cubit/profile
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/helpers.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -33,8 +33,13 @@ class ProfileScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 50, top: 20),
                     child: DefaultListView(
-                        itemBuilder: (context, index) => SettingsItem(
-                            icon: _settingsList()[index].icon, title: _settingsList()[index].title),
+                        itemBuilder: (context, index) => InkWell(
+                              onTap: () =>
+                                  Navigator.pushNamed(context, _settingsList()[index].route),
+                              child: SettingsItem(
+                                  icon: _settingsList()[index].icon,
+                                  title: _settingsList()[index].title),
+                            ),
                         count: _settingsList().length),
                   ),
                 ),
@@ -91,13 +96,13 @@ class _UserRow extends StatelessWidget {
 }
 
 List<_SettingsModel> _settingsList() => [
-      _SettingsModel(icon: SVGManager.wallet, title: "المحفظة"),
-      _SettingsModel(icon: SVGManager.ads, title: "الإعلانات"),
-      _SettingsModel(icon: SVGManager.note, title: "الطلبات"),
-      _SettingsModel(icon: SVGManager.heart, title: "المفضلة"),
-      _SettingsModel(icon: SVGManager.flag, title: "عن حصاد"),
-      _SettingsModel(icon: SVGManager.archive, title: "سياسة الإستخدام"),
-      _SettingsModel(icon: SVGManager.shield, title: "سياسة الخصوصية")
+      _SettingsModel(icon: SVGManager.wallet, title: "المحفظة", route: ""),
+      _SettingsModel(icon: SVGManager.ads, title: "الإعلانات", route: Routes.myAdvertisementScreen),
+      _SettingsModel(icon: SVGManager.note, title: "الطلبات", route: ""),
+      _SettingsModel(icon: SVGManager.heart, title: "المفضلة", route: ""),
+      _SettingsModel(icon: SVGManager.flag, title: "عن حصاد", route: ""),
+      _SettingsModel(icon: SVGManager.archive, title: "سياسة الإستخدام", route: ""),
+      _SettingsModel(icon: SVGManager.shield, title: "سياسة الخصوصية", route: "")
     ];
 
 List<String> _titleList() => [];
@@ -105,8 +110,10 @@ List<String> _titleList() => [];
 class _SettingsModel {
   String icon;
   String title;
+  String route;
   _SettingsModel({
     required this.icon,
     required this.title,
+    required this.route,
   });
 }

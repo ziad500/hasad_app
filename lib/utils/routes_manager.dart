@@ -3,6 +3,7 @@ import 'package:hasad_app/features/direct_selling/all/presentation/screens/direc
 import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/filter/presentation/screens/filter_screen.dart';
 import 'package:hasad_app/features/layout/layout.dart';
+import 'package:hasad_app/features/my_advertisement/presentation/screens/my_advertisement_screen.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
 
@@ -21,18 +22,10 @@ class Routes {
   static const String addRequestScreen = "/AddRequestScreen";
   static const String itemDetailsRoutes = "/itemDetailsRoutes";
   static const String directSellingListScreen = "/directSellingListScreen";
-  static const String brandsScreenRoutes = "/brandsScreenRoutes";
-  static const String editprofileScreen = "/editprofileScreen";
-  static const String productsByCategoryScreen = "/ProductsByCategoryScreen";
-  static const String allProductsScreen = "/AllProductsScreen";
-  static const String searchScreen = "/SearchScreen";
-  static const String productDetailsScreen = "/ProductDetailsScreen";
-  static const String favScreen = "/favScreen";
-  static const String blogScreen = "/blogScreen";
-  static const String ordersScreen = "/ordersScreen";
-  static const String ordersDetailsScreen = "/ordersDetailsScreen";
-  static const String checkOutScreen = "/checkOutScreen";
-  static const String checkOutSuccessScreen = "/checkOutSuccessScreen";
+  static const String myAdvertisementScreen = "/MyAdvertisementScreen";
+
+  ////////
+
   static const String returnPolicyRoutes = "/returnPolicyRoutes";
   static const String supportRoutes = "/supportRoutes";
   static const String appPrivacyRoutes = "/appPrivacyRoutes";
@@ -71,6 +64,13 @@ class RouteGenerator {
               categoryName: args?['name'],
               categoryId: args?['id'],
             );
+          },
+        );
+
+      case Routes.myAdvertisementScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const MyAdvertisementScreen();
           },
         );
       case Routes.addRequestScreen:

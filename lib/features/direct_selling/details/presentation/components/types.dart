@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/network_image.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
@@ -36,18 +37,21 @@ class TypeDetailsRowWidget extends StatelessWidget {
         Expanded(
             child: _Item(
                 title: LocaleKeys.harvestDate.tr(),
-                subTitle: directSellingDataModel?.agricultureType?.name,
-                image: directSellingDataModel?.agricultureType?.image))
+                subTitle: directSellingDataModel?.harvestDate,
+                isDate: true,
+                image: null))
       ],
     );
   }
 }
 
 class _Item extends StatelessWidget {
-  const _Item({required this.title, required this.subTitle, required this.image});
+  const _Item(
+      {required this.title, required this.subTitle, required this.image, this.isDate = false});
   final String? title;
   final String? subTitle;
   final String? image;
+  final bool isDate;
 
   @override
   Widget build(BuildContext context) {
@@ -57,28 +61,43 @@ class _Item extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        NetworkImageWidget(
-          image: image,
-          errorWidget: Container(
-            height: 60.h,
-            width: 70.w,
-            decoration:
-                BoxDecoration(color: AppColors.grey, borderRadius: BorderRadius.circular(8)),
-            child: const Icon(Icons.error),
-          ),
-          imageBuilder: (_, image) => Container(
-            height: 60.h,
-            width: 70.w,
-            decoration: BoxDecoration(
-                image: DecorationImage(image: image, fit: BoxFit.cover),
-                color: AppColors.grey,
-                borderRadius: BorderRadius.circular(8)),
-          ),
-        ),
+        isDate
+            ? Container(
+                height: 60.h,
+                width: 70.w,
+                decoration: BoxDecoration(
+                    color: AppColors.primaryColor, borderRadius: BorderRadius.circular(8)),
+                child: Center(
+                    child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: DefaultText(
+                          text: isEmpty(subTitle),
+                          textStyle:
+                              Theme.of(context).textTheme.titleSmall?.copyWith(color: Colors.white),
+                        ))),
+              )
+            : NetworkImageWidget(
+                image: image,
+                errorWidget: Container(
+                  height: 60.h,
+                  width: 70.w,
+                  decoration:
+                      BoxDecoration(color: AppColors.grey, borderRadius: BorderRadius.circular(8)),
+                  child: const Icon(Icons.error),
+                ),
+                imageBuilder: (_, image) => Container(
+                  height: 60.h,
+                  width: 70.w,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: image, fit: BoxFit.cover),
+                      color: AppColors.grey,
+                      borderRadius: BorderRadius.circular(8)),
+                ),
+              ),
         const SizedBox(
           height: 10,
         ),
-        SubTitleWidget(subTitle: isEmpty(subTitle))
+        SubTitleWidget(subTitle: isDate ? "" : isEmpty(subTitle))
       ],
     );
   }
