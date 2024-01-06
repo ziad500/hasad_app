@@ -1,6 +1,7 @@
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/screens/direct_selling_list_screen.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
+import 'package:hasad_app/features/filter/presentation/screens/filter_screen.dart';
 import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
@@ -16,6 +17,7 @@ class Routes {
   static const String forgetPassword = "/forgetPassword";
   static const String signUpScreenRoutes = "/signUpScreen";
   static const String homeScreenRoutes = "/homeScreen";
+  static const String filterScreen = "/FilterScreenRoutes";
   static const String addRequestScreen = "/AddRequestScreen";
   static const String itemDetailsRoutes = "/itemDetailsRoutes";
   static const String directSellingListScreen = "/directSellingListScreen";
@@ -49,6 +51,12 @@ class RouteGenerator {
             return ItemDetailsScreen(
               id: args!['id'].toString(),
             );
+          },
+        );
+      case Routes.filterScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const FilterScreen();
           },
         );
       case Routes.directSellingListScreen:

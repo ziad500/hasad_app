@@ -25,7 +25,9 @@ class CustomDropDown extends StatelessWidget {
       this.validator,
       this.label,
       this.prefix,
-      this.borderColor});
+      this.borderColor,
+      this.borderRadius,
+      this.textColor});
 
   final List<OptionItem> list;
   final List<DropdownMenuItem<OptionItem>>? items;
@@ -43,9 +45,9 @@ class CustomDropDown extends StatelessWidget {
   final String? label;
   final Widget? prefix;
   final Color? borderColor;
-
+  final double? borderRadius;
   final TextEditingController textEditingController = TextEditingController();
-
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,7 +56,7 @@ class CustomDropDown extends StatelessWidget {
         if (title != null) ...[
           Text(
             title!,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: textColor),
           ),
           const SizedBox(
             height: 10,
@@ -74,11 +76,14 @@ class CustomDropDown extends StatelessWidget {
                     contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                     fillColor: Colors.white,
                     filled: true,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(borderRadius ?? 3).w,
+                        borderSide: BorderSide(color: borderColor ?? AppColors.borderColor)),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(3).w,
-                    ),
+                        borderRadius: BorderRadius.circular(borderRadius ?? 3).w,
+                        borderSide: BorderSide(color: borderColor ?? AppColors.borderColor)),
                     enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(3).w,
+                        borderRadius: BorderRadius.circular(borderRadius ?? 3).w,
                         borderSide: BorderSide(color: borderColor ?? AppColors.borderColor))
                     // Add more decoration..
                     ),
@@ -180,7 +185,7 @@ class CustomDropDown extends StatelessWidget {
                 ),
                 dropdownStyleData: DropdownStyleData(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3).w,
+                    borderRadius: BorderRadius.circular(borderRadius ?? 3).w,
                   ),
                 ),
                 menuItemStyleData: const MenuItemStyleData(
