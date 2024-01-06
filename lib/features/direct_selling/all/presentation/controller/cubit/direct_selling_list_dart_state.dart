@@ -18,3 +18,5 @@ final class GetDirectSellingListErrorState extends DirectSellingListState {
 }
 
 final class DirectSellingListAllCaughtState extends DirectSellingListState {}
+
+final class ResetState extends DirectSellingListState {}

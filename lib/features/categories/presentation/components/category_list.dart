@@ -32,7 +32,11 @@ class CategoriesList extends StatelessWidget {
                 height: 110.h,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => InkWell(
-                      onTap: () => Navigator.pushNamed(context, Routes.directSellingListScreen),
+                      onTap: () => Navigator.pushNamed(context, Routes.directSellingListScreen,
+                          arguments: {
+                            "id": cubit.categories[index].id.toString(),
+                            "name": cubit.categories[index].name.toString()
+                          }),
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                         width: 95.w,

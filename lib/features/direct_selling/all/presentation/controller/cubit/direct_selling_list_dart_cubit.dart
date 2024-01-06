@@ -20,10 +20,10 @@ class DirectSellingListCubit extends Cubit<DirectSellingListState> {
   GetMainListRequest getMainListRequest = GetMainListRequest();
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> allDirectSelling = [];
-  String page = "1";
   Future<void> getDirectSellingList() async {
     if (_canFetchMore()) {
       getMainListRequest.page = getPageNumber();
+      getMainListRequest.departmentId = departmentMainId;
       _emitLoadingState();
       await _getDirectSellingListUseCase.execude(getMainListRequest).then((value) => value.fold(
           (l) => emit(GetDirectSellingListErrorState(l.message)), (r) => _handleSuccessState(r)));
@@ -70,5 +70,23 @@ class DirectSellingListCubit extends Cubit<DirectSellingListState> {
     return nextPageNumber;
   }
 
-  //////////////////////////// my direct selling list //////////////////////////////
+  String? departmentMainId;
+  void setDepartmentID(String? departmentId) => departmentMainId = departmentId;
+
+  //////////////////////////// filter //////////////////////////////
+  Future<void> passGetMainListRequest(GetMainListRequest? value) async {
+    getMainListRequest = value ?? GetMainListRequest();
+    directSellingListModel = null;
+    emit(ResetState());
+  }
+
+  bool hasFilter() =>
+      getMainListRequest.agricultureTypeId != null ||
+      getMainListRequest.cityId != null ||
+      getMainListRequest.districtId != null ||
+      getMainListRequest.harvestDate != null ||
+      getMainListRequest.highestPrice != null ||
+      getMainListRequest.lowestPrice != null ||
+      getMainListRequest.packagingTypeId != null ||
+      getMainListRequest.regionId != null;
 }

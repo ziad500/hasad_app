@@ -31,36 +31,45 @@ class FilterScreen extends StatelessWidget {
               BlocBuilder<FilterCubit, FilterState>(
                 builder: (context, state) {
                   FilterCubit cubit = FilterCubit.get(context);
-                  return SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        children: [
-                          const AgricultureFilter(),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          const PackagingFilter(),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          _SelectHarvestDate(cubit: cubit),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          AddressMainDropDown(
-                              provinceController: cubit.provinceController,
-                              cityController: cubit.cityController,
-                              districtController: cubit.districtController),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          DefaultButton(
-                              buttonName: LocaleKeys.done.tr(),
-                              buttonFunction: () {
-                                buttonFunc(cubit.passFilterRequest());
-                              })
-                        ],
+                  return Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            const AgricultureFilter(),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            const PackagingFilter(),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            _SelectHarvestDate(cubit: cubit),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            AddressMainDropDown(
+                                provinceController: cubit.provinceController,
+                                cityController: cubit.cityController,
+                                districtController: cubit.districtController),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            _Slider(cubit: cubit),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            DefaultButton(
+                                buttonName: LocaleKeys.done.tr(),
+                                buttonFunction: () {
+                                  buttonFunc(cubit.passFilterRequest());
+                                }),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -68,6 +77,43 @@ class FilterScreen extends StatelessWidget {
               )
             ],
           )),
+    );
+  }
+}
+
+class _Slider extends StatelessWidget {
+  const _Slider({required this.cubit});
+  final FilterCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "${cubit.selectedRange.start} SAR",
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.primaryColor),
+            ),
+            Text(
+              "${cubit.selectedRange.end} SAR",
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.primaryColor),
+            ),
+          ],
+        ),
+        RangeSlider(
+            values: cubit.selectedRange,
+            divisions: 500,
+            inactiveColor: Colors.grey,
+            activeColor: AppColors.primaryColor,
+            min: 100,
+            max: 100000,
+            labels: RangeLabels("${cubit.selectedRange.start}", "${cubit.selectedRange.end}"),
+            onChanged: (newRange) {
+              cubit.setRange(newRange);
+            }),
+      ],
     );
   }
 }

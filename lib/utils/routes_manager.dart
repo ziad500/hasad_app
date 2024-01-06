@@ -56,13 +56,21 @@ class RouteGenerator {
       case Routes.filterScreen:
         return MaterialPageRoute(
           builder: (context) {
-            return const FilterScreen();
+            final args = settings.arguments as Map<String, dynamic>?;
+            return FilterScreen(
+              buttonFunc: args?['buttonFunc'],
+            );
           },
         );
       case Routes.directSellingListScreen:
         return MaterialPageRoute(
           builder: (context) {
-            return const DirectSellingListScreen();
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return DirectSellingListScreen(
+              categoryName: args?['name'],
+              categoryId: args?['id'],
+            );
           },
         );
       case Routes.addRequestScreen:

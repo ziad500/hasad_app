@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/main_item.dart';
 import 'package:hasad_app/core/pagenation/base_list_view.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
@@ -28,29 +27,28 @@ class _DirectSellingListViewState extends State<DirectSellingListView> {
     return BlocBuilder<DirectSellingListCubit, DirectSellingListState>(builder: (context, state) {
       //pass the cubit ,states and items type '<DirectSellingListCubit, DirectSellingListDartState, ReportModel>'
 
-      if (state is GetDirectSellingListLoadingState) {
-        return const LoadingWidget();
-      }
       return PagenatedListView<DirectSellingListCubit, DirectSellingListState,
-              DirectSellingDataModel>(
-          //start listening to fetch the next page when scroll to .7 total height
-          init: () => controller.addListener(() async {
-                var percentageOftotalLength = 0.7 * controller.position.maxScrollExtent;
-                var currentLength = controller.position.pixels;
-                if (currentLength >= percentageOftotalLength &&
-                    cubit.state is! GetDirectSellingListPaginationLoadingState) {
-                  await cubit.getDirectSellingList();
-                }
-              }),
-          controller: controller,
-          //build this widget for the cureent screen
-          childBuilder: (index) => MainItemWidget(
-              isbidding: false, directSellingDataModel: cubit.allDirectSelling[index]),
-          items: cubit.allDirectSelling,
-          //indicates that you do not has any other pages to fetch
-          allCaught: state is DirectSellingListAllCaughtState,
-          //indicates that you we currently fetching the next page
-          isLoading: state is GetDirectSellingListPaginationLoadingState);
+          DirectSellingDataModel>(
+        //start listening to fetch the next page when scroll to .7 total height
+        init: () => controller.addListener(() async {
+          var percentageOftotalLength = 0.7 * controller.position.maxScrollExtent;
+          var currentLength = controller.position.pixels;
+          if (currentLength >= percentageOftotalLength &&
+              cubit.state is! GetDirectSellingListPaginationLoadingState) {
+            await cubit.getDirectSellingList();
+          }
+        }),
+        controller: controller,
+        //build this widget for the cureent screen
+        childBuilder: (index) =>
+            MainItemWidget(isbidding: false, directSellingDataModel: cubit.allDirectSelling[index]),
+        items: cubit.allDirectSelling,
+        //indicates that you do not has any other pages to fetch
+        allCaught: state is DirectSellingListAllCaughtState,
+        //indicates that you we currently fetching the next page
+        isLoading: state is GetDirectSellingListPaginationLoadingState,
+        mainLoading: state is GetDirectSellingListLoadingState,
+      );
     });
   }
 }

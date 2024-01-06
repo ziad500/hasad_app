@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/direct_selling/all/data/network/requests.dart';
@@ -21,6 +22,13 @@ class FilterCubit extends Cubit<FilterState> {
     emit(SelectHarvestDateState());
   }
 
+  RangeValues selectedRange = const RangeValues(100, 100000);
+  void setRange(RangeValues value) {
+    selectedRange = value;
+
+    emit(SetRangeState());
+  }
+
   GetMainListRequest passFilterRequest() => GetMainListRequest(
       agricultureTypeId: agricultureTypeId,
       cityId: provinceController.text == "" ? null : provinceController.text,
@@ -28,5 +36,7 @@ class FilterCubit extends Cubit<FilterState> {
       harvestDate: selectedHarvestDate == null ? null : convertDateFormat(selectedHarvestDate!),
       packagingTypeId: packagingTypeId,
       page: "1",
+      highestPrice: selectedRange.end.toString(),
+      lowestPrice: selectedRange.start.toString(),
       regionId: cityController.text == "" ? null : cityController.text);
 }

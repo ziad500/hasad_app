@@ -32,6 +32,7 @@ class PagenatedListView<B extends StateStreamable<States>, States, DataType>
   final ScrollController controller;
   final EdgeInsetsGeometry? padding;
   final bool useExpanded;
+  final bool mainLoading;
   const PagenatedListView(
       {required this.init,
       required this.controller,
@@ -41,7 +42,8 @@ class PagenatedListView<B extends StateStreamable<States>, States, DataType>
       required this.isLoading,
       this.padding,
       this.useExpanded = true,
-      super.key});
+      super.key,
+      required this.mainLoading});
 
   @override
   State<PagenatedListView<B, States, DataType>> createState() =>
@@ -69,14 +71,17 @@ class _PagenatedListViewState<B extends StateStreamable<States>, States, DataTyp
             //the parent is bloc builder with the passed bloc & states types
             //we are using this here to rebuild the widget whenever a new state has been emitted
             child: _Child<B, States, DataType>(
-                controller: widget.controller,
-                items: widget.items,
-                childBuilder: widget.childBuilder,
-                allCaught: widget.allCaught,
-                isLoading: widget.isLoading))
+            controller: widget.controller,
+            items: widget.items,
+            childBuilder: widget.childBuilder,
+            allCaught: widget.allCaught,
+            isLoading: widget.isLoading,
+            mainLoading: widget.mainLoading,
+          ))
         : _Child<B, States, DataType>(
             padding: widget.padding,
             controller: widget.controller,
+            mainLoading: widget.mainLoading,
             items: widget.items,
             childBuilder: widget.childBuilder,
             allCaught: widget.allCaught,
@@ -91,6 +96,8 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
   final ScrollController controller;
   final EdgeInsetsGeometry? padding;
   final bool useExpanded;
+  final bool mainLoading;
+
   const _Child(
       {required this.controller,
       required this.items,
@@ -99,12 +106,16 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
       required this.isLoading,
       this.padding,
       this.useExpanded = true,
-      super.key});
+      super.key,
+      required this.mainLoading});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<B, States>(
       builder: (context, state) {
+        if (mainLoading) {
+          return const _LoadingWidget();
+        }
         return ListView.separated(
           //attach the scroll controller in order to listen on it
           controller: controller,

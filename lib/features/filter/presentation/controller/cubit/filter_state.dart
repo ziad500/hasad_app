@@ -7,3 +7,5 @@ sealed class FilterState {
 final class FilterInitial extends FilterState {}
 
 final class SelectHarvestDateState extends FilterState {}
+
+final class SetRangeState extends FilterState {}

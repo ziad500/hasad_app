@@ -8,6 +8,7 @@ class GetMainListRequest {
   String? lowestPrice;
   String? highestPrice;
   String? page;
+  String? departmentId;
   GetMainListRequest(
       {this.agricultureTypeId,
       this.cityId,
@@ -17,5 +18,6 @@ class GetMainListRequest {
       this.lowestPrice,
       this.packagingTypeId,
       this.page,
-      this.regionId});
+      this.regionId,
+      this.departmentId});
 }

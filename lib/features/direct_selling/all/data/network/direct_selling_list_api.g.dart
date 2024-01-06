@@ -32,6 +32,7 @@ class _DirectSellingListAppServiceClient
     String? lowestPrice,
     String? highestPrice,
     String? page,
+    String? departmentId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -44,6 +45,7 @@ class _DirectSellingListAppServiceClient
       r'lowest_price': lowestPrice,
       r'highest_price': highestPrice,
       r'page': page,
+      r'department_id ': departmentId,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
