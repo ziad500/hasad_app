@@ -1,14 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/network_image.dart';
-import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
 import 'package:hasad_app/features/slider/presentation/components/page_indicator_widget.dart';
 
 class ItemDetailsSlider extends StatefulWidget {
-  const ItemDetailsSlider({super.key});
+  const ItemDetailsSlider({super.key, this.list, this.onPageChanged, required this.currentIndex});
+  final List? list;
+  final dynamic Function(int, CarouselPageChangedReason)? onPageChanged;
+  final int currentIndex;
 
   @override
   State<ItemDetailsSlider> createState() => _ItemDetailsSliderState();
@@ -26,11 +27,9 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
           children: [
             CarouselSlider(
                 carouselController: carouselController,
-                items: DirectSellingDetailsCubit.get(context).directSellingDataModel?.images == null
+                items: widget.list == null
                     ? []
-                    : DirectSellingDetailsCubit.get(context)
-                        .directSellingDataModel!
-                        .images!
+                    : widget.list!
                         .map(
                           (offer) => NetworkImageWidget(
                             image: offer,
@@ -73,41 +72,34 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                 options: CarouselOptions(
                     viewportFraction: 1,
                     height: 240.h,
-                    onPageChanged: (index, reason) {
-                      DirectSellingDetailsCubit.get(context).onSliderChanged(index);
-                    },
+                    onPageChanged: widget.onPageChanged,
                     autoPlay: true,
                     autoPlayAnimationDuration: const Duration(seconds: 1),
                     enableInfiniteScroll: true,
                     enlargeCenterPage: true)),
-            BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).w,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < (widget.list == null ? 0 : widget.list!.length); i++)
+                    Padding(
+                      padding: const EdgeInsets.all(2),
+                      child: PageIndicatorWidget(
+                        index: i,
+                        currentIndex: widget.currentIndex,
+                      ),
+                    ),
+                ],
+              ),
+            )
+
+            /* BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
               buildWhen: (previous, current) => current is ChangeIndexSliderstate,
               builder: (context, state) {
-                int length =
-                    DirectSellingDetailsCubit.get(context).directSellingDataModel?.images == null
-                        ? 0
-                        : DirectSellingDetailsCubit.get(context)
-                            .directSellingDataModel!
-                            .images!
-                            .length;
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (int i = 0; i < length; i++)
-                        Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: PageIndicatorWidget(
-                            index: i,
-                            currentIndex: DirectSellingDetailsCubit.get(context).currentIndex,
-                          ),
-                        ),
-                    ],
-                  ),
-                );
-              },
-            ),
+                int length = ;
+                return  },
+            ), */
           ],
         ),
       ],

@@ -28,6 +28,11 @@ class DirectSellingDataModel {
   num? price;
   List<String>? images;
   List<String>? priceInclusions;
+  num? purchasingPrice;
+  num? auctionPrice;
+  String? expiryTime;
+  String? closed;
+  num? numberOfAuctions;
   DirectSellingDataModel(
       this.city,
       this.description,
@@ -46,7 +51,12 @@ class DirectSellingDataModel {
       this.packagingType,
       this.user,
       this.video,
-      this.priceInclusions);
+      this.priceInclusions,
+      this.auctionPrice,
+      this.closed,
+      this.expiryTime,
+      this.numberOfAuctions,
+      this.purchasingPrice);
 }
 
 class TypeModel {

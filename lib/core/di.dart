@@ -1,4 +1,18 @@
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
+import 'package:hasad_app/features/bidding/all/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/bidding/all/data/network/bidding_list_api.dart';
+import 'package:hasad_app/features/bidding/all/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/bidding/all/domain/repository/repo.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_list_usecase.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/get_my_bidding_list_usecase.dart';
+import 'package:hasad_app/features/bidding/all/presentation/controller/cubit/bidding_list_dart_cubit.dart';
+import 'package:hasad_app/features/bidding/all/presentation/controller/my_bidding_list/cubit/my_bidding_list_cubit.dart';
+import 'package:hasad_app/features/bidding/details/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/bidding/details/data/network/bidding_details_api.dart';
+import 'package:hasad_app/features/bidding/details/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/bidding/details/domain/repository/repo.dart';
+import 'package:hasad_app/features/bidding/details/domain/use_cases/get_bidding_details_usecase.dart';
+import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/categories/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/categories/data/network/categories_api.dart';
 import 'package:hasad_app/features/categories/data/repository/repo_impl.dart';
@@ -68,6 +82,8 @@ Future<void> initAppModule() async {
   iniProfile();
   iniDirectSellingList();
   iniDirectSellingDetails();
+  iniBiddingList();
+  iniBiddingDetails();
 }
 
 iniLogin() async {
@@ -324,5 +340,73 @@ iniDirectSellingDetails() async {
   if (!GetIt.I.isRegistered<GetDirectSellingDetailsUseCase>()) {
     sl.registerLazySingleton<GetDirectSellingDetailsUseCase>(
         () => GetDirectSellingDetailsUseCase(sl.call()));
+  }
+}
+
+iniBiddingList() async {
+  //cubit
+  if (!GetIt.I.isRegistered<BiddingListCubit>()) {
+    sl.registerFactory<BiddingListCubit>(() => BiddingListCubit(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<MyBiddingListCubit>()) {
+    sl.registerFactory<MyBiddingListCubit>(() => MyBiddingListCubit(sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<BiddingListAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<BiddingListAppServiceClient>(() => BiddingListAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<BiddingListRepository>()) {
+    sl.registerLazySingleton<BiddingListRepository>(() => BiddingListRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<BiddingListRemoteDataSource>()) {
+    sl.registerLazySingleton<BiddingListRemoteDataSource>(
+        () => BiddingListRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetBiddingListUseCase>()) {
+    sl.registerLazySingleton<GetBiddingListUseCase>(() => GetBiddingListUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<GetMyBiddingListUseCase>()) {
+    sl.registerLazySingleton<GetMyBiddingListUseCase>(() => GetMyBiddingListUseCase(sl.call()));
+  }
+}
+
+iniBiddingDetails() async {
+  //cubit
+  if (!GetIt.I.isRegistered<BiddingDetailsCubit>()) {
+    sl.registerFactory<BiddingDetailsCubit>(() => BiddingDetailsCubit(sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<BiddingDetailsAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<BiddingDetailsAppServiceClient>(
+        () => BiddingDetailsAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<BiddingDetailsRepository>()) {
+    sl.registerLazySingleton<BiddingDetailsRepository>(
+        () => BiddingDetailsRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<BiddingDetailsRemoteDataSource>()) {
+    sl.registerLazySingleton<BiddingDetailsRemoteDataSource>(
+        () => BiddingDetailsRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetBiddingDetailsUseCase>()) {
+    sl.registerLazySingleton<GetBiddingDetailsUseCase>(() => GetBiddingDetailsUseCase(sl.call()));
   }
 }

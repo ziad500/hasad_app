@@ -23,8 +23,11 @@ class MainItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.itemDetailsRoutes,
-          arguments: {"id": directSellingDataModel.id}),
+      onTap: () => isbidding
+          ? Navigator.pushNamed(context, Routes.biddingDetailsScreen,
+              arguments: {"id": directSellingDataModel.id})
+          : Navigator.pushNamed(context, Routes.itemDetailsRoutes,
+              arguments: {"id": directSellingDataModel.id}),
       child: Container(
         width: double.maxFinite,
         // height: 145.h,
@@ -85,7 +88,10 @@ class _BiddingDetails extends StatelessWidget {
                     width: 5,
                   ),
                   DefaultText(
-                      text: "44", textStyle: TextStyle(fontSize: 15.sp, color: AppColors.red)),
+                      text: directSellingDataModel.numberOfAuctions == null
+                          ? "0"
+                          : directSellingDataModel.numberOfAuctions.toString(),
+                      textStyle: TextStyle(fontSize: 15.sp, color: AppColors.red)),
                 ],
               ),
             ),
@@ -194,7 +200,7 @@ class LocationAndPrice extends StatelessWidget {
           child: IconAndText(
             svg: SVGManager.location,
             title:
-                "${directSellingDataModel.region} -${directSellingDataModel.district} - ${directSellingDataModel.city}",
+                "${directSellingDataModel.region} -${directSellingDataModel.city} - ${directSellingDataModel.district}",
             color: AppColors.blueAccent,
           ),
         ),
@@ -219,7 +225,7 @@ class _PriceRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultText(
-            text: "سعر المزاد SAR 800",
+            text: "سعر المزاد SAR ${directSellingDataModel.auctionPrice}",
             textStyle: Theme.of(context)
                 .textTheme
                 .labelMedium
@@ -229,7 +235,7 @@ class _PriceRow extends StatelessWidget {
             width: 10,
           ),
           DefaultText(
-            text: "سعر الشراء الأن SAR 800",
+            text: "سعر الشراء الأن SAR ${directSellingDataModel.purchasingPrice}",
             textStyle: Theme.of(context)
                 .textTheme
                 .labelMedium

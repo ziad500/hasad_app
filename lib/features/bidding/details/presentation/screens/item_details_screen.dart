@@ -4,6 +4,7 @@ import 'package:hasad_app/common/default/default_divider.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/core/di.dart';
+import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/base/body.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/description_item.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/image_slider.dart';
@@ -12,16 +13,15 @@ import 'package:hasad_app/features/direct_selling/details/presentation/component
 import 'package:hasad_app/features/direct_selling/details/presentation/components/title_and_price.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/types.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/user_row.dart';
-import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
-class ItemDetailsScreen extends StatelessWidget {
-  const ItemDetailsScreen({super.key, required this.id});
+class BiddingDetailsScreen extends StatelessWidget {
+  const BiddingDetailsScreen({super.key, required this.id});
   final String id;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => sl<DirectSellingDetailsCubit>()..getDirectSellingList(id),
+        create: (context) => sl<BiddingDetailsCubit>()..getBiddingList(id),
         child: ItemDetailsBody(
           actions: const [
             Padding(
@@ -32,23 +32,23 @@ class ItemDetailsScreen extends StatelessWidget {
               ),
             )
           ],
-          body: BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
+          body: BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
             buildWhen: (a, b) =>
-                b is GetDirectSellingDetailsSuccessState ||
-                b is GetDirectSellingDetailsErrorState ||
-                b is GetDirectSellingDetailsLoadingState,
+                b is GetBiddingDetailsSuccessState ||
+                b is GetBiddingDetailsErrorState ||
+                b is GetBiddingDetailsLoadingState,
             builder: (context, state) {
-              DirectSellingDetailsCubit cubit = DirectSellingDetailsCubit.get(context);
-              if (state is GetDirectSellingDetailsLoadingState) {
+              BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
+              if (state is GetBiddingDetailsLoadingState) {
                 return const LoadingWidget();
               }
-              if (state is GetDirectSellingDetailsErrorState) {
+              if (state is GetBiddingDetailsErrorState) {
                 return Center(child: DefaultText(text: state.error));
               }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
+                  BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
                     buildWhen: (a, b) => b is ChangeIndexSliderstate,
                     builder: (context, state) {
                       return ItemDetailsSlider(

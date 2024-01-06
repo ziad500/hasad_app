@@ -28,7 +28,12 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.packagingType.toDomain(),
         this?.user.toDomain(),
         this?.video,
-        this?.priceInclusions);
+        this?.priceInclusions,
+        this?.auctionPrice,
+        this?.closed,
+        this?.expiryTime,
+        this?.numberOfAuctions,
+        this?.purchasingPrice);
   }
 }
 

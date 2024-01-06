@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/core/di.dart';
+import 'package:hasad_app/features/bidding/all/presentation/components/my_bidding_list.dart';
+import 'package:hasad_app/features/bidding/all/presentation/controller/my_bidding_list/cubit/my_bidding_list_cubit.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/components/my_direct_selling_list.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/my_direct_selling_list/cubit/my_direct_selling_list_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
@@ -45,10 +47,13 @@ class MyAdvertisementScreen extends StatelessWidget {
               ),
               Expanded(
                   child: TabBarView(children: [
-                const Icon(Icons.abc),
+                BlocProvider(
+                  create: (context) => sl<MyBiddingListCubit>()..getBiddingList(),
+                  child: const MyBiddingListView(),
+                ),
                 BlocProvider(
                   create: (context) => sl<MyDirectSellingListCubit>()..getDirectSellingList(),
-                  child: MyDirectSellingListView(),
+                  child: const MyDirectSellingListView(),
                 )
               ]))
             ],

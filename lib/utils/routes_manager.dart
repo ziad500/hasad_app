@@ -1,4 +1,6 @@
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
+import 'package:hasad_app/features/bidding/all/presentation/screens/bidding_list_screen.dart';
+import 'package:hasad_app/features/bidding/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/screens/direct_selling_list_screen.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/filter/presentation/screens/filter_screen.dart';
@@ -21,8 +23,12 @@ class Routes {
   static const String filterScreen = "/FilterScreenRoutes";
   static const String addRequestScreen = "/AddRequestScreen";
   static const String itemDetailsRoutes = "/itemDetailsRoutes";
+  static const String biddingDetailsScreen = "/BiddingDetailsScreen";
+
   static const String directSellingListScreen = "/directSellingListScreen";
   static const String myAdvertisementScreen = "/MyAdvertisementScreen";
+
+  static const String biddingListScreen = "/biddingListScreen";
 
   ////////
 
@@ -36,6 +42,16 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.biddingDetailsScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return BiddingDetailsScreen(
+              id: args!['id'].toString(),
+            );
+          },
+        );
       case Routes.itemDetailsRoutes:
         return MaterialPageRoute(
           builder: (context) {
@@ -61,6 +77,17 @@ class RouteGenerator {
             final args = settings.arguments as Map<String, dynamic>?;
 
             return DirectSellingListScreen(
+              categoryName: args?['name'],
+              categoryId: args?['id'],
+            );
+          },
+        );
+      case Routes.biddingListScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return BiddingListScreen(
               categoryName: args?['name'],
               categoryId: args?['id'],
             );

@@ -1,3 +1,4 @@
+import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 import 'all_caught_up.dart';
@@ -116,9 +117,12 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
         if (mainLoading) {
           return const _LoadingWidget();
         }
+        if (items.isEmpty) {
+          return const EmptyList();
+        }
         return ListView.separated(
           //attach the scroll controller in order to listen on it
-          controller: controller,
+          controller: controller, shrinkWrap: true,
           //leave a 2.h vertical space between every item
           separatorBuilder: (context, index) => SizedBox(height: 20.h),
           padding: padding ?? EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),

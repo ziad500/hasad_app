@@ -58,6 +58,16 @@ class DirectSellingDataResponse {
   String? district;
   @JsonKey(name: "price")
   num? price;
+  @JsonKey(name: "purchasing_price")
+  num? purchasingPrice;
+  @JsonKey(name: "auction_price")
+  num? auctionPrice;
+  @JsonKey(name: "expiry_time")
+  String? expiryTime;
+  @JsonKey(name: "closed")
+  String? closed;
+  @JsonKey(name: "number_of_auctions")
+  num? numberOfAuctions;
   @JsonKey(name: "images")
   List<String>? images;
   @JsonKey(name: "price_inclusions")
@@ -81,7 +91,12 @@ class DirectSellingDataResponse {
       this.packagingType,
       this.user,
       this.video,
-      this.priceInclusions});
+      this.priceInclusions,
+      this.auctionPrice,
+      this.closed,
+      this.expiryTime,
+      this.numberOfAuctions,
+      this.purchasingPrice});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>

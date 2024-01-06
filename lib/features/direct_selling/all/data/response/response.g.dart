@@ -62,6 +62,11 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       priceInclusions: (json['price_inclusions'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      auctionPrice: json['auction_price'] as num?,
+      closed: json['closed'] as String?,
+      expiryTime: json['expiry_time'] as String?,
+      numberOfAuctions: json['number_of_auctions'] as num?,
+      purchasingPrice: json['purchasing_price'] as num?,
     );
 
 Map<String, dynamic> _$DirectSellingDataResponseToJson(
@@ -83,6 +88,11 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'city': instance.city,
       'district': instance.district,
       'price': instance.price,
+      'purchasing_price': instance.purchasingPrice,
+      'auction_price': instance.auctionPrice,
+      'expiry_time': instance.expiryTime,
+      'closed': instance.closed,
+      'number_of_auctions': instance.numberOfAuctions,
       'images': instance.images,
       'price_inclusions': instance.priceInclusions,
     };
