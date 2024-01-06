@@ -6,6 +6,12 @@ import 'package:hasad_app/features/categories/domain/repository/repo.dart';
 import 'package:hasad_app/features/categories/domain/use_cases/get_categories_types_usecase.dart';
 import 'package:hasad_app/features/categories/domain/use_cases/get_categories_usecase.dart';
 import 'package:hasad_app/features/categories/presentation/controller/cubit/categories_cubit.dart';
+import 'package:hasad_app/features/direct_selling/all/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/direct_selling/all/data/network/direct_selling_list_api.dart';
+import 'package:hasad_app/features/direct_selling/all/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/repository/repo.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_list_usecase.dart';
+import 'package:hasad_app/features/direct_selling/all/presentation/controller/cubit/direct_selling_list_dart_cubit.dart';
 import 'package:hasad_app/features/lists/data/data_source/lists_data_source.dart';
 import 'package:hasad_app/features/lists/data/network/lists_api.dart';
 import 'package:hasad_app/features/lists/data/repository/lists_repo_impl.dart';
@@ -52,6 +58,7 @@ Future<void> initAppModule() async {
   iniLists();
   iniCategories();
   iniProfile();
+  iniDirectSellingList();
 }
 
 iniLogin() async {
@@ -235,5 +242,38 @@ iniProfile() async {
 
   if (!GetIt.I.isRegistered<EditProfileUseCase>()) {
     sl.registerLazySingleton<EditProfileUseCase>(() => EditProfileUseCase(sl.call()));
+  }
+}
+
+iniDirectSellingList() async {
+  //cubit
+  if (!GetIt.I.isRegistered<DirectSellingListCubit>()) {
+    sl.registerFactory<DirectSellingListCubit>(() => DirectSellingListCubit(sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<DirectSellingListAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<DirectSellingListAppServiceClient>(
+        () => DirectSellingListAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<DirectSellingListRepository>()) {
+    sl.registerLazySingleton<DirectSellingListRepository>(
+        () => DirectSellingListRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<DirectSellingListRemoteDataSource>()) {
+    sl.registerLazySingleton<DirectSellingListRemoteDataSource>(
+        () => DirectSellingListRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetDirectSellingListUseCase>()) {
+    sl.registerLazySingleton<GetDirectSellingListUseCase>(
+        () => GetDirectSellingListUseCase(sl.call()));
   }
 }

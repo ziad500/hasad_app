@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hasad_app/common/default/default_list_view.dart';
-import 'package:hasad_app/common/main_item.dart';
 import 'package:hasad_app/common/row_of_text.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/features/categories/presentation/components/category_list.dart';
@@ -47,9 +45,9 @@ class BiddingScreen extends StatelessWidget {
                     SizedBox(
                       height: 15.h,
                     ),
-                    DefaultListView(
+                    /*  DefaultListView(
                         itemBuilder: (context, index) => const MainItemWidget(isbidding: true),
-                        count: 10)
+                        count: 10) */
                   ],
                 ),
               ),

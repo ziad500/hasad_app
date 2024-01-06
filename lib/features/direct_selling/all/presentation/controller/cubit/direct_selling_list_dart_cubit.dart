@@ -5,11 +5,10 @@ import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direc
 
 part 'direct_selling_list_dart_state.dart';
 
-class DirectSellingListDartCubit extends Cubit<DirectSellingListDartState> {
+class DirectSellingListCubit extends Cubit<DirectSellingListState> {
   final GetDirectSellingListUseCase _getDirectSellingListUseCase;
-  DirectSellingListDartCubit(this._getDirectSellingListUseCase)
-      : super(DirectSellingListDartInitial());
-  static DirectSellingListDartCubit get(context) => BlocProvider.of(context);
+  DirectSellingListCubit(this._getDirectSellingListUseCase) : super(DirectSellingListDartInitial());
+  static DirectSellingListCubit get(context) => BlocProvider.of(context);
   @override
   void emit(state) {
     if (!isClosed) {

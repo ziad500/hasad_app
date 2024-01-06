@@ -1,3 +1,5 @@
+import 'package:hasad_app/utils/app_colors.dart';
+
 import 'all_caught_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -146,7 +148,9 @@ class _LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) => Center(
         child: Padding(
           padding: EdgeInsets.only(top: 2.h),
-          child: const CircularProgressIndicator(),
+          child: const CircularProgressIndicator(
+            color: AppColors.primaryColor,
+          ),
         ),
       );
 }

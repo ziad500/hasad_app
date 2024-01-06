@@ -9,13 +9,16 @@ import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/timer/cubit/presentation/bidding_timer.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
 class MainItemWidget extends StatelessWidget {
-  const MainItemWidget({super.key, required this.isbidding});
+  const MainItemWidget({super.key, required this.isbidding, required this.directSellingDataModel});
   final bool isbidding;
+  final DirectSellingDataModel directSellingDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +30,11 @@ class MainItemWidget extends StatelessWidget {
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25)),
         child: Row(
           children: [
-            /* Image.network(
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s",
-              fit: BoxFit.cover,
-              width: 70.w,
-            ), */
-            _NetowrkImage(),
-            SizedBox(
+            _NetowrkImage(directSellingDataModel.images?[0]),
+            const SizedBox(
               width: 10,
             ),
-            _Description(isbidding)
+            _Description(isbidding, directSellingDataModel)
           ],
         ),
       ),
@@ -45,7 +43,8 @@ class MainItemWidget extends StatelessWidget {
 }
 
 class _BiddingDetails extends StatelessWidget {
-  const _BiddingDetails();
+  const _BiddingDetails(this.directSellingDataModel);
+  final DirectSellingDataModel directSellingDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -97,22 +96,28 @@ class _BiddingDetails extends StatelessWidget {
 }
 
 class _NetowrkImage extends StatelessWidget {
-  const _NetowrkImage();
+  const _NetowrkImage(this.image);
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
     return NetworkImageWidget(
-      image:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s",
+      image: image,
       imageBuilder: (_, image) => Container(
         width: 70.w,
+        height: 100.h,
         decoration: BoxDecoration(
             image: DecorationImage(image: image, fit: BoxFit.cover),
             color: Colors.green,
-            borderRadius: BorderRadius.circular(25)),
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(Constants.isArabic ? 25 : 0),
+                topRight: Radius.circular(Constants.isArabic ? 25 : 0),
+                topLeft: Radius.circular(Constants.isArabic ? 0 : 25),
+                bottomLeft: Radius.circular(Constants.isArabic ? 0 : 25))),
       ),
       errorWidget: Container(
         width: 70.w,
+        height: 100.h,
         decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(25)),
       ),
     );
@@ -120,8 +125,9 @@ class _NetowrkImage extends StatelessWidget {
 }
 
 class _Description extends StatelessWidget {
-  const _Description(this.isBidding);
+  const _Description(this.isBidding, this.directSellingDataModel);
   final bool isBidding;
+  final DirectSellingDataModel directSellingDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +142,7 @@ class _Description extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Expanded(child: TitleWidget(title: "مزاد الخضار والفواكه اليومي")),
+                    Expanded(child: TitleWidget(title: isEmpty(directSellingDataModel.title))),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: SvgPicture.asset(SVGManager.favorite),
@@ -148,25 +154,25 @@ class _Description extends StatelessWidget {
                 ),
                 SubTitleWidget(
                     maxlines: isBidding ? 2 : 3,
-                    subTitle:
-                        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص "),
+                    subTitle: isEmpty(directSellingDataModel.description)),
                 const SizedBox(
                   height: 5,
                 ),
                 if (isBidding) ...[
-                  const _PriceRow(),
+                  _PriceRow(directSellingDataModel),
                   const SizedBox(
                     height: 5,
                   ),
                 ],
-                LocationAndPrice(isBidding: isBidding),
+                LocationAndPrice(
+                    isBidding: isBidding, directSellingDataModel: directSellingDataModel),
                 const SizedBox(
                   height: 5,
                 ),
               ],
             ),
           ),
-          if (isBidding) const _TimerWidget(),
+          if (isBidding) _TimerWidget(directSellingDataModel),
         ],
       ),
     );
@@ -174,8 +180,10 @@ class _Description extends StatelessWidget {
 }
 
 class LocationAndPrice extends StatelessWidget {
-  const LocationAndPrice({super.key, required this.isBidding});
+  const LocationAndPrice(
+      {super.key, required this.isBidding, required this.directSellingDataModel});
   final bool isBidding;
+  final DirectSellingDataModel directSellingDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -184,19 +192,23 @@ class LocationAndPrice extends StatelessWidget {
         Expanded(
           child: IconAndText(
             svg: SVGManager.location,
-            title: "حائل -البقعاء - الغزالة",
+            title:
+                "${directSellingDataModel.region} -${directSellingDataModel.district} - ${directSellingDataModel.city}",
             color: AppColors.blueAccent,
           ),
         ),
         if (!isBidding)
-          const Padding(padding: EdgeInsets.all(8.0), child: PriceWidget(price: "500"))
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: PriceWidget(price: isEmpty(directSellingDataModel.price)))
       ],
     );
   }
 }
 
 class _PriceRow extends StatelessWidget {
-  const _PriceRow();
+  const _PriceRow(this.directSellingDataModel);
+  final DirectSellingDataModel directSellingDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -229,7 +241,8 @@ class _PriceRow extends StatelessWidget {
 }
 
 class _TimerWidget extends StatelessWidget {
-  const _TimerWidget();
+  const _TimerWidget(this.directSellingDataModel);
+  final DirectSellingDataModel directSellingDataModel;
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +269,7 @@ class _TimerWidget extends StatelessWidget {
                 date: DateTime.now().add(const Duration(days: 1)).toString()),
           ),
         ),
-        const _BiddingDetails()
+        _BiddingDetails(directSellingDataModel)
       ],
     );
   }
