@@ -12,11 +12,4 @@ class ItemDetailsCubit extends Cubit<ItemDetailsState> {
       super.emit(state);
     }
   }
-
-  int currentIndex = 0;
-
-  Future<void> onSliderChanged(int index) async {
-    currentIndex = index;
-    emit(ChangeIndexSliderstate());
-  }
 }

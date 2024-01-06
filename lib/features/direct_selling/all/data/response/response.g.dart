@@ -47,9 +47,7 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
           ? null
           : TypeResponse.fromJson(
               json['agriculture_type'] as Map<String, dynamic>),
-      createdAt: (json['created_at'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      createdAt: json['created_at'] as String?,
       department: json['department'] as String?,
       departmentType: json['department_type'] as String?,
       harvestDate: json['harvest_date'] as String?,
@@ -59,8 +57,11 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
               json['packaging_type'] as Map<String, dynamic>),
       user: json['user'] == null
           ? null
-          : ProfileDataResponse.fromJson(json['user'] as Map<String, dynamic>),
+          : UserResponse.fromJson(json['user'] as Map<String, dynamic>),
       video: json['video'] as String?,
+      priceInclusions: (json['price_inclusions'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$DirectSellingDataResponseToJson(
@@ -83,6 +84,7 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'district': instance.district,
       'price': instance.price,
       'images': instance.images,
+      'price_inclusions': instance.priceInclusions,
     };
 
 TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(
@@ -93,5 +95,18 @@ TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(
 Map<String, dynamic> _$TypeResponseToJson(TypeResponse instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'image': instance.image,
+    };
+
+UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
+      name: json['name'] as String?,
+      phone: json['phone'] as String?,
+      image: json['image'] as String?,
+    );
+
+Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'phone': instance.phone,
       'image': instance.image,
     };

@@ -2,27 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/common/user_image.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/utils/helpers.dart';
 
 class UserRowWidget extends StatelessWidget {
-  const UserRowWidget({super.key});
+  const UserRowWidget({super.key, this.userModel, required this.date});
+  final UserModel? userModel;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        UserImageWidget(imageUrl: null),
-        SizedBox(
+        UserImageWidget(imageUrl: userModel?.image),
+        const SizedBox(
           width: 15,
         ),
         Expanded(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleWidget(title: "محمد سالم"),
-            SizedBox(
+            TitleWidget(title: isEmpty(userModel?.name)),
+            const SizedBox(
               height: 10,
             ),
-            SubTitleWidget(subTitle: "تم النشر بتاريخ 20/12/2022 ")
+            SubTitleWidget(subTitle: "تم النشر بتاريخ $date ")
           ],
         ))
       ],

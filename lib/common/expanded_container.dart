@@ -22,6 +22,7 @@ class _ExpandableItemState extends State<ExpandableItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InkWell(onTap: toggleExpanded, child: widget.baseWidget(isExpanded)),
         if (isExpanded) ...[

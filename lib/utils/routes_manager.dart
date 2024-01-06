@@ -1,6 +1,6 @@
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/screens/direct_selling_list_screen.dart';
-import 'package:hasad_app/features/item_details/presentation/screens/item_details_screen.dart';
+import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
@@ -44,7 +44,11 @@ class RouteGenerator {
       case Routes.itemDetailsRoutes:
         return MaterialPageRoute(
           builder: (context) {
-            return const ItemDetailsScreen();
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return ItemDetailsScreen(
+              id: args!['id'].toString(),
+            );
           },
         );
       case Routes.directSellingListScreen:

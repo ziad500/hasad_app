@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/expanded_container.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
 class DescriptionWidget extends StatelessWidget {
-  const DescriptionWidget({super.key});
+  const DescriptionWidget({super.key, required this.desc});
+  final String desc;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class DescriptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DefaultText(
-                text: "الوصف",
+                text: LocaleKeys.description.tr(),
                 textStyle: Theme.of(context).textTheme.titleMedium,
               ),
               value
@@ -30,8 +33,7 @@ class DescriptionWidget extends StatelessWidget {
           );
         },
         expandedWidget: DefaultText(
-          text:
-              "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربىهذا النص هو ",
+          text: desc,
           textStyle: Theme.of(context).textTheme.bodySmall,
         ));
   }

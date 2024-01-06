@@ -23,7 +23,8 @@ class MainItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.itemDetailsRoutes),
+      onTap: () => Navigator.pushNamed(context, Routes.itemDetailsRoutes,
+          arguments: {"id": directSellingDataModel.id}),
       child: Container(
         width: double.maxFinite,
         // height: 145.h,

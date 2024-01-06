@@ -1,4 +1,3 @@
-import 'package:hasad_app/features/profile/data/response/profile_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../core/responses/pagination_response.dart';
@@ -48,9 +47,9 @@ class DirectSellingDataResponse {
   @JsonKey(name: "video")
   String? video;
   @JsonKey(name: "created_at")
-  List<String>? createdAt;
+  String? createdAt;
   @JsonKey(name: "user")
-  ProfileDataResponse? user;
+  UserResponse? user;
   @JsonKey(name: "region")
   String? region;
   @JsonKey(name: "city")
@@ -61,6 +60,9 @@ class DirectSellingDataResponse {
   num? price;
   @JsonKey(name: "images")
   List<String>? images;
+  @JsonKey(name: "price_inclusions")
+  List<String>? priceInclusions;
+
   DirectSellingDataResponse(
       {this.city,
       this.description,
@@ -78,7 +80,8 @@ class DirectSellingDataResponse {
       this.harvestDate,
       this.packagingType,
       this.user,
-      this.video});
+      this.video,
+      this.priceInclusions});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -100,4 +103,25 @@ class TypeResponse {
   factory TypeResponse.fromJson(Map<String, dynamic> json) => _$TypeResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$TypeResponseToJson(this);
+}
+
+@JsonSerializable()
+class UserResponse {
+  @JsonKey(name: 'name')
+  String? name;
+  @JsonKey(name: 'phone')
+  String? phone;
+  @JsonKey(name: 'image')
+  String? image;
+  UserResponse({
+    this.name,
+    this.phone,
+    this.image,
+  });
+
+  // from json
+  factory UserResponse.fromJson(Map<String, dynamic> json) => _$UserResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() => _$UserResponseToJson(this);
 }
