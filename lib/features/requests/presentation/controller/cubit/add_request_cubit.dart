@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/requests/data/network/requests.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
-import 'package:hasad_app/features/requests/presentation/components/base/done_request_screen.dart';
+import 'package:hasad_app/common/done_request_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_department_request.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_of_agriculture_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_of_packaging.dart';
@@ -14,7 +15,9 @@ import 'package:hasad_app/features/requests/presentation/components/screens/more
 import 'package:hasad_app/features/requests/presentation/components/screens/price_including_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/select_harvest_date_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/upload_images_screen.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/date_helper.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
 part 'add_request_state.dart';
@@ -47,7 +50,12 @@ class AddRequestCubit extends Cubit<AddRequestState> {
     const SelectHarvestDateScreen(),
     const UploadImagesScreen(),
     const MoreDetailsScreen(),
-    const DoneRequestScreen()
+    DoneRequestScreen(
+      donePageState: DonePageState.waiting,
+      title: "${LocaleKeys.thankYou.tr()} ،",
+      subTitle: LocaleKeys.weWillReviewAndInsertYourAdvertisement.tr(),
+      route: Routes.homeScreenRoutes,
+    )
   ];
 
   PageController pageController = PageController();

@@ -16,3 +16,15 @@ final class GetDirectSellingDetailsErrorState extends DirectSellingDetailsState 
 }
 
 final class ChangeIndexSliderstate extends DirectSellingDetailsState {}
+
+final class BuyDirectSellingLoadingState extends DirectSellingDetailsState {}
+
+final class BuyDirectSellingSuccessState extends DirectSellingDetailsState {
+  final SuccessModel successModel;
+  BuyDirectSellingSuccessState(this.successModel);
+}
+
+final class BuyDirectSellingErrorState extends DirectSellingDetailsState {
+  final String error;
+  const BuyDirectSellingErrorState(this.error);
+}

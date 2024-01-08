@@ -1,4 +1,5 @@
 import 'package:hasad_app/core/execute_error_handler.dart';
+import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:hasad_app/features/direct_selling/details/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/direct_selling/details/data/mapper/mapper.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/models/direct_selling_details_model.dart';
@@ -18,6 +19,15 @@ class DirectSellingDetailsRepositoryImpl implements DirectSellingDetailsReposito
     return executeAndHandleError<DirectSellingDetailsModel>(() async {
       final response =
           await _directSellingDetailsRemoteDataSource.getDirectSellingDetails(advertisementId);
+      return response.toDomain();
+    });
+  }
+
+  @override
+  Future<Either<Failure, SuccessModel>> buyDirectSelling(String advertisementId) {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response =
+          await _directSellingDetailsRemoteDataSource.buyDirectSellingDetails(advertisementId);
       return response.toDomain();
     });
   }

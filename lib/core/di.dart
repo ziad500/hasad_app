@@ -34,6 +34,7 @@ import 'package:hasad_app/features/direct_selling/details/data/data_source/remot
 import 'package:hasad_app/features/direct_selling/details/data/network/direct_selling_details_api.dart';
 import 'package:hasad_app/features/direct_selling/details/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/repository/repo.dart';
+import 'package:hasad_app/features/direct_selling/details/domain/use_cases/buy_direct_selling_usecase.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/use_cases/get_direct_selling_details_usecase.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
 import 'package:hasad_app/features/lists/data/data_source/lists_data_source.dart';
@@ -322,7 +323,8 @@ iniDirectSellingList() async {
 iniDirectSellingDetails() async {
   //cubit
   if (!GetIt.I.isRegistered<DirectSellingDetailsCubit>()) {
-    sl.registerFactory<DirectSellingDetailsCubit>(() => DirectSellingDetailsCubit(sl.call()));
+    sl.registerFactory<DirectSellingDetailsCubit>(
+        () => DirectSellingDetailsCubit(sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -349,6 +351,9 @@ iniDirectSellingDetails() async {
   if (!GetIt.I.isRegistered<GetDirectSellingDetailsUseCase>()) {
     sl.registerLazySingleton<GetDirectSellingDetailsUseCase>(
         () => GetDirectSellingDetailsUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<BuyDirectSellingUseCase>()) {
+    sl.registerLazySingleton<BuyDirectSellingUseCase>(() => BuyDirectSellingUseCase(sl.call()));
   }
 }
 

@@ -1,12 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/features/direct_selling/details/domain/use_cases/buy_direct_selling_usecase.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/use_cases/get_direct_selling_details_usecase.dart';
 
 part 'direct_selling_details_state.dart';
 
 class DirectSellingDetailsCubit extends Cubit<DirectSellingDetailsState> {
   final GetDirectSellingDetailsUseCase _getDirectSellingDetailsUseCase;
-  DirectSellingDetailsCubit(this._getDirectSellingDetailsUseCase)
+  final BuyDirectSellingUseCase _buyDirectSellingUseCase;
+  DirectSellingDetailsCubit(this._getDirectSellingDetailsUseCase, this._buyDirectSellingUseCase)
       : super(DirectSellingDetailsInitial());
 
   static DirectSellingDetailsCubit get(context) => BlocProvider.of(context);
@@ -18,7 +21,7 @@ class DirectSellingDetailsCubit extends Cubit<DirectSellingDetailsState> {
   }
 
   DirectSellingDataModel? directSellingDataModel;
-  Future<void> getDirectSellingList(String id) async {
+  Future<void> getDirectSellingDetails(String id) async {
     emit(GetDirectSellingDetailsLoadingState());
     await _getDirectSellingDetailsUseCase
         .execude(id)
@@ -33,5 +36,14 @@ class DirectSellingDetailsCubit extends Cubit<DirectSellingDetailsState> {
   Future<void> onSliderChanged(int index) async {
     currentIndex = index;
     emit(ChangeIndexSliderstate());
+  }
+
+  Future<void> buyDirectSelling() async {
+    emit(BuyDirectSellingLoadingState());
+    await _buyDirectSellingUseCase
+        .execude(directSellingDataModel!.id.toString())
+        .then((value) => value.fold((l) => emit(BuyDirectSellingErrorState(l.message)), (r) {
+              emit(BuyDirectSellingSuccessState(r));
+            }));
   }
 }
