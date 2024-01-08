@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/text_with_shadows.dart';
 import 'package:hasad_app/common/user_image.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/percentage_widget.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/date_helper.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
 class BiddingProgressWidget extends StatelessWidget {
@@ -21,36 +23,45 @@ class BiddingProgressWidget extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            PercentageWidget(value: value),
+            PercentageWidget(
+                value: value, notStarted: !isDatePast(directSellingDataModel?.biddingDate)),
             SizedBox(
               width: 180.w,
               height: 180.w,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextWithShadowWidget(
-                      maxlines: 1,
-                      text: "سعر المزاد الان",
-                      textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: AppColors.darkRed,
-                          )),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  TextWithShadowWidget(
-                      maxlines: 2,
-                      text: "SAR ${directSellingDataModel?.auctionPrice} ",
-                      textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: AppColors.darkRed,
-                          )),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  _UserWidget(
-                    userModel: directSellingDataModel?.user,
-                  )
-                ],
-              ),
+              child: !isDatePast(directSellingDataModel?.biddingDate)
+                  ? Center(
+                      child: DefaultText(
+                        text: "سوف يبدأقريبا",
+                        textAlign: TextAlign.center,
+                        textStyle: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextWithShadowWidget(
+                            maxlines: 1,
+                            text: "سعر المزاد الان",
+                            textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: AppColors.darkRed,
+                                )),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        TextWithShadowWidget(
+                            maxlines: 2,
+                            text: "SAR ${directSellingDataModel?.auctionPrice} ",
+                            textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: AppColors.darkRed,
+                                )),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        _UserWidget(
+                          userModel: directSellingDataModel?.user,
+                        )
+                      ],
+                    ),
             )
           ],
         ),

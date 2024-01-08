@@ -33,7 +33,8 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.closed,
         this?.expiryTime,
         this?.numberOfAuctions,
-        this?.purchasingPrice);
+        this?.purchasingPrice,
+        this?.biddingDate);
   }
 }
 

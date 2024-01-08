@@ -72,6 +72,8 @@ class DirectSellingDataResponse {
   List<String>? images;
   @JsonKey(name: "price_inclusions")
   List<String>? priceInclusions;
+  @JsonKey(name: "bidding_date")
+  String? biddingDate;
 
   DirectSellingDataResponse(
       {this.city,
@@ -96,7 +98,8 @@ class DirectSellingDataResponse {
       this.closed,
       this.expiryTime,
       this.numberOfAuctions,
-      this.purchasingPrice});
+      this.purchasingPrice,
+      this.biddingDate});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>

@@ -27,7 +27,7 @@ class AppColors {
   static const Color iconColor = Color(0xff3E735F);
   static const Color appbarColor = Color(0xffF3F5FB);
   static Color fillColor = Colors.grey.withOpacity(0.08);
-  static const Color textPurple = Color(0xff6F21EF);
+  static const Color textPurple = Color(0xff7D4478);
   static const Color textDarkPurple = Color(0xff2346C6);
   static const Color textBlue = Color(0xff0077E4);
   static const Color textRed = Color(0xffC92828);

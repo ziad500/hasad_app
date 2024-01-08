@@ -14,9 +14,9 @@ import 'package:hasad_app/features/direct_selling/details/presentation/component
 import 'package:hasad_app/features/direct_selling/details/presentation/components/description_item.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/image_slider.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/location_widget.dart';
-import 'package:hasad_app/features/direct_selling/details/presentation/components/row_of_buttons.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/title_and_price.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/types.dart';
+import 'package:hasad_app/utils/date_helper.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
 class BiddingDetailsScreen extends StatelessWidget {
@@ -102,7 +102,11 @@ class BiddingDetailsScreen extends StatelessWidget {
                               height: 20.h,
                             ),
                             BiddingProgressWidget(
-                                value: 0.3, directSellingDataModel: cubit.directSellingDataModel),
+                                value: calculateTimePercentage(
+                                        cubit.directSellingDataModel!.biddingDate.toString(),
+                                        cubit.directSellingDataModel!.expiryTime.toString()) /
+                                    100,
+                                directSellingDataModel: cubit.directSellingDataModel),
                             SizedBox(
                               height: 20.h,
                             ),

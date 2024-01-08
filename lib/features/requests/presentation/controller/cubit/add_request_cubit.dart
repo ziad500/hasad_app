@@ -155,6 +155,6 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       districtId: districtController.text,
       price: defaultPriceController.text,
       biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
-      biddingdate: selectedbiddingDate != null ? convertDateFormat(selectedbiddingDate!) : null,
+      biddingdate: selectedbiddingDate,
       startingPrice: startPriceController.text == "" ? null : startPriceController.text);
 }

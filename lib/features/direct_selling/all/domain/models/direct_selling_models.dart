@@ -33,6 +33,8 @@ class DirectSellingDataModel {
   String? expiryTime;
   String? closed;
   num? numberOfAuctions;
+  String? biddingDate;
+
   DirectSellingDataModel(
       this.city,
       this.description,
@@ -56,7 +58,8 @@ class DirectSellingDataModel {
       this.closed,
       this.expiryTime,
       this.numberOfAuctions,
-      this.purchasingPrice);
+      this.purchasingPrice,
+      this.biddingDate);
 }
 
 class TypeModel {

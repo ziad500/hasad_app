@@ -13,6 +13,7 @@ class TextWithShadowWidget extends StatelessWidget {
     return DefaultText(
       text: text,
       maxlines: maxlines,
+      textAlign: TextAlign.center,
       textStyle: textStyle?.copyWith(
         shadows: <Shadow>[
           Shadow(

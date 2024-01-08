@@ -165,8 +165,12 @@ class _SelectDate extends StatelessWidget {
             Icons.date_range_outlined,
             color: AppColors.primaryColor,
           ),
-          onTap: () => showDatePickerFunction(context).then((value) =>
-              value == null ? null : cubit.selectbiddingDate(formatDateString(value.toString()))),
+          onTap: () => showDatePickerFunction(context).then((date) => date == null
+              ? null
+              : showTimePickerFunction(context).then((time) => time == null
+                  ? null
+                  : cubit.selectbiddingDate(
+                      "${date.year}-${date.month}-${date.day} ${time.hour}:${time.minute}"))),
         ),
       ],
     );

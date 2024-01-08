@@ -73,6 +73,7 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       expiryTime: json['expiry_time'] as String?,
       numberOfAuctions: json['number_of_auctions'] as num?,
       purchasingPrice: json['purchasing_price'] as num?,
+      biddingDate: json['bidding_date'] as String?,
     );
 
 Map<String, dynamic> _$DirectSellingDataResponseToJson(
@@ -101,6 +102,7 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'number_of_auctions': instance.numberOfAuctions,
       'images': instance.images,
       'price_inclusions': instance.priceInclusions,
+      'bidding_date': instance.biddingDate,
     };
 
 TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(
