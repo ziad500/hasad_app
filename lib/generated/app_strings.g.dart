@@ -116,5 +116,27 @@ abstract class  LocaleKeys {
   static const addBriefDescription = 'addBriefDescription';
   static const describeAdvertisementHere = 'describeAdvertisementHere';
   static const hour = 'hour';
+  static const totalBids = 'totalBids';
+  static const auctionPrice = 'auctionPrice';
+  static const saudiRiyal = 'saudiRiyal';
+  static const buyNowPrice = 'buyNowPrice';
+  static const endsIn = 'endsIn';
+  static const startingSoon = 'startingSoon';
+  static const currentBidPrice = 'currentBidPrice';
+  static const startsIn = 'startsIn';
+  static const ended = 'ended';
+  static const bidNow = 'bidNow';
+  static const buyNow = 'buyNow';
+  static const contactSeller = 'contactSeller';
+  static const wallet = 'wallet';
+  static const ads = 'ads';
+  static const orders = 'orders';
+  static const favorites = 'favorites';
+  static const aboutHarvest = 'aboutHarvest';
+  static const termsOfUse = 'termsOfUse';
+  static const privacyPolicy = 'privacyPolicy';
+  static const edit = 'edit';
+  static const processCompleted = 'processCompleted';
+  static const myOrders = 'myOrders';
 
 }

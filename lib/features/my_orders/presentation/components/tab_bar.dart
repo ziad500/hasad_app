@@ -16,8 +16,8 @@ class MyOrdersTabBar extends StatelessWidget {
         indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(26).w, color: AppColors.addRequestContainerColor),
         tabs: [
-          const Tab(
-            text: "مزاد",
+          Tab(
+            text: LocaleKeys.auction.tr(),
           ),
           Tab(
             text: LocaleKeys.directSale.tr(),

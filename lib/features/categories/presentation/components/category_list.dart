@@ -50,15 +50,17 @@ class CategoriesList extends StatelessWidget {
                         child: Column(
                           children: [
                             Expanded(
+                                flex: 3,
                                 child: _NetowrkImage(
-                              image: cubit.categories[index].image,
-                            )),
+                                  image: cubit.categories[index].image,
+                                )),
                             const SizedBox(
                               height: 7,
                             ),
                             DefaultText(
-                              text: isEmpty(cubit.categories[index].name),
-                              textStyle: Theme.of(context).textTheme.bodyMedium,
+                              text: isEmpty(cubit.categories[index].name) * 2,
+                              maxlines: 1,
+                              textStyle: Theme.of(context).textTheme.bodySmall,
                             )
                           ],
                         ),

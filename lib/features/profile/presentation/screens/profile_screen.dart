@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,6 +11,7 @@ import 'package:hasad_app/common/user_image.dart';
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/features/profile/presentation/components/settings_item.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/helpers.dart';
@@ -77,14 +79,14 @@ class _UserRow extends StatelessWidget {
               SubTitleWidget(subTitle: isEmpty(profileDataModel?.phone))
             ],
           )),
-          const Column(
+          Column(
             children: [
-              Icon(
+              const Icon(
                 Icons.settings_outlined,
                 color: AppColors.blue,
               ),
               SubTitleWidget(
-                subTitle: "تعديل",
+                subTitle: LocaleKeys.edit.tr(),
                 color: AppColors.blue,
               )
             ],
@@ -96,13 +98,15 @@ class _UserRow extends StatelessWidget {
 }
 
 List<_SettingsModel> _settingsList() => [
-      _SettingsModel(icon: SVGManager.wallet, title: "المحفظة", route: ""),
-      _SettingsModel(icon: SVGManager.ads, title: "الإعلانات", route: Routes.myAdvertisementScreen),
-      _SettingsModel(icon: SVGManager.note, title: "الطلبات", route: Routes.myOrdersScreen),
-      _SettingsModel(icon: SVGManager.heart, title: "المفضلة", route: ""),
-      _SettingsModel(icon: SVGManager.flag, title: "عن حصاد", route: ""),
-      _SettingsModel(icon: SVGManager.archive, title: "سياسة الإستخدام", route: ""),
-      _SettingsModel(icon: SVGManager.shield, title: "سياسة الخصوصية", route: "")
+      _SettingsModel(icon: SVGManager.wallet, title: LocaleKeys.wallet.tr(), route: ""),
+      _SettingsModel(
+          icon: SVGManager.ads, title: LocaleKeys.ads.tr(), route: Routes.myAdvertisementScreen),
+      _SettingsModel(
+          icon: SVGManager.note, title: LocaleKeys.orders.tr(), route: Routes.myOrdersScreen),
+      _SettingsModel(icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: ""),
+      _SettingsModel(icon: SVGManager.flag, title: LocaleKeys.aboutHarvest.tr(), route: ""),
+      _SettingsModel(icon: SVGManager.archive, title: LocaleKeys.termsOfUse.tr(), route: ""),
+      _SettingsModel(icon: SVGManager.shield, title: LocaleKeys.privacyPolicy.tr(), route: "")
     ];
 
 List<String> _titleList() => [];

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_text.dart';
@@ -5,6 +6,7 @@ import 'package:hasad_app/common/text_with_shadows.dart';
 import 'package:hasad_app/common/user_image.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/percentage_widget.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/date_helper.dart';
 import 'package:hasad_app/utils/helpers.dart';
@@ -31,7 +33,7 @@ class BiddingProgressWidget extends StatelessWidget {
               child: !isDatePast(directSellingDataModel?.biddingDate)
                   ? Center(
                       child: DefaultText(
-                        text: "سوف يبدأقريبا",
+                        text: LocaleKeys.startingSoon.tr(),
                         textAlign: TextAlign.center,
                         textStyle: Theme.of(context).textTheme.bodyLarge,
                       ),
@@ -41,7 +43,7 @@ class BiddingProgressWidget extends StatelessWidget {
                       children: [
                         TextWithShadowWidget(
                             maxlines: 1,
-                            text: "سعر المزاد الان",
+                            text: LocaleKeys.currentBidPrice.tr(),
                             textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: AppColors.darkRed,
                                 )),
@@ -50,7 +52,8 @@ class BiddingProgressWidget extends StatelessWidget {
                         ),
                         TextWithShadowWidget(
                             maxlines: 2,
-                            text: "SAR ${directSellingDataModel?.auctionPrice} ",
+                            text:
+                                "${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel?.auctionPrice} ",
                             textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                                   color: AppColors.darkRed,
                                 )),
@@ -88,7 +91,7 @@ class _UserWidget extends StatelessWidget {
             imageUrl: userModel?.image,
           ),
           const SizedBox(
-            width: 15,
+            width: 10,
           ),
           Flexible(
             child: TextWithShadowWidget(

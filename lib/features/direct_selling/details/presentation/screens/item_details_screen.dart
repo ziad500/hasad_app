@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_divider.dart';
@@ -17,6 +18,7 @@ import 'package:hasad_app/features/direct_selling/details/presentation/component
 import 'package:hasad_app/features/direct_selling/details/presentation/components/types.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/user_row.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
@@ -36,9 +38,9 @@ class ItemDetailsScreen extends StatelessWidget {
                 }
                 if (state is BuyDirectSellingSuccessState) {
                   navigateToDoneScreen(context,
-                      title: " تمت العملية",
+                      title: LocaleKeys.processCompleted.tr(),
                       donePageState: DonePageState.done,
-                      buttonText: "My Orders",
+                      buttonText: LocaleKeys.myOrders.tr(),
                       subTitle: state.successModel.message!,
                       route: Routes.myOrdersScreen);
                 }

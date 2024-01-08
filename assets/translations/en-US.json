@@ -116,7 +116,29 @@
 "advertisementTitle": "Advertisement Title",
 "addBriefDescription": "Add a brief description for the advertisement....",
 "describeAdvertisementHere": "You can describe your advertisement here...",
-"hour":"hour"
+"hour":"hour",
+"totalBids": "Total Bids",
+"auctionPrice": "Auction Price",
+"saudiRiyal": "SAR",
+"buyNowPrice": "Buy Now Price",
+"endsIn": "Ends In",
+"startingSoon": "Starting Soon",
+"currentBidPrice": "Current Bid Price",
+"startsIn": "Starts In",
+"ended": "Ended",
+"bidNow": "Bid Now",
+"buyNow": "Buy Now",
+"contactSeller": "Contact Seller",
+"wallet": "Wallet",
+"ads": "Ads",
+"orders": "Orders",
+"favorites": "Favorites",
+"aboutHarvest": "About Harvest",
+"termsOfUse": "Terms of Use",
+"privacyPolicy": "Privacy Policy",
+"edit": "Edit",
+"processCompleted": "Process Completed",
+"myOrders": "My Orders"
 
    
 }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'package:hasad_app/features/bidding/all/presentation/controller/my_biddin
 import 'package:hasad_app/features/direct_selling/all/presentation/components/my_direct_selling_list.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/my_direct_selling_list/cubit/my_direct_selling_list_cubit.dart';
 import 'package:hasad_app/features/my_advertisement/presentation/components/tab_bar.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class MyAdvertisementScreen extends StatelessWidget {
@@ -18,7 +20,7 @@ class MyAdvertisementScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: DefaultScaffold(
-          appbarTitle: "الإعلانات",
+          appbarTitle: LocaleKeys.ads.tr(),
           body: Column(
             children: [
               Container(

@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/timer/cubit/presentation/bidding_timer.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/date_helper.dart';
 import 'package:hasad_app/utils/helpers.dart';
@@ -17,7 +19,7 @@ class BiddingTimerWidget extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const TitleWidget(title: "يبدأ في :"),
+                TitleWidget(title: "${LocaleKeys.startsIn.tr()} :"),
                 const SizedBox(
                   width: 10,
                 ),
@@ -34,14 +36,12 @@ class BiddingTimerWidget extends StatelessWidget {
                 child: (value) => Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        isDatePast(directSellingDataModel?.biddingDate)
-                            ? const TitleWidget(title: "ينتهي في :")
-                            : const TitleWidget(title: "يبدأ في :"),
+                        TitleWidget(title: "${LocaleKeys.endsIn.tr()} :"),
                         const SizedBox(
                           width: 10,
                         ),
                         TitleWidget(
-                            title: value == "0:0:00:00" ? "انتهي" : value,
+                            title: value == "0:0:00:00" ? LocaleKeys.ended.tr() : value,
                             color: AppColors.darkRed,
                             size: 18.sp,
                             fontWeight: FontWeight.bold),

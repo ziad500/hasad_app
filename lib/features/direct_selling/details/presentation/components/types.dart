@@ -57,7 +57,10 @@ class _Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TitleWidget(title: isEmpty(title)),
+        TitleWidget(
+          title: isEmpty(title),
+          size: 14.sp,
+        ),
         const SizedBox(
           height: 10,
         ),

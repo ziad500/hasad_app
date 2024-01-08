@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,6 +11,7 @@ import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/timer/cubit/presentation/bidding_timer.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/app_decorations.dart';
@@ -75,7 +77,7 @@ class _BiddingDetails extends StatelessWidget {
           FittedBox(
             fit: BoxFit.scaleDown,
             child: DefaultText(
-              text: "إجمالى المزايدات",
+              text: LocaleKeys.totalBids.tr(),
               textStyle: TextStyle(fontSize: 10.sp, color: AppColors.darkBlue),
             ),
           ),
@@ -232,7 +234,8 @@ class _PriceRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultText(
-            text: "سعر المزاد SAR ${directSellingDataModel.auctionPrice}",
+            text:
+                "${LocaleKeys.currentBidPrice.tr()} ${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel.auctionPrice}",
             textStyle: Theme.of(context)
                 .textTheme
                 .labelMedium
@@ -242,7 +245,8 @@ class _PriceRow extends StatelessWidget {
             width: 10,
           ),
           DefaultText(
-            text: "سعر الشراء الأن SAR ${directSellingDataModel.purchasingPrice}",
+            text:
+                "${LocaleKeys.buyNow.tr()} ${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel.purchasingPrice}",
             textStyle: Theme.of(context)
                 .textTheme
                 .labelMedium
@@ -277,7 +281,7 @@ class _TimerWidget extends StatelessWidget {
                         ),
                       ),
                       svg: SVGManager.clock,
-                      title: "ينتهي في:  ",
+                      title: "${LocaleKeys.endsIn.tr()}:  ",
                       color: AppColors.orangeColor,
                     ),
                 date: DateTime.parse(directSellingDataModel.expiryTime

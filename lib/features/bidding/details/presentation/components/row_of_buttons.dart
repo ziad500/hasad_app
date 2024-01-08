@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
@@ -17,7 +19,7 @@ class BiddingRowOfButtons extends StatelessWidget {
         children: [
           Expanded(
               child: DefaultButton(
-                  buttonName: "المزايدة الان",
+                  buttonName: LocaleKeys.bidNow.tr(),
                   textColor: Colors.white,
                   color: AppColors.darkRed,
                   buttonFunction: () {})),
@@ -26,7 +28,7 @@ class BiddingRowOfButtons extends StatelessWidget {
           ),
           Expanded(
               child: DefaultButton(
-            buttonName: "شراء الان",
+            buttonName: LocaleKeys.buyNow.tr(),
             buttonFunction: () {},
             textColor: Colors.white,
             color: AppColors.darkBlue,
@@ -49,7 +51,7 @@ class BiddingRowOfButtons extends StatelessWidget {
                       colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                     ),
                     DefaultText(
-                      text: "راسل البائع",
+                      text: LocaleKeys.contactSeller.tr(),
                       textStyle: Theme.of(context)
                           .textTheme
                           .titleSmall

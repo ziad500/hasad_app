@@ -113,11 +113,29 @@
 "advertisementTitle": "عنوان الإعلان",
 "addBriefDescription": "أضف وصف مختصر للإعلان ....",
 "describeAdvertisementHere": "يمكنك وصف اعلانك هنا ...",
-"hour":"ساعة"
-
-
-
-
+"hour":"ساعة",
+"totalBids": "إجمالى المزايدات",
+"auctionPrice": "سعر المزاد",
+"saudiRiyal": "ريال سعودي",
+"buyNowPrice": "سعر الشراء الأن",
+"endsIn": "ينتهي في",
+"startingSoon": "سوف يبدأ قريبا",
+"currentBidPrice": "سعر المزاد",
+"startsIn": "يبدأ في",
+"ended": "انتهي",
+"bidNow": "المزايدة الان",
+"buyNow": "شراء الان",
+"contactSeller": "راسل البائع",
+"wallet": "المحفظة",
+"ads": "الإعلانات",
+"orders": "الطلبات",
+"favorites": "المفضلة",
+"aboutHarvest": "عن حصاد",
+"termsOfUse": "سياسة الإستخدام",
+"privacyPolicy": "سياسة الخصوصية",
+"edit": "تعديل",
+"processCompleted": "تمت العملية",
+"myOrders": "طلباتي"
 
 
 
