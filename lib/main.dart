@@ -20,8 +20,6 @@ import 'core/di.dart' as di;
 import 'core/network_cubit.dart';
 
 void main() async {
-  //01032226321
-
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
@@ -94,9 +92,12 @@ class _MyAppState extends State<MyApp> {
             child: MaterialApp(
               builder: (context, child) {
                 ScreenUtil.init(context);
-                return Theme(
-                  data: getApplicationTheme(),
-                  child: child!,
+                return MediaQuery(
+                  data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1)),
+                  child: Theme(
+                    data: getApplicationTheme(),
+                    child: child!,
+                  ),
                 );
               },
               navigatorKey: navigatorKey,

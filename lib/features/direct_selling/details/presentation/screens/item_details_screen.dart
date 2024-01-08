@@ -23,6 +23,7 @@ class ItemDetailsScreen extends StatelessWidget {
     return BlocProvider(
         create: (context) => sl<DirectSellingDetailsCubit>()..getDirectSellingList(id),
         child: ItemDetailsBody(
+          floatingActionButton: const ItemRowOfButtons(),
           actions: const [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -85,11 +86,7 @@ class ItemDetailsScreen extends StatelessWidget {
                                 userModel: cubit.directSellingDataModel?.user,
                                 date: isEmpty(cubit.directSellingDataModel?.createdAt)),
                             const SizedBox(
-                              height: 20,
-                            ),
-                            const ItemRowOfButtons(),
-                            const SizedBox(
-                              height: 20,
+                              height: 100,
                             ),
                           ],
                         ),

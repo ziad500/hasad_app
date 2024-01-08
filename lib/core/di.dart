@@ -25,9 +25,11 @@ import 'package:hasad_app/features/direct_selling/all/data/network/direct_sellin
 import 'package:hasad_app/features/direct_selling/all/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/repository/repo.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_list_usecase.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_orders_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_my_direct_selling_list_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/cubit/direct_selling_list_dart_cubit.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/my_direct_selling_list/cubit/my_direct_selling_list_cubit.dart';
+import 'package:hasad_app/features/direct_selling/all/presentation/controller/orders/cubit/direct_selling_orders_cubit.dart';
 import 'package:hasad_app/features/direct_selling/details/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/direct_selling/details/data/network/direct_selling_details_api.dart';
 import 'package:hasad_app/features/direct_selling/details/data/repository/repo_impl.dart';
@@ -278,6 +280,9 @@ iniDirectSellingList() async {
   if (!GetIt.I.isRegistered<MyDirectSellingListCubit>()) {
     sl.registerFactory<MyDirectSellingListCubit>(() => MyDirectSellingListCubit(sl.call()));
   }
+  if (!GetIt.I.isRegistered<DirectSellingOrdersCubit>()) {
+    sl.registerFactory<DirectSellingOrdersCubit>(() => DirectSellingOrdersCubit(sl.call()));
+  }
 
   //app service client instance
   if (!GetIt.I.isRegistered<DirectSellingListAppServiceClient>()) {
@@ -307,6 +312,10 @@ iniDirectSellingList() async {
   if (!GetIt.I.isRegistered<GetMyDirectSellingListUseCase>()) {
     sl.registerLazySingleton<GetMyDirectSellingListUseCase>(
         () => GetMyDirectSellingListUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<GetDirectSellingOrdersListUseCase>()) {
+    sl.registerLazySingleton<GetDirectSellingOrdersListUseCase>(
+        () => GetDirectSellingOrdersListUseCase(sl.call()));
   }
 }
 

@@ -10,35 +10,38 @@ class ItemRowOfButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-            child: DefaultButton(
-          buttonName: "شراء الان",
-          buttonFunction: () {},
-          textColor: Colors.white,
-          color: AppColors.darkBlue,
-        )),
-        SizedBox(
-          width: 15.w,
-        ),
-        Expanded(
-            child: DefaultButton(
-                buttonName: "راسل للبائع",
-                icon: SvgPicture.asset(SVGManager.chats),
-                buttonFunction: () {})),
-        SizedBox(
-          width: 15.w,
-        ),
-        CircleAvatar(
-          backgroundColor: AppColors.red,
-          radius: 25,
-          child: SvgPicture.asset(
-            SVGManager.call,
-            height: 20,
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+        children: [
+          Expanded(
+              child: DefaultButton(
+            buttonName: "شراء الان",
+            buttonFunction: () {},
+            textColor: Colors.white,
+            color: AppColors.darkBlue,
+          )),
+          SizedBox(
+            width: 15.w,
           ),
-        )
-      ],
+          Expanded(
+              child: DefaultButton(
+                  buttonName: "راسل للبائع",
+                  icon: SvgPicture.asset(SVGManager.chats),
+                  buttonFunction: () {})),
+          SizedBox(
+            width: 15.w,
+          ),
+          CircleAvatar(
+            backgroundColor: AppColors.red,
+            radius: 25,
+            child: SvgPicture.asset(
+              SVGManager.call,
+              height: 20,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,8 +1,16 @@
-import 'app_colors.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/material.dart';
 
 class AppDecorations {
   static BoxDecoration primaryDecoration = BoxDecoration(
-      borderRadius: BorderRadius.circular(12).w, border: Border.all(color: AppColors.borderColor));
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(25),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.3),
+        spreadRadius: 3,
+        blurRadius: 5,
+        offset: const Offset(0, 3), // changes position of shadow
+      ),
+    ],
+  );
 }

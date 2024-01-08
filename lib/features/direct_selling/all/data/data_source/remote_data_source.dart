@@ -1,13 +1,14 @@
 import 'package:hasad_app/features/direct_selling/all/data/network/direct_selling_list_api.dart';
 import 'package:hasad_app/features/direct_selling/all/data/network/requests.dart';
+import 'package:hasad_app/features/direct_selling/all/data/response/orders_response.dart';
 import 'package:hasad_app/features/direct_selling/all/data/response/response.dart';
 
 abstract class DirectSellingListRemoteDataSource {
   Future<DirectSellingListResponse> directSellingList(GetMainListRequest getMainListRequest);
 
-  Future<DirectSellingListResponse> myDirectSellingList(
-    String? page,
-  );
+  Future<DirectSellingListResponse> myDirectSellingList(String? page);
+
+  Future<DirectSellingOrdersListResponse> directSellingOrdersList(String? page);
 }
 
 class DirectSellingListRemoteDataSourceImpl implements DirectSellingListRemoteDataSource {
@@ -32,4 +33,8 @@ class DirectSellingListRemoteDataSourceImpl implements DirectSellingListRemoteDa
   @override
   Future<DirectSellingListResponse> myDirectSellingList(String? page) =>
       _directSellingListAppServiceClient.myDirectSellingList(page);
+
+  @override
+  Future<DirectSellingOrdersListResponse> directSellingOrdersList(String? page) =>
+      _directSellingListAppServiceClient.directSellingOrdersList(page);
 }

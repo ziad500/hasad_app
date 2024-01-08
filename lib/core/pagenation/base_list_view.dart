@@ -1,7 +1,5 @@
 import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/utils/app_colors.dart';
-
-import 'all_caught_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -124,7 +122,7 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
           //attach the scroll controller in order to listen on it
           controller: controller, shrinkWrap: true,
           //leave a 2.h vertical space between every item
-          separatorBuilder: (context, index) => SizedBox(height: 20.h),
+          separatorBuilder: (context, index) => SizedBox(height: 10.h),
           padding: padding ?? EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
           itemCount: items.length,
           itemBuilder: (context, index) {
@@ -142,7 +140,7 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
                       //show loading to indicate the user that we are fetching another posts for him
                       if (isLoading) const _LoadingWidget(),
 
-                      if (allCaught) const AllCaughtUpWidget()
+                      if (allCaught) const SizedBox()
                     ],
                   )
               ],

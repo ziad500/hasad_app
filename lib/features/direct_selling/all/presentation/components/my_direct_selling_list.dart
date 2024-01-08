@@ -32,6 +32,8 @@ class _MyDirectSellingListViewState extends State<MyDirectSellingListView> {
       }
       return PagenatedListView<MyDirectSellingListCubit, MyDirectSellingListState,
           DirectSellingDataModel>(
+        useExpanded: false,
+
         //start listening to fetch the next page when scroll to .7 total height
         init: () => controller.addListener(() async {
           var percentageOftotalLength = 0.7 * controller.position.maxScrollExtent;

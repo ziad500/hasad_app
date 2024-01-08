@@ -98,7 +98,7 @@ class _UserRow extends StatelessWidget {
 List<_SettingsModel> _settingsList() => [
       _SettingsModel(icon: SVGManager.wallet, title: "المحفظة", route: ""),
       _SettingsModel(icon: SVGManager.ads, title: "الإعلانات", route: Routes.myAdvertisementScreen),
-      _SettingsModel(icon: SVGManager.note, title: "الطلبات", route: ""),
+      _SettingsModel(icon: SVGManager.note, title: "الطلبات", route: Routes.myOrdersScreen),
       _SettingsModel(icon: SVGManager.heart, title: "المفضلة", route: ""),
       _SettingsModel(icon: SVGManager.flag, title: "عن حصاد", route: ""),
       _SettingsModel(icon: SVGManager.archive, title: "سياسة الإستخدام", route: ""),

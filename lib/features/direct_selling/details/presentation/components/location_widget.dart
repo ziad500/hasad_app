@@ -22,9 +22,10 @@ class ItemLocationWidget extends StatelessWidget {
           height: 10,
         ),
         IconAndText(
+            color: AppColors.blueAccent,
             svg: SVGManager.location,
             title:
-                "${directSellingDataModel?.region} -${directSellingDataModel?.city} - ${directSellingDataModel?.district}"),
+                "${directSellingDataModel?.region?.name} -${directSellingDataModel?.city?.name} - ${directSellingDataModel?.district?.name}"),
       ],
     );
   }

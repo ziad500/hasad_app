@@ -11,13 +11,13 @@ extension TypeResponseMapper on TypeResponse? {
 extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
   DirectSellingDataModel toDomain() {
     return DirectSellingDataModel(
-        this?.city,
+        this?.city.toDomain(),
         this?.description,
-        this?.district,
+        this?.district.toDomain(),
         this?.id,
         this?.images,
         this?.price,
-        this?.region,
+        this?.region.toDomain(),
         this?.title,
         this?.advertisementType,
         this?.agricultureType.toDomain(),

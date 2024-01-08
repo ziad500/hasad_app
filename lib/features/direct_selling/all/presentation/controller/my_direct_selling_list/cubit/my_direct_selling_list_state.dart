@@ -1,10 +1,7 @@
 part of 'my_direct_selling_list_cubit.dart';
 
-sealed class MyDirectSellingListState extends Equatable {
+sealed class MyDirectSellingListState {
   const MyDirectSellingListState();
-
-  @override
-  List<Object> get props => [];
 }
 
 final class MyDirectSellingListInitial extends MyDirectSellingListState {}

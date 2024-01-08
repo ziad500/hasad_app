@@ -22,21 +22,30 @@ class MyAdvertisementScreen extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                  height: 50.h,
+                  height: 45.h,
                   margin: const EdgeInsets.symmetric(horizontal: 20).w,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                       color: AppColors.mainOpacity, borderRadius: BorderRadius.circular(26).w),
                   child: const MyAdvertisementTabBar()),
+              SizedBox(
+                height: 20.h,
+              ),
               Expanded(
                   child: TabBarView(children: [
                 BlocProvider(
                   create: (context) => sl<MyBiddingListCubit>()..getBiddingList(),
-                  child: const MyBiddingListView(),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: MyBiddingListView(),
+                  ),
                 ),
                 BlocProvider(
                   create: (context) => sl<MyDirectSellingListCubit>()..getDirectSellingList(),
-                  child: const MyDirectSellingListView(),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: MyDirectSellingListView(),
+                  ),
                 )
               ]))
             ],

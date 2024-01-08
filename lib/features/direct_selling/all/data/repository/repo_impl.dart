@@ -1,7 +1,9 @@
 import 'package:hasad_app/core/execute_error_handler.dart';
 import 'package:hasad_app/features/direct_selling/all/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/direct_selling/all/data/mapper/mapper.dart';
+import 'package:hasad_app/features/direct_selling/all/data/mapper/orders_mapper.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/repository/repo.dart';
 
 import '../network/requests.dart';
@@ -27,6 +29,14 @@ class DirectSellingListRepositoryImpl implements DirectSellingListRepository {
   Future<Either<Failure, DirectSellingListModel>> myDirectSellingList(String? page) {
     return executeAndHandleError<DirectSellingListModel>(() async {
       final response = await _directSellingListRemoteDataSource.myDirectSellingList(page);
+      return response.toDomain();
+    });
+  }
+
+  @override
+  Future<Either<Failure, DirectSellingOrdersListModel>> directSellingOrdersList(String? page) {
+    return executeAndHandleError<DirectSellingOrdersListModel>(() async {
+      final response = await _directSellingListRemoteDataSource.directSellingOrdersList(page);
       return response.toDomain();
     });
   }

@@ -11,7 +11,8 @@ import 'package:hasad_app/features/direct_selling/all/presentation/controller/cu
 ///the cubit will call the fetching method to fetch the next page , this will happen only if the current state is not loading state
 ///which indicates that no fetchng request is happening now]
 class DirectSellingListView extends StatefulWidget {
-  const DirectSellingListView({super.key});
+  const DirectSellingListView({super.key, this.expanded = false});
+  final bool expanded;
 
   @override
   State<DirectSellingListView> createState() => _DirectSellingListViewState();
@@ -29,6 +30,7 @@ class _DirectSellingListViewState extends State<DirectSellingListView> {
 
       return PagenatedListView<DirectSellingListCubit, DirectSellingListState,
           DirectSellingDataModel>(
+        useExpanded: widget.expanded,
         //start listening to fetch the next page when scroll to .7 total height
         init: () => controller.addListener(() async {
           var percentageOftotalLength = 0.7 * controller.position.maxScrollExtent;

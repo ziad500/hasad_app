@@ -34,7 +34,8 @@ class _BiddingListViewState extends State<BiddingListView> {
       }
 
       return PagenatedListView<BiddingListCubit, BiddingListState, DirectSellingDataModel>(
-        useExpanded: widget.useExpanded,
+        useExpanded: false,
+
         //start listening to fetch the next page when scroll to .7 total height
         init: () => controller.addListener(() async {
           var percentageOftotalLength = 0.7 * controller.position.maxScrollExtent;

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' hide Headers;
+import 'package:hasad_app/features/direct_selling/all/data/response/orders_response.dart';
 import 'package:hasad_app/features/direct_selling/all/data/response/response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -27,6 +28,11 @@ abstract class DirectSellingListAppServiceClient {
 
   @GET("advertisement/direct-selling/my")
   Future<DirectSellingListResponse> myDirectSellingList(
+    @Query('page') String? page,
+  );
+
+  @GET("advertisement/direct-selling/order")
+  Future<DirectSellingOrdersListResponse> directSellingOrdersList(
     @Query('page') String? page,
   );
 }

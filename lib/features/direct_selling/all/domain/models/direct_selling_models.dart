@@ -22,9 +22,9 @@ class DirectSellingDataModel {
   String? video;
   String? createdAt;
   UserModel? user;
-  String? region;
-  String? city;
-  String? district;
+  TypeModel? region;
+  TypeModel? city;
+  TypeModel? district;
   num? price;
   List<String>? images;
   List<String>? priceInclusions;

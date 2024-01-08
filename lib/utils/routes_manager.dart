@@ -6,6 +6,7 @@ import 'package:hasad_app/features/direct_selling/details/presentation/screens/i
 import 'package:hasad_app/features/filter/presentation/screens/filter_screen.dart';
 import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/my_advertisement/presentation/screens/my_advertisement_screen.dart';
+import 'package:hasad_app/features/my_orders/presentation/screens/my_orders_screen.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
 
@@ -26,8 +27,8 @@ class Routes {
   static const String biddingDetailsScreen = "/BiddingDetailsScreen";
 
   static const String directSellingListScreen = "/directSellingListScreen";
-  static const String myAdvertisementScreen = "/MyAdvertisementScreen";
-
+  static const String myOrdersScreen = "/MyOrdersScreen";
+  static const String myAdvertisementScreen = "/MyOrdersScreen";
   static const String biddingListScreen = "/biddingListScreen";
 
   ////////
@@ -93,7 +94,12 @@ class RouteGenerator {
             );
           },
         );
-
+      case Routes.myOrdersScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const MyOrdersScreen();
+          },
+        );
       case Routes.myAdvertisementScreen:
         return MaterialPageRoute(
           builder: (context) {

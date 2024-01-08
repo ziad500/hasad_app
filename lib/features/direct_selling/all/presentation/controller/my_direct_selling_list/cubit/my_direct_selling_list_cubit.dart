@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_my_direct_selling_list_usecase.dart';

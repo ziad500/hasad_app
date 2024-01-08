@@ -51,11 +51,11 @@ class DirectSellingDataResponse {
   @JsonKey(name: "user")
   UserResponse? user;
   @JsonKey(name: "region")
-  String? region;
+  TypeResponse? region;
   @JsonKey(name: "city")
-  String? city;
+  TypeResponse? city;
   @JsonKey(name: "district")
-  String? district;
+  TypeResponse? district;
   @JsonKey(name: "price")
   num? price;
   @JsonKey(name: "purchasing_price")

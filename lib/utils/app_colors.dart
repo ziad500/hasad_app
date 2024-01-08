@@ -4,6 +4,7 @@ class AppColors {
   static const Color primaryColor = Color(0xff3E735F);
   static const Color secondaryColor = Color(0xff49AB86CC);
   static const Color red = Color(0xffDE3E3E);
+  static const Color darkRed = Color(0xffE20000);
   static const Color darkBlue = Color(0xff2229C9);
   static const Color blue = Color(0xff176AEE);
   static const Color scaffoldColor = Color(0xffF5F5F5);
@@ -39,4 +40,5 @@ class AppColors {
   static const Color starIconColor = Color(0xffE9862B);
   static const Color orangeColor = Color(0xffF96C05);
   static const Color addRequestContainerColor = Color(0xff49AB86);
+  static const Color percentageSecondary = Color(0xff3FE0A3);
 }

@@ -33,14 +33,20 @@ Map<String, dynamic> _$DirectSellingListResponseToJson(
 DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
         Map<String, dynamic> json) =>
     DirectSellingDataResponse(
-      city: json['city'] as String?,
+      city: json['city'] == null
+          ? null
+          : TypeResponse.fromJson(json['city'] as Map<String, dynamic>),
       description: json['description'] as String?,
-      district: json['district'] as String?,
+      district: json['district'] == null
+          ? null
+          : TypeResponse.fromJson(json['district'] as Map<String, dynamic>),
       id: json['id'] as int?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       price: json['price'] as num?,
-      region: json['region'] as String?,
+      region: json['region'] == null
+          ? null
+          : TypeResponse.fromJson(json['region'] as Map<String, dynamic>),
       title: json['title'] as String?,
       advertisementType: json['advertisement_type'] as String?,
       agricultureType: json['agriculture_type'] == null

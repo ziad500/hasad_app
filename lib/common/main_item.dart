@@ -12,6 +12,7 @@ import 'package:hasad_app/core/timer/cubit/presentation/bidding_timer.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/app_decorations.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
@@ -30,15 +31,23 @@ class MainItemWidget extends StatelessWidget {
               arguments: {"id": directSellingDataModel.id}),
       child: Container(
         width: double.maxFinite,
-        // height: 145.h,
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25)),
+        decoration: AppDecorations.primaryDecoration,
         child: Row(
+          mainAxisSize: MainAxisSize.max,
           children: [
-            _NetowrkImage(directSellingDataModel.images?[0]),
+            Expanded(
+              child: Center(
+                child: Image.network(
+                  directSellingDataModel.images![0],
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            //  _NetowrkImage(directSellingDataModel.images?[0]),
             const SizedBox(
               width: 10,
             ),
-            _Description(isbidding, directSellingDataModel)
+            Expanded(flex: 3, child: _Description(isbidding, directSellingDataModel))
           ],
         ),
       ),
@@ -138,50 +147,48 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(child: TitleWidget(title: isEmpty(directSellingDataModel.title))),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset(SVGManager.favorite),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                SubTitleWidget(
-                    maxlines: isBidding ? 2 : 3,
-                    subTitle: isEmpty(directSellingDataModel.description)),
-                const SizedBox(
-                  height: 5,
-                ),
-                if (isBidding) ...[
-                  _PriceRow(directSellingDataModel),
-                  const SizedBox(
-                    height: 5,
-                  ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(child: TitleWidget(title: isEmpty(directSellingDataModel.title))),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: SvgPicture.asset(SVGManager.favorite),
+                  )
                 ],
-                LocationAndPrice(
-                    isBidding: isBidding, directSellingDataModel: directSellingDataModel),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              SubTitleWidget(
+                  maxlines: isBidding ? 2 : 3,
+                  subTitle: isEmpty(directSellingDataModel.description)),
+              const SizedBox(
+                height: 5,
+              ),
+              if (isBidding) ...[
+                _PriceRow(directSellingDataModel),
                 const SizedBox(
                   height: 5,
                 ),
               ],
-            ),
+              LocationAndPrice(
+                  isBidding: isBidding, directSellingDataModel: directSellingDataModel),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
           ),
-          if (isBidding) _TimerWidget(directSellingDataModel),
-        ],
-      ),
+        ),
+        if (isBidding) _TimerWidget(directSellingDataModel),
+      ],
     );
   }
 }
@@ -200,7 +207,7 @@ class LocationAndPrice extends StatelessWidget {
           child: IconAndText(
             svg: SVGManager.location,
             title:
-                "${directSellingDataModel.region} -${directSellingDataModel.city} - ${directSellingDataModel.district}",
+                "${directSellingDataModel.region?.name} -${directSellingDataModel.city?.name} - ${directSellingDataModel.district?.name}",
             color: AppColors.blueAccent,
           ),
         ),
@@ -273,7 +280,10 @@ class _TimerWidget extends StatelessWidget {
                       title: "ينتهي في:  ",
                       color: AppColors.orangeColor,
                     ),
-                date: DateTime.now().add(const Duration(days: 1)).toString()),
+                date: DateTime.parse(directSellingDataModel.expiryTime
+                        .toString()
+                        .replaceAll(RegExp(r'\s[APap][Mm]$'), ''))
+                    .toIso8601String()),
           ),
         ),
         _BiddingDetails(directSellingDataModel)

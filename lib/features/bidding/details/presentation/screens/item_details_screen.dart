@@ -5,7 +5,10 @@ import 'package:hasad_app/common/default/default_divider.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/core/di.dart';
+import 'package:hasad_app/features/bidding/details/presentation/components/bidding_progress.dart';
+import 'package:hasad_app/features/bidding/details/presentation/components/bidding_timer_widget.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/bidding_widget.dart';
+import 'package:hasad_app/features/bidding/details/presentation/components/row_of_buttons.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/base/body.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/description_item.dart';
@@ -14,7 +17,6 @@ import 'package:hasad_app/features/direct_selling/details/presentation/component
 import 'package:hasad_app/features/direct_selling/details/presentation/components/row_of_buttons.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/title_and_price.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/types.dart';
-import 'package:hasad_app/features/direct_selling/details/presentation/components/user_row.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
 class BiddingDetailsScreen extends StatelessWidget {
@@ -25,6 +27,7 @@ class BiddingDetailsScreen extends StatelessWidget {
     return BlocProvider(
         create: (context) => sl<BiddingDetailsCubit>()..getBiddingList(id),
         child: ItemDetailsBody(
+          floatingActionButton: const BiddingRowOfButtons(),
           actions: const [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -95,15 +98,19 @@ class BiddingDetailsScreen extends StatelessWidget {
                             DescriptionWidget(
                                 desc: isEmpty(cubit.directSellingDataModel?.description)),
                             const _DefaulDivider(),
-                            UserRowWidget(
-                                userModel: cubit.directSellingDataModel?.user,
-                                date: isEmpty(cubit.directSellingDataModel?.createdAt)),
-                            const SizedBox(
-                              height: 20,
+                            SizedBox(
+                              height: 20.h,
                             ),
-                            const ItemRowOfButtons(),
+                            BiddingProgressWidget(
+                                value: 0.3, directSellingDataModel: cubit.directSellingDataModel),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            BiddingTimerWidget(
+                              directSellingDataModel: cubit.directSellingDataModel,
+                            ),
                             const SizedBox(
-                              height: 20,
+                              height: 100,
                             ),
                           ],
                         ),

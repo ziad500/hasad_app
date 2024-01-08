@@ -45,7 +45,10 @@ class DirectSellingListScreen extends StatelessWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                const Expanded(child: DirectSellingListView())
+                const Expanded(
+                    child: DirectSellingListView(
+                  expanded: false,
+                ))
               ],
             ),
           )),
