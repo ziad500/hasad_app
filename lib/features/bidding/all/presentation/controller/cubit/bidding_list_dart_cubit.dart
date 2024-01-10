@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_list_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/data/network/requests.dart';
@@ -20,13 +22,26 @@ class BiddingListCubit extends Cubit<BiddingListState> {
   GetMainListRequest getMainListRequest = GetMainListRequest();
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> allBidding = [];
+  Completer<void>? completer;
+
   Future<void> getBiddingList() async {
+    if (completer != null && !completer!.isCompleted) {
+      completer!.complete();
+    }
+
+    completer = Completer<void>();
     if (_canFetchMore()) {
       getMainListRequest.page = getPageNumber();
       getMainListRequest.departmentId = departmentMainId;
       _emitLoadingState();
-      await _getBiddingListUseCase.execude(getMainListRequest, type).then((value) => value.fold(
-          (l) => emit(GetBiddingListErrorState(l.message)), (r) => _handleSuccessState(r)));
+      await _getBiddingListUseCase
+          .execude(getMainListRequest, type)
+          .then((value) => value.fold((l) => emit(GetBiddingListErrorState(l.message)), (r) {
+                if (completer != null && !completer!.isCompleted) {
+                  completer!.complete();
+                  _handleSuccessState(r);
+                }
+              }));
     }
   }
 
@@ -75,6 +90,13 @@ class BiddingListCubit extends Cubit<BiddingListState> {
 
   String type = biddingAboutToEnd;
   void setType(String typeName) => type = typeName;
+
+  void reset() {
+    getMainListRequest = GetMainListRequest();
+    directSellingListModel = null;
+    allBidding = [];
+    emit(ResetState());
+  }
 
   //////////////////////////// filter //////////////////////////////
   Future<void> passGetMainListRequest(GetMainListRequest? value) async {

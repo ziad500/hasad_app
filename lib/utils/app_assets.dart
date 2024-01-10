@@ -36,6 +36,10 @@ class SVGManager {
   static String wallet = "$svgPath/wallet.svg";
   static String note = "$svgPath/note.svg";
   static String star = "$svgPath/star.svg";
+
+  static String calendar = "$svgPath/calendar.svg";
+  static String timer = "$svgPath/timer.svg";
+  static String repeat = "$svgPath/repeat.svg";
 }
 
 String gifPath = "assets/gif";

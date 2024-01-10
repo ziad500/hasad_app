@@ -138,7 +138,10 @@
 "privacyPolicy": "Privacy Policy",
 "edit": "Edit",
 "processCompleted": "Process Completed",
-"myOrders": "My Orders"
+"myOrders": "My Orders",
+"biddingAboutToEnd":"About to end",
+"biddingStillAvailable":"Still available",
+"biddingupcoming":"Upcoming"
 
    
 }

@@ -45,13 +45,13 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
       r'lowest_price': lowestPrice,
       r'highest_price': highestPrice,
       r'page': page,
-      r'department_id ': departmentId,
+      r'department_id': departmentId,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DirectSellingListResponse>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -78,8 +78,8 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DirectSellingListResponse>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,

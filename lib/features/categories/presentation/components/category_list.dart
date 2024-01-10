@@ -58,7 +58,7 @@ class CategoriesList extends StatelessWidget {
                               height: 7,
                             ),
                             DefaultText(
-                              text: isEmpty(cubit.categories[index].name) * 2,
+                              text: isEmpty(cubit.categories[index].name),
                               maxlines: 1,
                               textStyle: Theme.of(context).textTheme.bodySmall,
                             )

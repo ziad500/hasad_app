@@ -135,7 +135,10 @@
 "privacyPolicy": "سياسة الخصوصية",
 "edit": "تعديل",
 "processCompleted": "تمت العملية",
-"myOrders": "طلباتي"
+"myOrders": "طلباتي",
+"biddingAboutToEnd":"علي وشك الانتهاء",
+"biddingStillAvailable":"مازالت متاحة",
+"biddingupcoming":"مزادات قادمة"
 
 
 

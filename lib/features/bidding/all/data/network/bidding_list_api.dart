@@ -22,7 +22,7 @@ abstract class BiddingListAppServiceClient {
     @Query('lowest_price') String? lowestPrice,
     @Query('highest_price') String? highestPrice,
     @Query('page') String? page,
-    @Query('department_id ') String? departmentId,
+    @Query('department_id') String? departmentId,
   );
 
   @GET("advertisement/auctions/my")

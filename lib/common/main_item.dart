@@ -17,6 +17,7 @@ import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/app_decorations.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
+import 'package:hasad_app/utils/date_helper.dart';
 
 class MainItemWidget extends StatelessWidget {
   const MainItemWidget({super.key, required this.isbidding, required this.directSellingDataModel});
@@ -39,10 +40,12 @@ class MainItemWidget extends StatelessWidget {
           children: [
             Expanded(
               child: Center(
-                child: Image.network(
-                  directSellingDataModel.images![0],
-                  fit: BoxFit.cover,
-                ),
+                child: directSellingDataModel.images!.isNotEmpty
+                    ? Image.network(
+                        directSellingDataModel.images![0],
+                        fit: BoxFit.cover,
+                      )
+                    : SizedBox(),
               ),
             ),
             //  _NetowrkImage(directSellingDataModel.images?[0]),
@@ -228,32 +231,29 @@ class _PriceRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          DefaultText(
-            text:
-                "${LocaleKeys.currentBidPrice.tr()} ${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel.auctionPrice}",
-            textStyle: Theme.of(context)
-                .textTheme
-                .labelMedium
-                ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.red),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          DefaultText(
-            text:
-                "${LocaleKeys.buyNow.tr()} ${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel.purchasingPrice}",
-            textStyle: Theme.of(context)
-                .textTheme
-                .labelMedium
-                ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.blue),
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DefaultText(
+          text:
+              "${LocaleKeys.currentBidPrice.tr()} ${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel.auctionPrice}",
+          textStyle: Theme.of(context)
+              .textTheme
+              .labelMedium
+              ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.red),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        DefaultText(
+          text:
+              "${LocaleKeys.buyNow.tr()} ${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel.purchasingPrice}",
+          textStyle: Theme.of(context)
+              .textTheme
+              .labelMedium
+              ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.blue),
+        ),
+      ],
     );
   }
 }
@@ -269,25 +269,36 @@ class _TimerWidget extends StatelessWidget {
         Flexible(
           child: Padding(
             padding: const EdgeInsets.only(bottom: 5.0),
-            child: BiddingTimeObject(
-                child: (value) => IconAndText(
-                      widget: Expanded(
-                        child: DefaultText(
-                          text: value,
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: AppColors.red, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      svg: SVGManager.clock,
-                      title: "${LocaleKeys.endsIn.tr()}:  ",
-                      color: AppColors.orangeColor,
+            child: !isDatePast(directSellingDataModel.biddingDate)
+                ? Center(
+                    child: DefaultText(
+                      text: LocaleKeys.startingSoon.tr(),
+                      textAlign: TextAlign.center,
+                      textStyle: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: AppColors.primaryColor),
                     ),
-                date: DateTime.parse(directSellingDataModel.expiryTime
-                        .toString()
-                        .replaceAll(RegExp(r'\s[APap][Mm]$'), ''))
-                    .toIso8601String()),
+                  )
+                : BiddingTimeObject(
+                    child: (value) => IconAndText(
+                          widget: Expanded(
+                            child: DefaultText(
+                              text: value == "0:0:00:00" ? LocaleKeys.ended.tr() : value,
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(color: AppColors.red, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          svg: SVGManager.clock,
+                          title: "${LocaleKeys.endsIn.tr()}:  ",
+                          color: AppColors.orangeColor,
+                        ),
+                    date: DateTime.parse(directSellingDataModel.expiryTime
+                            .toString()
+                            .replaceAll(RegExp(r'\s[APap][Mm]$'), ''))
+                        .toIso8601String()),
           ),
         ),
         _BiddingDetails(directSellingDataModel)

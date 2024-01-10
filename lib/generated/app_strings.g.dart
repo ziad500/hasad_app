@@ -138,5 +138,8 @@ abstract class  LocaleKeys {
   static const edit = 'edit';
   static const processCompleted = 'processCompleted';
   static const myOrders = 'myOrders';
+  static const biddingAboutToEnd = 'biddingAboutToEnd';
+  static const biddingStillAvailable = 'biddingStillAvailable';
+  static const biddingupcoming = 'biddingupcoming';
 
 }

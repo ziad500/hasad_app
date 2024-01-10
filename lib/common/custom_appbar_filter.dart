@@ -6,17 +6,18 @@ import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class CustomAppbarWithFilter extends StatelessWidget {
-  const CustomAppbarWithFilter({super.key, required this.name, this.onTap});
+  const CustomAppbarWithFilter({super.key, required this.name, this.onTap, this.color});
   final String name;
   final void Function()? onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2).w,
       width: double.maxFinite,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(30), color: AppColors.mainOpacity),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30), color: color ?? AppColors.mainOpacity),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
