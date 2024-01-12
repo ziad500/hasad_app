@@ -25,22 +25,18 @@ class BiddingListCubit extends Cubit<BiddingListState> {
   Completer<void>? completer;
 
   Future<void> getBiddingList() async {
-    if (completer != null && !completer!.isCompleted) {
-      completer!.complete();
-    }
-
-    completer = Completer<void>();
     if (_canFetchMore()) {
       getMainListRequest.page = getPageNumber();
       getMainListRequest.departmentId = departmentMainId;
+
       _emitLoadingState();
       await _getBiddingListUseCase
           .execude(getMainListRequest, type)
           .then((value) => value.fold((l) => emit(GetBiddingListErrorState(l.message)), (r) {
-                if (completer != null && !completer!.isCompleted) {
-                  completer!.complete();
-                  _handleSuccessState(r);
+                if (getMainListRequest.page == "1") {
+                  allBidding = [];
                 }
+                _handleSuccessState(r);
               }));
     }
   }

@@ -24,10 +24,12 @@ class _BiddingTabBarWidgetState extends State<BiddingTabBarWidget> {
             .map((e) => Expanded(
                   child: InkWell(
                     onTap: () {
-                      setState(() {
-                        index = widget.list.indexOf(e);
-                      });
-                      widget.onTap(_ontapFunc(widget.list.indexOf(e)));
+                      if (index != widget.list.indexOf(e)) {
+                        setState(() {
+                          index = widget.list.indexOf(e);
+                        });
+                        widget.onTap(_ontapFunc(widget.list.indexOf(e)));
+                      }
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8).w,
