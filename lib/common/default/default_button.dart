@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class DefaultButton extends StatelessWidget {
   const DefaultButton(
       {Key? key,
+      this.isLoading = false,
       required this.buttonName,
       required this.buttonFunction,
       this.buttonwidth,
@@ -18,7 +19,8 @@ class DefaultButton extends StatelessWidget {
       this.borderRAdius = 12,
       this.icon,
       this.widget,
-      this.isSecondary = false})
+      this.isSecondary = false,
+      this.loadingColor})
       : super(key: key);
 
   final String buttonName;
@@ -35,7 +37,8 @@ class DefaultButton extends StatelessWidget {
   final double borderRAdius;
   final Widget? widget;
   final bool isSecondary;
-
+  final bool isLoading;
+  final Color? loadingColor;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -59,30 +62,32 @@ class DefaultButton extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0).w,
               child: Center(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Row(
-                    children: [
-                      if (icon != null && iconLeft) ...[
-                        icon!,
-                        const SizedBox(
-                          width: 5,
+                child: isLoading
+                    ? CircularProgressIndicator(
+                        color: loadingColor ?? Colors.white,
+                      )
+                    : FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Row(
+                          children: [
+                            if (icon != null && iconLeft) ...[
+                              icon!,
+                              const SizedBox(
+                                width: 5,
+                              ),
+                            ],
+                            Text(buttonName,
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: isSecondary ? AppColors.textGrey : textColor)),
+                            if (icon != null && !iconLeft) ...[
+                              SizedBox(
+                                width: 30.w,
+                              ),
+                              icon!
+                            ],
+                          ],
                         ),
-                      ],
-                      Text(buttonName,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(color: isSecondary ? AppColors.textGrey : textColor)),
-                      if (icon != null && !iconLeft) ...[
-                        SizedBox(
-                          width: 30.w,
-                        ),
-                        icon!
-                      ],
-                    ],
-                  ),
-                ),
+                      ),
               ),
             ),
       ),

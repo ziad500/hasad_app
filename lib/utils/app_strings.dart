@@ -1,4 +1,4 @@
-class AppStrings {
+/* class AppStrings {
   static const String success = "success";
   static const String badRequestError = "bad_request_error";
   static const String forbiddenError = "forbidden_error";
@@ -41,3 +41,4 @@ class AppStrings {
   static const String faq = 'faq';
   ////////
 }
+ */

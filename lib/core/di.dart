@@ -49,8 +49,10 @@ import 'package:hasad_app/features/profile/data/data_source/profile_remote_data_
 import 'package:hasad_app/features/profile/data/network/profile_api.dart';
 import 'package:hasad_app/features/profile/data/repository/profile_repo_impl.dart';
 import 'package:hasad_app/features/profile/domain/repository/profile_repo.dart';
+import 'package:hasad_app/features/profile/domain/use_cases/change_password_usecase.dart';
 import 'package:hasad_app/features/profile/domain/use_cases/edit_profile_usecase.dart';
 import 'package:hasad_app/features/profile/domain/use_cases/get_profile_usecase.dart';
+import 'package:hasad_app/features/profile/presentation/controller/change_password/change_password_cubit.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/features/requests/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/requests/data/network/request_api.dart';
@@ -87,6 +89,7 @@ Future<void> initAppModule() async {
   iniDirectSellingDetails();
   iniBiddingList();
   iniBiddingDetails();
+  initChangePassword();
 }
 
 iniLogin() async {
@@ -137,10 +140,6 @@ iniForgetPassword() async {
   }
   if (!GetIt.I.isRegistered<VerifyOtpUseCase>()) {
     sl.registerLazySingleton<VerifyOtpUseCase>(() => VerifyOtpUseCase(sl.call()));
-  }
-  if (!GetIt.I.isRegistered<RequestChangePasswordUseCase>()) {
-    sl.registerLazySingleton<RequestChangePasswordUseCase>(
-        () => RequestChangePasswordUseCase(sl.call()));
   }
 }
 
@@ -244,7 +243,7 @@ iniCategories() async {
 iniProfile() async {
   //cubit
   if (!GetIt.I.isRegistered<ProfileCubit>()) {
-    sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl.call(), sl.call()));
+    sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl.call(), sl.call(), sl.call()));
   }
   //app service client instance
   if (!GetIt.I.isRegistered<ProfileAppServiceClient>()) {
@@ -266,6 +265,9 @@ iniProfile() async {
   //usecase
   if (!GetIt.I.isRegistered<GetProfileUseCase>()) {
     sl.registerLazySingleton<GetProfileUseCase>(() => GetProfileUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<ChangePasswordUseCase>()) {
+    sl.registerLazySingleton<ChangePasswordUseCase>(() => ChangePasswordUseCase(sl.call()));
   }
 
   if (!GetIt.I.isRegistered<EditProfileUseCase>()) {
@@ -422,5 +424,16 @@ iniBiddingDetails() async {
   //usecase
   if (!GetIt.I.isRegistered<GetBiddingDetailsUseCase>()) {
     sl.registerLazySingleton<GetBiddingDetailsUseCase>(() => GetBiddingDetailsUseCase(sl.call()));
+  }
+}
+
+initChangePassword() async {
+  //cubit
+  if (!GetIt.I.isRegistered<ChangePasswordCubit>()) {
+    sl.registerFactory<ChangePasswordCubit>(() => ChangePasswordCubit(sl.call()));
+  }
+  //usecase
+  if (!GetIt.I.isRegistered<ChangePasswordUseCase>()) {
+    sl.registerLazySingleton<ChangePasswordUseCase>(() => ChangePasswordUseCase(sl.call()));
   }
 }

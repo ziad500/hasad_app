@@ -25,3 +25,12 @@ final class EditProfileDataErrorState extends ProfileState {
 }
 
 final class UploadProfileImageSuccess extends ProfileState {}
+
+final class ChangePasswordLoadingState extends ProfileState {}
+
+final class ChangePasswordSuccessState extends ProfileState {}
+
+final class ChangePasswordErrorState extends ProfileState {
+  final String error;
+  const ChangePasswordErrorState(this.error);
+}

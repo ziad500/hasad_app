@@ -21,4 +21,10 @@ abstract class ProfileAppServiceClient {
     @Part(name: "stc") String? stc,
     @Part(name: "image") File? image,
   );
+
+  @POST("profile/edit-password")
+  Future<dynamic> changePassword(
+      @Part(name: "old_password") String? oldPassword,
+      @Part(name: "password") String? password,
+      @Part(name: "password_confirmation") String? passwordConfirmation);
 }

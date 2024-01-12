@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hasad_app/common/default/default_divider.dart';
 import 'package:hasad_app/common/default/default_list_view.dart';
-import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
@@ -29,7 +28,9 @@ class ProfileScreen extends StatelessWidget {
           body: Column(
             children: [
               state is GetProfileDataLoadingState
-                  ? const LoadingWidget()
+                  ? const LinearProgressIndicator(
+                      color: AppColors.primaryColor,
+                    )
                   : _UserRow(ProfileCubit.get(context).profileDataModel),
               const DefaultDivider(),
               Expanded(
@@ -118,8 +119,6 @@ List<_SettingsModel> _settingsList() => [
       _SettingsModel(icon: SVGManager.archive, title: LocaleKeys.termsOfUse.tr(), route: ""),
       _SettingsModel(icon: SVGManager.shield, title: LocaleKeys.privacyPolicy.tr(), route: "")
     ];
-
-List<String> _titleList() => [];
 
 class _SettingsModel {
   String icon;

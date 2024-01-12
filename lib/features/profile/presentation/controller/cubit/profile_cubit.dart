@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:hasad_app/features/profile/domain/use_cases/change_password_usecase.dart';
+
 import '../../../data/network/requests.dart';
 import '../../../domain/use_cases/edit_profile_usecase.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +16,9 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final GetProfileUseCase getProfileUseCase;
   final EditProfileUseCase editProfileUseCase;
-  ProfileCubit(this.getProfileUseCase, this.editProfileUseCase) : super(ProfileInitial());
+  final ChangePasswordUseCase changePasswordUseCase;
+  ProfileCubit(this.getProfileUseCase, this.editProfileUseCase, this.changePasswordUseCase)
+      : super(ProfileInitial());
 
   static ProfileCubit get(context) => BlocProvider.of(context);
   @override
@@ -67,7 +71,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController stcController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController(text: "**************");
+  final TextEditingController passwordhintController =
+      TextEditingController(text: "**************");
 
   void setController() {
     nameController.text = profileDataModel?.name ?? "";

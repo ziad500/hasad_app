@@ -41,4 +41,19 @@ class ProfileRepositoryImpl implements ProfileRepository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, dynamic>> changePassword(
+      ChangePasswordRequest changePasswordRequest) async {
+    try {
+      final response = await _profileRemoteDataSource.changePassword(changePasswordRequest);
+      return right(response);
+    } catch (error) {
+      if (error is DioException) {
+        return left(hangdleResponseError(error));
+      } else {
+        return left(Failure(100, error.toString()));
+      }
+    }
+  }
 }

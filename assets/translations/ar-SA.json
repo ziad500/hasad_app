@@ -138,7 +138,11 @@
 "myOrders": "طلباتي",
 "biddingAboutToEnd":"علي وشك الانتهاء",
 "biddingStillAvailable":"مازالت متاحة",
-"biddingupcoming":"مزادات قادمة"
+"biddingupcoming":"مزادات قادمة",
+"oldPassword": "كلمة المرور القديمة",
+"changePassword": "تغيير كلمة المرور",
+"editProfile": "تعديل الملف الشخصي",
+"upload": "رفع"
 
 
 

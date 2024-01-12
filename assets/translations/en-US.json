@@ -141,7 +141,11 @@
 "myOrders": "My Orders",
 "biddingAboutToEnd":"About to end",
 "biddingStillAvailable":"Still available",
-"biddingupcoming":"Upcoming"
+"biddingupcoming":"Upcoming",
+"oldPassword": "Old Password",
+"changePassword": "Change Password",
+"editProfile": "Edit Profile",
+"upload": "Upload"
 
    
 }

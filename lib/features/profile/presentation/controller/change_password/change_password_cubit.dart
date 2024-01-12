@@ -1,8 +1,8 @@
-/* import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:triple_s/feature/auth/data/network/auth_requests.dart';
-import 'package:triple_s/feature/auth/domain/use_cases/change_password_usecase.dart';
-import 'package:triple_s/utils/app_colors.dart';
+import 'package:hasad_app/features/profile/data/network/requests.dart';
+import 'package:hasad_app/features/profile/domain/use_cases/change_password_usecase.dart';
+import 'package:hasad_app/utils/app_colors.dart';
 
 part 'change_password_state.dart';
 
@@ -10,13 +10,13 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
   final ChangePasswordUseCase changePasswordUseCase;
 
   ChangePasswordCubit(this.changePasswordUseCase) : super(ChangePasswordInitial());
-  static ChangePasswordCubit get(context) => BlocProvider.of(context);  @override
+  static ChangePasswordCubit get(context) => BlocProvider.of(context);
+  @override
   void emit(state) {
     if (!isClosed) {
       super.emit(state);
     }
   }
-
 
   Icon oldSuffix = const Icon(
     Icons.remove_red_eye,
@@ -89,13 +89,19 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
     emit(ConfirmViewPasswordState());
   }
 
-  Future<void> changePasswod(ChangePasswordRequest changePasswordRequest) async {
+  final TextEditingController oldPasswordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordConfirmationController = TextEditingController();
+
+  Future<void> changePassword() async {
     emit(ChangePasswordLoadingState());
-    await changePasswordUseCase.execude(changePasswordRequest).then((value) => value.fold((l) {
-          emit(ChangePasswordErrorState(l.message));
-        }, (r) {
-          emit(ChangePasswordSuccessState());
-        }));
+    await changePasswordUseCase.execude(_passChangePasswordRequest()).then((value) => value.fold(
+        (l) => emit(ChangePasswordErrorState(l.message)),
+        (r) => emit(ChangePasswordSuccessState())));
   }
+
+  ChangePasswordRequest _passChangePasswordRequest() => ChangePasswordRequest(
+      oldPassword: oldPasswordController.text,
+      password: passwordController.text,
+      passwordConfirmation: passwordConfirmationController.text);
 }
- */

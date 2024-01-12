@@ -141,5 +141,9 @@ abstract class  LocaleKeys {
   static const biddingAboutToEnd = 'biddingAboutToEnd';
   static const biddingStillAvailable = 'biddingStillAvailable';
   static const biddingupcoming = 'biddingupcoming';
+  static const oldPassword = 'oldPassword';
+  static const changePassword = 'changePassword';
+  static const editProfile = 'editProfile';
+  static const upload = 'upload';
 
 }

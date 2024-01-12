@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import '../cubit/layout_cubit.dart';
 import '../../../utils/app_colors.dart';
 
@@ -24,6 +25,11 @@ class BottomNavBarItem extends StatelessWidget {
         splashColor: Colors.transparent,
         minWidth: 40,
         onPressed: () {
+          if (index == 3) {
+            if (ProfileCubit.get(context).profileDataModel == null) {
+              ProfileCubit.get(context).getProfileData();
+            }
+          }
           cubit.changeScreen(index);
         },
         child: SvgPicture.asset(

@@ -105,6 +105,55 @@ class _ProfileAppServiceClient implements ProfileAppServiceClient {
     return value;
   }
 
+  @override
+  Future<dynamic> changePassword(
+    String? oldPassword,
+    String? password,
+    String? passwordConfirmation,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (oldPassword != null) {
+      _data.fields.add(MapEntry(
+        'old_password',
+        oldPassword,
+      ));
+    }
+    if (password != null) {
+      _data.fields.add(MapEntry(
+        'password',
+        password,
+      ));
+    }
+    if (passwordConfirmation != null) {
+      _data.fields.add(MapEntry(
+        'password_confirmation',
+        passwordConfirmation,
+      ));
+    }
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'profile/edit-password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

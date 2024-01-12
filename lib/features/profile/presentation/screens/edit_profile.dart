@@ -10,10 +10,12 @@ import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/loading_frame.dart';
 import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
+import 'package:hasad_app/common/default/show_modal_bottom_sheet.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/default/user_image.dart';
 import 'package:hasad_app/common/icons/call_icon.dart';
 import 'package:hasad_app/common/icons/stc_icon.dart';
+import 'package:hasad_app/features/profile/presentation/components/change_password_bottomsheet.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
@@ -43,7 +45,7 @@ class EditProfileScreen extends StatelessWidget {
             state is EditProfileDataLoadingState ? const LoadingPage() : const SizedBox()
           ],
           child: DefaultScaffold(
-              appbarTitle: "تعديل الملف الشخصي",
+              appbarTitle: LocaleKeys.editProfile.tr(),
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -84,18 +86,7 @@ class EditProfileScreen extends StatelessWidget {
                       SizedBox(
                         height: 20.h,
                       ),
-                      DefaultFormField(
-                          borderRadius: 16,
-                          controller: cubit.passwordController,
-                          prefix: const Icon(
-                            Icons.lock,
-                            size: 20,
-                            color: Colors.black,
-                          ),
-                          hint: "****************",
-                          enabled: false,
-                          hintColor: Colors.black,
-                          validator: defaultValidation),
+                      const _EditPassword(),
                       SizedBox(
                         height: 30.h,
                       ),
@@ -157,7 +148,7 @@ class _ProfileImage extends StatelessWidget {
                       size: 15.sp,
                     ),
                     DefaultText(
-                      text: "رفع",
+                      text: LocaleKeys.upload.tr(),
                       textStyle:
                           Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.blue),
                     ),
@@ -168,6 +159,31 @@ class _ProfileImage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _EditPassword extends StatelessWidget {
+  const _EditPassword({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showModalSheet(context, const ChangePasswordBottomSheet());
+      },
+      child: DefaultFormField(
+          borderRadius: 16,
+          controller: ProfileCubit.get(context).passwordhintController,
+          prefix: const Icon(
+            Icons.lock,
+            size: 20,
+            color: Colors.black,
+          ),
+          hint: "****************",
+          enabled: false,
+          hintColor: Colors.black,
+          validator: defaultValidation),
     );
   }
 }

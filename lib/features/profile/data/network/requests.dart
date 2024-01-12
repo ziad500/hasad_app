@@ -13,3 +13,14 @@ class EditProfileRequest {
     this.image,
   });
 }
+
+class ChangePasswordRequest {
+  String? oldPassword;
+  String? password;
+  String? passwordConfirmation;
+  ChangePasswordRequest({
+    this.oldPassword,
+    this.password,
+    this.passwordConfirmation,
+  });
+}
