@@ -4,6 +4,7 @@ import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/default_text_button.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/icons/call_icon.dart';
+import 'package:hasad_app/common/icons/stc_icon.dart';
 import 'package:hasad_app/common/logo_widget.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -88,7 +89,9 @@ class UserSignUp extends StatelessWidget {
                         DefaultFormField(
                             controller: stcController,
                             hint: LocaleKeys.yourStcNumber.tr(),
-                            prefix: SvgPicture.asset(SVGManager.circle),
+                            prefix: const IconSTC(
+                              color: AppColors.primaryColor,
+                            ),
                             validator: defaultStcValidation),
                         SizedBox(
                           height: 10.h,

@@ -32,6 +32,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(GetProfileDataErrorState(l.message));
         }, (r) {
           profileDataModel = r.data;
+          setController();
           emit(GetProfileDataSuccessState());
         }));
   }
@@ -66,6 +67,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController stcController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController(text: "**************");
 
   void setController() {
     nameController.text = profileDataModel?.name ?? "";

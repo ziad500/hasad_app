@@ -8,7 +8,7 @@ class DefaultFormField extends StatelessWidget {
   const DefaultFormField(
       {super.key,
       required this.controller,
-      required this.hint,
+      this.hint,
       this.maxLines = 1,
       this.textInputType = TextInputType.text,
       required this.validator,
@@ -37,7 +37,7 @@ class DefaultFormField extends StatelessWidget {
       this.borderRadius = 30,
       this.hintColor});
   final TextEditingController controller;
-  final String hint;
+  final String? hint;
   final int? maxLines;
   final double width;
   final List<TextInputFormatter>? inputFormatters;
@@ -149,6 +149,10 @@ class DefaultFormField extends StatelessWidget {
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius).w,
                 borderSide: BorderSide(color: borderColro ?? AppColors.red),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius).w,
+                borderSide: BorderSide(color: borderColro ?? Colors.transparent),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius).w,

@@ -63,7 +63,7 @@ class DefaultScaffold extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: DefaultText(
                             text: appbarTitle!,
-                            textStyle: Theme.of(context).textTheme.headlineLarge,
+                            textStyle: Theme.of(context).textTheme.headlineMedium,
                           ),
                         )
                       : null),

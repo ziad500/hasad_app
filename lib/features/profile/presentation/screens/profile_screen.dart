@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hasad_app/common/default/default_divider.dart';
 import 'package:hasad_app/common/default/default_list_view.dart';
+import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
@@ -27,7 +28,9 @@ class ProfileScreen extends StatelessWidget {
         return DefaultScaffold(
           body: Column(
             children: [
-              _UserRow(ProfileCubit.get(context).profileDataModel),
+              state is GetProfileDataLoadingState
+                  ? const LoadingWidget()
+                  : _UserRow(ProfileCubit.get(context).profileDataModel),
               const DefaultDivider(),
               Expanded(
                 child: Padding(
@@ -79,17 +82,24 @@ class _UserRow extends StatelessWidget {
               SubTitleWidget(subTitle: isEmpty(profileDataModel?.phone))
             ],
           )),
-          Column(
-            children: [
-              const Icon(
-                Icons.settings_outlined,
-                color: AppColors.blue,
-              ),
-              SubTitleWidget(
-                subTitle: LocaleKeys.edit.tr(),
-                color: AppColors.blue,
-              )
-            ],
+          InkWell(
+            onTap: () {
+              ProfileCubit.get(context).profileImage = null;
+              ProfileCubit.get(context).setController();
+              Navigator.pushNamed(context, Routes.editProfileRoutes);
+            },
+            child: Column(
+              children: [
+                const Icon(
+                  Icons.settings_outlined,
+                  color: AppColors.blue,
+                ),
+                SubTitleWidget(
+                  subTitle: LocaleKeys.edit.tr(),
+                  color: AppColors.blue,
+                )
+              ],
+            ),
           )
         ],
       ),
