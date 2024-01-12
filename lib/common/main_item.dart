@@ -11,6 +11,7 @@ import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/timer/cubit/presentation/bidding_timer.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/features/favorites/presentation/components/add_to_fav_icon.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -45,7 +46,7 @@ class MainItemWidget extends StatelessWidget {
                         directSellingDataModel.images![0],
                         fit: BoxFit.cover,
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
             ),
             //  _NetowrkImage(directSellingDataModel.images?[0]),
@@ -164,9 +165,8 @@ class _Description extends StatelessWidget {
                 children: [
                   Expanded(child: TitleWidget(title: isEmpty(directSellingDataModel.title))),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: SvgPicture.asset(SVGManager.favorite),
-                  )
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: FavoriteIcon(directSellingDataModel: directSellingDataModel))
                 ],
               ),
               const SizedBox(

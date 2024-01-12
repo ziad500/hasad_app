@@ -55,9 +55,11 @@ class DefaultButton extends StatelessWidget {
         ),
         height: height,
         color: color ?? (isSecondary ? AppColors.white : AppColors.primaryColor),
-        onPressed: () {
-          buttonFunction();
-        },
+        onPressed: isLoading
+            ? null
+            : () {
+                buttonFunction();
+              },
         child: widget ??
             Padding(
               padding: const EdgeInsets.all(5.0).w,

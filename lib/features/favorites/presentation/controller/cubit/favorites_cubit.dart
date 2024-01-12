@@ -1,0 +1,101 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/features/favorites/data/network/requests.dart';
+import 'package:hasad_app/features/favorites/domain/use_cases/add_to_favorites_usecase.dart';
+import 'package:hasad_app/features/favorites/domain/use_cases/get_favorites_usecase.dart';
+
+part 'favorites_state.dart';
+
+enum FavoritesType { directSelling, auction }
+
+class FavoritesCubit extends Cubit<FavoritesState> {
+  final GetFavoritesListUseCase _getFavoritesListUseCase;
+  final AddToFavoritesUseCase _addToFavoritesUseCase;
+
+  FavoritesCubit(this._getFavoritesListUseCase, this._addToFavoritesUseCase)
+      : super(FavoritesInitial());
+  static FavoritesCubit get(context) => BlocProvider.of(context);
+  @override
+  void emit(state) {
+    if (!isClosed) {
+      super.emit(state);
+    }
+  }
+
+  String getType(FavoritesType favoritesType) {
+    switch (favoritesType) {
+      case FavoritesType.auction:
+        return "auctions";
+      case FavoritesType.directSelling:
+        return "direct-selling";
+
+      default:
+        return "direct-selling";
+    }
+  }
+
+  DirectSellingListModel? directSellingListModel;
+  List<DirectSellingDataModel> allFavorites = [];
+  Future<void> getFavoritesList(FavoritesType favoritesType, {bool reset = true}) async {
+    if (reset) {
+      allFavorites = [];
+    }
+    _emitLoadingState();
+    await _getFavoritesListUseCase
+        .execude(GetFavoritesListReqeust(type: getType(favoritesType), page: null))
+        .then((value) => value.fold(
+            (l) => emit(GetFavoritesListErrorState(l.message)), (r) => _handleSuccessState(r)));
+  }
+
+  void _emitSuccessState() {
+    emit(GetFavoritesListSuccessState());
+    if (directSellingListModel?.pagination?.nextPageUrl == null) {
+      emit(FavoritesListAllCaughtState());
+    }
+  }
+
+  void _handleSuccessState(DirectSellingListModel response) {
+    if (directSellingListModel == null) {
+      allFavorites = response.data ?? [];
+      directSellingListModel = response;
+    } else {
+      allFavorites.addAll(response.data ?? []);
+      directSellingListModel = response;
+    }
+    _emitSuccessState();
+  }
+
+  void _emitLoadingState() {
+    if (directSellingListModel == null) {
+      emit(GetFavoritesListLoadingState());
+    } else {
+      emit(GetFavoritesListPaginationLoadingState());
+    }
+  }
+
+  String? getPageNumber() {
+    String? nextPageNumber = directSellingListModel?.pagination?.nextPageUrl
+        ?.split('?')
+        .firstWhere((element) => element.contains("page"));
+    try {
+      nextPageNumber = nextPageNumber!.split("=").last;
+    } catch (_) {
+      nextPageNumber = "1";
+    }
+    return nextPageNumber;
+  }
+
+  Future<void> getAllFavoritesList() async {
+    getFavoritesList(FavoritesType.auction, reset: false);
+    getFavoritesList(FavoritesType.directSelling, reset: false);
+  }
+
+  inFavList(String id) => allFavorites.any((element) => element.id.toString() == id);
+
+  Future<void> addToFav(DirectSellingDataModel directSellingDataModel) async {
+    emit(AddToFavoritesListLoadingState());
+    await _addToFavoritesUseCase.execude(directSellingDataModel.id.toString()).then((value) =>
+        value.fold((l) => emit(AddToFavoritesListErrorState(l.message)),
+            (r) => emit(AddToFavoritesListSuccessState())));
+  }
+}

@@ -3,6 +3,7 @@ import 'package:hasad_app/features/bidding/all/presentation/screens/bidding_list
 import 'package:hasad_app/features/bidding/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/screens/direct_selling_list_screen.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
+import 'package:hasad_app/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hasad_app/features/filter/presentation/screens/filter_screen.dart';
 import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/my_advertisement/presentation/screens/my_advertisement_screen.dart';
@@ -32,6 +33,7 @@ class Routes {
   static const String myAdvertisementScreen = "/myAdvertisementScreen";
   static const String biddingListScreen = "/biddingListScreen";
   static const String editProfileRoutes = "/editProfileRoutes";
+  static const String favoritesRoutes = "/favoritesRoutes";
 
   ////////
 
@@ -55,11 +57,15 @@ class RouteGenerator {
             );
           },
         );
+      case Routes.favoritesRoutes:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const FavoritesScreen();
+          },
+        );
       case Routes.editProfileRoutes:
         return MaterialPageRoute(
           builder: (context) {
-            final args = settings.arguments as Map<String, dynamic>?;
-
             return const EditProfileScreen();
           },
         );

@@ -114,7 +114,8 @@ List<_SettingsModel> _settingsList() => [
           icon: SVGManager.ads, title: LocaleKeys.ads.tr(), route: Routes.myAdvertisementScreen),
       _SettingsModel(
           icon: SVGManager.note, title: LocaleKeys.orders.tr(), route: Routes.myOrdersScreen),
-      _SettingsModel(icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: ""),
+      _SettingsModel(
+          icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: Routes.favoritesRoutes),
       _SettingsModel(icon: SVGManager.flag, title: LocaleKeys.aboutHarvest.tr(), route: ""),
       _SettingsModel(icon: SVGManager.archive, title: LocaleKeys.termsOfUse.tr(), route: ""),
       _SettingsModel(icon: SVGManager.shield, title: LocaleKeys.privacyPolicy.tr(), route: "")

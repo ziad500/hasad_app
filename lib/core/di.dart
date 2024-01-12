@@ -37,6 +37,13 @@ import 'package:hasad_app/features/direct_selling/details/domain/repository/repo
 import 'package:hasad_app/features/direct_selling/details/domain/use_cases/buy_direct_selling_usecase.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/use_cases/get_direct_selling_details_usecase.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
+import 'package:hasad_app/features/favorites/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/favorites/data/network/fav_api.dart';
+import 'package:hasad_app/features/favorites/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/favorites/domain/repository/repo.dart';
+import 'package:hasad_app/features/favorites/domain/use_cases/add_to_favorites_usecase.dart';
+import 'package:hasad_app/features/favorites/domain/use_cases/get_favorites_usecase.dart';
+import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
 import 'package:hasad_app/features/lists/data/data_source/lists_data_source.dart';
 import 'package:hasad_app/features/lists/data/network/lists_api.dart';
 import 'package:hasad_app/features/lists/data/repository/lists_repo_impl.dart';
@@ -66,7 +73,6 @@ import '../features/auth/data/data_source.dart/auth_remote_data_source.dart';
 import '../features/auth/data/network/auth_app_api.dart';
 import '../features/auth/data/repository/auth_repo_impl.dart';
 import '../features/auth/domain/Repository/auth_repo.dart';
-import '../features/auth/domain/usecase/request_change_password_usecase.dart';
 import '../features/auth/domain/usecase/reset_password_usecase.dart';
 import '../features/auth/domain/usecase/user_login_usecase.dart';
 import '../features/auth/domain/usecase/user_signup_usecase.dart';
@@ -90,6 +96,7 @@ Future<void> initAppModule() async {
   iniBiddingList();
   iniBiddingDetails();
   initChangePassword();
+  iniFavoritesList();
 }
 
 iniLogin() async {
@@ -435,5 +442,39 @@ initChangePassword() async {
   //usecase
   if (!GetIt.I.isRegistered<ChangePasswordUseCase>()) {
     sl.registerLazySingleton<ChangePasswordUseCase>(() => ChangePasswordUseCase(sl.call()));
+  }
+}
+
+iniFavoritesList() async {
+  //cubit
+
+  if (!GetIt.I.isRegistered<FavoritesCubit>()) {
+    sl.registerFactory<FavoritesCubit>(() => FavoritesCubit(sl.call(), sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<FavoritesAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<FavoritesAppServiceClient>(() => FavoritesAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<FavoritesRepository>()) {
+    sl.registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<FavoritesRemoteDataSource>()) {
+    sl.registerLazySingleton<FavoritesRemoteDataSource>(
+        () => FavoritesRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetFavoritesListUseCase>()) {
+    sl.registerLazySingleton<GetFavoritesListUseCase>(() => GetFavoritesListUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<AddToFavoritesUseCase>()) {
+    sl.registerLazySingleton<AddToFavoritesUseCase>(() => AddToFavoritesUseCase(sl.call()));
   }
 }

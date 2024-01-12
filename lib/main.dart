@@ -1,5 +1,6 @@
 import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
+import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
 import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
@@ -79,6 +80,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider(
           create: (context) => di.sl<ProfileCubit>()..getProfileData(),
+        ),
+        BlocProvider(
+          create: (context) => di.sl<FavoritesCubit>()..getAllFavoritesList(),
         ),
       ],
       child: BlocConsumer<InternetCubit, InternetState>(

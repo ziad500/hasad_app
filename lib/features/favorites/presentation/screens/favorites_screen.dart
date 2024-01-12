@@ -5,41 +5,42 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/shared_tabbar.dart';
 import 'package:hasad_app/core/di.dart';
-import 'package:hasad_app/features/bidding/all/presentation/components/my_bidding_list.dart';
-import 'package:hasad_app/features/bidding/all/presentation/controller/my_bidding_list/cubit/my_bidding_list_cubit.dart';
-import 'package:hasad_app/features/direct_selling/all/presentation/components/my_direct_selling_list.dart';
-import 'package:hasad_app/features/direct_selling/all/presentation/controller/my_direct_selling_list/cubit/my_direct_selling_list_cubit.dart';
+import 'package:hasad_app/features/favorites/presentation/components/bidding_list.dart';
+import 'package:hasad_app/features/favorites/presentation/components/direct_selling_list.dart';
+import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 
-class MyAdvertisementScreen extends StatelessWidget {
-  const MyAdvertisementScreen({super.key});
+class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: DefaultScaffold(
-          appbarTitle: LocaleKeys.ads.tr(),
+          appbarTitle: LocaleKeys.favorites.tr(),
           body: Column(
             children: [
-              SharedTabBar(),
+              const SharedTabBar(),
               SizedBox(
                 height: 20.h,
               ),
               Expanded(
                   child: TabBarView(children: [
                 BlocProvider(
-                  create: (context) => sl<MyBiddingListCubit>()..getBiddingList(),
+                  create: (context) =>
+                      sl<FavoritesCubit>()..getFavoritesList(FavoritesType.auction),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: MyBiddingListView(),
+                    child: DirectSellingFavListView(),
                   ),
                 ),
                 BlocProvider(
-                  create: (context) => sl<MyDirectSellingListCubit>()..getDirectSellingList(),
+                  create: (context) =>
+                      sl<FavoritesCubit>()..getFavoritesList(FavoritesType.directSelling),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: MyDirectSellingListView(),
+                    child: BiddingFavListView(),
                   ),
                 )
               ]))
