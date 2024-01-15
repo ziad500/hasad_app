@@ -9,7 +9,7 @@ import 'package:hasad_app/utils/app_colors.dart';
 class BiddingTabBarWidget extends StatefulWidget {
   const BiddingTabBarWidget({super.key, required this.list, required this.onTap});
   final List<TabBarModel> list;
-  final void Function(String) onTap;
+  final void Function(String, int) onTap;
 
   @override
   State<BiddingTabBarWidget> createState() => _BiddingTabBarWidgetState();
@@ -28,7 +28,7 @@ class _BiddingTabBarWidgetState extends State<BiddingTabBarWidget> {
                         setState(() {
                           index = widget.list.indexOf(e);
                         });
-                        widget.onTap(_ontapFunc(widget.list.indexOf(e)));
+                        widget.onTap(_ontapFunc(widget.list.indexOf(e)), index);
                       }
                     },
                     child: Container(

@@ -28,16 +28,14 @@ class FavoritesScreen extends StatelessWidget {
               Expanded(
                   child: TabBarView(children: [
                 BlocProvider(
-                  create: (context) =>
-                      sl<FavoritesCubit>()..getFavoritesList(FavoritesType.auction),
+                  create: (context) => sl<FavoritesCubit>()..getFavoritesList(),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: DirectSellingFavListView(),
                   ),
                 ),
                 BlocProvider(
-                  create: (context) =>
-                      sl<FavoritesCubit>()..getFavoritesList(FavoritesType.directSelling),
+                  create: (context) => sl<FavoritesCubit>()..getFavoritesList(),
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: BiddingFavListView(),

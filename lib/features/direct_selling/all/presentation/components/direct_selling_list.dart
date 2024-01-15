@@ -27,6 +27,11 @@ class _DirectSellingListViewState extends State<DirectSellingListView> {
 
     return BlocBuilder<DirectSellingListCubit, DirectSellingListState>(builder: (context, state) {
       //pass the cubit ,states and items type '<DirectSellingListCubit, DirectSellingListDartState, ReportModel>'
+      if (state is GetDirectSellingListErrorState) {
+        return Center(
+          child: Text(state.error),
+        );
+      }
 
       return PagenatedListView<DirectSellingListCubit, DirectSellingListState,
           DirectSellingDataModel>(

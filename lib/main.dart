@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => di.sl<ProfileCubit>()..getProfileData(),
         ),
         BlocProvider(
-          create: (context) => di.sl<FavoritesCubit>()..getAllFavoritesList(),
+          create: (context) => di.sl<FavoritesCubit>()..getFavoritesList(),
         ),
       ],
       child: BlocConsumer<InternetCubit, InternetState>(

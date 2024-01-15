@@ -51,11 +51,11 @@ class DirectSellingDataResponse {
   @JsonKey(name: "user")
   UserResponse? user;
   @JsonKey(name: "region")
-  TypeResponse? region;
+  LocationResponse? region;
   @JsonKey(name: "city")
-  TypeResponse? city;
+  LocationResponse? city;
   @JsonKey(name: "district")
-  TypeResponse? district;
+  LocationResponse? district;
   @JsonKey(name: "price")
   num? price;
   @JsonKey(name: "purchasing_price")
@@ -106,6 +106,21 @@ class DirectSellingDataResponse {
       _$DirectSellingDataResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$DirectSellingDataResponseToJson(this);
+}
+
+@JsonSerializable()
+class LocationResponse {
+  @JsonKey(name: "name")
+  String? name;
+  @JsonKey(name: "id")
+  int? id;
+
+  LocationResponse({this.id, this.name});
+
+  // from json
+  factory LocationResponse.fromJson(Map<String, dynamic> json) => _$LocationResponseFromJson(json);
+  // to json
+  Map<String, dynamic> toJson() => _$LocationResponseToJson(this);
 }
 
 @JsonSerializable()

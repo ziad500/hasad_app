@@ -47,9 +47,9 @@ class _BiddingListViewState extends State<BiddingListView> {
         }),
         controller: controller,
         //build this widget for the cureent screen
-        childBuilder: (index) =>
-            MainItemWidget(isbidding: true, directSellingDataModel: cubit.allBidding[index]),
-        items: cubit.allBidding,
+        childBuilder: (index) => MainItemWidget(
+            isbidding: true, directSellingDataModel: cubit.biddingStillAvailableList[index]),
+        items: cubit.biddingStillAvailableList,
         //indicates that you do not has any other pages to fetch
         allCaught: state is BiddingListAllCaughtState,
         //indicates that you we currently fetching the next page

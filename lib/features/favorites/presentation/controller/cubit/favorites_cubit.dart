@@ -6,8 +6,6 @@ import 'package:hasad_app/features/favorites/domain/use_cases/get_favorites_usec
 
 part 'favorites_state.dart';
 
-enum FavoritesType { directSelling, auction }
-
 class FavoritesCubit extends Cubit<FavoritesState> {
   final GetFavoritesListUseCase _getFavoritesListUseCase;
   final AddToFavoritesUseCase _addToFavoritesUseCase;
@@ -22,28 +20,15 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     }
   }
 
-  String getType(FavoritesType favoritesType) {
-    switch (favoritesType) {
-      case FavoritesType.auction:
-        return "auctions";
-      case FavoritesType.directSelling:
-        return "direct-selling";
-
-      default:
-        return "direct-selling";
-    }
-  }
-
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> allFavorites = [];
-  Future<void> getFavoritesList(FavoritesType favoritesType, {bool reset = true}) async {
+  Future<void> getFavoritesList({bool reset = true}) async {
     if (reset) {
       allFavorites = [];
     }
     _emitLoadingState();
-    await _getFavoritesListUseCase
-        .execude(GetFavoritesListReqeust(type: getType(favoritesType), page: null))
-        .then((value) => value.fold(
+    await _getFavoritesListUseCase.execude(GetFavoritesListReqeust(page: null)).then((value) =>
+        value.fold(
             (l) => emit(GetFavoritesListErrorState(l.message)), (r) => _handleSuccessState(r)));
   }
 
@@ -83,11 +68,6 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       nextPageNumber = "1";
     }
     return nextPageNumber;
-  }
-
-  Future<void> getAllFavoritesList() async {
-    getFavoritesList(FavoritesType.auction, reset: false);
-    getFavoritesList(FavoritesType.directSelling, reset: false);
   }
 
   inFavList(String id) => allFavorites.any((element) => element.id.toString() == id);

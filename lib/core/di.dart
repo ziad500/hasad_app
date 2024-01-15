@@ -44,6 +44,13 @@ import 'package:hasad_app/features/favorites/domain/repository/repo.dart';
 import 'package:hasad_app/features/favorites/domain/use_cases/add_to_favorites_usecase.dart';
 import 'package:hasad_app/features/favorites/domain/use_cases/get_favorites_usecase.dart';
 import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
+import 'package:hasad_app/features/invoice/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/invoice/data/network/invoice_api.dart';
+import 'package:hasad_app/features/invoice/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/invoice/domain/repository/repo.dart';
+import 'package:hasad_app/features/invoice/domain/use_cases/bidding_invoice_usecase.dart';
+import 'package:hasad_app/features/invoice/domain/use_cases/direct_selling_invoice_usecase.dart';
+import 'package:hasad_app/features/invoice/presentation/controller/cubit/invoice_cubit.dart';
 import 'package:hasad_app/features/lists/data/data_source/lists_data_source.dart';
 import 'package:hasad_app/features/lists/data/network/lists_api.dart';
 import 'package:hasad_app/features/lists/data/repository/lists_repo_impl.dart';
@@ -97,6 +104,7 @@ Future<void> initAppModule() async {
   iniBiddingDetails();
   initChangePassword();
   iniFavoritesList();
+  iniInvoice();
 }
 
 iniLogin() async {
@@ -476,5 +484,39 @@ iniFavoritesList() async {
   }
   if (!GetIt.I.isRegistered<AddToFavoritesUseCase>()) {
     sl.registerLazySingleton<AddToFavoritesUseCase>(() => AddToFavoritesUseCase(sl.call()));
+  }
+}
+
+iniInvoice() async {
+  //cubit
+
+  if (!GetIt.I.isRegistered<InvoiceCubit>()) {
+    sl.registerFactory<InvoiceCubit>(() => InvoiceCubit(sl.call(), sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<InvoiceAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<InvoiceAppServiceClient>(() => InvoiceAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<InvoiceRepository>()) {
+    sl.registerLazySingleton<InvoiceRepository>(() => InvoiceRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<InvoiceRemoteDataSource>()) {
+    sl.registerLazySingleton<InvoiceRemoteDataSource>(() => InvoiceRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetDirectSellingInvoiceUseCase>()) {
+    sl.registerLazySingleton<GetDirectSellingInvoiceUseCase>(
+        () => GetDirectSellingInvoiceUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<GetBiddingInvoiceUseCase>()) {
+    sl.registerLazySingleton<GetBiddingInvoiceUseCase>(() => GetBiddingInvoiceUseCase(sl.call()));
   }
 }

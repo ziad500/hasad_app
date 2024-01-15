@@ -21,6 +21,5 @@ class FavoritesRemoteDataSourceImpl implements FavoritesRemoteDataSource {
   @override
   Future<DirectSellingListResponse> favoritesList(
           GetFavoritesListReqeust getFavoritesListReqeust) =>
-      _favoritesAppServiceClient.favoritesList(
-          getFavoritesListReqeust.page, getFavoritesListReqeust.type);
+      _favoritesAppServiceClient.favoritesList(getFavoritesListReqeust.page);
 }

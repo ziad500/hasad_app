@@ -56,7 +56,7 @@ class BiddingListScreen extends StatelessWidget {
                     BiddingListCubit cubit = BiddingListCubit.get(context);
 
                     return BiddingTabBarWidget(
-                        onTap: (value) {
+                        onTap: (value, index) {
                           cubit.reset();
                           cubit.setDepartmentID(categoryId);
                           cubit.setType(value);

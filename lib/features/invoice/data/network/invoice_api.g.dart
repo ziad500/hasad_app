@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'fav_api.dart';
+part of 'invoice_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'fav_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _FavoritesAppServiceClient implements FavoritesAppServiceClient {
-  _FavoritesAppServiceClient(
+class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
+  _InvoiceAppServiceClient(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,21 +21,23 @@ class _FavoritesAppServiceClient implements FavoritesAppServiceClient {
   String? baseUrl;
 
   @override
-  Future<DirectSellingListResponse> favoritesList(String? page) async {
+  Future<InvoiceResponse> directSellingInvoice(String? purchaseId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'page': page};
+    final queryParameters = <String, dynamic>{
+      r'purchase_invoice_id': purchaseId
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DirectSellingListResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'advertisement/favourites',
+              'advertisement/direct-selling/purchase-invoice',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -44,40 +46,37 @@ class _FavoritesAppServiceClient implements FavoritesAppServiceClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DirectSellingListResponse.fromJson(_result.data!);
+    final value = InvoiceResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<dynamic> addToFavorites(String? advertisementId) async {
+  Future<InvoiceResponse> biddingInvoice(String? purchaseId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'purchase_invoice_id': purchaseId
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = FormData();
-    if (advertisementId != null) {
-      _data.fields.add(MapEntry(
-        'advertisement_id',
-        advertisementId,
-      ));
-    }
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
-      method: 'POST',
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'advertisement/favorite',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-    final value = _result.data;
+            .compose(
+              _dio.options,
+              'advertisement/bidding/purchase-invoice',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = InvoiceResponse.fromJson(_result.data!);
     return value;
   }
 

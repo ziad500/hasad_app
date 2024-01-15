@@ -21,7 +21,10 @@ class BiddingListCubit extends Cubit<BiddingListState> {
 //////////////////////////// all direct selling list //////////////////////////////
   GetMainListRequest getMainListRequest = GetMainListRequest();
   DirectSellingListModel? directSellingListModel;
-  List<DirectSellingDataModel> allBidding = [];
+  List<DirectSellingDataModel> biddingStillAvailableList = [];
+  List<DirectSellingDataModel> biddingAboutToEndList = [];
+  List<DirectSellingDataModel> biddingupcomingList = [];
+
   Completer<void>? completer;
 
   Future<void> getBiddingList() async {
@@ -33,10 +36,7 @@ class BiddingListCubit extends Cubit<BiddingListState> {
       await _getBiddingListUseCase
           .execude(getMainListRequest, type)
           .then((value) => value.fold((l) => emit(GetBiddingListErrorState(l.message)), (r) {
-                if (getMainListRequest.page == "1") {
-                  allBidding = [];
-                }
-                _handleSuccessState(r);
+                _handlebiddingStillAvailableListSuccessState(r);
               }));
     }
   }
@@ -48,12 +48,12 @@ class BiddingListCubit extends Cubit<BiddingListState> {
     }
   }
 
-  void _handleSuccessState(DirectSellingListModel response) {
-    if (directSellingListModel == null) {
-      allBidding = response.data ?? [];
+  void _handlebiddingStillAvailableListSuccessState(DirectSellingListModel response) {
+    if (directSellingListModel == null || getMainListRequest.page == "1") {
+      biddingStillAvailableList = response.data ?? [];
       directSellingListModel = response;
     } else {
-      allBidding.addAll(response.data ?? []);
+      biddingStillAvailableList.addAll(response.data ?? []);
       directSellingListModel = response;
     }
     _emitSuccessState();
@@ -90,7 +90,7 @@ class BiddingListCubit extends Cubit<BiddingListState> {
   void reset() {
     getMainListRequest = GetMainListRequest();
     directSellingListModel = null;
-    allBidding = [];
+    biddingStillAvailableList = [];
     emit(ResetState());
   }
 

@@ -6,8 +6,7 @@ part of 'pagination_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PaginationResponse _$PaginationResponseFromJson(Map<String, dynamic> json) =>
-    PaginationResponse(
+PaginationResponse _$PaginationResponseFromJson(Map<String, dynamic> json) => PaginationResponse(
       currentPage: json['current_page'] as int?,
       lastPage: json['last_page'] as int?,
       nextPageUrl: json['next_page_url'] as String?,
@@ -15,8 +14,7 @@ PaginationResponse _$PaginationResponseFromJson(Map<String, dynamic> json) =>
       total: json['total'] as int?,
     );
 
-Map<String, dynamic> _$PaginationResponseToJson(PaginationResponse instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PaginationResponseToJson(PaginationResponse instance) => <String, dynamic>{
       'total': instance.total,
       'current_page': instance.currentPage,
       'last_page': instance.lastPage,

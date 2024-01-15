@@ -10,9 +10,9 @@ part 'fav_api.g.dart';
 abstract class FavoritesAppServiceClient {
   factory FavoritesAppServiceClient(Dio dio, {String baseUrl}) = _FavoritesAppServiceClient;
 
-  @GET("advertisement/{type}/favourites")
+  @GET("advertisement/favourites")
   Future<DirectSellingListResponse> favoritesList(
-      @Query('page') String? page, @Path('type') String type);
+      @Query('page') String? page);
 
   @POST("advertisement/favorite")
   Future<dynamic> addToFavorites(@Part(name: "advertisement_id") String? advertisementId);

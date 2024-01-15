@@ -22,9 +22,9 @@ class DirectSellingDataModel {
   String? video;
   String? createdAt;
   UserModel? user;
-  TypeModel? region;
-  TypeModel? city;
-  TypeModel? district;
+  LocationModel? region;
+  LocationModel? city;
+  LocationModel? district;
   num? price;
   List<String>? images;
   List<String>? priceInclusions;
@@ -78,4 +78,11 @@ class UserModel {
     this.phone,
     this.image,
   );
+}
+
+class LocationModel {
+  String? name;
+  int? id;
+
+  LocationModel(this.id, this.name);
 }

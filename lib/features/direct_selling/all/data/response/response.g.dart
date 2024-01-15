@@ -35,18 +35,18 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
     DirectSellingDataResponse(
       city: json['city'] == null
           ? null
-          : TypeResponse.fromJson(json['city'] as Map<String, dynamic>),
+          : LocationResponse.fromJson(json['city'] as Map<String, dynamic>),
       description: json['description'] as String?,
       district: json['district'] == null
           ? null
-          : TypeResponse.fromJson(json['district'] as Map<String, dynamic>),
+          : LocationResponse.fromJson(json['district'] as Map<String, dynamic>),
       id: json['id'] as int?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
       price: json['price'] as num?,
       region: json['region'] == null
           ? null
-          : TypeResponse.fromJson(json['region'] as Map<String, dynamic>),
+          : LocationResponse.fromJson(json['region'] as Map<String, dynamic>),
       title: json['title'] as String?,
       advertisementType: json['advertisement_type'] as String?,
       agricultureType: json['agriculture_type'] == null
@@ -103,6 +103,18 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'images': instance.images,
       'price_inclusions': instance.priceInclusions,
       'bidding_date': instance.biddingDate,
+    };
+
+LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
+    LocationResponse(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'id': instance.id,
     };
 
 TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(

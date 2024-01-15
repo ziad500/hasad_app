@@ -30,6 +30,7 @@ class IconAndText extends StatelessWidget {
               ))
             : Expanded(
                 child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   DefaultText(
                     text: title,

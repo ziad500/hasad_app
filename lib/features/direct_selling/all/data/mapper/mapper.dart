@@ -50,3 +50,9 @@ extension UserResponseMapper on UserResponse? {
     return UserModel(this?.name, this?.phone, this?.image);
   }
 }
+
+extension LocationResponseMapper on LocationResponse? {
+  LocationModel toDomain() {
+    return LocationModel(this?.id, this?.name);
+  }
+}
