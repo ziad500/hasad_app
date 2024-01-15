@@ -1,3 +1,4 @@
+import 'package:hasad_app/core/network_info.dart';
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
 import 'package:hasad_app/features/bidding/all/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/bidding/all/data/network/bidding_list_api.dart';
@@ -20,6 +21,7 @@ import 'package:hasad_app/features/categories/domain/repository/repo.dart';
 import 'package:hasad_app/features/categories/domain/use_cases/get_categories_types_usecase.dart';
 import 'package:hasad_app/features/categories/domain/use_cases/get_categories_usecase.dart';
 import 'package:hasad_app/features/categories/presentation/controller/cubit/categories_cubit.dart';
+import 'package:hasad_app/features/chats/core/di.dart';
 import 'package:hasad_app/features/direct_selling/all/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/direct_selling/all/data/network/direct_selling_list_api.dart';
 import 'package:hasad_app/features/direct_selling/all/data/repository/repo_impl.dart';
@@ -74,6 +76,7 @@ import 'package:hasad_app/features/requests/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/requests/domain/repository/repo.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'dio_factory.dart';
 import '../features/auth/data/data_source.dart/auth_remote_data_source.dart';
@@ -92,6 +95,8 @@ import 'package:get_it/get_it.dart';
 GetIt sl = GetIt.instance;
 Future<void> initAppModule() async {
   sl.registerLazySingleton<DioFactory>(() => DioFactory());
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(InternetConnectionChecker()));
+
   iniLogin();
   iniForgetPassword();
   initAddRequest();
@@ -105,6 +110,7 @@ Future<void> initAppModule() async {
   initChangePassword();
   iniFavoritesList();
   iniInvoice();
+  initChatsModule();
 }
 
 iniLogin() async {

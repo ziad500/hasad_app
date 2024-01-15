@@ -17,33 +17,30 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: DefaultScaffold(
-          appbarTitle: LocaleKeys.favorites.tr(),
-          body: Column(
-            children: [
-              const SharedTabBar(),
-              SizedBox(
-                height: 20.h,
-              ),
-              Expanded(
-                  child: TabBarView(children: [
-                BlocProvider(
-                  create: (context) => sl<FavoritesCubit>()..getFavoritesList(),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: DirectSellingFavListView(),
-                  ),
+      child: BlocProvider(
+        create: (context) => sl<FavoritesCubit>()..getFavoritesList(),
+        child: DefaultScaffold(
+            appbarTitle: LocaleKeys.favorites.tr(),
+            body: Column(
+              children: [
+                const SharedTabBar(),
+                SizedBox(
+                  height: 20.h,
                 ),
-                BlocProvider(
-                  create: (context) => sl<FavoritesCubit>()..getFavoritesList(),
-                  child: const Padding(
+                const Expanded(
+                    child: TabBarView(children: [
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: BiddingFavListView(),
                   ),
-                )
-              ]))
-            ],
-          )),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: DirectSellingFavListView(),
+                  ),
+                ]))
+              ],
+            )),
+      ),
     );
   }
 }

@@ -13,7 +13,7 @@ class SettingsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      height: 50.h,
+      height: 40.h,
       padding: const EdgeInsets.symmetric(horizontal: 15).w,
       decoration: BoxDecoration(
           color: AppColors.addRequestContainerColor, borderRadius: BorderRadius.circular(10.6)),

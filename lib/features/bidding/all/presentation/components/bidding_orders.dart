@@ -28,6 +28,12 @@ class _BiddingOrdersListViewState extends State<BiddingOrdersListView> {
     return BlocBuilder<DirectSellingOrdersCubit, DirectSellingOrdersState>(
         builder: (context, state) {
       //pass the cubit ,states and items type '<DirectSellingOrdersCubit, DirectSellingListDartState, ReportModel>'
+      String? getError() {
+        if (state is GetDirectSellingOrdersListErrorState) {
+          return state.error;
+        }
+        return null;
+      }
 
       return PagenatedListView<DirectSellingOrdersCubit, DirectSellingOrdersState,
           DirectSellingOrderModel>(
@@ -51,6 +57,8 @@ class _BiddingOrdersListViewState extends State<BiddingOrdersListView> {
         //indicates that you we currently fetching the next page
         isLoading: state is GetDirectSellingOrdersListPaginationLoadingState,
         mainLoading: state is GetDirectSellingOrdersListLoadingState,
+        error: getError(),
+        isError: state is GetDirectSellingOrdersListErrorState,
       );
     });
   }

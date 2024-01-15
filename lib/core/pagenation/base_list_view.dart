@@ -32,6 +32,8 @@ class PagenatedListView<B extends StateStreamable<States>, States, DataType>
   final EdgeInsetsGeometry? padding;
   final bool useExpanded;
   final bool mainLoading;
+  final bool isError;
+  final String? error;
   const PagenatedListView(
       {required this.init,
       required this.controller,
@@ -42,7 +44,9 @@ class PagenatedListView<B extends StateStreamable<States>, States, DataType>
       this.padding,
       this.useExpanded = true,
       super.key,
-      required this.mainLoading});
+      required this.mainLoading,
+      this.isError = false,
+      this.error});
 
   @override
   State<PagenatedListView<B, States, DataType>> createState() =>
@@ -76,6 +80,8 @@ class _PagenatedListViewState<B extends StateStreamable<States>, States, DataTyp
             allCaught: widget.allCaught,
             isLoading: widget.isLoading,
             mainLoading: widget.mainLoading,
+            error: widget.error,
+            isError: widget.isError,
           ))
         : _Child<B, States, DataType>(
             padding: widget.padding,
@@ -84,7 +90,10 @@ class _PagenatedListViewState<B extends StateStreamable<States>, States, DataTyp
             items: widget.items,
             childBuilder: widget.childBuilder,
             allCaught: widget.allCaught,
-            isLoading: widget.isLoading);
+            isLoading: widget.isLoading,
+            error: widget.error,
+            isError: widget.isError,
+          );
   }
 }
 
@@ -96,7 +105,8 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
   final EdgeInsetsGeometry? padding;
   final bool useExpanded;
   final bool mainLoading;
-
+  final bool isError;
+  final String? error;
   const _Child(
       {required this.controller,
       required this.items,
@@ -106,7 +116,9 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
       this.padding,
       this.useExpanded = true,
       super.key,
-      required this.mainLoading});
+      required this.mainLoading,
+      this.error,
+      this.isError = false});
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +126,11 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
       builder: (context, state) {
         if (mainLoading) {
           return const _LoadingWidget();
+        }
+        if (isError && error != null) {
+          return Center(
+            child: Text(error!),
+          );
         }
         if (items.isEmpty) {
           return const EmptyList();

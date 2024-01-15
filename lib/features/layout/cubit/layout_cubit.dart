@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/bidding/main_screen/presentation/screens/bidding_screen.dart';
-import 'package:hasad_app/features/chat/presentation/screens/chat_screen.dart';
+import 'package:hasad_app/features/chats/presentation/screens/chats_screen.dart';
 import 'package:hasad_app/features/direct_selling/main_screen/presentation/screens/home_screen.dart';
 import 'package:hasad_app/features/profile/presentation/screens/profile_screen.dart';
 
@@ -14,7 +14,7 @@ class LayoutCubit extends Cubit<LayoutState> {
   final List<Widget> screens = [
     const BiddingScreen(),
     const HomeScreen(),
-    const ChatScreen(),
+    const ChatsScreen(),
     const ProfileScreen()
   ];
   int currentTap = 0;

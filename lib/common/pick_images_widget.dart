@@ -13,17 +13,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImagesWidget extends StatefulWidget {
-  const PickImagesWidget({Key? key, this.text, required this.onUpload}) : super(key: key);
+  const PickImagesWidget({Key? key, this.text, required this.onUpload, this.imagesStatic})
+      : super(key: key);
 
   final String? text;
   final Function(List<XFile>) onUpload;
+  final List<String>? imagesStatic;
 
   @override
   State<PickImagesWidget> createState() => _PickImagesWidgetState();
 }
 
 class _PickImagesWidgetState extends State<PickImagesWidget> {
-  final List<XFile> images = [];
+  List<XFile> images = [];
+  @override
+  void initState() {
+    if (widget.imagesStatic != null) {
+      images = widget.imagesStatic!.map((e) => XFile(e)).toList();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

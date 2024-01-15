@@ -27,9 +27,13 @@ class _MyDirectSellingListViewState extends State<MyDirectSellingListView> {
     return BlocBuilder<MyDirectSellingListCubit, MyDirectSellingListState>(
         builder: (context, state) {
       //pass the cubit ,states and items type '<MyDirectSellingListCubit, DirectSellingListDartState, ReportModel>'
-      if (state is MyGetDirectSellingListErrorState) {
-        return Center(child: Text(state.error));
+      String? getError() {
+        if (state is MyGetDirectSellingListErrorState) {
+          return state.error;
+        }
+        return null;
       }
+
       return PagenatedListView<MyDirectSellingListCubit, MyDirectSellingListState,
           DirectSellingDataModel>(
         useExpanded: false,
@@ -53,6 +57,8 @@ class _MyDirectSellingListViewState extends State<MyDirectSellingListView> {
         //indicates that you we currently fetching the next page
         isLoading: state is MyGetDirectSellingListPaginationLoadingState,
         mainLoading: state is MyGetDirectSellingListLoadingState,
+        isError: state is MyGetDirectSellingListErrorState,
+        error: getError(),
       );
     });
   }

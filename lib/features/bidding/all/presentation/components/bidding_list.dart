@@ -24,13 +24,13 @@ class _BiddingListViewState extends State<BiddingListView> {
   @override
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<BiddingListCubit>(context);
-
     return BlocBuilder<BiddingListCubit, BiddingListState>(builder: (context, state) {
       //pass the cubit ,states and items type '<BiddingListCubit, BiddingListDartState, ReportModel>'
-      if (state is GetBiddingListErrorState) {
-        return Center(
-          child: Text(state.error),
-        );
+      String? getError() {
+        if (state is GetBiddingListErrorState) {
+          return state.error;
+        }
+        return null;
       }
 
       return PagenatedListView<BiddingListCubit, BiddingListState, DirectSellingDataModel>(
@@ -55,6 +55,8 @@ class _BiddingListViewState extends State<BiddingListView> {
         //indicates that you we currently fetching the next page
         isLoading: state is GetBiddingListPaginationLoadingState,
         mainLoading: state is GetBiddingListLoadingState,
+        isError: state is GetBiddingListErrorState,
+        error: getError(),
       );
     });
   }

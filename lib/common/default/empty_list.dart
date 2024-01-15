@@ -1,4 +1,6 @@
-import 'default_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasad_app/utils/app_assets.dart';
+import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 
 class EmptyList extends StatelessWidget {
@@ -8,11 +10,13 @@ class EmptyList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [DefaultText(text: "no more")],
+        children: [
+          /* DefaultText(text: "no more") */ Lottie.asset(JsonManager.empty, height: 400.h),
+        ],
       ),
     );
   }

@@ -41,11 +41,14 @@ class UploadImagesScreen extends StatelessWidget {
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    PickImagesWidget(onUpload: (value) {
-                      cubit.images = value;
-                    }),
+                    PickImagesWidget(
+                        imagesStatic: cubit.images.map((e) => e.path).toList(),
+                        onUpload: (value) {
+                          cubit.images = value;
+                        }),
                     PickMediaWidget(
                         mediaType: MediaType.video,
+                        videoStatic: cubit.videoPath,
                         onUpload: (value) {
                           cubit.videoPath = value;
                         })

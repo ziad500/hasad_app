@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_list_view.dart';
 import 'package:hasad_app/common/default/default_text.dart';
+import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/main_item.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
@@ -22,6 +23,9 @@ class BiddingFavListView extends StatelessWidget {
         }
         if (state is GetFavoritesListErrorState) {
           return Center(child: DefaultText(text: state.error));
+        }
+        if (list.isEmpty) {
+          return const Center(child: EmptyList());
         }
         return DefaultListView(
             itemBuilder: (context, index) =>

@@ -19,17 +19,31 @@ enum MediaType {
 
 class PickMediaWidget extends StatefulWidget {
   const PickMediaWidget(
-      {super.key, this.text, required this.mediaType, required this.onUpload, this.widget});
+      {super.key,
+      this.text,
+      required this.mediaType,
+      required this.onUpload,
+      this.widget,
+      this.videoStatic});
   final String? text;
   final Function(String?) onUpload;
   final MediaType? mediaType;
   final Widget? widget;
+  final String? videoStatic;
 
   @override
   State<PickMediaWidget> createState() => _PickMediaWidgetState();
 }
 
 class _PickMediaWidgetState extends State<PickMediaWidget> {
+  @override
+  void initState() {
+    if (widget.videoStatic != null && widget.videoStatic != "") {
+      video = XFile(widget.videoStatic!);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

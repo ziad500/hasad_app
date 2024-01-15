@@ -40,13 +40,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   }
 
   void _handleSuccessState(DirectSellingListModel response) {
-    if (directSellingListModel == null) {
-      allFavorites = response.data ?? [];
-      directSellingListModel = response;
-    } else {
-      allFavorites.addAll(response.data ?? []);
-      directSellingListModel = response;
-    }
+    allFavorites = response.data ?? [];
     _emitSuccessState();
   }
 
@@ -74,8 +68,15 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   Future<void> addToFav(DirectSellingDataModel directSellingDataModel) async {
     emit(AddToFavoritesListLoadingState());
-    await _addToFavoritesUseCase.execude(directSellingDataModel.id.toString()).then((value) =>
-        value.fold((l) => emit(AddToFavoritesListErrorState(l.message)),
-            (r) => emit(AddToFavoritesListSuccessState())));
+    await _addToFavoritesUseCase
+        .execude(directSellingDataModel.id.toString())
+        .then((value) => value.fold((l) => emit(AddToFavoritesListErrorState(l.message)), (r) {
+              if (allFavorites.contains(directSellingDataModel)) {
+                allFavorites.removeWhere((element) => element.id == directSellingDataModel.id);
+              } else {
+                allFavorites.add(directSellingDataModel);
+              }
+              emit(AddToFavoritesListSuccessState());
+            }));
   }
 }

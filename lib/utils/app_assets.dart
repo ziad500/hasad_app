@@ -47,3 +47,9 @@ String gifPath = "assets/gif";
 class GifManager {
   static String logo = "$gifPath/logo.gif";
 }
+
+String jsonPath = "assets/json";
+
+class JsonManager {
+  static String empty = "$jsonPath/empty.json";
+}
