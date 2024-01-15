@@ -1,6 +1,7 @@
 import 'package:hasad_app/core/responses/pagination_response.dart';
 import 'package:hasad_app/features/direct_selling/all/data/response/response.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/features/profile/data/mapper/profile_mapper.dart';
 
 extension TypeResponseMapper on TypeResponse? {
   TypeModel toDomain() {
@@ -26,7 +27,7 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.departmentType,
         this?.harvestDate,
         this?.packagingType.toDomain(),
-        this?.user.toDomain(),
+        this?.owner.toDomain(),
         this?.video,
         this?.priceInclusions,
         this?.auctionPrice,
@@ -34,7 +35,9 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.expiryTime,
         this?.numberOfAuctions,
         this?.purchasingPrice,
-        this?.biddingDate);
+        this?.biddingDate,
+        this?.purchasingPrice,
+        this?.purchaseTax);
   }
 }
 
@@ -42,12 +45,6 @@ extension DirectSellingListResponseMapper on DirectSellingListResponse? {
   DirectSellingListModel toDomain() {
     return DirectSellingListModel(this?.status, this?.message,
         this?.data?.map((e) => e.toDomain()).toList(), this?.pagination.toDomain());
-  }
-}
-
-extension UserResponseMapper on UserResponse? {
-  UserModel toDomain() {
-    return UserModel(this?.name, this?.phone, this?.image);
   }
 }
 

@@ -9,35 +9,36 @@ import 'package:hasad_app/features/chats/core/stream_service.dart';
 import 'package:hasad_app/features/chats/data/firebase/requests.dart';
 import 'package:hasad_app/features/chats/data/response/messages_response.dart';
 import 'package:hasad_app/features/chats/data/response/user_reponse.dart';
-import 'package:hasad_app/features/chats/domain/model/message_model.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
 import 'package:hasad_app/features/chats/domain/usecases/add_chat_usecase.dart';
-import 'package:hasad_app/features/chats/domain/usecases/get_messages_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/make_message_read_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/save_message_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/update_user_usecase.dart';
+import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
+import 'package:hasad_app/main.dart';
 part 'messages_state.dart';
 
 class MessagesCubit extends Cubit<MessagesState> {
   final MakeMessageReadUseCase makeMessageReadUseCase;
-  final GetMessagesUseCase getMessagesUseCase;
   final SaveMessageUseCase saveMessageUseCase;
   final UpdateUserUseCase updateUserUseCase;
   final AddChatUseCase addChatUseCase;
   final NetworkInfo networkInfo;
-  MessagesCubit(this.makeMessageReadUseCase, this.getMessagesUseCase, this.saveMessageUseCase,
-      this.updateUserUseCase, this.addChatUseCase, this.networkInfo)
+  MessagesCubit(this.makeMessageReadUseCase, this.saveMessageUseCase, this.updateUserUseCase,
+      this.addChatUseCase, this.networkInfo)
       : super(ChatsInitial());
   static MessagesCubit get(context) => BlocProvider.of(context);
 
   Future sendMessage(MessageResponse messageModel, UserChatsResponse recieverModel) async {
+    ProfileDataModel? userModel = ProfileCubit.get(navigatorKey.currentContext).profileDataModel;
     //me
     addChat(SendMessageRequest(
         messageModel: MessageResponse(
             created: Timestamp.now(),
             recieverId: recieverModel.userId,
             senderId: Constants.userId,
-            text: "Hello",
+            text: messageModel.text,
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
             created: Timestamp.now(),
@@ -45,8 +46,8 @@ class MessagesCubit extends Cubit<MessagesState> {
             isRead: true,
             lastMessage: messageModel.text,
             modified: Timestamp.now(),
-            nameAr: "his name",
-            nameEn: "his name",
+            nameAr: recieverModel.nameEn,
+            nameEn: recieverModel.nameEn,
             time: Timestamp.now().toString(),
             userId: recieverModel.userId),
         userId: Constants.userId));
@@ -56,7 +57,7 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             recieverId: Constants.userId,
             senderId: recieverModel.userId,
-            text: "Hello",
+            text: messageModel.text,
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
           created: Timestamp.now(),
@@ -64,8 +65,8 @@ class MessagesCubit extends Cubit<MessagesState> {
           isRead: false,
           lastMessage: messageModel.text,
           modified: Timestamp.now(),
-          nameAr: "my name",
-          nameEn: "my name",
+          nameAr: userModel?.name,
+          nameEn: userModel?.name,
           time: Timestamp.now().toString(),
           userId: recieverModel.userId,
         ),
@@ -78,7 +79,7 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             modified: Timestamp.now(),
             image: recieverModel.image,
-            lastMessage: recieverModel.lastMessage,
+            lastMessage: messageModel.text,
             nameAr: recieverModel.nameAr,
             nameEn: recieverModel.nameEn,
             userId: recieverModel.userId),
@@ -90,10 +91,10 @@ class MessagesCubit extends Cubit<MessagesState> {
             isRead: false,
             created: Timestamp.now(),
             modified: Timestamp.now(),
-            image: "My image",
-            lastMessage: recieverModel.lastMessage,
-            nameAr: "My name",
-            nameEn: "My name",
+            image: userModel?.image,
+            lastMessage: messageModel.text,
+            nameAr: userModel?.name,
+            nameEn: userModel?.name,
             userId: Constants.userId),
         userId: recieverModel.userId!));
   }
@@ -101,72 +102,18 @@ class MessagesCubit extends Cubit<MessagesState> {
   Future addChat(SendMessageRequest sendMessageRequest) async {
     emit(AddChatLoadingState());
     try {
-      await addChatUseCase
-          .execude(sendMessageRequest)
-          .then((value) => value.fold((l) => emit(AddChatFaildState()), (r) => null));
-    } catch (e) {
-      emit(AddChatSuccessState());
-    }
+      await addChatUseCase.execude(sendMessageRequest).then((value) => value.fold((l) {
+            emit(AddChatFaildState());
+          }, (r) => emit(AddChatSuccessState())));
+    } catch (e) {}
   }
 
   Future saveMessage(SendMessageRequest sendMessageRequest) async {
     emit(SaveMessageLoadingState());
     try {
-      await saveMessageUseCase
-          .execude(sendMessageRequest)
-          .then((value) => value.fold((l) => emit(SaveMessageFaildState()), (r) => null));
-    } catch (e) {
-      emit(SaveMessageSuccessState());
-    }
-  }
-
-  List<MessageModel> messages = [];
-
-  StreamSubscription<List<MessageModel>> messagesStream(recieverId) {
-    return getMessagesUseCase.execude(recieverId).listen((event) async {
-      messages = [];
-      for (var element in event) {
-        messages.add(element);
-      }
-      if (await networkInfo.isConnected) {
-        sendUnsentMessages();
-      } else {
-        final List<UserChatModel> unsentMessages = DatabaseHelper.getUnsentMessages()
-            .where((element) => element.userId == recieverId)
-            .toList();
-        if (unsentMessages.isNotEmpty) {
-          for (var element in unsentMessages) {
-            messages.add(MessageModel(
-                created: element.created,
-                recieverId: element.userId,
-                senderId: Constants.userId,
-                time: element.time,
-                text: element.lastMessage));
-          }
-        }
-      }
-
-      emit(GetMessagesSuccessState());
-    });
-  }
-
-  StreamSubscription<List<MessageModel>>? messagesSubscription;
-
-  // function to get chat messages
-  void getMessages({required String recieverId, bool cancel = false}) {
-    emit(GetMessagesLoadingState());
-
-    try {
-      if (messagesSubscription != null) {
-        messagesSubscription!.cancel();
-        messagesSubscription = null;
-      }
-      messagesSubscription = messagesStream(recieverId);
-    } on SocketException catch (_) {
-      emit(GetMessagesFaildState());
-    } catch (_) {
-      emit(GetMessagesFaildState());
-    }
+      await saveMessageUseCase.execude(sendMessageRequest).then((value) =>
+          value.fold((l) => emit(SaveMessageFaildState()), (r) => emit(SaveMessageSuccessState())));
+    } catch (e) {}
   }
 
   //check if message sent

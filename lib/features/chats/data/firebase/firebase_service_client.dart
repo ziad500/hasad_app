@@ -1,13 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hasad_app/features/chats/data/firebase/requests.dart';
 import '../../../../core/constants.dart';
-import '../response/messages_response.dart';
 import '../response/user_reponse.dart';
 
 abstract class FirebaseServiceClient {
   Future<dynamic> updateUser(UserChatsResponse userModel);
-  Stream<List<MessageResponse>> getMessages(String recieverId);
-  Stream<List<UserChatsResponse>> getChats(String userId);
   Future<dynamic> makeMessageRead(MakeMessageReadRequest makeMessageReadRequest);
 
   //send Message
@@ -64,18 +61,6 @@ class FirebaseServiceClientImpl implements FirebaseServiceClient {
   }
 
   @override
-  Stream<List<MessageResponse>> getMessages(String recieverId) {
-    final usersCollectionRef = firestore.collection("users");
-    final chatsCollectionRef = usersCollectionRef.doc(Constants.userId).collection("chats");
-    final messagesCollectionRef =
-        chatsCollectionRef.doc(recieverId).collection("messages").orderBy('created');
-
-    return messagesCollectionRef.snapshots().map((querySnap) {
-      return querySnap.docs.map((docSnap) => MessageResponse.fromSnapshot(docSnap)).toList();
-    });
-  }
-
-  @override
   Future<dynamic> updateUser(UserChatsResponse userModel) async {
     final usersCollectionRef = firestore.collection("users");
     final chatsSenderCollectionRef = usersCollectionRef.doc(Constants.userId).collection("chats");
@@ -93,17 +78,6 @@ class FirebaseServiceClientImpl implements FirebaseServiceClient {
                 modified: UserChatsResponse.fromSnapshot(value).modified)
             .toDocument());
       }
-    });
-  }
-
-  @override
-  Stream<List<UserChatsResponse>> getChats(String userId) {
-    final usersCollectionRef = firestore.collection("users");
-    final chatsCollectionRef =
-        usersCollectionRef.doc(userId).collection("chats").orderBy('modified', descending: true);
-
-    return chatsCollectionRef.snapshots().map((querySnap) {
-      return querySnap.docs.map((docSnap) => UserChatsResponse.fromSnapshot(docSnap)).toList();
     });
   }
 

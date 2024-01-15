@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../../core/responses/pagination_response.dart';
+import '../../../../profile/data/response/profile_response.dart';
 
 part 'response.g.dart';
 
@@ -48,8 +49,8 @@ class DirectSellingDataResponse {
   String? video;
   @JsonKey(name: "created_at")
   String? createdAt;
-  @JsonKey(name: "user")
-  UserResponse? user;
+  @JsonKey(name: "owner")
+  ProfileDataResponse? owner;
   @JsonKey(name: "region")
   LocationResponse? region;
   @JsonKey(name: "city")
@@ -74,6 +75,10 @@ class DirectSellingDataResponse {
   List<String>? priceInclusions;
   @JsonKey(name: "bidding_date")
   String? biddingDate;
+  @JsonKey(name: "purchase_tax")
+  num? purchaseTax;
+  @JsonKey(name: "price_after_tax")
+  num? priceAfterTax;
 
   DirectSellingDataResponse(
       {this.city,
@@ -91,7 +96,7 @@ class DirectSellingDataResponse {
       this.departmentType,
       this.harvestDate,
       this.packagingType,
-      this.user,
+      this.owner,
       this.video,
       this.priceInclusions,
       this.auctionPrice,
@@ -99,7 +104,9 @@ class DirectSellingDataResponse {
       this.expiryTime,
       this.numberOfAuctions,
       this.purchasingPrice,
-      this.biddingDate});
+      this.biddingDate,
+      this.priceAfterTax,
+      this.purchaseTax});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -136,25 +143,4 @@ class TypeResponse {
   factory TypeResponse.fromJson(Map<String, dynamic> json) => _$TypeResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$TypeResponseToJson(this);
-}
-
-@JsonSerializable()
-class UserResponse {
-  @JsonKey(name: 'name')
-  String? name;
-  @JsonKey(name: 'phone')
-  String? phone;
-  @JsonKey(name: 'image')
-  String? image;
-  UserResponse({
-    this.name,
-    this.phone,
-    this.image,
-  });
-
-  // from json
-  factory UserResponse.fromJson(Map<String, dynamic> json) => _$UserResponseFromJson(json);
-
-  // to json
-  Map<String, dynamic> toJson() => _$UserResponseToJson(this);
 }

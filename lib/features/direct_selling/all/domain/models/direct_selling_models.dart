@@ -1,4 +1,5 @@
 import 'package:hasad_app/core/responses/pagination_response.dart';
+import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 
 class DirectSellingListModel {
   bool? status;
@@ -21,7 +22,7 @@ class DirectSellingDataModel {
   String? departmentType;
   String? video;
   String? createdAt;
-  UserModel? user;
+  ProfileDataModel? owner;
   LocationModel? region;
   LocationModel? city;
   LocationModel? district;
@@ -34,6 +35,8 @@ class DirectSellingDataModel {
   String? closed;
   num? numberOfAuctions;
   String? biddingDate;
+  num? purchaseTax;
+  num? priceAfterTax;
 
   DirectSellingDataModel(
       this.city,
@@ -51,7 +54,7 @@ class DirectSellingDataModel {
       this.departmentType,
       this.harvestDate,
       this.packagingType,
-      this.user,
+      this.owner,
       this.video,
       this.priceInclusions,
       this.auctionPrice,
@@ -59,7 +62,9 @@ class DirectSellingDataModel {
       this.expiryTime,
       this.numberOfAuctions,
       this.purchasingPrice,
-      this.biddingDate);
+      this.biddingDate,
+      this.priceAfterTax,
+      this.purchaseTax);
 }
 
 class TypeModel {

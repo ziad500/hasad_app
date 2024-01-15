@@ -61,9 +61,9 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
           ? null
           : TypeResponse.fromJson(
               json['packaging_type'] as Map<String, dynamic>),
-      user: json['user'] == null
+      owner: json['owner'] == null
           ? null
-          : UserResponse.fromJson(json['user'] as Map<String, dynamic>),
+          : ProfileDataResponse.fromJson(json['owner'] as Map<String, dynamic>),
       video: json['video'] as String?,
       priceInclusions: (json['price_inclusions'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -74,6 +74,8 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       numberOfAuctions: json['number_of_auctions'] as num?,
       purchasingPrice: json['purchasing_price'] as num?,
       biddingDate: json['bidding_date'] as String?,
+      priceAfterTax: json['price_after_tax'] as num?,
+      purchaseTax: json['purchase_tax'] as num?,
     );
 
 Map<String, dynamic> _$DirectSellingDataResponseToJson(
@@ -90,7 +92,7 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'department_type': instance.departmentType,
       'video': instance.video,
       'created_at': instance.createdAt,
-      'user': instance.user,
+      'owner': instance.owner,
       'region': instance.region,
       'city': instance.city,
       'district': instance.district,
@@ -103,6 +105,8 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'images': instance.images,
       'price_inclusions': instance.priceInclusions,
       'bidding_date': instance.biddingDate,
+      'purchase_tax': instance.purchaseTax,
+      'price_after_tax': instance.priceAfterTax,
     };
 
 LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
@@ -125,18 +129,5 @@ TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(
 Map<String, dynamic> _$TypeResponseToJson(TypeResponse instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'image': instance.image,
-    };
-
-UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
-      name: json['name'] as String?,
-      phone: json['phone'] as String?,
-      image: json['image'] as String?,
-    );
-
-Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'phone': instance.phone,
       'image': instance.image,
     };

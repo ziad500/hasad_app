@@ -73,6 +73,11 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void saveCredentials(MainUserAuthModel loginModel) {
+    CacheHelper.saveData(key: CacheKeys.userId, value: loginModel.data?.user?.id.toString() ?? "")
+        .then((value) {
+      //set token value
+      Constants.userId = CacheHelper.getData(key: CacheKeys.userId);
+    });
     //save token in cache
     CacheHelper.saveData(key: CacheKeys.token, value: loginModel.data?.token ?? "").then((value) {
       //set token value

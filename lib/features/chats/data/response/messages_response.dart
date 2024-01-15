@@ -20,6 +20,14 @@ class MessageResponse extends MessageModel {
         text: documentSnapshot.get('text'),
         senderId: documentSnapshot.get('senderId'));
   }
+  factory MessageResponse.fromJson(Map<String, dynamic> json) {
+    return MessageResponse(
+      created: json['created'] ?? "",
+      recieverId: json['recieverId'] ?? "",
+      text: json['text'] ?? "",
+      senderId: json["senderId"] ?? "",
+    );
+  }
 
   Map<String, dynamic> toDocument() {
     return {

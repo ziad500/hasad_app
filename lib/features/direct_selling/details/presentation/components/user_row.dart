@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/common/user_image.dart';
-import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
 class UserRowWidget extends StatelessWidget {
   const UserRowWidget({super.key, this.userModel, required this.date});
-  final UserModel? userModel;
+  final ProfileDataModel? userModel;
   final String date;
 
   @override

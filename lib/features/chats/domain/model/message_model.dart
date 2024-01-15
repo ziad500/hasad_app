@@ -12,8 +12,7 @@ class MessageModel {
     return MessageModel(
         senderId: json['senderId'],
         recieverId: json['recieverId'],
-        created:
-            json['created'] != null ? Timestamp.fromMillisecondsSinceEpoch(json['created']) : null,
+        created: json['created'],
         text: json['text'],
         time: json['time']);
   }

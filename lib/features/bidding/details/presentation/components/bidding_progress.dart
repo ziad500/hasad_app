@@ -6,6 +6,7 @@ import 'package:hasad_app/common/text_with_shadows.dart';
 import 'package:hasad_app/common/user_image.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/percentage_widget.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/date_helper.dart';
@@ -61,7 +62,7 @@ class BiddingProgressWidget extends StatelessWidget {
                           height: 10.h,
                         ),
                         _UserWidget(
-                          userModel: directSellingDataModel?.user,
+                          userModel: directSellingDataModel?.owner,
                         )
                       ],
                     ),
@@ -75,7 +76,7 @@ class BiddingProgressWidget extends StatelessWidget {
 
 class _UserWidget extends StatelessWidget {
   const _UserWidget({this.userModel});
-  final UserModel? userModel;
+  final ProfileDataModel? userModel;
 
   @override
   Widget build(BuildContext context) {

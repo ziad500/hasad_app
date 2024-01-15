@@ -114,7 +114,7 @@ class ItemDetailsScreen extends StatelessWidget {
                                   desc: isEmpty(cubit.directSellingDataModel?.description)),
                               const _DefaulDivider(),
                               UserRowWidget(
-                                  userModel: cubit.directSellingDataModel?.user,
+                                  userModel: cubit.directSellingDataModel?.owner,
                                   date: isEmpty(cubit.directSellingDataModel?.createdAt)),
                               const SizedBox(
                                 height: 100,

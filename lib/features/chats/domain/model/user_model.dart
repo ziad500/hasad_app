@@ -24,18 +24,16 @@ class UserChatModel {
       this.time});
   factory UserChatModel.fromJson(Map<String, dynamic> json) {
     return UserChatModel(
-      userId: json['userId'],
-      nameAr: json['nameAr'],
-      title: json['title'],
-      time: json["time"],
-      created:
-          json['created'] != null ? Timestamp.fromMillisecondsSinceEpoch(json['created']) : null,
-      nameEn: json['nameEn'],
-      modified:
-          json['modified'] != null ? Timestamp.fromMillisecondsSinceEpoch(json['modified']) : null,
-      image: json['image'],
-      lastMessage: json['lastMessage'],
-      isRead: json['isRead'],
+      userId: json['userId'] ?? "",
+      nameAr: json['nameAr'] ?? "",
+      title: json['title'] ?? "",
+      time: json["time"] ?? "",
+      created: json['created'],
+      nameEn: json['nameEn'] ?? "",
+      modified: json['modified'],
+      image: json['image'] ?? "",
+      lastMessage: json['lastMessage'] ?? "",
+      isRead: json['isRead'] ?? false,
     );
   }
 

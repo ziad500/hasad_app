@@ -6,12 +6,11 @@ import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/chats/data/response/messages_response.dart';
 import 'package:hasad_app/features/chats/data/response/user_reponse.dart';
-import 'package:hasad_app/features/chats/domain/model/user_model.dart';
+import 'package:hasad_app/features/chats/domain/model/message_model.dart';
 import 'package:hasad_app/features/chats/presentation/controller/messages/messages_cubit.dart';
-import 'package:hasad_app/features/chats/presentation/screens/message_screen.dart';
 
-class ChatsScreen extends StatelessWidget {
-  const ChatsScreen({super.key});
+class MessagesScreen extends StatelessWidget {
+  const MessagesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +28,13 @@ class ChatsScreen extends StatelessWidget {
                       created: Timestamp.now(),
                       recieverId: "2",
                       senderId: "1",
-                      text: "HEllo",
+                      text: "zooosos",
                       time: Timestamp.now().toString()),
                   UserChatsResponse(
                       created: Timestamp.now(),
                       image: null,
                       isRead: false,
-                      lastMessage: "Hello",
+                      lastMessage: "zooosos",
                       modified: Timestamp.now(),
                       nameAr: "زياد",
                       nameEn: "ziad",
@@ -46,21 +45,19 @@ class ChatsScreen extends StatelessWidget {
             ),
             body: FirestorePagination(
               isLive: true,
+              reverse: true,
+              limit: 10,
               query: FirebaseFirestore.instance
                   .collection('users')
                   .doc(Constants.userId)
                   .collection("chats")
-                  .orderBy("modified", descending: true),
+                  .doc("2")
+                  .collection("messages")
+                  .orderBy("created", descending: true),
               itemBuilder: (context, documentSnapshot, index) {
                 final data = documentSnapshot.data() as Map<String, dynamic>;
-                UserChatModel? response = UserChatModel.fromJson(data);
-                return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const MessagesScreen()));
-                    },
-                    child: Text(response.nameEn ?? "ss"));
-                // Do something cool with the data
+                MessageModel? response = MessageModel.fromJson(data);
+                return Text(response.text ?? "ss");
               },
             ),
           );

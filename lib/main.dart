@@ -32,8 +32,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await di.initAppModule();
   Constants.token = CacheHelper.getData(key: CacheKeys.token) ?? "";
-  Constants.refreshToken = CacheHelper.getData(key: CacheKeys.refreshToken) ?? "";
-  Constants.userId = CacheHelper.getData(key: CacheKeys.userId) ?? "";
+  Constants.userId = CacheHelper.getData(key: CacheKeys.userId).toString();
   print(Constants.token);
   runApp(EasyLocalization(
     supportedLocales: const [ARABIC_LOCAL, ENGLISH_LOCAL],
