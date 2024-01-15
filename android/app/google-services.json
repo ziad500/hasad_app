@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "270767948869",
+    "project_id": "hasad-app",
+    "storage_bucket": "hasad-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270767948869:android:253187889a7e7bcef5cf2c",
+        "android_client_info": {
+          "package_name": "com.example.hasad_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD_VRNUEaTXep6m_QfoWBBhqZ68owdxN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

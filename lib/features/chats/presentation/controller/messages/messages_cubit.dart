@@ -12,12 +12,11 @@ import 'package:hasad_app/features/chats/data/response/user_reponse.dart';
 import 'package:hasad_app/features/chats/domain/model/message_model.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
 import 'package:hasad_app/features/chats/domain/usecases/add_chat_usecase.dart';
-import 'package:hasad_app/features/chats/domain/usecases/get_chats_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/get_messages_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/make_message_read_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/save_message_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/update_user_usecase.dart';
-part 'chats_state.dart';
+part 'messages_state.dart';
 
 class MessagesCubit extends Cubit<MessagesState> {
   final MakeMessageReadUseCase makeMessageReadUseCase;

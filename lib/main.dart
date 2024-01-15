@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
 import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
@@ -5,6 +6,7 @@ import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 
+import 'firebase_options.dart';
 import 'utils/bloc_observer.dart';
 import 'utils/cache_helper.dart';
 import 'utils/cache_keys.dart';
@@ -22,6 +24,9 @@ import 'core/network_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();

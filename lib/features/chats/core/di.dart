@@ -12,7 +12,7 @@ import 'package:hasad_app/features/chats/domain/usecases/make_message_read_useca
 import 'package:hasad_app/features/chats/domain/usecases/save_message_usecase.dart';
 import 'package:hasad_app/features/chats/domain/usecases/update_user_usecase.dart';
 import 'package:hasad_app/features/chats/presentation/controller/chats/chats_cubit.dart';
-import 'package:hasad_app/features/chats/presentation/controller/messages/chats_cubit.dart';
+import 'package:hasad_app/features/chats/presentation/controller/messages/messages_cubit.dart';
 
 initChatsModule() {
   //remote data source instance

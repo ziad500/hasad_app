@@ -1,4 +1,4 @@
-part of 'chats_cubit.dart';
+part of 'messages_cubit.dart';
 
 class MessagesState {}
 

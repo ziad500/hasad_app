@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/chats/data/response/messages_response.dart';
 import 'package:hasad_app/features/chats/data/response/user_reponse.dart';
-import 'package:hasad_app/features/chats/presentation/controller/messages/chats_cubit.dart';
+import 'package:hasad_app/features/chats/presentation/controller/messages/messages_cubit.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({super.key});
