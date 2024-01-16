@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasad_app/common/default/image_view.dart';
 
 class NetworkImageWidget extends StatelessWidget {
   const NetworkImageWidget(
@@ -9,12 +10,16 @@ class NetworkImageWidget extends StatelessWidget {
       this.radius,
       this.imageBuilder,
       this.placeholder,
-      this.errorWidget});
+      this.errorWidget,
+      this.enableOnTap = false,
+      this.putUrl = true});
   final String? image;
   final double? radius;
   final Widget Function(BuildContext, ImageProvider<Object>)? imageBuilder;
   final Widget Function(BuildContext, String)? placeholder;
   final Widget? errorWidget;
+  final bool enableOnTap;
+  final bool putUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +30,16 @@ class NetworkImageWidget extends StatelessWidget {
             imageUrl: image!,
             fit: BoxFit.fill,
             imageBuilder: imageBuilder ??
-                (context, imageProvider) => Image(
-                      image: imageProvider,
-                      width: radius,
-                      fit: BoxFit.fill,
+                (context, imageProvider) => InkWell(
+                      onTap: !enableOnTap
+                          ? null
+                          : () => navigatorToImagesView(
+                              context: context, images: [image!], index: 0, putUrl: putUrl),
+                      child: Image(
+                        image: imageProvider,
+                        width: radius,
+                        fit: BoxFit.fill,
+                      ),
                     ),
             filterQuality: FilterQuality.medium,
             placeholder: placeholder ??

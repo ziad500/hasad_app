@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_pagination/firebase_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
@@ -27,6 +28,7 @@ class ChatsScreen extends StatelessWidget {
               child: FirestorePagination(
                 isLive: true,
                 limit: 10,
+                onEmpty: const EmptyList(),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 20,
                 ),

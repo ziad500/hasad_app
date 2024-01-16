@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/chats/data/response/messages_response.dart';
@@ -13,41 +15,69 @@ class SendWidgetSuffixIcon extends StatelessWidget {
   final UserChatModel? userModel;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SvgPicture.asset(
-          SVGManager.camera,
-          matchTextDirection: true,
-        ),
-        SvgPicture.asset(
-          SVGManager.files,
-          matchTextDirection: true,
-        ),
-        InkWell(
-            onTap: () {
-              if (MessagesCubit.get(context).messageContoller.text.trim() != "") {
-                MessagesCubit.get(context).sendMessage(
-                  MessageResponse(
-                      created: Timestamp.now(),
-                      recieverId: userModel?.userId,
-                      senderId: Constants.userId,
-                      time: Timestamp.now().toString()),
-                  UserChatsResponse(
-                      image: userModel?.image,
-                      nameAr: userModel?.nameAr,
-                      nameEn: userModel?.nameEn,
-                      userId: userModel?.userId),
-                );
-
-                MessagesCubit.get(context).messageContoller.clear();
-              }
-            },
+    return BlocListener<MessagesCubit, MessagesState>(
+      listener: (context, state) {
+        if (state is UploadImageSuccess) {
+          MessagesCubit.get(context).uploadFile(
+            MessageResponse(
+                created: Timestamp.now(),
+                recieverId: userModel?.userId,
+                text: MessagesCubit.get(context).messageContoller.text,
+                senderId: Constants.userId,
+                time: Timestamp.now().toString()),
+            UserChatsResponse(
+                image: userModel?.image,
+                nameAr: userModel?.nameAr,
+                lastMessage: MessagesCubit.get(context).messageContoller.text,
+                nameEn: userModel?.nameEn,
+                userId: userModel?.userId),
+          );
+        }
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: () => MessagesCubit.get(context).pickFiles(fileType: FileType.image),
             child: SvgPicture.asset(
-              SVGManager.send,
+              SVGManager.camera,
               matchTextDirection: true,
-            )),
-      ],
+            ),
+          ),
+          InkWell(
+            onTap: () => MessagesCubit.get(context).pickFiles(fileType: FileType.custom),
+            child: SvgPicture.asset(
+              SVGManager.files,
+              matchTextDirection: true,
+            ),
+          ),
+          InkWell(
+              onTap: () {
+                if (MessagesCubit.get(context).messageContoller.text.trim() != "") {
+                  MessagesCubit.get(context).sendMessage(
+                    MessageResponse(
+                        created: Timestamp.now(),
+                        recieverId: userModel?.userId,
+                        text: MessagesCubit.get(context).messageContoller.text,
+                        senderId: Constants.userId,
+                        time: Timestamp.now().toString()),
+                    UserChatsResponse(
+                        image: userModel?.image,
+                        nameAr: userModel?.nameAr,
+                        lastMessage: MessagesCubit.get(context).messageContoller.text,
+                        nameEn: userModel?.nameEn,
+                        userId: userModel?.userId),
+                  );
+
+                  MessagesCubit.get(context).messageContoller.clear();
+                }
+              },
+              child: SvgPicture.asset(
+                SVGManager.send,
+                matchTextDirection: true,
+              )),
+        ],
+      ),
     );
   }
 }

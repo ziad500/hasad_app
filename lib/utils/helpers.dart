@@ -12,3 +12,9 @@ String isEmpty(dynamic value, {String? nullValue}) {
 String getDateAgo(String? date) {
   return "${timeago.format(DateTime.parse(date ?? DateTime.now().toString()))} ";
 }
+
+bool isImage(String link) =>
+    link.contains(".jpeg") ||
+    link.contains(".png") ||
+    link.contains(".gif") ||
+    link.contains(".webp");

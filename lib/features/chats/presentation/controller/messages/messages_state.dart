@@ -59,3 +59,18 @@ class AddChatLoadingState extends MessagesState {}
 class AddChatSuccessState extends MessagesState {}
 
 class AddChatFaildState extends MessagesState {}
+
+class UploadFileLoadingState extends MessagesState {}
+
+class UploadFileSuccessState extends MessagesState {}
+
+class UploadFileFaildState extends MessagesState {}
+
+final class RemoveFilesState extends MessagesState {}
+
+final class UploadImageSuccess extends MessagesState {
+  final File? file;
+  UploadImageSuccess({this.file});
+}
+
+final class UploadImageError extends MessagesState {}

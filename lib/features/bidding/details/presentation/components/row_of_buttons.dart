@@ -20,7 +20,6 @@ class BiddingRowOfButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
-      buildWhen: (a, b) => false,
       builder: (context, state) {
         if (state is GetBiddingDetailsLoadingState) {
           return const SizedBox();

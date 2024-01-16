@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hasad_app/features/chats/data/firebase/requests.dart';
 import '../../../../core/constants.dart';
 import '../response/user_reponse.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 abstract class FirebaseServiceClient {
   Future<dynamic> updateUser(UserChatsResponse userModel);
@@ -10,6 +13,8 @@ abstract class FirebaseServiceClient {
   //send Message
   Future<dynamic> addChat(SendMessageRequest sendMessageRequest);
   Future<dynamic> saveMessage(SendMessageRequest sendMessageRequest);
+
+  Future<dynamic>? uploadFile(String path);
 }
 
 class FirebaseServiceClientImpl implements FirebaseServiceClient {
@@ -102,5 +107,22 @@ class FirebaseServiceClientImpl implements FirebaseServiceClient {
                 .toDocument());
       }
     });
+  }
+
+  @override
+  Future<dynamic>? uploadFile(String path) {
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child("images/${Uri.file(path).pathSegments.last}")
+        .putFile(File(path))
+        .then((value) => value.ref.getDownloadURL().then((value) {
+              return value;
+            }).catchError((e) {
+              return e;
+            }))
+        .catchError((e) {
+      return e;
+    });
+    return null;
   }
 }

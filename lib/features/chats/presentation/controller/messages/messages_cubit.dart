@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/network_info.dart';
+import 'package:hasad_app/core/services/pick_files.dart';
 import 'package:hasad_app/features/chats/core/local_database_service.dart';
 import 'package:hasad_app/features/chats/core/stream_service.dart';
 import 'package:hasad_app/features/chats/data/firebase/requests.dart';
@@ -18,6 +20,8 @@ import 'package:hasad_app/features/chats/domain/usecases/update_user_usecase.dar
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/main.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 part 'messages_state.dart';
 
 class MessagesCubit extends Cubit<MessagesState> {
@@ -34,20 +38,19 @@ class MessagesCubit extends Cubit<MessagesState> {
 
   Future sendMessage(MessageResponse messageModel, UserChatsResponse recieverModel) async {
     ProfileDataModel? myProfile = ProfileCubit.get(navigatorKey.currentContext).profileDataModel;
-    messageModel.text = messageContoller.text;
     //me
     addChat(SendMessageRequest(
         messageModel: MessageResponse(
             created: Timestamp.now(),
             recieverId: recieverModel.userId,
             senderId: Constants.userId,
-            text: messageContoller.text,
+            text: messageModel.text,
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
             created: Timestamp.now(),
             image: recieverModel.image,
             isRead: true,
-            lastMessage: messageContoller.text,
+            lastMessage: messageModel.text,
             modified: Timestamp.now(),
             nameAr: recieverModel.nameEn,
             nameEn: recieverModel.nameEn,
@@ -60,13 +63,13 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             recieverId: Constants.userId,
             senderId: recieverModel.userId,
-            text: messageContoller.text,
+            text: messageModel.text,
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
           created: Timestamp.now(),
           image: myProfile?.image,
           isRead: false,
-          lastMessage: messageContoller.text,
+          lastMessage: messageModel.text,
           modified: Timestamp.now(),
           nameAr: myProfile?.name,
           nameEn: myProfile?.name,
@@ -82,7 +85,7 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             modified: Timestamp.now(),
             image: recieverModel.image,
-            lastMessage: messageContoller.text,
+            lastMessage: messageModel.text,
             nameAr: recieverModel.nameAr,
             nameEn: recieverModel.nameEn,
             userId: recieverModel.userId),
@@ -95,7 +98,7 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             modified: Timestamp.now(),
             image: myProfile?.image,
-            lastMessage: messageContoller.text,
+            lastMessage: messageModel.text,
             nameAr: myProfile?.name,
             nameEn: myProfile?.name,
             userId: Constants.userId),
@@ -169,5 +172,45 @@ class MessagesCubit extends Cubit<MessagesState> {
           .then((value) => value.fold((l) {}, (r) {}));
     } on SocketException catch (_) {
     } catch (_) {}
+  }
+
+  ////////////////////////////// upload file ///////////////////////////
+  void uploadFile(MessageResponse messageModel, UserChatsResponse recieverModel) {
+    emit(UploadFileLoadingState());
+
+    firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child("hasadImagesFirebase/${Uri.file(file!.path!).pathSegments.last}")
+        .putFile(File(file!.path!))
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {
+        messageModel.text = value;
+        sendMessage(messageModel, recieverModel);
+        emit(UploadFileSuccessState());
+      }).catchError((error) {
+        emit(UploadFileFaildState());
+      });
+    }).catchError((error) {
+      emit(UploadFileFaildState());
+    });
+  }
+
+  PlatformFile? file;
+// function to pick files
+  Future<void> pickFiles({FileType fileType = FileType.custom}) async {
+    try {
+      await FilePickerService.pickFile(
+        fileType: fileType,
+        allowMultiple: false,
+      ).then((value) {
+        if (value != null) {
+          file = value.files.first;
+          emit(UploadImageSuccess(file: File(file!.path!)));
+        }
+      });
+    } catch (e) {
+      print("....$e");
+      emit(UploadImageError());
+    }
   }
 }

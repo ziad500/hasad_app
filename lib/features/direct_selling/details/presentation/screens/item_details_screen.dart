@@ -57,7 +57,7 @@ class ItemDetailsScreen extends StatelessWidget {
             )
           ],
           child: ItemDetailsBody(
-            floatingActionButton: const ItemRowOfButtons(),
+            floatingActionButton: const DirectSellingRowOfButtons(),
             actions: [
               BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
                 builder: (context, state) {
