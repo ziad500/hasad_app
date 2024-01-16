@@ -21,6 +21,7 @@ class MessageModel {
     return {
       'senderId': senderId,
       'recieverId': recieverId,
+      // ignore: prefer_null_aware_operators
       'created': created != null ? created!.millisecondsSinceEpoch : null,
       'text': text,
       'time': time

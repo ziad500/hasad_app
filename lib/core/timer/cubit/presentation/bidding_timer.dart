@@ -8,7 +8,6 @@ class BiddingTimeObject extends StatelessWidget {
   final Widget Function(String) child;
   @override
   Widget build(BuildContext context) {
-    print(date);
     return BlocProvider(
       create: (context) =>
           TimerrCubit(TimerrInitial(TimerState("", false)))..startTimer(DateTime.parse(date)),

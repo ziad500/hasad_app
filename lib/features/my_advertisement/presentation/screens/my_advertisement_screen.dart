@@ -26,7 +26,7 @@ class MyAdvertisementScreen extends StatelessWidget {
             appbarTitle: LocaleKeys.ads.tr(),
             body: Column(
               children: [
-                SharedTabBar(),
+                const SharedTabBar(),
                 SizedBox(
                   height: 20.h,
                 ),

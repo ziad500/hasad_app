@@ -8,8 +8,7 @@ part of 'bidding_details_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _BiddingDetailsAppServiceClient
-    implements BiddingDetailsAppServiceClient {
+class _BiddingDetailsAppServiceClient implements BiddingDetailsAppServiceClient {
   _BiddingDetailsAppServiceClient(
     this._dio, {
     this.baseUrl,
@@ -22,17 +21,14 @@ class _BiddingDetailsAppServiceClient
   String? baseUrl;
 
   @override
-  Future<DirectSellingDetailsResponse> getBiddingDetails(
-      String? advertisementId) async {
+  Future<DirectSellingDetailsResponse> getBiddingDetails(String? advertisementId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'advertisement_id': advertisementId
-    };
+    final queryParameters = <String, dynamic>{r'advertisement_id': advertisementId};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DirectSellingDetailsResponse>(Options(
+    const Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingDetailsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,

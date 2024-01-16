@@ -30,12 +30,17 @@ class MessagesScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 NetworkImageWidget(
-                  radius: 30,
+                  radius: 20,
                   image: userChatModel?.image,
+                  imageBuilder: (context, imageProvider) => CircleAvatar(
+                      backgroundColor: Colors.white, radius: 20, backgroundImage: imageProvider),
                   errorWidget: CircleAvatar(
                       backgroundColor: Colors.white,
-                      radius: 30,
+                      radius: 20,
                       child: SvgPicture.asset(SVGManager.profile)),
+                ),
+                const SizedBox(
+                  width: 15,
                 ),
                 Expanded(child: TitleWidget(title: userChatModel?.nameEn ?? "", maxlines: 1))
               ],
@@ -60,7 +65,7 @@ class MessagesScreen extends StatelessWidget {
                           .collection('users')
                           .doc(Constants.userId)
                           .collection("chats")
-                          .doc("2")
+                          .doc(userChatModel?.userId)
                           .collection("messages")
                           .orderBy("created", descending: true),
                       itemBuilder: (context, documentSnapshot, index) {

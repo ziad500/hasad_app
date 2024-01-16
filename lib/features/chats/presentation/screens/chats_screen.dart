@@ -26,6 +26,9 @@ class ChatsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: FirestorePagination(
                 isLive: true,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 20,
+                ),
                 query: FirebaseFirestore.instance
                     .collection("users")
                     .doc(Constants.userId)

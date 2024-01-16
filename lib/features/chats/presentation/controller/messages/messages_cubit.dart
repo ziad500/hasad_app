@@ -31,8 +31,9 @@ class MessagesCubit extends Cubit<MessagesState> {
       : super(ChatsInitial());
   static MessagesCubit get(context) => BlocProvider.of(context);
   final TextEditingController messageContoller = TextEditingController();
+
   Future sendMessage(MessageResponse messageModel, UserChatsResponse recieverModel) async {
-    ProfileDataModel? userModel = ProfileCubit.get(navigatorKey.currentContext).profileDataModel;
+    ProfileDataModel? myProfile = ProfileCubit.get(navigatorKey.currentContext).profileDataModel;
     messageModel.text = messageContoller.text;
     //me
     addChat(SendMessageRequest(
@@ -44,7 +45,7 @@ class MessagesCubit extends Cubit<MessagesState> {
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
             created: Timestamp.now(),
-            image: null,
+            image: recieverModel.image,
             isRead: true,
             lastMessage: messageContoller.text,
             modified: Timestamp.now(),
@@ -63,12 +64,12 @@ class MessagesCubit extends Cubit<MessagesState> {
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
           created: Timestamp.now(),
-          image: null,
+          image: myProfile?.image,
           isRead: false,
           lastMessage: messageContoller.text,
           modified: Timestamp.now(),
-          nameAr: userModel?.name,
-          nameEn: userModel?.name,
+          nameAr: myProfile?.name,
+          nameEn: myProfile?.name,
           time: Timestamp.now().toString(),
           userId: recieverModel.userId,
         ),
@@ -93,29 +94,25 @@ class MessagesCubit extends Cubit<MessagesState> {
             isRead: false,
             created: Timestamp.now(),
             modified: Timestamp.now(),
-            image: userModel?.image,
+            image: myProfile?.image,
             lastMessage: messageContoller.text,
-            nameAr: userModel?.name,
-            nameEn: userModel?.name,
+            nameAr: myProfile?.name,
+            nameEn: myProfile?.name,
             userId: Constants.userId),
         userId: recieverModel.userId!));
   }
 
   Future addChat(SendMessageRequest sendMessageRequest) async {
     emit(AddChatLoadingState());
-    try {
-      await addChatUseCase.execude(sendMessageRequest).then((value) => value.fold((l) {
-            emit(AddChatFaildState());
-          }, (r) => emit(AddChatSuccessState())));
-    } catch (e) {}
+    await addChatUseCase.execude(sendMessageRequest).then((value) => value.fold((l) {
+          emit(AddChatFaildState());
+        }, (r) => emit(AddChatSuccessState())));
   }
 
   Future saveMessage(SendMessageRequest sendMessageRequest) async {
     emit(SaveMessageLoadingState());
-    try {
-      await saveMessageUseCase.execude(sendMessageRequest).then((value) =>
-          value.fold((l) => emit(SaveMessageFaildState()), (r) => emit(SaveMessageSuccessState())));
-    } catch (e) {}
+    await saveMessageUseCase.execude(sendMessageRequest).then((value) =>
+        value.fold((l) => emit(SaveMessageFaildState()), (r) => emit(SaveMessageSuccessState())));
   }
 
   //check if message sent

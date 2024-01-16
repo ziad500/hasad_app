@@ -28,6 +28,8 @@ class ChatWidget extends StatelessWidget {
             NetworkImageWidget(
               radius: 30,
               image: userChatModel?.image,
+              imageBuilder: (context, imageProvider) => CircleAvatar(
+                  backgroundColor: Colors.white, radius: 30, backgroundImage: imageProvider),
               errorWidget: CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: 30,

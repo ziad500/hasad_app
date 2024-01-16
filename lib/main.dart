@@ -41,7 +41,7 @@ void main() async {
     startLocale: ARABIC_LOCAL,
     fallbackLocale: ENGLISH_LOCAL,
     child: DevicePreview(
-      builder: (context) => MyApp(), // Wrap your app
+      builder: (context) => const MyApp(), // Wrap your app
     ),
   ));
 }

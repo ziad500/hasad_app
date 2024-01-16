@@ -23,29 +23,26 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
   @override
   Future<InvoiceResponse> directSellingInvoice(String? purchaseId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'purchase_invoice_id': purchaseId
-    };
+    final queryParameters = <String, dynamic>{r'purchase_invoice_id': purchaseId};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'advertisement/direct-selling/purchase-invoice',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'advertisement/direct-selling/purchase-invoice',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
     final value = InvoiceResponse.fromJson(_result.data!);
     return value;
   }
@@ -53,29 +50,26 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
   @override
   Future<InvoiceResponse> biddingInvoice(String? purchaseId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'purchase_invoice_id': purchaseId
-    };
+    final queryParameters = <String, dynamic>{r'purchase_invoice_id': purchaseId};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'advertisement/bidding/purchase-invoice',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'advertisement/bidding/purchase-invoice',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
     final value = InvoiceResponse.fromJson(_result.data!);
     return value;
   }

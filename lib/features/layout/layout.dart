@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/loading_frame.dart';
-import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/features/favorites/presentation/components/add_to_fav_loading.dart';
-import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
 
 import 'components/bottom_navigation_bar.dart';
 import 'components/layout_floating_action_botton.dart';
