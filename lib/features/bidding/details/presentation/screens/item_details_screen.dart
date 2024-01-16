@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_divider.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/bidding_progress.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/bidding_timer_widget.dart';
@@ -16,6 +17,8 @@ import 'package:hasad_app/features/direct_selling/details/presentation/component
 import 'package:hasad_app/features/direct_selling/details/presentation/components/location_widget.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/title_and_price.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/types.dart';
+import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
+import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/date_helper.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
@@ -28,13 +31,32 @@ class BiddingDetailsScreen extends StatelessWidget {
         create: (context) => sl<BiddingDetailsCubit>()..getBiddingList(id),
         child: ItemDetailsBody(
           floatingActionButton: const BiddingRowOfButtons(),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(Icons.favorite_border),
-              ),
+          actions: [
+            BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
+              builder: (context, state) {
+                if (BiddingDetailsCubit.get(context).directSellingDataModel != null) {
+                  return BlocConsumer<FavoritesCubit, FavoritesState>(listener: (context, state) {
+                    if (state is AddToFavoritesListErrorState) {
+                      showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+                    }
+                  }, builder: (context, state) {
+                    FavoritesCubit cubit = FavoritesCubit.get(context);
+                    return InkWell(
+                      onTap: () =>
+                          cubit.addToFav(BiddingDetailsCubit.get(context).directSellingDataModel!),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: CircleAvatar(
+                          backgroundColor: cubit.inFavList(id) ? Colors.red : Colors.white,
+                          child: Icon(Icons.favorite_border,
+                              color: cubit.inFavList(id) ? Colors.white : AppColors.primaryColor),
+                        ),
+                      ),
+                    );
+                  });
+                }
+                return const SizedBox();
+              },
             )
           ],
           body: BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(

@@ -22,6 +22,9 @@ class BiddingRowOfButtons extends StatelessWidget {
     return BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
       buildWhen: (a, b) => false,
       builder: (context, state) {
+        if (state is GetBiddingDetailsLoadingState) {
+          return const SizedBox();
+        }
         BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
         ProfileDataModel? user = cubit.directSellingDataModel?.owner;
 

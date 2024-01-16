@@ -47,9 +47,9 @@ class FirebaseServiceClientImpl implements FirebaseServiceClient {
             UserChatsResponse(
                     isRead: sendMessageRequest.recieverModel.isRead,
                     created: UserChatsResponse.fromSnapshot(value).created,
-                    image: UserChatsResponse.fromSnapshot(value).image,
-                    nameAr: UserChatsResponse.fromSnapshot(value).nameAr,
-                    nameEn: UserChatsResponse.fromSnapshot(value).nameEn,
+                    image: sendMessageRequest.recieverModel.image,
+                    nameAr: sendMessageRequest.recieverModel.nameAr,
+                    nameEn: sendMessageRequest.recieverModel.nameEn,
                     userId: UserChatsResponse.fromSnapshot(value).userId,
                     lastMessage: sendMessageRequest.messageModel.text,
                     modified: sendMessageRequest.recieverModel.modified)

@@ -6,6 +6,7 @@ import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/loading_frame.dart';
 import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/done_request_screen.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/core/func/payment_faild_dialog.dart';
@@ -18,7 +19,9 @@ import 'package:hasad_app/features/direct_selling/details/presentation/component
 import 'package:hasad_app/features/direct_selling/details/presentation/components/types.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/user_row.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
+import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
+import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
@@ -55,13 +58,32 @@ class ItemDetailsScreen extends StatelessWidget {
           ],
           child: ItemDetailsBody(
             floatingActionButton: const ItemRowOfButtons(),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.favorite_border),
-                ),
+            actions: [
+              BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
+                builder: (context, state) {
+                  if (DirectSellingDetailsCubit.get(context).directSellingDataModel != null) {
+                    return BlocConsumer<FavoritesCubit, FavoritesState>(listener: (context, state) {
+                      if (state is AddToFavoritesListErrorState) {
+                        showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+                      }
+                    }, builder: (context, state) {
+                      FavoritesCubit cubit = FavoritesCubit.get(context);
+                      return InkWell(
+                        onTap: () => cubit.addToFav(
+                            DirectSellingDetailsCubit.get(context).directSellingDataModel!),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: CircleAvatar(
+                            backgroundColor: cubit.inFavList(id) ? Colors.red : Colors.white,
+                            child: Icon(Icons.favorite_border,
+                                color: cubit.inFavList(id) ? Colors.white : AppColors.primaryColor),
+                          ),
+                        ),
+                      );
+                    });
+                  }
+                  return const SizedBox();
+                },
               )
             ],
             body: BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
