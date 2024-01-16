@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/network_info.dart';
@@ -29,22 +30,23 @@ class MessagesCubit extends Cubit<MessagesState> {
       this.addChatUseCase, this.networkInfo)
       : super(ChatsInitial());
   static MessagesCubit get(context) => BlocProvider.of(context);
-
+  final TextEditingController messageContoller = TextEditingController();
   Future sendMessage(MessageResponse messageModel, UserChatsResponse recieverModel) async {
     ProfileDataModel? userModel = ProfileCubit.get(navigatorKey.currentContext).profileDataModel;
+    messageModel.text = messageContoller.text;
     //me
     addChat(SendMessageRequest(
         messageModel: MessageResponse(
             created: Timestamp.now(),
             recieverId: recieverModel.userId,
             senderId: Constants.userId,
-            text: messageModel.text,
+            text: messageContoller.text,
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
             created: Timestamp.now(),
             image: null,
             isRead: true,
-            lastMessage: messageModel.text,
+            lastMessage: messageContoller.text,
             modified: Timestamp.now(),
             nameAr: recieverModel.nameEn,
             nameEn: recieverModel.nameEn,
@@ -57,13 +59,13 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             recieverId: Constants.userId,
             senderId: recieverModel.userId,
-            text: messageModel.text,
+            text: messageContoller.text,
             time: Timestamp.now().toString()),
         recieverModel: UserChatsResponse(
           created: Timestamp.now(),
           image: null,
           isRead: false,
-          lastMessage: messageModel.text,
+          lastMessage: messageContoller.text,
           modified: Timestamp.now(),
           nameAr: userModel?.name,
           nameEn: userModel?.name,
@@ -79,7 +81,7 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             modified: Timestamp.now(),
             image: recieverModel.image,
-            lastMessage: messageModel.text,
+            lastMessage: messageContoller.text,
             nameAr: recieverModel.nameAr,
             nameEn: recieverModel.nameEn,
             userId: recieverModel.userId),
@@ -92,7 +94,7 @@ class MessagesCubit extends Cubit<MessagesState> {
             created: Timestamp.now(),
             modified: Timestamp.now(),
             image: userModel?.image,
-            lastMessage: messageModel.text,
+            lastMessage: messageContoller.text,
             nameAr: userModel?.name,
             nameEn: userModel?.name,
             userId: Constants.userId),

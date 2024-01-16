@@ -35,7 +35,8 @@ class DefaultFormField extends StatelessWidget {
       this.horizontalPadding = 40,
       this.label,
       this.borderRadius = 30,
-      this.hintColor});
+      this.hintColor,
+      this.suffixWidth});
   final TextEditingController controller;
   final String? hint;
   final int? maxLines;
@@ -65,6 +66,7 @@ class DefaultFormField extends StatelessWidget {
   final String? label;
   final Color? hintColor;
   final double borderRadius;
+  final double? suffixWidth;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -128,8 +130,8 @@ class DefaultFormField extends StatelessWidget {
               prefixIconConstraints:
                   BoxConstraints(maxHeight: 25, maxWidth: 50.w, minHeight: 25, minWidth: 50.w),
               suffixIcon: suffix == null ? null : InkWell(onTap: onSuffixTap, child: suffix),
-              suffixIconConstraints:
-                  BoxConstraints(maxHeight: 25, maxWidth: 50.w, minHeight: 25, minWidth: 50.w),
+              suffixIconConstraints: BoxConstraints(
+                  maxHeight: 25, maxWidth: suffixWidth ?? 50.w, minHeight: 25, minWidth: 50.w),
 
               //border party!
 
