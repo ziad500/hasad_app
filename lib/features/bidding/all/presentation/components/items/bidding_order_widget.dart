@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
-import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model.dart';
+import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -13,15 +14,15 @@ import 'package:hasad_app/utils/app_decorations.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
-class DirectSellingOrderWidget extends StatelessWidget {
-  const DirectSellingOrderWidget({super.key, required this.directSellingOrderModel});
-  final DirectSellingOrderModel directSellingOrderModel;
+class BiddingOrderWidget extends StatelessWidget {
+  const BiddingOrderWidget({super.key, required this.biddingOrderModel});
+  final BiddingOrderModel biddingOrderModel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Navigator.pushNamed(context, Routes.invoiceRoutes, arguments: {
-        "id": directSellingOrderModel.purchaseInvoiceId.toString(),
+        "id": biddingOrderModel.purchaseInvoiceId.toString(),
       }),
       child: Container(
         width: double.maxFinite,
@@ -36,19 +37,22 @@ class DirectSellingOrderWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TitleWidget(title: isEmpty(directSellingOrderModel.title)),
-                      SubTitleWidget(subTitle: isEmpty(directSellingOrderModel.description))
+                      TitleWidget(title: isEmpty(biddingOrderModel.title)),
+                      // SubTitleWidget(subTitle: isEmpty(biddingOrderModel.description))
                     ],
                   ),
                 ),
-                SvgPicture.asset(
-                  SVGManager.star,
-                  height: 25.sp,
+                Column(
+                  children: [
+                    SvgPicture.asset(
+                      SVGManager.star,
+                      height: 25.sp,
+                    ),
+                    const SizedBox(height: 5),
+                    SubTitleWidget(subTitle: LocaleKeys.biddingWin.tr())
+                  ],
                 ),
               ],
-            ),
-            SizedBox(
-              height: 10.h,
             ),
             Row(
               children: [
@@ -58,7 +62,7 @@ class DirectSellingOrderWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultText(
-                      text: "تم الطلب:",
+                      text: "${LocaleKeys.donefinish.tr()} :",
                       textStyle: Theme.of(context)
                           .textTheme
                           .titleSmall
@@ -69,20 +73,36 @@ class DirectSellingOrderWidget extends StatelessWidget {
                     ),
                     Flexible(
                       child: DefaultText(
-                        text: isEmpty(directSellingOrderModel.createdAt),
+                        text: isEmpty(biddingOrderModel.expiryTime),
                         textStyle: Theme.of(context).textTheme.bodySmall,
                       ),
                     )
                   ],
                 )),
-                const SizedBox(
-                  width: 15,
-                ),
-                DefaultText(
-                  text: " ${directSellingOrderModel.price} ${LocaleKeys.saudiRiyal.tr()}",
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: DefaultText(
+                  text: " ${biddingOrderModel.price} ${LocaleKeys.saudiRiyal.tr()}",
                   textStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.darkBlue),
-                )
+                )),
+                DefaultButton(
+                    height: 35,
+                    width: 100.w,
+                    textSize: 12.sp,
+                    color: biddingOrderModel.biddingDate == null
+                        ? AppColors.red
+                        : AppColors.primaryColor,
+                    buttonName: biddingOrderModel.biddingDate == null
+                        ? LocaleKeys.pleasePay.tr()
+                        : LocaleKeys.donePayment.tr(),
+                    buttonFunction: () {})
               ],
             )
           ],

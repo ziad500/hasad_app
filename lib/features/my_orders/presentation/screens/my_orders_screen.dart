@@ -6,8 +6,8 @@ import 'package:hasad_app/common/default/loading_frame.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/shared_tabbar.dart';
 import 'package:hasad_app/core/di.dart';
-import 'package:hasad_app/features/bidding/all/presentation/components/my_bidding_list.dart';
-import 'package:hasad_app/features/bidding/all/presentation/controller/my_bidding_list/cubit/my_bidding_list_cubit.dart';
+import 'package:hasad_app/features/bidding/all/presentation/components/bidding_orders.dart';
+import 'package:hasad_app/features/bidding/all/presentation/controller/orders/cubit/bidding_orders_cubit.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/components/direct_selling_orders.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/orders/cubit/direct_selling_orders_cubit.dart';
 import 'package:hasad_app/features/favorites/presentation/components/add_to_fav_loading.dart';
@@ -33,10 +33,10 @@ class MyOrdersScreen extends StatelessWidget {
                 Expanded(
                     child: TabBarView(children: [
                   BlocProvider(
-                    create: (context) => sl<MyBiddingListCubit>()..getBiddingList(),
+                    create: (context) => sl<BiddingOrdersCubit>()..getBiddingList(),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: MyBiddingListView(),
+                      child: BiddingOrdersListView(),
                     ),
                   ),
                   BlocProvider(

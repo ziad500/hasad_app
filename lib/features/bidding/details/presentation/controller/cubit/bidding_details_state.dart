@@ -16,3 +16,15 @@ final class GetBiddingDetailsErrorState extends BiddingDetailsState {
 }
 
 final class ChangeIndexSliderstate extends BiddingDetailsState {}
+
+final class BuyBiddingLoadingState extends BiddingDetailsState {}
+
+final class BuyBiddingSuccessState extends BiddingDetailsState {
+  final SuccessModel successModel;
+  BuyBiddingSuccessState(this.successModel);
+}
+
+final class BuyBiddingErrorState extends BiddingDetailsState {
+  final String error;
+  const BuyBiddingErrorState(this.error);
+}

@@ -1,3 +1,4 @@
+import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 
 import 'package:hasad_app/features/direct_selling/all/data/network/requests.dart';
@@ -10,4 +11,6 @@ abstract class BiddingListRepository {
       GetMainListRequest getMainListRequest, String type);
 
   Future<Either<Failure, DirectSellingListModel>> myBiddingList(String? page);
+
+  Future<Either<Failure, BiddingOrdersListModel>> biddingOrdersList(String? page);
 }

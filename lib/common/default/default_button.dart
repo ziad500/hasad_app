@@ -20,7 +20,9 @@ class DefaultButton extends StatelessWidget {
       this.icon,
       this.widget,
       this.isSecondary = false,
-      this.loadingColor})
+      this.loadingColor,
+      this.width,
+      this.textSize})
       : super(key: key);
 
   final String buttonName;
@@ -35,14 +37,17 @@ class DefaultButton extends StatelessWidget {
   final Widget? icon;
   final bool iconLeft;
   final double borderRAdius;
+  final double? width;
   final Widget? widget;
   final bool isSecondary;
   final bool isLoading;
   final Color? loadingColor;
+  final double? textSize;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
+      width: width,
       child: MaterialButton(
         splashColor: Colors.grey.withOpacity(0.1),
         elevation: 0,
@@ -80,7 +85,8 @@ class DefaultButton extends StatelessWidget {
                             ],
                             Text(buttonName,
                                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: isSecondary ? AppColors.textGrey : textColor)),
+                                    color: isSecondary ? AppColors.textGrey : textColor,
+                                    fontSize: textSize)),
                             if (icon != null && !iconLeft) ...[
                               SizedBox(
                                 width: 30.w,

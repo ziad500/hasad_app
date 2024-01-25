@@ -142,7 +142,13 @@
 "oldPassword": "كلمة المرور القديمة",
 "changePassword": "تغيير كلمة المرور",
 "editProfile": "تعديل الملف الشخصي",
-"upload": "رفع"
+"upload": "رفع",
+"totalPrice":"السعر الكلي",
+"tax":"ضريبة",
+"donefinish":"تم الانتهاء",
+"donePayment":"تم الدفع",
+"pleasePay":"يرجي الدفع",
+"biddingWin":"تم الفوز بالمذاد"
 
 
 

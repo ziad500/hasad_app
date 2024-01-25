@@ -145,7 +145,13 @@
 "oldPassword": "Old Password",
 "changePassword": "Change Password",
 "editProfile": "Edit Profile",
-"upload": "Upload"
+"upload": "Upload",
+"totalPrice":"Total price",
+"tax":"Tax",
+"donefinish": "Completed",
+"donePayment": "Payment completed",
+"pleasePay": "Please pay",
+"biddingWin": "Bid won"
 
    
 }

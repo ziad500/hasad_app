@@ -1,6 +1,6 @@
-/* import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model.dart';
-import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_orders_usecase.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_orders_usecase.dart';
 
 part 'bidding_orders_state.dart';
 
@@ -59,4 +59,3 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
     return nextPageNumber;
   }
 }
- */

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
+import 'package:hasad_app/common/show_tax_dialog.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
@@ -43,7 +44,10 @@ class BiddingRowOfButtons extends StatelessWidget {
               Expanded(
                   child: DefaultButton(
                 buttonName: LocaleKeys.buyNow.tr(),
-                buttonFunction: () {},
+                buttonFunction: () => showTaxBottomSheet(context,
+                    price: cubit.directSellingDataModel?.purchasingPrice,
+                    totalPrice: cubit.directSellingDataModel?.priceAfterTax,
+                    buttonFunction: () => cubit.buyBidding()),
                 textColor: Colors.white,
                 color: AppColors.darkBlue,
               )),

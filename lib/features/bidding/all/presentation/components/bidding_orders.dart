@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/core/pagenation/base_list_view.dart';
-import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model.dart';
-import 'package:hasad_app/features/direct_selling/all/presentation/components/items/order_item.dart';
-import 'package:hasad_app/features/direct_selling/all/presentation/controller/orders/cubit/direct_selling_orders_cubit.dart';
+import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
+import 'package:hasad_app/features/bidding/all/presentation/components/items/bidding_order_widget.dart';
+import 'package:hasad_app/features/bidding/all/presentation/controller/orders/cubit/bidding_orders_cubit.dart';
 
 ///pagenated list view to fetch all the reports
 ///the page contains 8 reports , the '_ReportsListViewState' will has a 'ScrollController' variable
@@ -23,42 +23,40 @@ class _BiddingOrdersListViewState extends State<BiddingOrdersListView> {
   final controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    var cubit = BlocProvider.of<DirectSellingOrdersCubit>(context);
+    var cubit = BlocProvider.of<BiddingOrdersCubit>(context);
 
-    return BlocBuilder<DirectSellingOrdersCubit, DirectSellingOrdersState>(
-        builder: (context, state) {
-      //pass the cubit ,states and items type '<DirectSellingOrdersCubit, DirectSellingListDartState, ReportModel>'
+    return BlocBuilder<BiddingOrdersCubit, BiddingOrdersState>(builder: (context, state) {
+      //pass the cubit ,states and items type '<BiddingOrdersCubit, BiddingListDartState, ReportModel>'
       String? getError() {
-        if (state is GetDirectSellingOrdersListErrorState) {
+        if (state is GetBiddingOrdersListErrorState) {
           return state.error;
         }
         return null;
       }
 
-      return PagenatedListView<DirectSellingOrdersCubit, DirectSellingOrdersState,
-          DirectSellingOrderModel>(
+      return PagenatedListView<BiddingOrdersCubit, BiddingOrdersState, BiddingOrderModel>(
         useExpanded: widget.expanded,
         //start listening to fetch the next page when scroll to .7 total height
         init: () => controller.addListener(() async {
           var percentageOftotalLength = 0.7 * controller.position.maxScrollExtent;
           var currentLength = controller.position.pixels;
           if (currentLength >= percentageOftotalLength &&
-              cubit.state is! GetDirectSellingOrdersListPaginationLoadingState) {
-            await cubit.getDirectSellingList();
+              cubit.state is! GetBiddingOrdersListPaginationLoadingState) {
+            await cubit.getBiddingList();
           }
         }),
         controller: controller,
         //build this widget for the cureent screen
         childBuilder: (index) =>
-            DirectSellingOrderWidget(directSellingOrderModel: cubit.directSellingOrders[index]),
+            BiddingOrderWidget(biddingOrderModel: cubit.directSellingOrders[index]),
         items: cubit.directSellingOrders,
         //indicates that you do not has any other pages to fetch
-        allCaught: state is DirectSellingOrdersListAllCaughtState,
+        allCaught: state is BiddingOrdersListAllCaughtState,
         //indicates that you we currently fetching the next page
-        isLoading: state is GetDirectSellingOrdersListPaginationLoadingState,
-        mainLoading: state is GetDirectSellingOrdersListLoadingState,
+        isLoading: state is GetBiddingOrdersListPaginationLoadingState,
+        mainLoading: state is GetBiddingOrdersListLoadingState,
         error: getError(),
-        isError: state is GetDirectSellingOrdersListErrorState,
+        isError: state is GetBiddingOrdersListErrorState,
       );
     });
   }

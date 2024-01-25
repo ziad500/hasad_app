@@ -5,13 +5,16 @@ import 'package:hasad_app/features/bidding/all/data/network/bidding_list_api.dar
 import 'package:hasad_app/features/bidding/all/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/bidding/all/domain/repository/repo.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_list_usecase.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_orders_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_my_bidding_list_usecase.dart';
 import 'package:hasad_app/features/bidding/all/presentation/controller/cubit/bidding_list_dart_cubit.dart';
 import 'package:hasad_app/features/bidding/all/presentation/controller/my_bidding_list/cubit/my_bidding_list_cubit.dart';
+import 'package:hasad_app/features/bidding/all/presentation/controller/orders/cubit/bidding_orders_cubit.dart';
 import 'package:hasad_app/features/bidding/details/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/bidding/details/data/network/bidding_details_api.dart';
 import 'package:hasad_app/features/bidding/details/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/bidding/details/domain/repository/repo.dart';
+import 'package:hasad_app/features/bidding/details/domain/use_cases/buy_bidding_advertisement_usecase.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/get_bidding_details_usecase.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/categories/data/data_source/remote_data_source.dart';
@@ -388,6 +391,9 @@ iniBiddingList() async {
   if (!GetIt.I.isRegistered<MyBiddingListCubit>()) {
     sl.registerFactory<MyBiddingListCubit>(() => MyBiddingListCubit(sl.call()));
   }
+  if (!GetIt.I.isRegistered<BiddingOrdersCubit>()) {
+    sl.registerFactory<BiddingOrdersCubit>(() => BiddingOrdersCubit(sl.call()));
+  }
 
   //app service client instance
   if (!GetIt.I.isRegistered<BiddingListAppServiceClient>()) {
@@ -414,12 +420,16 @@ iniBiddingList() async {
   if (!GetIt.I.isRegistered<GetMyBiddingListUseCase>()) {
     sl.registerLazySingleton<GetMyBiddingListUseCase>(() => GetMyBiddingListUseCase(sl.call()));
   }
+  if (!GetIt.I.isRegistered<GetBiddingOrdersListUseCase>()) {
+    sl.registerLazySingleton<GetBiddingOrdersListUseCase>(
+        () => GetBiddingOrdersListUseCase(sl.call()));
+  }
 }
 
 iniBiddingDetails() async {
   //cubit
   if (!GetIt.I.isRegistered<BiddingDetailsCubit>()) {
-    sl.registerFactory<BiddingDetailsCubit>(() => BiddingDetailsCubit(sl.call()));
+    sl.registerFactory<BiddingDetailsCubit>(() => BiddingDetailsCubit(sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -445,6 +455,10 @@ iniBiddingDetails() async {
   //usecase
   if (!GetIt.I.isRegistered<GetBiddingDetailsUseCase>()) {
     sl.registerLazySingleton<GetBiddingDetailsUseCase>(() => GetBiddingDetailsUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<BuyBiddingAdverticseUseCase>()) {
+    sl.registerLazySingleton<BuyBiddingAdverticseUseCase>(
+        () => BuyBiddingAdverticseUseCase(sl.call()));
   }
 }
 
