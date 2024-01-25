@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
@@ -104,3 +105,21 @@ double calculateTimePercentage(String startStr, String endStr) {
   double percentage = (timePassedInHours / totalTimeInHours) * 100;
   return percentage;
 }
+
+String fullFormatTimestamp(DateTime timestamp) {
+  String formattedDate = DateFormat('dd-MM-yyyy . hh:mm a').format(timestamp);
+  return formattedDate;
+}
+
+String timeFormatTimestamp(DateTime timestamp) {
+  String formattedDate = DateFormat('hh:mm a').format(timestamp);
+  return formattedDate;
+}
+
+String dateFormatTimestamp(DateTime timestamp) {
+  String formattedDate = DateFormat('dd-MM-yyyy').format(timestamp);
+  return formattedDate;
+}
+
+DateTime getDateTimeFromTimeStamp(Timestamp timestamp) =>
+    DateTime.fromMillisecondsSinceEpoch(timestamp.seconds * 1000);
