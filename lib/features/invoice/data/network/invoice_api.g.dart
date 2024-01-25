@@ -21,7 +21,8 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
   String? baseUrl;
 
   @override
-  Future<InvoiceResponse> directSellingInvoice(String? purchaseId) async {
+  Future<DirectSellingInvoiceResponse> directSellingInvoice(
+      String? purchaseId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'purchase_invoice_id': purchaseId
@@ -29,8 +30,8 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingInvoiceResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -46,12 +47,12 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = InvoiceResponse.fromJson(_result.data!);
+    final value = DirectSellingInvoiceResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<InvoiceResponse> biddingInvoice(String? purchaseId) async {
+  Future<BiddingInvoiceResponse> biddingInvoice(String? purchaseId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'purchase_invoice_id': purchaseId
@@ -59,15 +60,15 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<InvoiceResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BiddingInvoiceResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'advertisement/bidding/purchase-invoice',
+              'advertisement/auctions/purchase-invoice',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -76,7 +77,7 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = InvoiceResponse.fromJson(_result.data!);
+    final value = BiddingInvoiceResponse.fromJson(_result.data!);
     return value;
   }
 

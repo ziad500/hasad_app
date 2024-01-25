@@ -21,7 +21,7 @@ class BiddingOrderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.invoiceRoutes, arguments: {
+      onTap: () => Navigator.pushNamed(context, Routes.biddingInvoiceScreen, arguments: {
         "id": biddingOrderModel.purchaseInvoiceId.toString(),
       }),
       child: Container(

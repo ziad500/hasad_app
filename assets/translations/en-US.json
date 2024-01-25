@@ -151,7 +151,10 @@
 "donefinish": "Completed",
 "donePayment": "Payment completed",
 "pleasePay": "Please pay",
-"biddingWin": "Bid won"
+"biddingWin": "Bid won",
+"orderDetails": "Order Details",
+"invoiceNumber": "Invoice Number",
+"date": "Date"
 
    
 }

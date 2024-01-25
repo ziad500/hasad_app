@@ -10,7 +10,7 @@ class GetDirectSellingInvoiceUseCase {
     this._repository,
   );
 
-  Future<Either<Failure, InvoiceModel>> execude(String purchaseId) async {
+  Future<Either<Failure, DirectSelligInvoiceModel>> execude(String purchaseId) async {
     return await _repository.directSellingInvoice(purchaseId);
   }
 }

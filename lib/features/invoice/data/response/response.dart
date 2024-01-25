@@ -5,24 +5,25 @@ import 'package:hasad_app/features/direct_selling/all/data/response/response.dar
 part 'response.g.dart';
 
 @JsonSerializable()
-class InvoiceResponse {
+class DirectSellingInvoiceResponse {
   @JsonKey(name: "status")
   bool? status;
   @JsonKey(name: "message")
   String? message;
   @JsonKey(name: "data")
-  InvoiceDataResponse? data;
+  DirectSellingInvoiceDataResponse? data;
 
-  InvoiceResponse({this.status, this.message, this.data});
+  DirectSellingInvoiceResponse({this.status, this.message, this.data});
 
   // from json
-  factory InvoiceResponse.fromJson(Map<String, dynamic> json) => _$InvoiceResponseFromJson(json);
+  factory DirectSellingInvoiceResponse.fromJson(Map<String, dynamic> json) =>
+      _$DirectSellingInvoiceResponseFromJson(json);
   // to json
-  Map<String, dynamic> toJson() => _$InvoiceResponseToJson(this);
+  Map<String, dynamic> toJson() => _$DirectSellingInvoiceResponseToJson(this);
 }
 
 @JsonSerializable()
-class InvoiceDataResponse {
+class DirectSellingInvoiceDataResponse {
   @JsonKey(name: "invoice_number")
   String? invoiceNumber;
   @JsonKey(name: "subtotal")
@@ -32,8 +33,8 @@ class InvoiceDataResponse {
   @JsonKey(name: "total")
   num? total;
   @JsonKey(name: "advertisement")
-  InvoiceadvertisementResponse? advertisement;
-  InvoiceDataResponse({
+  DirectSellingInvoiceadvertisementResponse? advertisement;
+  DirectSellingInvoiceDataResponse({
     this.invoiceNumber,
     this.subtotal,
     this.tax,
@@ -42,14 +43,14 @@ class InvoiceDataResponse {
   });
 
   // from json
-  factory InvoiceDataResponse.fromJson(Map<String, dynamic> json) =>
-      _$InvoiceDataResponseFromJson(json);
+  factory DirectSellingInvoiceDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$DirectSellingInvoiceDataResponseFromJson(json);
   // to json
-  Map<String, dynamic> toJson() => _$InvoiceDataResponseToJson(this);
+  Map<String, dynamic> toJson() => _$DirectSellingInvoiceDataResponseToJson(this);
 }
 
 @JsonSerializable()
-class InvoiceadvertisementResponse {
+class DirectSellingInvoiceadvertisementResponse {
   @JsonKey(name: "id")
   int? id;
   @JsonKey(name: "advertisement_type_id")
@@ -68,7 +69,7 @@ class InvoiceadvertisementResponse {
   num? price;
   @JsonKey(name: "images")
   List<String>? images;
-  InvoiceadvertisementResponse({
+  DirectSellingInvoiceadvertisementResponse({
     this.id,
     this.advertisementTypeId,
     this.title,
@@ -81,8 +82,8 @@ class InvoiceadvertisementResponse {
   });
 
   // from json
-  factory InvoiceadvertisementResponse.fromJson(Map<String, dynamic> json) =>
-      _$InvoiceadvertisementResponseFromJson(json);
+  factory DirectSellingInvoiceadvertisementResponse.fromJson(Map<String, dynamic> json) =>
+      _$DirectSellingInvoiceadvertisementResponseFromJson(json);
   // to json
-  Map<String, dynamic> toJson() => _$InvoiceadvertisementResponseToJson(this);
+  Map<String, dynamic> toJson() => _$DirectSellingInvoiceadvertisementResponseToJson(this);
 }

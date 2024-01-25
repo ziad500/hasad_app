@@ -6,7 +6,8 @@ part of 'orders_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BiddingOrdersListResponse _$BiddingOrdersListResponseFromJson(Map<String, dynamic> json) =>
+BiddingOrdersListResponse _$BiddingOrdersListResponseFromJson(
+        Map<String, dynamic> json) =>
     BiddingOrdersListResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
@@ -15,10 +16,12 @@ BiddingOrdersListResponse _$BiddingOrdersListResponseFromJson(Map<String, dynami
           .toList(),
       pagination: json['pagination'] == null
           ? null
-          : PaginationResponse.fromJson(json['pagination'] as Map<String, dynamic>),
+          : PaginationResponse.fromJson(
+              json['pagination'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$BiddingOrdersListResponseToJson(BiddingOrdersListResponse instance) =>
+Map<String, dynamic> _$BiddingOrdersListResponseToJson(
+        BiddingOrdersListResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
@@ -26,7 +29,8 @@ Map<String, dynamic> _$BiddingOrdersListResponseToJson(BiddingOrdersListResponse
       'pagination': instance.pagination,
     };
 
-BiddingOrderResponse _$BiddingOrderResponseFromJson(Map<String, dynamic> json) =>
+BiddingOrderResponse _$BiddingOrderResponseFromJson(
+        Map<String, dynamic> json) =>
     BiddingOrderResponse(
       purchaseInvoiceId: json['purchase_invoice_id'] as int?,
       advertisementId: json['advertisement_id'] as String?,
@@ -39,7 +43,8 @@ BiddingOrderResponse _$BiddingOrderResponseFromJson(Map<String, dynamic> json) =
       paymentdate: json['payment_date'] as String?,
     );
 
-Map<String, dynamic> _$BiddingOrderResponseToJson(BiddingOrderResponse instance) =>
+Map<String, dynamic> _$BiddingOrderResponseToJson(
+        BiddingOrderResponse instance) =>
     <String, dynamic>{
       'purchase_invoice_id': instance.purchaseInvoiceId,
       'advertisement_id': instance.advertisementId,

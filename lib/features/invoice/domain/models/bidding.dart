@@ -1,20 +1,19 @@
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 
-class DirectSelligInvoiceModel {
+class BiddingInvoiceModel {
   bool? status;
   String? message;
-  DirectSellingInvoiceDataModel? data;
-
-  DirectSelligInvoiceModel(this.status, this.message, this.data);
+  BiddingInvoiceDataModel? data;
+  BiddingInvoiceModel(this.status, this.message, this.data);
 }
 
-class DirectSellingInvoiceDataModel {
+class BiddingInvoiceDataModel {
   String? invoiceNumber;
   num? subtotal;
   num? tax;
   num? total;
-  DirectSellingInvoiceadvertisementModel? advertisement;
-  DirectSellingInvoiceDataModel(
+  BiddingInvoiceadvertisementModel? advertisement;
+  BiddingInvoiceDataModel(
     this.invoiceNumber,
     this.subtotal,
     this.tax,
@@ -23,7 +22,7 @@ class DirectSellingInvoiceDataModel {
   );
 }
 
-class DirectSellingInvoiceadvertisementModel {
+class BiddingInvoiceadvertisementModel {
   int? id;
   String? advertisementTypeId;
   String? title;
@@ -31,9 +30,14 @@ class DirectSellingInvoiceadvertisementModel {
   LocationModel? region;
   LocationModel? city;
   LocationModel? district;
-  num? price;
+  num? purchasingPrice;
+  num? auctionPrice;
+  String? biddingDate;
+  String? expiryTime;
+  String? closed;
+  num? numberOfAuctions;
   List<String>? images;
-  DirectSellingInvoiceadvertisementModel(
+  BiddingInvoiceadvertisementModel(
     this.id,
     this.advertisementTypeId,
     this.title,
@@ -41,7 +45,12 @@ class DirectSellingInvoiceadvertisementModel {
     this.region,
     this.city,
     this.district,
-    this.price,
+    this.purchasingPrice,
+    this.auctionPrice,
+    this.biddingDate,
+    this.expiryTime,
+    this.closed,
+    this.numberOfAuctions,
     this.images,
   );
 }

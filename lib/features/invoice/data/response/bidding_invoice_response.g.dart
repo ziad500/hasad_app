@@ -1,45 +1,45 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'response.dart';
+part of 'bidding_invoice_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DirectSellingInvoiceResponse _$DirectSellingInvoiceResponseFromJson(
+BiddingInvoiceResponse _$BiddingInvoiceResponseFromJson(
         Map<String, dynamic> json) =>
-    DirectSellingInvoiceResponse(
+    BiddingInvoiceResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
       data: json['data'] == null
           ? null
-          : DirectSellingInvoiceDataResponse.fromJson(
+          : BiddingInvoiceDataResponse.fromJson(
               json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$DirectSellingInvoiceResponseToJson(
-        DirectSellingInvoiceResponse instance) =>
+Map<String, dynamic> _$BiddingInvoiceResponseToJson(
+        BiddingInvoiceResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
       'data': instance.data,
     };
 
-DirectSellingInvoiceDataResponse _$DirectSellingInvoiceDataResponseFromJson(
+BiddingInvoiceDataResponse _$BiddingInvoiceDataResponseFromJson(
         Map<String, dynamic> json) =>
-    DirectSellingInvoiceDataResponse(
+    BiddingInvoiceDataResponse(
       invoiceNumber: json['invoice_number'] as String?,
       subtotal: json['subtotal'] as num?,
       tax: json['tax'] as num?,
       total: json['total'] as num?,
       advertisement: json['advertisement'] == null
           ? null
-          : DirectSellingInvoiceadvertisementResponse.fromJson(
+          : BiddingInvoiceadvertisementResponse.fromJson(
               json['advertisement'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$DirectSellingInvoiceDataResponseToJson(
-        DirectSellingInvoiceDataResponse instance) =>
+Map<String, dynamic> _$BiddingInvoiceDataResponseToJson(
+        BiddingInvoiceDataResponse instance) =>
     <String, dynamic>{
       'invoice_number': instance.invoiceNumber,
       'subtotal': instance.subtotal,
@@ -48,10 +48,9 @@ Map<String, dynamic> _$DirectSellingInvoiceDataResponseToJson(
       'advertisement': instance.advertisement,
     };
 
-DirectSellingInvoiceadvertisementResponse
-    _$DirectSellingInvoiceadvertisementResponseFromJson(
-            Map<String, dynamic> json) =>
-        DirectSellingInvoiceadvertisementResponse(
+BiddingInvoiceadvertisementResponse
+    _$BiddingInvoiceadvertisementResponseFromJson(Map<String, dynamic> json) =>
+        BiddingInvoiceadvertisementResponse(
           id: json['id'] as int?,
           advertisementTypeId: json['advertisement_type_id'] as String?,
           title: json['title'] as String?,
@@ -67,14 +66,19 @@ DirectSellingInvoiceadvertisementResponse
               ? null
               : LocationResponse.fromJson(
                   json['district'] as Map<String, dynamic>),
-          price: json['price'] as num?,
+          purchasingPrice: json['purchasing_price'] as num?,
+          auctionPrice: json['auction_price'] as num?,
+          biddingDate: json['bidding_date'] as String?,
+          expiryTime: json['expiry_time'] as String?,
+          closed: json['closed'] as String?,
+          numberOfAuctions: json['number_of_auctions'] as num?,
           images: (json['images'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList(),
         );
 
-Map<String, dynamic> _$DirectSellingInvoiceadvertisementResponseToJson(
-        DirectSellingInvoiceadvertisementResponse instance) =>
+Map<String, dynamic> _$BiddingInvoiceadvertisementResponseToJson(
+        BiddingInvoiceadvertisementResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'advertisement_type_id': instance.advertisementTypeId,
@@ -83,6 +87,11 @@ Map<String, dynamic> _$DirectSellingInvoiceadvertisementResponseToJson(
       'region': instance.region,
       'city': instance.city,
       'district': instance.district,
-      'price': instance.price,
+      'purchasing_price': instance.purchasingPrice,
+      'auction_price': instance.auctionPrice,
+      'bidding_date': instance.biddingDate,
+      'expiry_time': instance.expiryTime,
+      'closed': instance.closed,
+      'number_of_auctions': instance.numberOfAuctions,
       'images': instance.images,
     };

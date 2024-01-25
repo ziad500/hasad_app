@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/features/invoice/domain/models/bidding.dart';
 import 'package:hasad_app/features/invoice/domain/models/invoice_model.dart';
 import 'package:hasad_app/features/invoice/domain/use_cases/bidding_invoice_usecase.dart';
 import 'package:hasad_app/features/invoice/domain/use_cases/direct_selling_invoice_usecase.dart';
@@ -11,7 +12,7 @@ class InvoiceCubit extends Cubit<InvoiceState> {
   InvoiceCubit(this._getDirectSellingInvoiceUseCase, this._getBiddingInvoiceUseCase)
       : super(InvoiceInitial());
   static InvoiceCubit get(context) => BlocProvider.of(context);
-  InvoiceModel? invoiceModel;
+  DirectSelligInvoiceModel? invoiceModel;
   Future<void> getDirectSellingInvoice(String id) async {
     emit(GetDirectSellingLoadingState());
     await _getDirectSellingInvoiceUseCase
@@ -22,9 +23,14 @@ class InvoiceCubit extends Cubit<InvoiceState> {
             }));
   }
 
+  BiddingInvoiceModel? biddingInvoiceModel;
   Future<void> getBiddingInvoice(String id) async {
     emit(GetBiddingLoadingState());
-    await _getBiddingInvoiceUseCase.execude(id).then((value) => value.fold(
-        (l) => emit(GetBiddingErrorState(l.message)), (r) => emit(GetBiddingSuccessState())));
+    await _getBiddingInvoiceUseCase
+        .execude(id)
+        .then((value) => value.fold((l) => emit(GetBiddingErrorState(l.message)), (r) {
+              biddingInvoiceModel = r;
+              emit(GetBiddingSuccessState());
+            }));
   }
 }

@@ -151,5 +151,8 @@ abstract class  LocaleKeys {
   static const donePayment = 'donePayment';
   static const pleasePay = 'pleasePay';
   static const biddingWin = 'biddingWin';
+  static const orderDetails = 'orderDetails';
+  static const invoiceNumber = 'invoiceNumber';
+  static const date = 'date';
 
 }

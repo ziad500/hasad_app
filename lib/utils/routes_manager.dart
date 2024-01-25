@@ -5,6 +5,7 @@ import 'package:hasad_app/features/direct_selling/all/presentation/screens/direc
 import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hasad_app/features/filter/presentation/screens/filter_screen.dart';
+import 'package:hasad_app/features/invoice/presentation/screens/bidding_invoice.dart';
 import 'package:hasad_app/features/invoice/presentation/screens/invoice_screen.dart';
 import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/my_advertisement/presentation/screens/my_advertisement_screen.dart';
@@ -32,6 +33,8 @@ class Routes {
   static const String directSellingListScreen = "/directSellingListScreen";
   static const String myOrdersScreen = "/MyOrdersScreen";
   static const String invoiceRoutes = "/invoiceRoutes";
+  static const String biddingInvoiceScreen = "/biddingInvoiceScreen";
+
   static const String myAdvertisementScreen = "/myAdvertisementScreen";
   static const String biddingListScreen = "/biddingListScreen";
   static const String editProfileRoutes = "/editProfileRoutes";
@@ -49,13 +52,18 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.biddingInvoiceScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+            return BiddingInvoiceScreen(id: args!['id'].toString());
+          },
+        );
       case Routes.invoiceRoutes:
         return MaterialPageRoute(
           builder: (context) {
             final args = settings.arguments as Map<String, dynamic>?;
-            return InvoiceScreen(
-              id: args!['id'].toString(),
-            );
+            return DirectSellingInvoiceScreen(id: args!['id'].toString());
           },
         );
       case Routes.biddingDetailsScreen:

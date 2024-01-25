@@ -8,25 +8,25 @@ import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/logo_widget.dart';
 import 'package:hasad_app/core/di.dart';
-import 'package:hasad_app/features/invoice/domain/models/invoice_model.dart';
+import 'package:hasad_app/features/invoice/domain/models/bidding.dart';
 import 'package:hasad_app/features/invoice/presentation/components/calc_item.dart';
 import 'package:hasad_app/features/invoice/presentation/controller/cubit/invoice_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
-class DirectSellingInvoiceScreen extends StatelessWidget {
-  const DirectSellingInvoiceScreen({super.key, required this.id});
+class BiddingInvoiceScreen extends StatelessWidget {
+  const BiddingInvoiceScreen({super.key, required this.id});
   final String id;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<InvoiceCubit>()..getDirectSellingInvoice(id),
+      create: (context) => sl<InvoiceCubit>()..getBiddingInvoice(id),
       child: BlocBuilder<InvoiceCubit, InvoiceState>(
         builder: (context, state) {
           InvoiceCubit cubit = InvoiceCubit.get(context);
-          DirectSelligInvoiceModel? model = cubit.invoiceModel;
-          if (state is GetBiddingLoadingState) {
+          BiddingInvoiceModel? model = cubit.biddingInvoiceModel;
+          if (state is GetDirectSellingLoadingState) {
             return const LoadingWidget();
           }
           if (model == null) {
@@ -53,7 +53,7 @@ class DirectSellingInvoiceScreen extends StatelessWidget {
 
 class _Description extends StatelessWidget {
   const _Description({this.invoiceModel});
-  final DirectSelligInvoiceModel? invoiceModel;
+  final BiddingInvoiceModel? invoiceModel;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class _Description extends StatelessWidget {
 
 class _LogoAndData extends StatelessWidget {
   const _LogoAndData({this.invoiceModel});
-  final DirectSelligInvoiceModel? invoiceModel;
+  final BiddingInvoiceModel? invoiceModel;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -117,7 +117,7 @@ class _LogoAndData extends StatelessWidget {
 
 class _Summary extends StatelessWidget {
   const _Summary({this.invoiceModel});
-  final DirectSelligInvoiceModel? invoiceModel;
+  final BiddingInvoiceModel? invoiceModel;
   @override
   Widget build(BuildContext context) {
     return Expanded(

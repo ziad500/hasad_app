@@ -148,7 +148,10 @@
 "donefinish":"تم الانتهاء",
 "donePayment":"تم الدفع",
 "pleasePay":"يرجي الدفع",
-"biddingWin":"تم الفوز بالمذاد"
+"biddingWin":"تم الفوز بالمذاد",
+"orderDetails": "تفاصيل الطلب",
+"invoiceNumber": "رقم الفاتورة",
+"date": "التاريخ"
 
 
 
