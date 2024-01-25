@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/network_image.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
+import 'package:hasad_app/features/chats/core/constants.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
 import 'package:hasad_app/features/chats/presentation/screens/message_screen.dart';
 import 'package:hasad_app/utils/app_assets.dart';
@@ -54,16 +55,20 @@ class ChatWidget extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SubTitleWidget(
-                          subTitle: userChatModel?.lastMessage ?? "",
-                          maxlines: 1,
-                        ),
-                      ),
-                    ],
-                  )
+                  userChatModel!.lastMessage!.contains(ChatsConstants.fileKey)
+                      ? const Icon(
+                          Icons.attachment_outlined,
+                        )
+                      : Row(
+                          children: [
+                            Expanded(
+                              child: SubTitleWidget(
+                                subTitle: userChatModel?.lastMessage ?? "",
+                                maxlines: 1,
+                              ),
+                            ),
+                          ],
+                        )
                 ],
               ),
             ),

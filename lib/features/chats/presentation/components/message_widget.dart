@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/constants.dart';
+import 'package:hasad_app/features/chats/core/constants.dart';
 import 'package:hasad_app/features/chats/domain/model/message_model.dart';
 import 'package:hasad_app/features/chats/presentation/components/image_view.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -28,7 +29,7 @@ class MessageWidget extends StatelessWidget {
                     bottomRight: const Radius.circular(10),
                     topLeft: isMine ? const Radius.circular(0) : const Radius.circular(10),
                     topRight: isMine ? const Radius.circular(10) : const Radius.circular(0))),
-            child: messageModel!.text!.contains("hasadImagesFirebase")
+            child: messageModel!.text!.contains(ChatsConstants.fileKey)
                 ? FileView(file: messageModel!.text!)
                 : TitleWidget(
                     title: messageModel?.text ?? "",
