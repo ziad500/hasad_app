@@ -4,8 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/network_image.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/chats/core/constants.dart';
+import 'package:hasad_app/features/chats/data/response/user_reponse.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
+import 'package:hasad_app/features/chats/presentation/controller/messages/messages_cubit.dart';
 import 'package:hasad_app/features/chats/presentation/screens/message_screen.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/helpers.dart';
@@ -17,6 +20,10 @@ class ChatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
+          if (!userChatModel!.isRead!) {
+            MessagesCubit.get(context).makeMessageRead(
+                recieverModel: UserChatsResponse(isRead: true, userId: Constants.userId));
+          }
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -67,6 +74,8 @@ class ChatWidget extends StatelessWidget {
                                 maxlines: 1,
                               ),
                             ),
+                            if (!userChatModel!.isRead!)
+                              const Icon(Icons.keyboard_double_arrow_left)
                           ],
                         )
                 ],
