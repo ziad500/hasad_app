@@ -92,8 +92,8 @@ isDatePast(String? date) {
 }
 
 double calculateTimePercentage(String startStr, String endStr) {
-  DateTime start = DateFormat("yyyy-MM-dd HH:mm:ss a").parse(startStr);
-  DateTime end = DateFormat("yyyy-MM-dd HH:mm:ss a").parse(endStr);
+  DateTime start = DateFormat("yyyy-MM-dd HH:mm:ss a", "en").parse(startStr);
+  DateTime end = DateFormat("yyyy-MM-dd HH:mm:ss a", "en").parse(endStr);
 
   Duration totalTime = end.difference(start);
   int totalTimeInHours = totalTime.inHours;
