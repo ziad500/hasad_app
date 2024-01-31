@@ -5,31 +5,51 @@ import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class SettingsItem extends StatelessWidget {
-  const SettingsItem({super.key, required this.icon, required this.title});
+  const SettingsItem(
+      {super.key, required this.icon, required this.title, this.pendingBalance, this.balance});
   final String icon;
   final String title;
+  final String? pendingBalance;
+  final String? balance;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      height: 40.h,
-      padding: const EdgeInsets.symmetric(horizontal: 15).w,
-      decoration: BoxDecoration(
-          color: AppColors.addRequestContainerColor, borderRadius: BorderRadius.circular(10.6)),
-      child: Row(
-        children: [
-          SvgPicture.asset(icon),
-          Expanded(
-            child: Center(
-              child: TitleWidget(
-                color: Colors.white,
-                title: title,
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: [
+        Container(
+          width: double.maxFinite,
+          height: 40.h,
+          padding: const EdgeInsets.symmetric(horizontal: 15).w,
+          decoration: BoxDecoration(
+              color: AppColors.addRequestContainerColor, borderRadius: BorderRadius.circular(10.6)),
+          child: Row(
+            children: [
+              SvgPicture.asset(icon),
+              Expanded(
+                child: Center(
+                  child: TitleWidget(
+                    color: Colors.white,
+                    title: title,
+                  ),
+                ),
               ),
-            ),
+              if (pendingBalance != null)
+                TitleWidget(
+                  color: AppColors.darkRed,
+                  title: pendingBalance ?? "",
+                ),
+              const SizedBox(width: 15),
+              if (balance != null)
+                TitleWidget(
+                  color: AppColors.blue,
+                  title: balance ?? "",
+                ),
+              const SizedBox(width: 15),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -43,6 +43,11 @@ class SVGManager {
   static String calendar = "$svgPath/calendar.svg";
   static String timer = "$svgPath/timer.svg";
   static String repeat = "$svgPath/repeat.svg";
+
+  static String stc = "$svgPath/STC.svg";
+  static String cardAdd = "$svgPath/cardAdd.svg";
+  static String receipt = "$svgPath/receipt.svg";
+  static String upload = "$svgPath/upload.svg";
 }
 
 String gifPath = "assets/gif";

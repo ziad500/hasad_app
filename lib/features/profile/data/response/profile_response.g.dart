@@ -29,6 +29,8 @@ ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) =>
       phone: json['phone'] as int?,
       stc: json['stc'] as int?,
       image: json['image'] as String?,
+      balance: json['balance'] as num?,
+      reservedBalance: json['reserved_balance'] as num?,
     );
 
 Map<String, dynamic> _$ProfileDataResponseToJson(
@@ -39,4 +41,6 @@ Map<String, dynamic> _$ProfileDataResponseToJson(
       'phone': instance.phone,
       'stc': instance.stc,
       'image': instance.image,
+      'balance': instance.balance,
+      'reserved_balance': instance.reservedBalance,
     };

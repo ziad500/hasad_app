@@ -12,11 +12,9 @@ class ProfileDataModel {
   int? phone;
   int? stc;
   String? image;
+  num? balance;
+  num? reservedBalance;
+
   ProfileDataModel(
-    this.id,
-    this.name,
-    this.phone,
-    this.stc,
-    this.image,
-  );
+      this.id, this.name, this.phone, this.stc, this.image, this.balance, this.reservedBalance);
 }

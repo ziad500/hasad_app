@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:270767948869:android:253187889a7e7bcef5cf2c",
+        "mobilesdk_app_id": "1:270767948869:android:8bf2bb4a6f87b4f5f5cf2c",
         "android_client_info": {
-          "package_name": "com.example.hasad_app"
+          "package_name": "com.metamisr.hasad_app"
         }
       },
       "oauth_client": [],

@@ -32,13 +32,12 @@ class ProfileDataResponse {
   int? stc;
   @JsonKey(name: 'image')
   String? image;
-  ProfileDataResponse({
-    this.id,
-    this.name,
-    this.phone,
-    this.stc,
-    this.image,
-  });
+  @JsonKey(name: 'balance')
+  num? balance;
+  @JsonKey(name: 'reserved_balance')
+  num? reservedBalance;
+  ProfileDataResponse(
+      {this.id, this.name, this.phone, this.stc, this.image, this.balance, this.reservedBalance});
 
   // from json
   factory ProfileDataResponse.fromJson(Map<String, dynamic> json) =>

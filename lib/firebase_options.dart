@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAD_VRNUEaTXep6m_QfoWBBhqZ68owdxN4',
-    appId: '1:270767948869:android:253187889a7e7bcef5cf2c',
+    appId: '1:270767948869:android:8bf2bb4a6f87b4f5f5cf2c',
     messagingSenderId: '270767948869',
     projectId: 'hasad-app',
     storageBucket: 'hasad-app.appspot.com',
@@ -59,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD2-uQZgL3KPrdr-kE8vTzq0atrcojqkbU',
-    appId: '1:270767948869:ios:51071222de38da5af5cf2c',
+    appId: '1:270767948869:ios:16ee323bac81ac2ef5cf2c',
     messagingSenderId: '270767948869',
     projectId: 'hasad-app',
     storageBucket: 'hasad-app.appspot.com',
-    iosBundleId: 'com.example.hasadApp',
+    iosBundleId: 'com.metamisr.hasadApp',
   );
 }

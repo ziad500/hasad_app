@@ -1,4 +1,4 @@
-package com.example.hasad_app
+package com.metamisr.hasad_app
 
 import io.flutter.embedding.android.FlutterActivity
 

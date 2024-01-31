@@ -79,6 +79,13 @@ import 'package:hasad_app/features/requests/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/requests/domain/repository/repo.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/features/wallet/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/wallet/data/network/wallet_api.dart';
+import 'package:hasad_app/features/wallet/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/wallet/domain/repository/repo.dart';
+import 'package:hasad_app/features/wallet/domain/use_cases/bank_recharge_usecase.dart';
+import 'package:hasad_app/features/wallet/domain/use_cases/stc_recharge_usecase.dart';
+import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'dio_factory.dart';
@@ -114,6 +121,7 @@ Future<void> initAppModule() async {
   iniFavoritesList();
   iniInvoice();
   initChatsModule();
+  iniWallet();
 }
 
 iniLogin() async {
@@ -538,5 +546,38 @@ iniInvoice() async {
   }
   if (!GetIt.I.isRegistered<GetBiddingInvoiceUseCase>()) {
     sl.registerLazySingleton<GetBiddingInvoiceUseCase>(() => GetBiddingInvoiceUseCase(sl.call()));
+  }
+}
+
+iniWallet() async {
+  //cubit
+
+  if (!GetIt.I.isRegistered<WalletCubit>()) {
+    sl.registerFactory<WalletCubit>(() => WalletCubit(sl.call(), sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<WalletAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<WalletAppServiceClient>(() => WalletAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<WalletRepo>()) {
+    sl.registerLazySingleton<WalletRepo>(() => WalletRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<WalletRemoteDataSource>()) {
+    sl.registerLazySingleton<WalletRemoteDataSource>(() => WalletRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<BankRechargeUseCase>()) {
+    sl.registerLazySingleton<BankRechargeUseCase>(() => BankRechargeUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<StcRechargeUseCase>()) {
+    sl.registerLazySingleton<StcRechargeUseCase>(() => StcRechargeUseCase(sl.call()));
   }
 }

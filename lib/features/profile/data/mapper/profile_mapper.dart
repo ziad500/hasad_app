@@ -9,6 +9,7 @@ extension ProfileResponseMapper on ProfileResponse? {
 
 extension ProfileDataResponseMapper on ProfileDataResponse? {
   ProfileDataModel toDomain() {
-    return ProfileDataModel(this?.id, this?.name, this?.phone, this?.stc, this?.image);
+    return ProfileDataModel(this?.id, this?.name, this?.phone, this?.stc, this?.image,
+        this?.balance, this?.reservedBalance);
   }
 }

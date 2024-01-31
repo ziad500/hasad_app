@@ -13,6 +13,8 @@ import 'package:hasad_app/features/my_orders/presentation/screens/my_orders_scre
 import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
+import 'package:hasad_app/features/wallet/presentation/screens/upload_slip_screen.dart';
+import 'package:hasad_app/features/wallet/presentation/screens/wallet_screen.dart';
 
 import '../features/auth/presentation/screens/forget_password/view/forget_password_screen.dart';
 import '../features/auth/presentation/screens/login/views/login_screen.dart';
@@ -39,8 +41,11 @@ class Routes {
   static const String biddingListScreen = "/biddingListScreen";
   static const String editProfileRoutes = "/editProfileRoutes";
   static const String favoritesRoutes = "/favoritesRoutes";
+  static const String walletScreenRoutes = "/WalletScreenRoutes";
+  static const String uploadSlipScreen = "/UploadSlipScreen";
 
   ////////
+  ///
 
   static const String returnPolicyRoutes = "/returnPolicyRoutes";
   static const String supportRoutes = "/supportRoutes";
@@ -52,6 +57,18 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.uploadSlipScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const UploadSlipScreen();
+          },
+        );
+      case Routes.walletScreenRoutes:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const WalletScreen();
+          },
+        );
       case Routes.biddingInvoiceScreen:
         return MaterialPageRoute(
           builder: (context) {

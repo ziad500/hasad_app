@@ -24,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
+        ProfileDataModel? model = ProfileCubit.get(context).profileDataModel;
         return DefaultScaffold(
           body: Column(
             children: [
@@ -44,7 +45,9 @@ class ProfileScreen extends StatelessWidget {
                                   Navigator.pushNamed(context, _settingsList()[index].route),
                               child: SettingsItem(
                                   icon: _settingsList()[index].icon,
-                                  title: _settingsList()[index].title),
+                                  title: _settingsList()[index].title,
+                                  balance: index == 0 ? "${model?.balance}" : null,
+                                  pendingBalance: index == 0 ? "${model?.reservedBalance}" : null),
                             ),
                         count: _settingsList().length),
                   ),
@@ -109,7 +112,8 @@ class _UserRow extends StatelessWidget {
 }
 
 List<_SettingsModel> _settingsList() => [
-      _SettingsModel(icon: SVGManager.wallet, title: LocaleKeys.wallet.tr(), route: ""),
+      _SettingsModel(
+          icon: SVGManager.wallet, title: LocaleKeys.wallet.tr(), route: Routes.walletScreenRoutes),
       _SettingsModel(
           icon: SVGManager.ads, title: LocaleKeys.ads.tr(), route: Routes.myAdvertisementScreen),
       _SettingsModel(
