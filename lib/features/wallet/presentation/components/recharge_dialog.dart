@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,9 @@ import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/common/done_request_screen.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 import 'package:hasad_app/utils/validation.dart';
@@ -19,10 +22,15 @@ Future rechargeDialog(context,
               child: BlocConsumer<WalletCubit, WalletState>(
                 listener: (context, state) {
                   if (state is BankRechargSuccessState) {
-                    showSnackbar(
-                        context: context,
-                        text: state.successModel.message,
-                        state: ToastStates.SUCCESS);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DoneRequestScreen(
+                                donePageState: DonePageState.done,
+                                title: LocaleKeys.donePayment.tr(),
+                                subTitle: state.successModel.message ?? "",
+                                route: Routes.homeScreenRoutes)),
+                        (route) => false);
                   }
                   if (state is GetPaymentLinkSuccessState) {
                     Navigator.pushNamed(context, Routes.paymentRoutes, arguments: {

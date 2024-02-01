@@ -31,7 +31,7 @@ class RechargeSection extends StatelessWidget {
             builder: (context, state) {
               WalletCubit cubit = WalletCubit.get(context);
               return WalletSubWidget(
-                title: "شحن عن طريق البطاقة",
+                title: "شحن عن طريق البطاقة او STC",
                 icon: SVGManager.cardAdd,
                 onTap: () {
                   rechargeDialog(context, walletCubit: cubit, fromStc: true);
@@ -39,8 +39,6 @@ class RechargeSection extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 16),
-          WalletSubWidget(title: "شحن عن طريق STC", icon: SVGManager.stc),
           const SizedBox(height: 16),
           WalletSubWidget(
             title: "شحن عن طريق الإيداع",

@@ -38,3 +38,5 @@ final class GetPaymentLinkErrorState extends WalletState {
   final String error;
   GetPaymentLinkErrorState(this.error);
 }
+
+final class UploadProfileImageSuccess extends WalletState {}

@@ -5,6 +5,7 @@ import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/done_request_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
@@ -54,15 +55,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return BlocConsumer<WalletCubit, WalletState>(
       listener: (context, state) {
         if (state is StcRechargSuccessState) {
-          Navigator.push(
+          ProfileCubit.get(context).getProfileData();
+          Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => DoneRequestScreen(
                       donePageState: DonePageState.done,
-                      title: "Payment Successful",
+                      title: LocaleKeys.donePayment.tr(),
                       subTitle:
                           "You Have Successfully paid ${widget.value} ${LocaleKeys.saudiRiyal.tr()}",
-                      route: Routes.homeScreenRoutes)));
+                      route: Routes.homeScreenRoutes)),
+              (route) => false);
         }
         if (state is StcRechargErrorState) {
           showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);

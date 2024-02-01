@@ -8,6 +8,7 @@ import 'package:hasad_app/features/wallet/domain/models/stc_model.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/bank_recharge_usecase.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/get_payment_link_usecase.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/stc_recharge_usecase.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'wallet_state.dart';
 
@@ -18,6 +19,14 @@ class WalletCubit extends Cubit<WalletState> {
 
   WalletCubit(this._stcRechargeUseCase, this._bankRechargeUseCase, this._getPaymentLinkUseCase)
       : super(WalletInitial());
+
+  @override
+  void emit(state) {
+    if (!isClosed) {
+      super.emit(state);
+    }
+  }
+
   static WalletCubit get(context) => BlocProvider.of(context);
   Future bankRecharge() async {
     emit(BankRechargLoadingState());
@@ -44,4 +53,13 @@ class WalletCubit extends Cubit<WalletState> {
   final TextEditingController valueContoller = TextEditingController();
   File? file;
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
+  Future uploadImage() async {
+    await ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      if (value != null) {
+        file = File(value.path);
+        emit(UploadProfileImageSuccess());
+      }
+    });
+  }
 }
