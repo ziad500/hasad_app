@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
 import 'package:hasad_app/features/bidding/all/presentation/screens/bidding_list_screen.dart';
 import 'package:hasad_app/features/bidding/details/presentation/screens/item_details_screen.dart';
+import 'package:hasad_app/features/categories/presentation/screens/categories_screen.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/screens/direct_selling_list_screen.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/favorites/presentation/screens/favorites_screen.dart';
@@ -40,6 +41,7 @@ class Routes {
   static const String myOrdersScreen = "/MyOrdersScreen";
   static const String invoiceRoutes = "/invoiceRoutes";
   static const String biddingInvoiceScreen = "/biddingInvoiceScreen";
+  static const String categoriesScreen = "/categoriesScreen";
 
   static const String myAdvertisementScreen = "/myAdvertisementScreen";
   static const String biddingListScreen = "/biddingListScreen";
@@ -62,6 +64,14 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.categoriesScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return CategoriesScreen(type: args?['type']);
+          },
+        );
       case Routes.notificationsScreen:
         return MaterialPageRoute(
           builder: (context) {

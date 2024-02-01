@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hasad_app/common/row_of_text.dart';
 import 'package:hasad_app/common/search_bar.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/di.dart';
@@ -29,11 +28,6 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SearchBarWidget(),
-                RowOfTextViewAllWidget(
-                    title: LocaleKeys.directSaleCategories.tr(), onPressed: () {}),
-                SizedBox(
-                  height: 5.h,
-                ),
                 const CategoriesList(type: 1),
                 SizedBox(
                   height: 20.h,

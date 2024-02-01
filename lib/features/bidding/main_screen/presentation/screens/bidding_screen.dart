@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hasad_app/common/row_of_text.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/bidding/all/presentation/components/bidding_list.dart';
@@ -40,11 +39,6 @@ class BiddingScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const OffersSlider(),
-                      RowOfTextViewAllWidget(
-                          title: LocaleKeys.auctionCategories.tr(), onPressed: () {}),
-                      SizedBox(
-                        height: 5.h,
-                      ),
                       const CategoriesList(type: 2),
                       SizedBox(
                         height: 20.h,

@@ -14,7 +14,7 @@ class RowOfTextViewAllWidget extends StatelessWidget {
       children: [
         Expanded(child: TitleWidget(title: title)),
         DefaultTextButton(
-          onPressed: () {},
+          onPressed: onPressed,
           text: LocaleKeys.viewall.tr(),
           textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.blue),
         ),
