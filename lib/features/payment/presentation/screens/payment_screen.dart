@@ -37,7 +37,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           onPageStarted: (String url) {},
           onPageFinished: (String url) {
             if (url.contains("Success")) {
-              WalletCubit.get(context).stcRecharge();
+              WalletCubit.get(context).stcRecharge(extractPaymentId(url));
             }
           },
           onWebResourceError: (WebResourceError error) {},
@@ -81,5 +81,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
         );
       },
     );
+  }
+
+  String extractPaymentId(String url) {
+    Uri uri = Uri.parse(url);
+    String paymentId = uri.queryParameters['PaymentId'] ?? '';
+    return paymentId;
   }
 }

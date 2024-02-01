@@ -11,7 +11,6 @@ class BankRechargeRequest {
 
 class STCRechargeRequest {
   String value;
-  STCRechargeRequest({
-    required this.value,
-  });
+  String? paymentId;
+  STCRechargeRequest({required this.value, this.paymentId});
 }

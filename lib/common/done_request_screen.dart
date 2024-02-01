@@ -53,6 +53,7 @@ class DoneRequestScreen extends StatelessWidget {
             text: title,
             textStyle: Theme.of(context).textTheme.bodyLarge,
           ),
+          const SizedBox(height: 20),
           DefaultText(text: subTitle, textStyle: Theme.of(context).textTheme.bodyLarge),
           const Spacer(),
           DefaultButton(

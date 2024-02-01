@@ -39,10 +39,11 @@ class WalletCubit extends Cubit<WalletState> {
             (r) => emit(BankRechargSuccessState(r))));
   }
 
-  Future stcRecharge() async {
+  Future stcRecharge(String paymentId) async {
     emit(StcRechargLoadingState());
-    await _stcRechargeUseCase.execude(STCRechargeRequest(value: valueContoller.text)).then(
-        (value) => value.fold(
+    await _stcRechargeUseCase
+        .execude(STCRechargeRequest(value: valueContoller.text, paymentId: paymentId))
+        .then((value) => value.fold(
             (l) => emit(StcRechargErrorState(l.message)), (r) => emit(StcRechargSuccessState())));
   }
 

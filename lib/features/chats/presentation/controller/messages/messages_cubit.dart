@@ -209,7 +209,6 @@ class MessagesCubit extends Cubit<MessagesState> {
         }
       });
     } catch (e) {
-      print("....$e");
       emit(UploadImageError());
     }
   }

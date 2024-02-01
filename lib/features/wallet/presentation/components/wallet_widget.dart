@@ -48,7 +48,7 @@ class WalletWidget extends StatelessWidget {
                   Flexible(
                     child: TitleWidget(
                       fontWeight: FontWeight.bold,
-                      title: "${model?.balance} ${LocaleKeys.saudiRiyal.tr()}",
+                      title: "${model?.balance ?? "0"} ${LocaleKeys.saudiRiyal.tr()}",
                       color: AppColors.darkBlue,
                     ),
                   ),
@@ -68,7 +68,7 @@ class WalletWidget extends StatelessWidget {
                   Flexible(
                     child: TitleWidget(
                       fontWeight: FontWeight.bold,
-                      title: "${model?.reservedBalance} ${LocaleKeys.saudiRiyal.tr()}",
+                      title: "${model?.reservedBalance ?? "0"} ${LocaleKeys.saudiRiyal.tr()}",
                       color: AppColors.red,
                     ),
                   ),

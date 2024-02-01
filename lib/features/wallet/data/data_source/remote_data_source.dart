@@ -24,7 +24,7 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
       _appServiceClient.bankRecharge(bankRechargeRequest.value, bankRechargeRequest.depositSlip);
   @override
   Future<SuccessResponse> stcRecharge(STCRechargeRequest stcRechargeRequest) =>
-      _appServiceClient.stcRecharge(stcRechargeRequest.value);
+      _appServiceClient.stcRecharge(stcRechargeRequest.value, stcRechargeRequest.paymentId ?? "");
 
   @override
   Future<StchRechargeResponse> getPaymentLink(STCRechargeRequest stcRechargeRequest) =>

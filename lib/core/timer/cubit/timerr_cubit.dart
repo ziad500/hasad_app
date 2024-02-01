@@ -50,8 +50,8 @@ class TimerrCubit extends Cubit<TimerrState> {
 
   String get timerDisplay {
     Duration duration = Duration(seconds: start);
-    int days = duration.inDays;
-    int hours = duration.inHours % 24; // Adjust for remaining hours after subtracting days
+    /* int days = duration.inDays;
+    int hours = duration.inHours % 24;  */ // Adjust for remaining hours after subtracting days
     int minutes = duration.inMinutes % 60;
     int seconds = duration.inSeconds % 60;
     return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';

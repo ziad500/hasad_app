@@ -18,7 +18,8 @@ abstract class WalletAppServiceClient {
       @Part(name: "value") String value2, @Part(name: "deposit_slip") File depositSlip);
 
   @POST("recharges/card-stc")
-  Future<SuccessResponse> stcRecharge(@Part(name: "value") String value2);
+  Future<SuccessResponse> stcRecharge(
+      @Part(name: "value") String value2, @Part(name: "payment_id") String paymentId);
 
   @POST("recharges/payment")
   Future<StchRechargeResponse> getPaymentLink(@Part(name: "value") String value2);

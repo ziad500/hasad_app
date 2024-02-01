@@ -40,29 +40,31 @@ class _WalletAppServiceClient implements WalletAppServiceClient {
         filename: depositSlip.path.split(Platform.pathSeparator).last,
       ),
     ));
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'recharges/bank-transfer',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'recharges/bank-transfer',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<SuccessResponse> stcRecharge(String value2) async {
+  Future<SuccessResponse> stcRecharge(
+    String value2,
+    String paymentId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -71,23 +73,26 @@ class _WalletAppServiceClient implements WalletAppServiceClient {
       'value',
       value2,
     ));
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    _data.fields.add(MapEntry(
+      'payment_id',
+      paymentId,
+    ));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'recharges/card-stc',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'recharges/card-stc',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
@@ -102,8 +107,8 @@ class _WalletAppServiceClient implements WalletAppServiceClient {
       'value',
       value2,
     ));
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<StchRechargeResponse>(Options(
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<StchRechargeResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -128,24 +133,23 @@ class _WalletAppServiceClient implements WalletAppServiceClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              'withdraw-balance',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          'withdraw-balance',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }

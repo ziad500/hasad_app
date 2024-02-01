@@ -1,4 +1,3 @@
-import 'all_caught_up.dart';
 import '../../utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -111,10 +110,8 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
                 },
               ),
               if (isLoading) const _LoadingWidget(),
-              if (allCaught) const AllCaughtUpWidget(),
-              const SizedBox(
-                height: 30,
-              )
+              if (allCaught) const SizedBox(),
+              const SizedBox(height: 30)
             ],
           ),
         );
