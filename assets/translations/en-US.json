@@ -171,7 +171,11 @@
 "send": "Send",
 "ensureReceiptDetailsClear": "Ensure Receipt Details are Clear to Confirm the Order",
 "reservedBalance":"Reserved Balance",
-"youHaveSuccessfullyPaid": "You have successfully paid"
+"youHaveSuccessfullyPaid": "You have successfully paid",
+"withdrawBalance": "Withdraw Balance",
+"requestBalanceWithdrawal": "Request Balance Withdrawal",
+"doneUpload":"Upload Successfully",
+"doneSend":"Sent Successfully"
 
 
 

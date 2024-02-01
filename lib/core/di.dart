@@ -84,6 +84,7 @@ import 'package:hasad_app/features/wallet/data/network/wallet_api.dart';
 import 'package:hasad_app/features/wallet/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/wallet/domain/repository/repo.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/bank_recharge_usecase.dart';
+import 'package:hasad_app/features/wallet/domain/use_cases/collect_money_usecase.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/get_payment_link_usecase.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/stc_recharge_usecase.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
@@ -554,7 +555,7 @@ iniWallet() async {
   //cubit
 
   if (!GetIt.I.isRegistered<WalletCubit>()) {
-    sl.registerFactory<WalletCubit>(() => WalletCubit(sl.call(), sl.call(), sl.call()));
+    sl.registerFactory<WalletCubit>(() => WalletCubit(sl.call(), sl.call(), sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -583,5 +584,8 @@ iniWallet() async {
   }
   if (!GetIt.I.isRegistered<GetPaymentLinkUseCase>()) {
     sl.registerLazySingleton<GetPaymentLinkUseCase>(() => GetPaymentLinkUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<CollectMoneyUseCase>()) {
+    sl.registerLazySingleton<CollectMoneyUseCase>(() => CollectMoneyUseCase(sl.call()));
   }
 }

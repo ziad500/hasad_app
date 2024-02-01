@@ -169,7 +169,11 @@
 "send": "إرسال",
 "ensureReceiptDetailsClear": "تأكد من وضوح تفاصيل الإيصال لتأكيد الطلب",
 "reservedBalance":"**الرصيد المحجوز",
-"youHaveSuccessfullyPaid": "لقد دفعت بنجاح"
+"youHaveSuccessfullyPaid": "لقد دفعت بنجاح",
+"withdrawBalance": "سحب الرصيد",
+"requestBalanceWithdrawal": "طلب سحب الرصيد",
+"doneUpload": "تم الرفع بنجاح",
+"doneSend": "تم الإرسال بنجاح"
 
 
 

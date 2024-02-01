@@ -171,5 +171,9 @@ abstract class  LocaleKeys {
   static const ensureReceiptDetailsClear = 'ensureReceiptDetailsClear';
   static const reservedBalance = 'reservedBalance';
   static const youHaveSuccessfullyPaid = 'youHaveSuccessfullyPaid';
+  static const withdrawBalance = 'withdrawBalance';
+  static const requestBalanceWithdrawal = 'requestBalanceWithdrawal';
+  static const doneUpload = 'doneUpload';
+  static const doneSend = 'doneSend';
 
 }

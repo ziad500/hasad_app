@@ -9,6 +9,8 @@ abstract class WalletRemoteDataSource {
   Future<SuccessResponse> stcRecharge(STCRechargeRequest stcRechargeRequest);
 
   Future<StchRechargeResponse> getPaymentLink(STCRechargeRequest stcRechargeRequest);
+
+  Future<SuccessResponse> collectMoney();
 }
 
 class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
@@ -27,4 +29,7 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
   @override
   Future<StchRechargeResponse> getPaymentLink(STCRechargeRequest stcRechargeRequest) =>
       _appServiceClient.getPaymentLink(stcRechargeRequest.value);
+
+  @override
+  Future<SuccessResponse> collectMoney() => _appServiceClient.collectMoney();
 }

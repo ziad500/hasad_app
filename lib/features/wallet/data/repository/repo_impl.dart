@@ -36,4 +36,12 @@ class WalletRepositoryImpl implements WalletRepo {
       return response.toDomain();
     });
   }
+
+  @override
+  Future<Either<Failure, SuccessModel>> collectMoney() {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response = await _dataSource.collectMoney();
+      return response.toDomain();
+    });
+  }
 }

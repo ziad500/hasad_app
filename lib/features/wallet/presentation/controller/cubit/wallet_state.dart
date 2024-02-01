@@ -40,3 +40,15 @@ final class GetPaymentLinkErrorState extends WalletState {
 }
 
 final class UploadProfileImageSuccess extends WalletState {}
+
+final class CollectMoneyLoadingState extends WalletState {}
+
+final class CollectMoneySuccessState extends WalletState {
+  final SuccessModel successModel;
+  CollectMoneySuccessState(this.successModel);
+}
+
+final class CollectMoneyErrorState extends WalletState {
+  final String error;
+  CollectMoneyErrorState(this.error);
+}

@@ -10,4 +10,6 @@ abstract class WalletRepo {
   Future<Either<Failure, SuccessModel>> stcRecharge(STCRechargeRequest stcRechargeRequest);
 
   Future<Either<Failure, StchRechargeModel>> getPaymentLink(STCRechargeRequest stcRechargeRequest);
+
+  Future<Either<Failure, SuccessModel>> collectMoney();
 }

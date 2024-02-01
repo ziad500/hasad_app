@@ -22,4 +22,7 @@ abstract class WalletAppServiceClient {
 
   @POST("recharges/payment")
   Future<StchRechargeResponse> getPaymentLink(@Part(name: "value") String value2);
+
+  @GET("withdraw-balance")
+  Future<SuccessResponse> collectMoney();
 }

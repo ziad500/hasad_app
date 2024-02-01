@@ -29,7 +29,7 @@ Future rechargeDialog(context,
                         MaterialPageRoute(
                             builder: (context) => DoneRequestScreen(
                                 donePageState: DonePageState.done,
-                                title: LocaleKeys.donePayment.tr(),
+                                title: LocaleKeys.doneUpload.tr(),
                                 subTitle: state.successModel.message ?? "",
                                 route: Routes.homeScreenRoutes)),
                         (route) => false);

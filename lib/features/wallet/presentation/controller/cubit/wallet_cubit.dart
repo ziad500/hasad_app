@@ -6,6 +6,7 @@ import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:hasad_app/features/wallet/data/network/requests.dart';
 import 'package:hasad_app/features/wallet/domain/models/stc_model.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/bank_recharge_usecase.dart';
+import 'package:hasad_app/features/wallet/domain/use_cases/collect_money_usecase.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/get_payment_link_usecase.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/stc_recharge_usecase.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,8 +17,10 @@ class WalletCubit extends Cubit<WalletState> {
   final StcRechargeUseCase _stcRechargeUseCase;
   final BankRechargeUseCase _bankRechargeUseCase;
   final GetPaymentLinkUseCase _getPaymentLinkUseCase;
+  final CollectMoneyUseCase _collectMoneyUseCase;
 
-  WalletCubit(this._stcRechargeUseCase, this._bankRechargeUseCase, this._getPaymentLinkUseCase)
+  WalletCubit(this._stcRechargeUseCase, this._bankRechargeUseCase, this._getPaymentLinkUseCase,
+      this._collectMoneyUseCase)
       : super(WalletInitial());
 
   @override
@@ -48,6 +51,12 @@ class WalletCubit extends Cubit<WalletState> {
     await _getPaymentLinkUseCase.execude(STCRechargeRequest(value: valueContoller.text)).then(
         (value) => value.fold((l) => emit(GetPaymentLinkErrorState(l.message)),
             (r) => emit(GetPaymentLinkSuccessState(r))));
+  }
+
+  Future collectMoney() async {
+    emit(CollectMoneyLoadingState());
+    await _collectMoneyUseCase.execude().then((value) => value.fold(
+        (l) => emit(CollectMoneyErrorState(l.message)), (r) => emit(CollectMoneySuccessState(r))));
   }
 
   final TextEditingController valueContoller = TextEditingController();
