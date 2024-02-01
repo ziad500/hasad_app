@@ -24,6 +24,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
   Future<MainUserAuthResponse> userLogin(
     String phone,
     String password,
+    String deviceToken,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -36,6 +37,10 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     _data.fields.add(MapEntry(
       'password',
       password,
+    ));
+    _data.fields.add(MapEntry(
+      'device_token',
+      deviceToken,
     ));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MainUserAuthResponse>(Options(
@@ -65,6 +70,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     int stc,
     String password,
     String passwordConfirmation,
+    String deviceToken,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -89,6 +95,10 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     _data.fields.add(MapEntry(
       'password_confirmation',
       passwordConfirmation,
+    ));
+    _data.fields.add(MapEntry(
+      'device_token',
+      deviceToken,
     ));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MainUserAuthResponse>(Options(

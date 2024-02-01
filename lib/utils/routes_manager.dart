@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
 import 'package:hasad_app/features/bidding/all/presentation/screens/bidding_list_screen.dart';
 import 'package:hasad_app/features/bidding/details/presentation/screens/item_details_screen.dart';
@@ -10,9 +11,11 @@ import 'package:hasad_app/features/invoice/presentation/screens/invoice_screen.d
 import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/my_advertisement/presentation/screens/my_advertisement_screen.dart';
 import 'package:hasad_app/features/my_orders/presentation/screens/my_orders_screen.dart';
+import 'package:hasad_app/features/payment/presentation/screens/payment_screen.dart';
 import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
+import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
 import 'package:hasad_app/features/wallet/presentation/screens/upload_slip_screen.dart';
 import 'package:hasad_app/features/wallet/presentation/screens/wallet_screen.dart';
 
@@ -67,6 +70,17 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return const WalletScreen();
+          },
+        );
+      case Routes.paymentRoutes:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+            WalletCubit cubit = args!['cubit'] as WalletCubit;
+            return BlocProvider.value(
+              value: cubit,
+              child: PaymentScreen(link: args['url'], value: args['value']),
+            );
           },
         );
       case Routes.biddingInvoiceScreen:

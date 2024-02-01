@@ -32,8 +32,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       _authAppServiceClient.requestChangePassword(requestChangePasswordRequest.email);
 
   @override
-  Future<MainUserAuthResponse> userLogin(LoginRequest loginRequest) =>
-      _authAppServiceClient.userLogin(loginRequest.phone, loginRequest.password);
+  Future<MainUserAuthResponse> userLogin(LoginRequest loginRequest) => _authAppServiceClient
+      .userLogin(loginRequest.phone, loginRequest.password, loginRequest.deviceToken);
 
   @override
   Future<MainUserAuthResponse> userSignUp(UserSignUpRequest userSignUpRequest) =>
@@ -42,5 +42,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           userSignUpRequest.phone,
           userSignUpRequest.stc,
           userSignUpRequest.password,
-          userSignUpRequest.passwordConfirmation);
+          userSignUpRequest.passwordConfirmation,
+          userSignUpRequest.deviceToken!);
 }

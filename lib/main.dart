@@ -5,6 +5,8 @@ import 'package:hasad_app/features/favorites/presentation/controller/cubit/favor
 import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
+import 'package:hasad_app/services/firebase_messaging_service.dart';
+import 'package:hasad_app/services/local_notifications_service.dart';
 
 import 'firebase_options.dart';
 import 'utils/bloc_observer.dart';
@@ -27,6 +29,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FirebaseMessagingService.init();
+  LocalNotificationsService.init();
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();

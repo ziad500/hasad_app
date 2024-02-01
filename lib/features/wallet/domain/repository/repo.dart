@@ -7,5 +7,7 @@ import 'package:hasad_app/features/wallet/domain/models/stc_model.dart';
 abstract class WalletRepo {
   Future<Either<Failure, SuccessModel>> bankRecharge(BankRechargeRequest bankRechargeRequest);
 
-  Future<Either<Failure, StchRechargeModel>> stcRecharge(STCRechargeRequest stcRechargeRequest);
+  Future<Either<Failure, SuccessModel>> stcRecharge(STCRechargeRequest stcRechargeRequest);
+
+  Future<Either<Failure, StchRechargeModel>> getPaymentLink(STCRechargeRequest stcRechargeRequest);
 }

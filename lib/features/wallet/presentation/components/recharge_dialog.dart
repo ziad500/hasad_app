@@ -7,6 +7,7 @@ import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 import 'package:hasad_app/utils/validation.dart';
 
 Future rechargeDialog(context,
@@ -23,14 +24,17 @@ Future rechargeDialog(context,
                         text: state.successModel.message,
                         state: ToastStates.SUCCESS);
                   }
-                  if (state is StcRechargSuccessState) {
-                    showSnackbar(
-                        context: context, text: "Pay Succssfully", state: ToastStates.SUCCESS);
+                  if (state is GetPaymentLinkSuccessState) {
+                    Navigator.pushNamed(context, Routes.paymentRoutes, arguments: {
+                      "url": state.stchRechargeModel.url,
+                      "value": WalletCubit.get(context).valueContoller.text,
+                      "cubit": WalletCubit.get(context)
+                    });
                   }
                   if (state is BankRechargErrorState) {
                     showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
                   }
-                  if (state is StcRechargErrorState) {
+                  if (state is GetPaymentLinkErrorState) {
                     showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
                   }
                 },
@@ -72,11 +76,11 @@ Future rechargeDialog(context,
                                   buttonName: "شحن",
                                   loadingColor: AppColors.primaryColor,
                                   isLoading: state is BankRechargLoadingState ||
-                                      state is StcRechargLoadingState,
+                                      state is GetPaymentLinkLoadingState,
                                   buttonFunction: () {
                                     if (cubit.globalKey.currentState!.validate()) {
                                       if (fromStc) {
-                                        cubit.stcRecharge();
+                                        cubit.getPaymentLink();
                                       } else {
                                         cubit.bankRecharge();
                                       }

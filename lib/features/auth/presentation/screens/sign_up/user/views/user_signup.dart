@@ -144,11 +144,12 @@ class UserSignUp extends StatelessWidget {
                         UserSignupButton(
                             formKey: formkey,
                             userSignUpRequest: UserSignUpRequest(
-                                name: nameController.text,
-                                phone: int.tryParse(phoneController.text) ?? 0,
-                                stc: int.tryParse(stcController.text) ?? 0,
-                                password: passwordController.text,
-                                passwordConfirmation: confirmPasswordController.text)),
+                              name: nameController.text,
+                              phone: int.tryParse(phoneController.text) ?? 0,
+                              stc: int.tryParse(stcController.text) ?? 0,
+                              password: passwordController.text,
+                              passwordConfirmation: confirmPasswordController.text,
+                            )),
                         const SizedBox(
                           height: 20,
                         ),

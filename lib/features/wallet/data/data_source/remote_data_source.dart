@@ -6,7 +6,9 @@ import 'package:hasad_app/features/wallet/data/response/stc_response.dart';
 abstract class WalletRemoteDataSource {
   Future<SuccessResponse> bankRecharge(BankRechargeRequest bankRechargeRequest);
 
-  Future<StchRechargeResponse> stcRecharge(STCRechargeRequest stcRechargeRequest);
+  Future<SuccessResponse> stcRecharge(STCRechargeRequest stcRechargeRequest);
+
+  Future<StchRechargeResponse> getPaymentLink(STCRechargeRequest stcRechargeRequest);
 }
 
 class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
@@ -19,6 +21,10 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
   Future<SuccessResponse> bankRecharge(BankRechargeRequest bankRechargeRequest) =>
       _appServiceClient.bankRecharge(bankRechargeRequest.value, bankRechargeRequest.depositSlip);
   @override
-  Future<StchRechargeResponse> stcRecharge(STCRechargeRequest stcRechargeRequest) =>
+  Future<SuccessResponse> stcRecharge(STCRechargeRequest stcRechargeRequest) =>
       _appServiceClient.stcRecharge(stcRechargeRequest.value);
+
+  @override
+  Future<StchRechargeResponse> getPaymentLink(STCRechargeRequest stcRechargeRequest) =>
+      _appServiceClient.getPaymentLink(stcRechargeRequest.value);
 }

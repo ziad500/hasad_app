@@ -26,3 +26,15 @@ final class StcRechargErrorState extends WalletState {
   final String error;
   StcRechargErrorState(this.error);
 }
+
+final class GetPaymentLinkLoadingState extends WalletState {}
+
+final class GetPaymentLinkSuccessState extends WalletState {
+  final StchRechargeModel stchRechargeModel;
+  GetPaymentLinkSuccessState(this.stchRechargeModel);
+}
+
+final class GetPaymentLinkErrorState extends WalletState {
+  final String error;
+  GetPaymentLinkErrorState(this.error);
+}

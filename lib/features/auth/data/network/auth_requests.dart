@@ -1,7 +1,8 @@
 class LoginRequest {
   String phone;
   String password;
-  LoginRequest(this.phone, this.password);
+  String deviceToken;
+  LoginRequest(this.phone, this.password, this.deviceToken);
 }
 
 class UserSignUpRequest {
@@ -10,13 +11,15 @@ class UserSignUpRequest {
   int stc;
   String password;
   String passwordConfirmation;
-  UserSignUpRequest({
-    required this.name,
-    required this.phone,
-    required this.stc,
-    required this.password,
-    required this.passwordConfirmation,
-  });
+  String? deviceToken;
+
+  UserSignUpRequest(
+      {required this.name,
+      required this.phone,
+      required this.stc,
+      required this.password,
+      required this.passwordConfirmation,
+      this.deviceToken});
 }
 
 class ChangePasswordRequest {

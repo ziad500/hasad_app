@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:hasad_app/features/wallet/data/network/requests.dart';
+import 'package:hasad_app/features/wallet/domain/models/stc_model.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/bank_recharge_usecase.dart';
+import 'package:hasad_app/features/wallet/domain/use_cases/get_payment_link_usecase.dart';
 import 'package:hasad_app/features/wallet/domain/use_cases/stc_recharge_usecase.dart';
 
 part 'wallet_state.dart';
@@ -12,7 +14,10 @@ part 'wallet_state.dart';
 class WalletCubit extends Cubit<WalletState> {
   final StcRechargeUseCase _stcRechargeUseCase;
   final BankRechargeUseCase _bankRechargeUseCase;
-  WalletCubit(this._stcRechargeUseCase, this._bankRechargeUseCase) : super(WalletInitial());
+  final GetPaymentLinkUseCase _getPaymentLinkUseCase;
+
+  WalletCubit(this._stcRechargeUseCase, this._bankRechargeUseCase, this._getPaymentLinkUseCase)
+      : super(WalletInitial());
   static WalletCubit get(context) => BlocProvider.of(context);
   Future bankRecharge() async {
     emit(BankRechargLoadingState());
@@ -27,6 +32,13 @@ class WalletCubit extends Cubit<WalletState> {
     await _stcRechargeUseCase.execude(STCRechargeRequest(value: valueContoller.text)).then(
         (value) => value.fold(
             (l) => emit(StcRechargErrorState(l.message)), (r) => emit(StcRechargSuccessState())));
+  }
+
+  Future getPaymentLink() async {
+    emit(GetPaymentLinkLoadingState());
+    await _getPaymentLinkUseCase.execude(STCRechargeRequest(value: valueContoller.text)).then(
+        (value) => value.fold((l) => emit(GetPaymentLinkErrorState(l.message)),
+            (r) => emit(GetPaymentLinkSuccessState(r))));
   }
 
   final TextEditingController valueContoller = TextEditingController();

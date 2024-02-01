@@ -22,9 +22,17 @@ class WalletRepositoryImpl implements WalletRepo {
   }
 
   @override
-  Future<Either<Failure, StchRechargeModel>> stcRecharge(STCRechargeRequest stcRechargeRequest) {
-    return executeAndHandleError<StchRechargeModel>(() async {
+  Future<Either<Failure, SuccessModel>> stcRecharge(STCRechargeRequest stcRechargeRequest) {
+    return executeAndHandleError<SuccessModel>(() async {
       final response = await _dataSource.stcRecharge(stcRechargeRequest);
+      return response.toDomain();
+    });
+  }
+
+  @override
+  Future<Either<Failure, StchRechargeModel>> getPaymentLink(STCRechargeRequest stcRechargeRequest) {
+    return executeAndHandleError<StchRechargeModel>(() async {
+      final response = await _dataSource.getPaymentLink(stcRechargeRequest);
       return response.toDomain();
     });
   }

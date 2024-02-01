@@ -5,6 +5,9 @@ import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
+import 'package:hasad_app/services/firebase_messaging_service.dart';
+import 'package:hasad_app/utils/cache_helper.dart';
+import 'package:hasad_app/utils/cache_keys.dart';
 
 import '../../../../../../../../utils/routes_manager.dart';
 import '../../../../../data/network/auth_requests.dart';
@@ -16,27 +19,29 @@ class UserSignupButton extends StatelessWidget {
   final UserSignUpRequest userSignUpRequest;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserSignUpCubit, UserSignUpState>(
-      listener: (context, state) {
-        if (state is UserSignUpErrorState) {
-          showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
-        }
-        if (state is UserSignUpSuccessState) {
-          Navigator.pushNamed(context, Routes.homeScreenRoutes);
-          showSnackbar(
-              context: context, text: LocaleKeys.signUpSuccess.tr(), state: ToastStates.SUCCESS);
-        }
-      },
-      builder: (context, state) => state is UserSignUpLoadingState
+    return BlocConsumer<UserSignUpCubit, UserSignUpState>(listener: (context, state) {
+      if (state is UserSignUpErrorState) {
+        showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+      }
+      if (state is UserSignUpSuccessState) {
+        Navigator.pushNamed(context, Routes.homeScreenRoutes);
+        showSnackbar(
+            context: context, text: LocaleKeys.signUpSuccess.tr(), state: ToastStates.SUCCESS);
+      }
+    }, builder: (context, state) {
+      UserSignUpCubit cubit = UserSignUpCubit.get(context);
+      return state is UserSignUpLoadingState
           ? const LoadingWidget()
           : DefaultButton(
               borderRAdius: 43,
               buttonName: LocaleKeys.newRegister.tr(),
-              buttonFunction: () {
+              buttonFunction: () async {
+                userSignUpRequest.deviceToken = await FirebaseMessagingService.getToken() ?? "";
+                CacheHelper.saveData(key: CacheKeys.fcmId, value: userSignUpRequest.deviceToken);
                 if (formKey.currentState!.validate()) {
-                  UserSignUpCubit.get(context).userSignup(userSignUpRequest);
+                  await cubit.userSignup(userSignUpRequest);
                 }
-              }),
-    );
+              });
+    });
   }
 }

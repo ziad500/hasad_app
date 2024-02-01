@@ -12,15 +12,20 @@ abstract class AuthAppServiceClient {
 
   @POST("login")
   Future<MainUserAuthResponse> userLogin(
-      @Part(name: "phone") String phone, @Part(name: "password") String password);
+    @Part(name: "phone") String phone,
+    @Part(name: "password") String password,
+    @Part(name: "device_token") String deviceToken,
+  );
 
   @POST("register")
   Future<MainUserAuthResponse> userSignUp(
-      @Part(name: "name") String name,
-      @Part(name: "phone") int phone,
-      @Part(name: "stc") int stc,
-      @Part(name: "password") String password,
-      @Part(name: "password_confirmation") String passwordConfirmation);
+    @Part(name: "name") String name,
+    @Part(name: "phone") int phone,
+    @Part(name: "stc") int stc,
+    @Part(name: "password") String password,
+    @Part(name: "password_confirmation") String passwordConfirmation,
+    @Part(name: "device_token") String deviceToken,
+  );
 
   @POST("send-reset-password-code")
   Future<dynamic> requestChangePassword(@Part(name: "phone") String phone);

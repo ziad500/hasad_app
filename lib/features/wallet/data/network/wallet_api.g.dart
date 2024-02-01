@@ -62,7 +62,38 @@ class _WalletAppServiceClient implements WalletAppServiceClient {
   }
 
   @override
-  Future<StchRechargeResponse> stcRecharge(String value2) async {
+  Future<SuccessResponse> stcRecharge(String value2) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'value',
+      value2,
+    ));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'recharges/card-stc',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<StchRechargeResponse> getPaymentLink(String value2) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -79,7 +110,7 @@ class _WalletAppServiceClient implements WalletAppServiceClient {
     )
             .compose(
               _dio.options,
-              'recharges/card-stc',
+              'recharges/payment',
               queryParameters: queryParameters,
               data: _data,
             )

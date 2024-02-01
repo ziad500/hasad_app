@@ -4,6 +4,9 @@ import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:hasad_app/services/firebase_messaging_service.dart';
+import 'package:hasad_app/utils/cache_helper.dart';
+import 'package:hasad_app/utils/cache_keys.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
 import '../../../../data/network/auth_requests.dart';
@@ -37,6 +40,7 @@ class LoginButton extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        LoginCubit cubit = LoginCubit.get(context);
         return state is LoginLoadingState
             ? const Center(
                 child: LoadingWidget(),
@@ -44,10 +48,13 @@ class LoginButton extends StatelessWidget {
             : DefaultButton(
                 borderRAdius: 43,
                 buttonName: LocaleKeys.login.tr(),
-                buttonFunction: () {
+                buttonFunction: () async {
+                  CacheHelper.saveData(
+                      key: CacheKeys.fcmId, value: await FirebaseMessagingService.getToken());
+
                   if (formKey.currentState!.validate()) {
-                    LoginCubit.get(context)
-                        .login(LoginRequest(emailController.text, passwordController.text));
+                    await cubit.login(LoginRequest(emailController.text, passwordController.text,
+                        await FirebaseMessagingService.getToken() ?? ""));
                   }
                 });
       },

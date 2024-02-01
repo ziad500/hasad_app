@@ -11,10 +11,7 @@ StchRechargeResponse _$StchRechargeResponseFromJson(
     StchRechargeResponse(
       message: json['message'] as String?,
       status: json['status'] as bool?,
-      data: json['data'] == null
-          ? null
-          : StcRechargeDataResponse.fromJson(
-              json['data'] as Map<String, dynamic>),
+      url: json['data'] as String?,
     );
 
 Map<String, dynamic> _$StchRechargeResponseToJson(
@@ -22,19 +19,5 @@ Map<String, dynamic> _$StchRechargeResponseToJson(
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'data': instance.data,
-    };
-
-StcRechargeDataResponse _$StcRechargeDataResponseFromJson(
-        Map<String, dynamic> json) =>
-    StcRechargeDataResponse(
-      id: json['id'] as String?,
-      url: json['url'] as String?,
-    );
-
-Map<String, dynamic> _$StcRechargeDataResponseToJson(
-        StcRechargeDataResponse instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'url': instance.url,
+      'data': instance.url,
     };
