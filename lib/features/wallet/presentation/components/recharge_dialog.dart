@@ -7,6 +7,7 @@ import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/done_request_screen.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -22,6 +23,7 @@ Future rechargeDialog(context,
               child: BlocConsumer<WalletCubit, WalletState>(
                 listener: (context, state) {
                   if (state is BankRechargSuccessState) {
+                    ProfileCubit.get(context).getProfileData();
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

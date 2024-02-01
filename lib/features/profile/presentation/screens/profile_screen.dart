@@ -46,8 +46,9 @@ class ProfileScreen extends StatelessWidget {
                               child: SettingsItem(
                                   icon: _settingsList()[index].icon,
                                   title: _settingsList()[index].title,
-                                  balance: index == 0 ? "${model?.balance}" : null,
-                                  pendingBalance: index == 0 ? "${model?.reservedBalance}" : null),
+                                  balance: index == 0 ? "${model?.balance ?? ""}" : null,
+                                  pendingBalance:
+                                      index == 0 ? "${model?.reservedBalance ?? ""}" : null),
                             ),
                         count: _settingsList().length),
                   ),

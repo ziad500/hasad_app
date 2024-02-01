@@ -11,6 +11,7 @@ import 'package:hasad_app/features/invoice/presentation/screens/invoice_screen.d
 import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/my_advertisement/presentation/screens/my_advertisement_screen.dart';
 import 'package:hasad_app/features/my_orders/presentation/screens/my_orders_screen.dart';
+import 'package:hasad_app/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:hasad_app/features/payment/presentation/screens/payment_screen.dart';
 import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
@@ -46,6 +47,7 @@ class Routes {
   static const String favoritesRoutes = "/favoritesRoutes";
   static const String walletScreenRoutes = "/WalletScreenRoutes";
   static const String uploadSlipScreen = "/UploadSlipScreen";
+  static const String notificationsScreen = "/NotificationsScreen";
 
   ////////
   ///
@@ -60,6 +62,12 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.notificationsScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const NotificationsScreen();
+          },
+        );
       case Routes.uploadSlipScreen:
         return MaterialPageRoute(
           builder: (context) {

@@ -6,7 +6,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
-import '../core/di.dart';
 import '../main.dart';
 import '../utils/routes_manager.dart';
 
@@ -48,20 +47,14 @@ class LocalNotificationsService {
   // Handle the action when a notification is selected
   static Future<void> onSelectNotification(String? payload) async {
     if (payload != null) {
-      /*  initNotifications();
+      //initNotifications();
       var data = jsonDecode(payload);
 
       if (data.isEmpty) {
-        HomeCubit.get(navigatorKey.currentContext)
-            .getStatistics(staticticsType(), StatisticsRequest(null));
-
-        await navigatorKey.currentState?.pushReplacementNamed(Routes.homeRoutes);
+        await navigatorKey.currentState!.pushNamed(Routes.notificationsScreen);
       } else {
-        HomeCubit.get(navigatorKey.currentContext)
-            .getStatistics(staticticsType(), StatisticsRequest(null));
-
-        handleResponse(FirebaseNotificationModel.fromJson(data), notificationsModel: null);
-      } */
+        await navigatorKey.currentState!.pushNamed(Routes.notificationsScreen);
+      }
     }
   }
 
@@ -89,8 +82,8 @@ class LocalNotificationsService {
   // Show a notification with given ID, title, body, and payload
   static void showNotification(int id, {String? title, String? body, String? payload}) async {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-      'SSS_notification', // channel id
-      'SSS Notification', // channel name
+      'hasad_notification', // channel id
+      'hasad Notification', // channel name
       importance: Importance.max,
       priority: Priority.high,
       enableLights: true,
@@ -122,8 +115,8 @@ class LocalNotificationsService {
   static Future<void> scheduleDailyNotification(int notificationId, String title, String body,
       DateTime endDate, DateTimeComponents? dateTimeComponents) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'SSS_notification', // channel id
-      'SSS Notification', // channel name
+      'hasad_notification', // channel id
+      'hasad Notification', // channel name
       importance: Importance.high,
       priority: Priority.high,
       enableLights: true,
@@ -149,19 +142,13 @@ class LocalNotificationsService {
   static Future onDidReceiveLocalNotification(
       int id, String? title, String? body, String? payload) async {
     if (payload != null) {
-      /*  initNotifications();
+      //  initNotifications();
       var data = jsonDecode(payload);
       if (data.isEmpty) {
-        HomeCubit.get(navigatorKey.currentContext)
-            .getStatistics(staticticsType(), StatisticsRequest(null));
-
-        await navigatorKey.currentState?.pushReplacementNamed(Routes.homeRoutes);
+        await navigatorKey.currentState!.pushNamed(Routes.notificationsScreen);
       } else {
-        HomeCubit.get(navigatorKey.currentContext)
-            .getStatistics(staticticsType(), StatisticsRequest(null));
-
-        handleResponse(FirebaseNotificationModel.fromJson(data), notificationsModel: null);
-      } */
+        await navigatorKey.currentState!.pushNamed(Routes.notificationsScreen);
+      }
     }
   }
 /* 

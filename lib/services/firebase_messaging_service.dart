@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:hasad_app/main.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 import 'local_notifications_service.dart';
 
 /// Service class to handle Firebase Cloud Messaging (FCM) functionality.
@@ -8,12 +10,10 @@ class FirebaseMessagingService {
 
   // Function to get the initial message
   static Future<RemoteMessage?> getInitialMessage() async {
-    return await fcm?.getInitialMessage().then((message) {
+    return await fcm?.getInitialMessage().then((message) async {
       RemoteNotification? notification = message?.notification;
       if (notification != null && message?.data != null) {
-        /*  NotificationsCubit.get(navigatorKey.currentContext).hasUnReadNotifications();
-        LocalNotificationsService.handleClosedAppUserNavigate(
-            FirebaseNotificationModel.fromJson(message!.data)); */
+        await navigatorKey.currentState!.pushNamed(Routes.notificationsScreen);
       }
       return message;
     });
@@ -26,6 +26,7 @@ class FirebaseMessagingService {
     RemoteNotification? notification = message.notification;
     if (notification != null) {
       // Handle the notification when the app is in the background
+      // await navigatorKey.currentState!.pushNamed(Routes.notificationsScreen);
     }
   }
 
@@ -47,8 +48,6 @@ class FirebaseMessagingService {
 
       if (notification != null) {
         // Handle the notification when the app is open
-/*         NotificationsCubit.get(navigatorKey.currentContext).hasUnReadNotifications();
- */
         handleNotification(notification, message);
       }
     });
@@ -59,8 +58,7 @@ class FirebaseMessagingService {
 
       RemoteNotification? notification = message.notification;
       if (notification != null) {
-        /*  LocalNotificationsService.handleClosedAppUserNavigate(
-            FirebaseNotificationModel.fromJson(message.data)); */
+        await navigatorKey.currentState!.pushNamed(Routes.notificationsScreen);
       }
     });
 

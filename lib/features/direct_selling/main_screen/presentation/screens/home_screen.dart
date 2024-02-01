@@ -21,32 +21,34 @@ class HomeScreen extends StatelessWidget {
       create: (context) => sl<DirectSellingListCubit>()..getDirectSellingList(),
       child: Scaffold(
         backgroundColor: AppColors.scaffoldColor,
-        body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SearchBarWidget(),
-              RowOfTextViewAllWidget(title: LocaleKeys.directSaleCategories.tr(), onPressed: () {}),
-              SizedBox(
-                height: 5.h,
-              ),
-              const CategoriesList(type: 1),
-              SizedBox(
-                height: 20.h,
-              ),
-              TitleWidget(title: LocaleKeys.recentlyAdded.tr()),
-              SizedBox(
-                height: 15.h,
-              ),
-              const Expanded(
-                  child: DirectSellingListView(
-                expanded: false,
-              ))
-            ],
-          ),
-        )),
+        body: SingleChildScrollView(
+          child: SafeArea(
+              child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SearchBarWidget(),
+                RowOfTextViewAllWidget(
+                    title: LocaleKeys.directSaleCategories.tr(), onPressed: () {}),
+                SizedBox(
+                  height: 5.h,
+                ),
+                const CategoriesList(type: 1),
+                SizedBox(
+                  height: 20.h,
+                ),
+                TitleWidget(title: LocaleKeys.recentlyAdded.tr()),
+                SizedBox(
+                  height: 15.h,
+                ),
+                const DirectSellingListView(
+                  expanded: false,
+                )
+              ],
+            ),
+          )),
+        ),
       ),
     );
   }

@@ -1,17 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
 import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
 import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
+import 'package:hasad_app/main_functions.dart';
 import 'package:hasad_app/services/firebase_messaging_service.dart';
-import 'package:hasad_app/services/local_notifications_service.dart';
-
-import 'firebase_options.dart';
-import 'utils/bloc_observer.dart';
-import 'utils/cache_helper.dart';
-import 'utils/cache_keys.dart';
 import 'utils/language_manager.dart';
 import 'utils/routes_manager.dart';
 import 'utils/theme_manager.dart';
@@ -19,34 +13,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'core/constants.dart';
 import 'core/di.dart' as di;
 import 'core/network_cubit.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  FirebaseMessagingService.init();
-  LocalNotificationsService.init();
-  await EasyLocalization.ensureInitialized();
-  await CacheHelper.init();
-  Bloc.observer = MyBlocObserver();
-  await di.initAppModule();
-  Constants.token = CacheHelper.getData(key: CacheKeys.token) ?? "";
-  Constants.userId = CacheHelper.getData(key: CacheKeys.userId).toString();
+  await APPInit.init();
+  print(await FirebaseMessagingService.getToken());
   print(Constants.token);
-  runApp(EasyLocalization(
-    supportedLocales: const [ARABIC_LOCAL, ENGLISH_LOCAL],
-    path: ASSET_PATH_LOCALIZATION,
-    saveLocale: true,
-    startLocale: ARABIC_LOCAL,
-    fallbackLocale: ENGLISH_LOCAL,
+  runApp(LanguageManager.easyLocalizationInit(
     child: DevicePreview(
-      builder: (context) => const MyApp(), // Wrap your app
+      builder: (context) => const MyApp(),
     ),
   ));
 }

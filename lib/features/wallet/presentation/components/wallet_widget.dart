@@ -36,10 +36,12 @@ class WalletWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           title: LocaleKeys.balance.tr()),
-                      SubTitleWidget(
-                        fontWeight: FontWeight.bold,
-                        subTitle: LocaleKeys.purchaseReservedBalance.tr(),
-                        color: AppColors.darkBlue,
+                      Flexible(
+                        child: SubTitleWidget(
+                          fontWeight: FontWeight.bold,
+                          subTitle: LocaleKeys.purchaseReservedBalance.tr(),
+                          color: AppColors.darkBlue,
+                        ),
                       ),
                     ],
                   )),

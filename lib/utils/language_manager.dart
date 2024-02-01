@@ -28,6 +28,14 @@ extension LanguageTypeExtension on LanguageType {
 }
 
 class LanguageManager {
+  static dynamic easyLocalizationInit({required Widget child}) => EasyLocalization(
+      supportedLocales: const [ARABIC_LOCAL, ENGLISH_LOCAL],
+      path: ASSET_PATH_LOCALIZATION,
+      saveLocale: true,
+      startLocale: ARABIC_LOCAL,
+      fallbackLocale: ENGLISH_LOCAL,
+      child: child);
+
   static Future<Locale> getLocal() async {
     String currentLanguage = await LanguageManager.getAppLanguage();
     if (currentLanguage == LanguageType.ENGLISH.getValue()) {
