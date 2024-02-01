@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/wallet/presentation/components/recharge_section/recharge_section.dart';
 import 'package:hasad_app/features/wallet/presentation/components/wallet_widget.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class WalletScreen extends StatelessWidget {
@@ -17,13 +19,13 @@ class WalletScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => sl<WalletCubit>(),
       child: DefaultScaffold(
-          appbarTitle: "Wallet",
+          appbarTitle: LocaleKeys.wallet.tr(),
           body: SingleChildScrollView(
             child: Column(
               children: [
                 Center(
                   child: TitleWidget(
-                    title: "المحفظة الخاصة بك",
+                    title: LocaleKeys.yourWallet.tr(),
                     size: 14.sp,
                     color: AppColors.blue,
                   ),

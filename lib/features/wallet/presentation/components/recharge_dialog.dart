@@ -63,7 +63,7 @@ Future rechargeDialog(context,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 DefaultText(
-                                  text: "شحن بطاقة",
+                                  text: LocaleKeys.rechargeCard.tr(),
                                   textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                                       color: AppColors.blue, fontWeight: FontWeight.bold),
                                 ),
@@ -75,13 +75,13 @@ Future rechargeDialog(context,
                                     borderRadius: 10,
                                     borderColro: AppColors.blue,
                                     controller: cubit.valueContoller,
-                                    hint: "إدخل القيمة الجديدة للسعر",
+                                    hint: LocaleKeys.enterNewPrice.tr(),
                                     validator: defaultValidation),
                                 SizedBox(
                                   height: 20.h,
                                 ),
                                 DefaultButton(
-                                  buttonName: "شحن",
+                                  buttonName: LocaleKeys.recharge.tr(),
                                   loadingColor: AppColors.primaryColor,
                                   isLoading: state is BankRechargLoadingState ||
                                       state is GetPaymentLinkLoadingState,

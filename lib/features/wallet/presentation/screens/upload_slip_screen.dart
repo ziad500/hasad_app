@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_button.dart';
@@ -7,6 +8,7 @@ import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/wallet/presentation/components/recharge_dialog.dart';
 import 'package:hasad_app/features/wallet/presentation/components/upload_slip_main_item.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class UploadSlipScreen extends StatelessWidget {
@@ -23,8 +25,8 @@ class UploadSlipScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SubTitleWidget(
-                subTitle: "Make Sure that slip details is clear in order to be confirmed",
+              SubTitleWidget(
+                subTitle: LocaleKeys.ensureReceiptDetailsClear.tr(),
                 color: AppColors.primaryColor,
               ),
               const SizedBox(height: 16),
@@ -32,7 +34,7 @@ class UploadSlipScreen extends StatelessWidget {
                 builder: (context, state) {
                   WalletCubit cubit = WalletCubit.get(context);
                   return DefaultButton(
-                    buttonName: "send",
+                    buttonName: LocaleKeys.send.tr(),
                     buttonFunction: () {
                       rechargeDialog(context, walletCubit: cubit);
                     },
@@ -42,19 +44,19 @@ class UploadSlipScreen extends StatelessWidget {
             ],
           ),
         ),
-        appbarTitle: "Upload Slip",
-        body: const Padding(
-          padding: EdgeInsets.all(20.0),
+        appbarTitle: LocaleKeys.uploadReceipt.tr(),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SubTitleWidget(
-                subTitle: "Upload File",
+                subTitle: LocaleKeys.uploadFile.tr(),
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 10),
-              UploadSlipMainItem(),
+              const SizedBox(height: 10),
+              const UploadSlipMainItem(),
             ],
           ),
         ),

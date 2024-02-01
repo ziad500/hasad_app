@@ -154,5 +154,22 @@ abstract class  LocaleKeys {
   static const orderDetails = 'orderDetails';
   static const invoiceNumber = 'invoiceNumber';
   static const date = 'date';
+  static const rechargeWallet = 'rechargeWallet';
+  static const rechargeByCardOrSTC = 'rechargeByCardOrSTC';
+  static const rechargeByDeposit = 'rechargeByDeposit';
+  static const rechargeCard = 'rechargeCard';
+  static const enterNewPrice = 'enterNewPrice';
+  static const recharge = 'recharge';
+  static const uploadFiles = 'uploadFiles';
+  static const balance = 'balance';
+  static const purchaseReservedBalance = 'purchaseReservedBalance';
+  static const reservedBalanceNote = 'reservedBalanceNote';
+  static const yourWallet = 'yourWallet';
+  static const uploadFile = 'uploadFile';
+  static const uploadReceipt = 'uploadReceipt';
+  static const send = 'send';
+  static const ensureReceiptDetailsClear = 'ensureReceiptDetailsClear';
+  static const reservedBalance = 'reservedBalance';
+  static const youHaveSuccessfullyPaid = 'youHaveSuccessfullyPaid';
 
 }

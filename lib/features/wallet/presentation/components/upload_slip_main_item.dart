@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
@@ -46,7 +48,7 @@ class UploadSlipMainItem extends StatelessWidget {
                           const SizedBox(height: 10),
                           Flexible(
                             child: TitleWidget(
-                              title: "jpg,jpeg,png or webp File size no more than 5MB",
+                              title: LocaleKeys.uploadFiles.tr(),
                               size: 14.sp,
                               color: Colors.grey,
                             ),

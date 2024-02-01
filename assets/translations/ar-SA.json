@@ -151,7 +151,27 @@
 "biddingWin":"تم الفوز بالمذاد",
 "orderDetails": "تفاصيل الطلب",
 "invoiceNumber": "رقم الفاتورة",
-"date": "التاريخ"
+"date": "التاريخ",
+
+"rechargeWallet": "شحن المحفظة",
+"rechargeByCardOrSTC": "شحن عن طريق البطاقة أو STC",
+"rechargeByDeposit": "شحن عن طريق الإيداع",
+"rechargeCard": "شحن بطاقة",
+"enterNewPrice": "إدخال القيمة الجديدة للسعر",
+"recharge": "شحن",
+"uploadFiles": "رفع ملفات jpg، jpeg، png، أو webp بحجم لا يزيد عن 5 ميجابايت",
+"balance": "الرصيد",
+"purchaseReservedBalance": "(مخصص للشراء)",
+"reservedBalanceNote": "**الرصيد المحجوز: يتم حجز هذا الرصيد إذا تم المشاركة في المزاد، وخلال فترة المزاد، وفي حال عدم الفوز بالمزاد يتم تحويله إلى رصيد يمكن استخدامه في الشراء أو يتم سحبه",
+"yourWallet": "المحفظة الخاصة بك",
+"uploadFile": "رفع ملف",
+"uploadReceipt": "رفع الإيصال",
+"send": "إرسال",
+"ensureReceiptDetailsClear": "تأكد من وضوح تفاصيل الإيصال لتأكيد الطلب",
+"reservedBalance":"**الرصيد المحجوز",
+"youHaveSuccessfullyPaid": "لقد دفعت بنجاح"
+
+
 
 
 

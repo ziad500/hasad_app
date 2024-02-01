@@ -29,14 +29,16 @@ class WalletWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
+                  Expanded(
                       child: Row(
                     children: [
                       TitleWidget(
-                          fontWeight: FontWeight.bold, color: Colors.white, title: "الرصيد"),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          title: LocaleKeys.balance.tr()),
                       SubTitleWidget(
                         fontWeight: FontWeight.bold,
-                        subTitle: "(مخصص للشراء)",
+                        subTitle: LocaleKeys.purchaseReservedBalance.tr(),
                         color: AppColors.darkBlue,
                       ),
                     ],
@@ -54,10 +56,10 @@ class WalletWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: TitleWidget(
                       fontWeight: FontWeight.bold,
-                      title: "**الرصيد المحجوز",
+                      title: LocaleKeys.reservedBalance.tr(),
                       color: AppColors.red,
                     ),
                   ),
@@ -75,8 +77,7 @@ class WalletWidget extends StatelessWidget {
                 width: 250.w,
                 child: SubTitleWidget(
                   fontSize: 10.sp,
-                  subTitle:
-                      "** يتم حجز هذا الرصيد إذا تم المشاركة فى المزاد وخلال فتره المزاد وفى حالى  عدم الفوز بالمزاد يتم تحويله إلى رصيد يمكن إسعماله  فى الشراء أو أن يتم سحبه ",
+                  subTitle: LocaleKeys.reservedBalanceNote.tr(),
                   color: AppColors.white,
                 ),
               ),

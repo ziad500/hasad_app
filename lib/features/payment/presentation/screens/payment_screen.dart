@@ -63,7 +63,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       donePageState: DonePageState.done,
                       title: LocaleKeys.donePayment.tr(),
                       subTitle:
-                          "You Have Successfully paid ${widget.value} ${LocaleKeys.saudiRiyal.tr()}",
+                          "${LocaleKeys.youHaveSuccessfullyPaid.tr()} ${widget.value} ${LocaleKeys.saudiRiyal.tr()}",
                       route: Routes.homeScreenRoutes)),
               (route) => false);
         }

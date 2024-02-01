@@ -154,7 +154,26 @@
 "biddingWin": "Bid won",
 "orderDetails": "Order Details",
 "invoiceNumber": "Invoice Number",
-"date": "Date"
+"date": "Date",
+"rechargeWallet": "Recharge Wallet",
+"rechargeByCardOrSTC": "Recharge by Card or STC",
+"rechargeByDeposit": "Recharge by Deposit",
+"rechargeCard": "Recharge Card",
+"enterNewPrice": "Enter New Price",
+"recharge": "Recharge",
+"uploadFiles": "Upload jpg, jpeg, png, or webp files with a size not exceeding 5MB",
+"balance": "Balance",
+"purchaseReservedBalance": "(Reserved for Purchase)",
+"reservedBalanceNote": "**Reserved Balance: This balance is reserved if participating in an auction. If not won, it will be transferred to a balance usable for purchasing or can be withdrawn.",
+"yourWallet": "Your Wallet",
+"uploadFile": "Upload File",
+"uploadReceipt": "Upload Receipt",
+"send": "Send",
+"ensureReceiptDetailsClear": "Ensure Receipt Details are Clear to Confirm the Order",
+"reservedBalance":"Reserved Balance",
+"youHaveSuccessfullyPaid": "You have successfully paid"
+
+
 
    
 }
