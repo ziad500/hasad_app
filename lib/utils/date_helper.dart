@@ -107,17 +107,19 @@ double calculateTimePercentage(String startStr, String endStr) {
 }
 
 String fullFormatTimestamp(DateTime timestamp) {
-  String formattedDate = DateFormat('dd-MM-yyyy . hh:mm a').format(timestamp);
+  String formattedDate =
+      DateFormat('dd-MM-yyyy . hh:mm a', Constants.isArabic ? "ar" : "en").format(timestamp);
   return formattedDate;
 }
 
 String timeFormatTimestamp(DateTime timestamp) {
-  String formattedDate = DateFormat('hh:mm a').format(timestamp);
+  String formattedDate = DateFormat('hh:mm a', Constants.isArabic ? "ar" : "en").format(timestamp);
   return formattedDate;
 }
 
 String dateFormatTimestamp(DateTime timestamp) {
-  String formattedDate = DateFormat('dd-MM-yyyy').format(timestamp);
+  String formattedDate =
+      DateFormat('dd-MM-yyyy', Constants.isArabic ? "ar" : "en").format(timestamp);
   return formattedDate;
 }
 

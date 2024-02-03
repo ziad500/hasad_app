@@ -8,12 +8,14 @@ import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/common/user_image.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/features/profile/presentation/components/settings_item.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/cache_helper.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
@@ -41,12 +43,19 @@ class ProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 50, top: 20),
                     child: DefaultListView(
                         itemBuilder: (context, index) => InkWell(
-                              onTap: () =>
-                                  Navigator.pushNamed(context, _settingsList()[index].route),
+                              onTap: () {
+                                if (_settingsList()[index].func != null) {
+                                  _settingsList()[index].func!(context);
+                                } else {
+                                  Navigator.pushNamed(context, _settingsList()[index].route);
+                                }
+                              },
                               child: SettingsItem(
                                   icon: _settingsList()[index].icon,
                                   title: _settingsList()[index].title,
                                   balance: index == 0 ? "${model?.balance ?? ""}" : null,
+                                  iconWidget: _settingsList()[index].iconWidget,
+                                  color: _settingsList()[index].color,
                                   pendingBalance:
                                       index == 0 ? "${model?.reservedBalance ?? ""}" : null),
                             ),
@@ -123,16 +132,36 @@ List<_SettingsModel> _settingsList() => [
           icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: Routes.favoritesRoutes),
       _SettingsModel(icon: SVGManager.flag, title: LocaleKeys.aboutHarvest.tr(), route: ""),
       _SettingsModel(icon: SVGManager.archive, title: LocaleKeys.termsOfUse.tr(), route: ""),
-      _SettingsModel(icon: SVGManager.shield, title: LocaleKeys.privacyPolicy.tr(), route: "")
+      _SettingsModel(icon: SVGManager.shield, title: LocaleKeys.privacyPolicy.tr(), route: ""),
+      _SettingsModel(
+          color: AppColors.red,
+          icon: SVGManager.shield,
+          title: Constants.isArabic ? "تسجيل الخروج" : "Logout",
+          iconWidget: const Icon(
+            Icons.logout,
+            color: Colors.white,
+          ),
+          func: (context) {
+            CacheHelper.clearData();
+            Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoutes, (route) => false);
+          },
+          route: ""),
     ];
 
 class _SettingsModel {
   String icon;
   String title;
   String route;
+  Widget? iconWidget;
+  Function(BuildContext)? func;
+  final Color? color;
+
   _SettingsModel({
     required this.icon,
     required this.title,
     required this.route,
+    this.iconWidget,
+    this.func,
+    this.color,
   });
 }

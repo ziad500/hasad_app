@@ -64,6 +64,16 @@ import 'package:hasad_app/features/lists/domain/use_cases/get_cities_list_usecas
 import 'package:hasad_app/features/lists/domain/use_cases/get_districts_list_usecase.dart';
 import 'package:hasad_app/features/lists/domain/use_cases/get_list_by_endpoint_usecase.dart';
 import 'package:hasad_app/features/lists/presentation/controller/cubit/lists_cubit.dart';
+import 'package:hasad_app/features/notifications/data/data_source/notifications_data_source.dart';
+import 'package:hasad_app/features/notifications/data/network/notifications_api.dart';
+import 'package:hasad_app/features/notifications/data/repository/notifications_repo_impl.dart';
+import 'package:hasad_app/features/notifications/domain/repository/notifications_repo.dart';
+import 'package:hasad_app/features/notifications/domain/use_cases/delete_device_fcm_usecase.dart';
+import 'package:hasad_app/features/notifications/domain/use_cases/delete_notification_usecase.dart';
+import 'package:hasad_app/features/notifications/domain/use_cases/get_notification_usecase.dart';
+import 'package:hasad_app/features/notifications/domain/use_cases/has_un_read_notifications_usecase.dart';
+import 'package:hasad_app/features/notifications/domain/use_cases/read_notification_usecase.dart';
+import 'package:hasad_app/features/notifications/presentation/controller/notifications_cubit.dart';
 import 'package:hasad_app/features/profile/data/data_source/profile_remote_data_source.dart';
 import 'package:hasad_app/features/profile/data/network/profile_api.dart';
 import 'package:hasad_app/features/profile/data/repository/profile_repo_impl.dart';
@@ -124,6 +134,7 @@ Future<void> initAppModule() async {
   iniInvoice();
   initChatsModule();
   iniWallet();
+  initNotifications();
 }
 
 iniLogin() async {
@@ -587,5 +598,50 @@ iniWallet() async {
   }
   if (!GetIt.I.isRegistered<CollectMoneyUseCase>()) {
     sl.registerLazySingleton<CollectMoneyUseCase>(() => CollectMoneyUseCase(sl.call()));
+  }
+}
+
+initNotifications() async {
+  //cubit
+  if (!GetIt.I.isRegistered<NotificationsCubit>()) {
+    sl.registerFactory<NotificationsCubit>(
+        () => NotificationsCubit(sl.call(), sl.call(), sl.call(), sl.call(), sl.call()));
+  }
+  //app service client instance
+  if (!GetIt.I.isRegistered<NotificationsAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<NotificationsAppServiceClient>(
+        () => NotificationsAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<NotificationsRepository>()) {
+    sl.registerLazySingleton<NotificationsRepository>(() => NotificationsRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<NotificationsRemoteDataSource>()) {
+    sl.registerLazySingleton<NotificationsRemoteDataSource>(
+        () => NotificationsRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetNotificationsUsecase>()) {
+    sl.registerLazySingleton<GetNotificationsUsecase>(() => GetNotificationsUsecase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<DeleteNotificationsUsecase>()) {
+    sl.registerLazySingleton<DeleteNotificationsUsecase>(
+        () => DeleteNotificationsUsecase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<ReadNotificationsUsecase>()) {
+    sl.registerLazySingleton<ReadNotificationsUsecase>(() => ReadNotificationsUsecase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<HasUnReadNotificationsUsecase>()) {
+    sl.registerLazySingleton<HasUnReadNotificationsUsecase>(
+        () => HasUnReadNotificationsUsecase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<DeleteDeviceFcmUsecase>()) {
+    sl.registerLazySingleton<DeleteDeviceFcmUsecase>(() => DeleteDeviceFcmUsecase(sl.call()));
   }
 }

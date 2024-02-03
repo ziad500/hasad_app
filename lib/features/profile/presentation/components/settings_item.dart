@@ -6,11 +6,19 @@ import 'package:hasad_app/utils/app_colors.dart';
 
 class SettingsItem extends StatelessWidget {
   const SettingsItem(
-      {super.key, required this.icon, required this.title, this.pendingBalance, this.balance});
+      {super.key,
+      required this.icon,
+      required this.title,
+      this.pendingBalance,
+      this.balance,
+      this.iconWidget,
+      this.color});
   final String icon;
   final String title;
   final String? pendingBalance;
   final String? balance;
+  final Widget? iconWidget;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +30,11 @@ class SettingsItem extends StatelessWidget {
           height: 40.h,
           padding: const EdgeInsets.symmetric(horizontal: 15).w,
           decoration: BoxDecoration(
-              color: AppColors.addRequestContainerColor, borderRadius: BorderRadius.circular(10.6)),
+              color: color ?? AppColors.addRequestContainerColor,
+              borderRadius: BorderRadius.circular(10.6)),
           child: Row(
             children: [
-              SvgPicture.asset(icon),
+              iconWidget ?? SvgPicture.asset(icon),
               Expanded(
                 child: Center(
                   child: TitleWidget(

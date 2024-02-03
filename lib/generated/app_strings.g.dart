@@ -1,8 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-// ignore_for_file: constant_identifier_names
-
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const success = 'success';
   static const bad_request_error = 'bad_request_error';
   static const forbidden_error = 'forbidden_error';
@@ -177,4 +175,6 @@ abstract class LocaleKeys {
   static const requestBalanceWithdrawal = 'requestBalanceWithdrawal';
   static const doneUpload = 'doneUpload';
   static const doneSend = 'doneSend';
+  static const notifications = 'notifications';
+
 }
