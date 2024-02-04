@@ -27,7 +27,7 @@ class BiddingOrdersListResponse {
 @JsonSerializable()
 class BiddingOrderResponse {
   @JsonKey(name: "purchase_invoice_id")
-  int? purchaseInvoiceId;
+  String? purchaseInvoiceId;
   @JsonKey(name: "advertisement_id")
   String? advertisementId;
   @JsonKey(name: "title")

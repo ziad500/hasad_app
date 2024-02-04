@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/network_image.dart';
+import 'package:hasad_app/common/video/video_view.dart';
 import 'package:hasad_app/features/slider/presentation/components/page_indicator_widget.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/helpers.dart';
@@ -45,13 +46,15 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                         }
                         if (!isImage(offer)) {
                           return InkWell(
-                            //TODO
-                            //   onTap: ()=>,
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => VideoPlayerFromPath(videoPath: offer))),
                             child: Container(
                               height: widget.height ?? 240.h,
                               width: double.maxFinite,
                               decoration: BoxDecoration(
-                                  color: AppColors.addRequestContainerColor,
+                                  color: AppColors.grey,
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(widget.borderRadius ?? 25),
                                       bottomRight: Radius.circular(widget.borderRadius ?? 25))),
@@ -86,10 +89,6 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                               ),
                             ),
                             imageBuilder: (context, imageProvider) {
-                              if (offer == null) {
-                                return const SizedBox();
-                              }
-
                               return Container(
                                 height: widget.height ?? 240.h,
                                 width: double.maxFinite,

@@ -6,8 +6,7 @@ part of 'orders_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BiddingOrdersListResponse _$BiddingOrdersListResponseFromJson(
-        Map<String, dynamic> json) =>
+BiddingOrdersListResponse _$BiddingOrdersListResponseFromJson(Map<String, dynamic> json) =>
     BiddingOrdersListResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
@@ -16,12 +15,10 @@ BiddingOrdersListResponse _$BiddingOrdersListResponseFromJson(
           .toList(),
       pagination: json['pagination'] == null
           ? null
-          : PaginationResponse.fromJson(
-              json['pagination'] as Map<String, dynamic>),
+          : PaginationResponse.fromJson(json['pagination'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$BiddingOrdersListResponseToJson(
-        BiddingOrdersListResponse instance) =>
+Map<String, dynamic> _$BiddingOrdersListResponseToJson(BiddingOrdersListResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
@@ -29,10 +26,9 @@ Map<String, dynamic> _$BiddingOrdersListResponseToJson(
       'pagination': instance.pagination,
     };
 
-BiddingOrderResponse _$BiddingOrderResponseFromJson(
-        Map<String, dynamic> json) =>
+BiddingOrderResponse _$BiddingOrderResponseFromJson(Map<String, dynamic> json) =>
     BiddingOrderResponse(
-      purchaseInvoiceId: json['purchase_invoice_id'] as int?,
+      purchaseInvoiceId: json['purchase_invoice_id'] as String?,
       advertisementId: json['advertisement_id'] as String?,
       title: json['title'] as String?,
       biddingDate: json['bidding_date'] as String?,
@@ -43,8 +39,7 @@ BiddingOrderResponse _$BiddingOrderResponseFromJson(
       paymentdate: json['payment_date'] as String?,
     );
 
-Map<String, dynamic> _$BiddingOrderResponseToJson(
-        BiddingOrderResponse instance) =>
+Map<String, dynamic> _$BiddingOrderResponseToJson(BiddingOrderResponse instance) =>
     <String, dynamic>{
       'purchase_invoice_id': instance.purchaseInvoiceId,
       'advertisement_id': instance.advertisementId,

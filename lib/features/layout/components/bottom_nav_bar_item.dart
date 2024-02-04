@@ -26,9 +26,7 @@ class BottomNavBarItem extends StatelessWidget {
         minWidth: 40,
         onPressed: () {
           if (index == 3) {
-            if (ProfileCubit.get(context).profileDataModel == null) {
-              ProfileCubit.get(context).getProfileData();
-            }
+            ProfileCubit.get(context).getProfileData();
           }
           cubit.changeScreen(index);
         },

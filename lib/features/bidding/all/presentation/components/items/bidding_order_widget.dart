@@ -88,7 +88,7 @@ class BiddingOrderWidget extends StatelessWidget {
               children: [
                 Expanded(
                     child: DefaultText(
-                  text: " ${biddingOrderModel.price} ${LocaleKeys.saudiRiyal.tr()}",
+                  text: " ${biddingOrderModel.priceAfterTax} ${LocaleKeys.saudiRiyal.tr()}",
                   textStyle:
                       Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.darkBlue),
                 )),

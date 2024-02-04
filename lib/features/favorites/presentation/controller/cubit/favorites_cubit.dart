@@ -71,7 +71,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     await _addToFavoritesUseCase
         .execude(directSellingDataModel.id.toString())
         .then((value) => value.fold((l) => emit(AddToFavoritesListErrorState(l.message)), (r) {
-              if (allFavorites.contains(directSellingDataModel)) {
+              if (allFavorites.any((element) => element.id == directSellingDataModel.id)) {
                 allFavorites.removeWhere((element) => element.id == directSellingDataModel.id);
               } else {
                 allFavorites.add(directSellingDataModel);

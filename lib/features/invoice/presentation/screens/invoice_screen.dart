@@ -26,7 +26,7 @@ class DirectSellingInvoiceScreen extends StatelessWidget {
         builder: (context, state) {
           InvoiceCubit cubit = InvoiceCubit.get(context);
           DirectSelligInvoiceModel? model = cubit.invoiceModel;
-          if (state is GetBiddingLoadingState) {
+          if (state is GetDirectSellingLoadingState) {
             return const LoadingWidget();
           }
           if (model == null) {

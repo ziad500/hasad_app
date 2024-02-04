@@ -78,6 +78,7 @@ Future payInsuranceDialog(context, {required String text, required BiddingDetail
                                     color: AppColors.red,
                                     isLoading: state is PayInsuranceBiddingLoadingState,
                                     textColor: Colors.white,
+                                    loadingColor: AppColors.primaryColor,
                                     icon: SvgPicture.asset(SVGManager.wallet),
                                   ),
                                   SizedBox(

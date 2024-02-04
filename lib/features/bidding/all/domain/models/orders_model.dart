@@ -10,7 +10,7 @@ class BiddingOrdersListModel {
 }
 
 class BiddingOrderModel {
-  int? purchaseInvoiceId;
+  String? purchaseInvoiceId;
   String? advertisementId;
   String? title;
   String? biddingDate;
