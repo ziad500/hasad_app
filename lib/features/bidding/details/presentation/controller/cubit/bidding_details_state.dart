@@ -28,3 +28,27 @@ final class BuyBiddingErrorState extends BiddingDetailsState {
   final String error;
   const BuyBiddingErrorState(this.error);
 }
+
+final class BidBiddingLoadingState extends BiddingDetailsState {}
+
+final class BidBiddingSuccessState extends BiddingDetailsState {
+  final SuccessModel successModel;
+  BidBiddingSuccessState(this.successModel);
+}
+
+final class BidBiddingErrorState extends BiddingDetailsState {
+  final String error;
+  const BidBiddingErrorState(this.error);
+}
+
+final class PayInsuranceBiddingLoadingState extends BiddingDetailsState {}
+
+final class PayInsuranceBiddingSuccessState extends BiddingDetailsState {
+  final SuccessModel successModel;
+  PayInsuranceBiddingSuccessState(this.successModel);
+}
+
+final class PayInsuranceBiddingErrorState extends BiddingDetailsState {
+  final String error;
+  const PayInsuranceBiddingErrorState(this.error);
+}

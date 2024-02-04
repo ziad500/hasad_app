@@ -7,6 +7,7 @@ import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/show_tax_dialog.dart';
 import 'package:hasad_app/core/constants.dart';
+import 'package:hasad_app/features/bidding/details/presentation/components/bid_bottom_sheet.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
 import 'package:hasad_app/features/chats/presentation/screens/message_screen.dart';
@@ -37,7 +38,7 @@ class BiddingRowOfButtons extends StatelessWidget {
                       buttonName: LocaleKeys.bidNow.tr(),
                       textColor: Colors.white,
                       color: AppColors.darkRed,
-                      buttonFunction: () {})),
+                      buttonFunction: () => showBidBottomSheet(context, cubit: cubit))),
               SizedBox(
                 width: 10.w,
               ),
@@ -46,6 +47,7 @@ class BiddingRowOfButtons extends StatelessWidget {
                 buttonName: LocaleKeys.buyNow.tr(),
                 buttonFunction: () => showTaxBottomSheet(context,
                     price: cubit.directSellingDataModel?.purchasingPrice,
+                    note: LocaleKeys.buyBiddingNote.tr(),
                     totalPrice: cubit.directSellingDataModel?.priceAfterTax,
                     buttonFunction: () => cubit.buyBidding()),
                 textColor: Colors.white,

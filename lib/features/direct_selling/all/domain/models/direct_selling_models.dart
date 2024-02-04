@@ -23,6 +23,7 @@ class DirectSellingDataModel {
   String? video;
   String? createdAt;
   ProfileDataModel? owner;
+  LastBidModel? lastBid;
   LocationModel? region;
   LocationModel? city;
   LocationModel? district;
@@ -64,7 +65,8 @@ class DirectSellingDataModel {
       this.purchasingPrice,
       this.biddingDate,
       this.priceAfterTax,
-      this.purchaseTax);
+      this.purchaseTax,
+      this.lastBid);
 }
 
 class TypeModel {
@@ -90,4 +92,17 @@ class LocationModel {
   int? id;
 
   LocationModel(this.id, this.name);
+}
+
+class LastBidModel {
+  num? value;
+  String? name;
+  String? image;
+  String? createdAt;
+  LastBidModel(
+    this.value,
+    this.name,
+    this.image,
+    this.createdAt,
+  );
 }

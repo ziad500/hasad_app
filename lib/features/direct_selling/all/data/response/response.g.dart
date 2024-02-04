@@ -76,6 +76,9 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       biddingDate: json['bidding_date'] as String?,
       priceAfterTax: json['price_after_tax'] as num?,
       purchaseTax: json['purchase_tax'] as num?,
+      lastBid: json['last_bid'] == null
+          ? null
+          : LastBidResponse.fromJson(json['last_bid'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DirectSellingDataResponseToJson(
@@ -93,6 +96,7 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'video': instance.video,
       'created_at': instance.createdAt,
       'owner': instance.owner,
+      'last_bid': instance.lastBid,
       'region': instance.region,
       'city': instance.city,
       'district': instance.district,
@@ -130,4 +134,20 @@ Map<String, dynamic> _$TypeResponseToJson(TypeResponse instance) =>
     <String, dynamic>{
       'name': instance.name,
       'image': instance.image,
+    };
+
+LastBidResponse _$LastBidResponseFromJson(Map<String, dynamic> json) =>
+    LastBidResponse(
+      value: json['value'] as num?,
+      name: json['name'] as String?,
+      image: json['image'] as String?,
+      createdAt: json['created_at'] as String?,
+    );
+
+Map<String, dynamic> _$LastBidResponseToJson(LastBidResponse instance) =>
+    <String, dynamic>{
+      'value': instance.value,
+      'name': instance.name,
+      'image': instance.image,
+      'created_at': instance.createdAt,
     };

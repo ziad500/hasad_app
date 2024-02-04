@@ -13,9 +13,11 @@ NotificationsPaginationResponse _$NotificationsPaginationResponseFromJson(
       message: json['message'] as String?,
       pagination: json['pagination'] == null
           ? null
-          : PaginationResponse.fromJson(json['pagination'] as Map<String, dynamic>),
+          : PaginationResponse.fromJson(
+              json['pagination'] as Map<String, dynamic>),
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => NotificationsResponse.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => NotificationsResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -28,7 +30,8 @@ Map<String, dynamic> _$NotificationsPaginationResponseToJson(
       'data': instance.data,
     };
 
-NotificationsResponse _$NotificationsResponseFromJson(Map<String, dynamic> json) =>
+NotificationsResponse _$NotificationsResponseFromJson(
+        Map<String, dynamic> json) =>
     NotificationsResponse(
       id: json['id'] as String?,
       title: json['title'] as String?,
@@ -37,7 +40,8 @@ NotificationsResponse _$NotificationsResponseFromJson(Map<String, dynamic> json)
       createdAt: json['created_at'] as String?,
     );
 
-Map<String, dynamic> _$NotificationsResponseToJson(NotificationsResponse instance) =>
+Map<String, dynamic> _$NotificationsResponseToJson(
+        NotificationsResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

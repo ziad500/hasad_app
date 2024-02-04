@@ -18,5 +18,14 @@ abstract class BiddingDetailsAppServiceClient {
 
   @POST("advertisement/auctions/purchase/auction-direct")
   Future<SuccessResponse> buyBiddingAdvertisement(
-      @Query('advertisement_id') String? advertisementId);
+      @Part(name: 'advertisement_id') String? advertisementId);
+
+  @POST("advertisement/auctions/bid-now")
+  Future<SuccessResponse> bidBiddingAdvertisement(
+      @Part(name: 'advertisement_id') String? advertisementId,
+      @Part(name: 'bid_price') String? bidPrice);
+
+  @POST("advertisement/auctions/insurance-value/discount")
+  Future<SuccessResponse> payInsuranceBiddingAdvertisement(
+      @Part(name: 'advertisement_id') String? advertisementId);
 }

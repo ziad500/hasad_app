@@ -14,8 +14,10 @@ import 'package:hasad_app/features/bidding/details/data/data_source/remote_data_
 import 'package:hasad_app/features/bidding/details/data/network/bidding_details_api.dart';
 import 'package:hasad_app/features/bidding/details/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/bidding/details/domain/repository/repo.dart';
+import 'package:hasad_app/features/bidding/details/domain/use_cases/bid_usecase.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/buy_bidding_advertisement_usecase.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/get_bidding_details_usecase.dart';
+import 'package:hasad_app/features/bidding/details/domain/use_cases/pay_insurance_usecase.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/categories/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/categories/data/network/categories_api.dart';
@@ -450,7 +452,8 @@ iniBiddingList() async {
 iniBiddingDetails() async {
   //cubit
   if (!GetIt.I.isRegistered<BiddingDetailsCubit>()) {
-    sl.registerFactory<BiddingDetailsCubit>(() => BiddingDetailsCubit(sl.call(), sl.call()));
+    sl.registerFactory<BiddingDetailsCubit>(
+        () => BiddingDetailsCubit(sl.call(), sl.call(), sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -480,6 +483,14 @@ iniBiddingDetails() async {
   if (!GetIt.I.isRegistered<BuyBiddingAdverticseUseCase>()) {
     sl.registerLazySingleton<BuyBiddingAdverticseUseCase>(
         () => BuyBiddingAdverticseUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<BidBiddingAdverticseUseCase>()) {
+    sl.registerLazySingleton<BidBiddingAdverticseUseCase>(
+        () => BidBiddingAdverticseUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<PayInsuranceBiddingAdverticseUseCase>()) {
+    sl.registerLazySingleton<PayInsuranceBiddingAdverticseUseCase>(
+        () => PayInsuranceBiddingAdverticseUseCase(sl.call()));
   }
 }
 

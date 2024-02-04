@@ -29,4 +29,23 @@ class BiddingDetailsRepositoryImpl implements BiddingDetailsRepository {
       return response.toDomain();
     });
   }
+
+  @override
+  Future<Either<Failure, SuccessModel>> bidBiddingAdvertisement(
+      String? advertisementId, String? bidPrice) {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response =
+          await _biddingDetailsRemoteDataSource.bidBiddingAdvertisement(advertisementId, bidPrice);
+      return response.toDomain();
+    });
+  }
+
+  @override
+  Future<Either<Failure, SuccessModel>> payInsuranceBiddingAdvertisement(String? advertisementId) {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response =
+          await _biddingDetailsRemoteDataSource.payInsuranceBiddingAdvertisement(advertisementId);
+      return response.toDomain();
+    });
+  }
 }

@@ -8,4 +8,9 @@ abstract class BiddingDetailsRepository {
   Future<Either<Failure, DirectSellingDetailsModel>> getBiddingDetails(String advertisementId);
 
   Future<Either<Failure, SuccessModel>> buyBiddingAdvertisement(String? advertisementId);
+
+  Future<Either<Failure, SuccessModel>> bidBiddingAdvertisement(
+      String? advertisementId, String? bidPrice);
+
+  Future<Either<Failure, SuccessModel>> payInsuranceBiddingAdvertisement(String? advertisementId);
 }

@@ -26,8 +26,8 @@ class _NotificationsAppServiceClient implements NotificationsAppServiceClient {
     final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<NotificationsPaginationResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<NotificationsPaginationResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -109,8 +109,8 @@ class _NotificationsAppServiceClient implements NotificationsAppServiceClient {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<HasUnReadNotificationsResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HasUnReadNotificationsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,

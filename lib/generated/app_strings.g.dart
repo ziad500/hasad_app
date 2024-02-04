@@ -176,5 +176,6 @@ abstract class  LocaleKeys {
   static const doneUpload = 'doneUpload';
   static const doneSend = 'doneSend';
   static const notifications = 'notifications';
+  static const buyBiddingNote = 'buyBiddingNote';
 
 }

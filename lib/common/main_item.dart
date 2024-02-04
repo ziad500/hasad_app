@@ -284,7 +284,9 @@ class _TimerWidget extends StatelessWidget {
                     child: (value) => IconAndText(
                           widget: Expanded(
                             child: DefaultText(
-                              text: value == "0:0:00:00" ? LocaleKeys.ended.tr() : value,
+                              text: (value == "0:0:00:00" || directSellingDataModel.closed == "1")
+                                  ? LocaleKeys.ended.tr()
+                                  : value,
                               textStyle: Theme.of(context)
                                   .textTheme
                                   .bodySmall

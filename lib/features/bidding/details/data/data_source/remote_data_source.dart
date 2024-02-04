@@ -6,6 +6,10 @@ abstract class BiddingDetailsRemoteDataSource {
   Future<DirectSellingDetailsResponse> getBiddingDetails(String advertisementId);
 
   Future<SuccessResponse> buyBiddingAdvertisement(String? advertisementId);
+
+  Future<SuccessResponse> bidBiddingAdvertisement(String? advertisementId, String? bidPrice);
+
+  Future<SuccessResponse> payInsuranceBiddingAdvertisement(String? advertisementId);
 }
 
 class BiddingDetailsRemoteDataSourceImpl implements BiddingDetailsRemoteDataSource {
@@ -21,4 +25,11 @@ class BiddingDetailsRemoteDataSourceImpl implements BiddingDetailsRemoteDataSour
   @override
   Future<SuccessResponse> buyBiddingAdvertisement(String? advertisementId) =>
       _biddingDetailsAppServiceClient.buyBiddingAdvertisement(advertisementId);
+
+  @override
+  Future<SuccessResponse> bidBiddingAdvertisement(String? advertisementId, String? bidPrice) =>
+      _biddingDetailsAppServiceClient.bidBiddingAdvertisement(advertisementId, bidPrice);
+  @override
+  Future<SuccessResponse> payInsuranceBiddingAdvertisement(String? advertisementId) =>
+      _biddingDetailsAppServiceClient.payInsuranceBiddingAdvertisement(advertisementId);
 }

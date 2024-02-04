@@ -51,6 +51,8 @@ class DirectSellingDataResponse {
   String? createdAt;
   @JsonKey(name: "owner")
   ProfileDataResponse? owner;
+  @JsonKey(name: "last_bid")
+  LastBidResponse? lastBid;
   @JsonKey(name: "region")
   LocationResponse? region;
   @JsonKey(name: "city")
@@ -106,7 +108,8 @@ class DirectSellingDataResponse {
       this.purchasingPrice,
       this.biddingDate,
       this.priceAfterTax,
-      this.purchaseTax});
+      this.purchaseTax,
+      this.lastBid});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -143,4 +146,27 @@ class TypeResponse {
   factory TypeResponse.fromJson(Map<String, dynamic> json) => _$TypeResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$TypeResponseToJson(this);
+}
+
+@JsonSerializable()
+class LastBidResponse {
+  @JsonKey(name: "value")
+  num? value;
+  @JsonKey(name: "name")
+  String? name;
+  @JsonKey(name: "image")
+  String? image;
+  @JsonKey(name: "created_at")
+  String? createdAt;
+  LastBidResponse({
+    this.value,
+    this.name,
+    this.image,
+    this.createdAt,
+  });
+
+  // from json
+  factory LastBidResponse.fromJson(Map<String, dynamic> json) => _$LastBidResponseFromJson(json);
+  // to json
+  Map<String, dynamic> toJson() => _$LastBidResponseToJson(this);
 }

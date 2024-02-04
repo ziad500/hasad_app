@@ -37,7 +37,8 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.purchasingPrice,
         this?.biddingDate,
         this?.priceAfterTax,
-        this?.purchaseTax);
+        this?.purchaseTax,
+        this?.lastBid.toDomain());
   }
 }
 
@@ -45,6 +46,12 @@ extension DirectSellingListResponseMapper on DirectSellingListResponse? {
   DirectSellingListModel toDomain() {
     return DirectSellingListModel(this?.status, this?.message,
         this?.data?.map((e) => e.toDomain()).toList(), this?.pagination.toDomain());
+  }
+}
+
+extension LastBidResponseMapper on LastBidResponse? {
+  LastBidModel toDomain() {
+    return LastBidModel(this?.value, this?.name, this?.image, this?.createdAt);
   }
 }
 

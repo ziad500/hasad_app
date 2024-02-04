@@ -41,7 +41,9 @@ class BiddingTimerWidget extends StatelessWidget {
                           width: 10,
                         ),
                         TitleWidget(
-                            title: value == "0:0:00:00" ? LocaleKeys.ended.tr() : value,
+                            title: (value == "0:0:00:00" || directSellingDataModel?.closed == "1")
+                                ? LocaleKeys.ended.tr()
+                                : value,
                             color: AppColors.darkRed,
                             size: 18.sp,
                             fontWeight: FontWeight.bold),
