@@ -27,7 +27,7 @@ class BiddingDetailsCubit extends Cubit<BiddingDetailsState> {
   }
 
   DirectSellingDataModel? directSellingDataModel;
-  Future<void> getBiddingList(String id) async {
+  Future<void> getBiddingDetails(String id) async {
     emit(GetBiddingDetailsLoadingState());
     await _getBiddingDetailsUseCase
         .execude(id)

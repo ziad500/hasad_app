@@ -24,6 +24,7 @@ Future payInsuranceDialog(context, {required String text, required BiddingDetail
                     paymentFaildDialog(context, text: state.error);
                   }
                   if (state is PayInsuranceBiddingSuccessState) {
+                    Navigator.pop(context);
                     showSnackbar(
                         context: context,
                         text: LocaleKeys.doneAdd.tr(),

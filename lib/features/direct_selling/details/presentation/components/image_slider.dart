@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/network_image.dart';
 import 'package:hasad_app/features/slider/presentation/components/page_indicator_widget.dart';
+import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/helpers.dart';
 
 class ItemDetailsSlider extends StatefulWidget {
   const ItemDetailsSlider(
@@ -13,7 +15,7 @@ class ItemDetailsSlider extends StatefulWidget {
       required this.currentIndex,
       this.borderRadius,
       this.height});
-  final List? list;
+  final List<String?>? list;
   final dynamic Function(int, CarouselPageChangedReason)? onPageChanged;
   final int currentIndex;
   final double? borderRadius;
@@ -37,9 +39,29 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                 carouselController: carouselController,
                 items: widget.list == null
                     ? []
-                    : widget.list!
-                        .map(
-                          (offer) => NetworkImageWidget(
+                    : widget.list!.map((offer) {
+                        if (offer == null) {
+                          return const SizedBox();
+                        }
+                        if (!isImage(offer)) {
+                          return InkWell(
+                            //TODO
+                            //   onTap: ()=>,
+                            child: Container(
+                              height: widget.height ?? 240.h,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                  color: AppColors.addRequestContainerColor,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(widget.borderRadius ?? 25),
+                                      bottomRight: Radius.circular(widget.borderRadius ?? 25))),
+                              child: const Center(
+                                child: Icon(Icons.video_camera_back_sharp),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return NetworkImageWidget(
                             image: offer,
                             errorWidget: Container(
                               height: widget.height ?? 240.h,
@@ -64,6 +86,10 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                               ),
                             ),
                             imageBuilder: (context, imageProvider) {
+                              if (offer == null) {
+                                return const SizedBox();
+                              }
+
                               return Container(
                                 height: widget.height ?? 240.h,
                                 width: double.maxFinite,
@@ -74,9 +100,9 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                                         bottomRight: Radius.circular(widget.borderRadius ?? 25))),
                               );
                             },
-                          ),
-                        )
-                        .toList(),
+                          );
+                        }
+                      }).toList(),
                 options: CarouselOptions(
                     viewportFraction: 1,
                     height: widget.height ?? 240.h,

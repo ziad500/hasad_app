@@ -107,7 +107,10 @@ class ItemDetailsScreen extends StatelessWidget {
                       builder: (context, state) {
                         return ItemDetailsSlider(
                             currentIndex: cubit.currentIndex,
-                            list: cubit.directSellingDataModel?.images,
+                            list: [
+                              cubit.directSellingDataModel?.video,
+                              ...cubit.directSellingDataModel!.images!
+                            ],
                             onPageChanged: (index, _) => cubit.onSliderChanged(index));
                       },
                     ),

@@ -51,14 +51,14 @@ class BiddingProgressWidget extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
+                        TextWithShadowWidget(
+                            maxlines: 2,
+                            text:
+                                "${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel?.lastBid?.value ?? directSellingDataModel?.auctionPrice} ",
+                            textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: AppColors.darkRed,
+                                )),
                         if (directSellingDataModel?.lastBid?.name != null) ...[
-                          TextWithShadowWidget(
-                              maxlines: 2,
-                              text:
-                                  "${LocaleKeys.saudiRiyal.tr()} ${directSellingDataModel?.lastBid?.value} ",
-                              textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: AppColors.darkRed,
-                                  )),
                           SizedBox(
                             height: 10.h,
                           ),

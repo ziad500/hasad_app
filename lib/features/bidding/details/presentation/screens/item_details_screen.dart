@@ -35,7 +35,7 @@ class BiddingDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => sl<BiddingDetailsCubit>()..getBiddingList(id),
+        create: (context) => sl<BiddingDetailsCubit>()..getBiddingDetails(id),
         child: LoadingFrame(
           loadingStates: [
             BlocConsumer<BiddingDetailsCubit, BiddingDetailsState>(
@@ -116,7 +116,10 @@ class BiddingDetailsScreen extends StatelessWidget {
                                 height: 250.h,
                                 borderRadius: 0,
                                 currentIndex: cubit.currentIndex,
-                                list: cubit.directSellingDataModel?.images,
+                                list: [
+                                  cubit.directSellingDataModel?.video,
+                                  ...cubit.directSellingDataModel!.images!
+                                ],
                                 onPageChanged: (index, _) => cubit.onSliderChanged(index)),
                             BiddingNumbersWidget(
                               number: cubit.directSellingDataModel?.numberOfAuctions == null
