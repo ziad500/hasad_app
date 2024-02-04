@@ -1,6 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 
+import '../../generated/app_strings.g.dart';
+import '../../services/download_file.dart';
+import '../default/show_toast.dart';
 import 'overlay_video.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -50,15 +54,20 @@ class _VideoPlayerFromPathState extends State<VideoPlayerFromPath> {
   Widget build(BuildContext context) {
     return DefaultScaffold(
       back: true,
+      appbarLeading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back, size: 25),
+          color: Colors.white),
       appbaractions: [
         if (widget.videoPath.startsWith('http'))
           IconButton(
               onPressed: () {
-                /*  DownloadFileService.downloadFileAsBytes(widget.videoPath)
+                DownloadFileService.downloadFileAsBytes(widget.videoPath)
                     .then((value) => DownloadFileService.saveFileInStorage(value, widget.videoPath))
                     .then((value) => showSnackbar(
                         context: context, state: ToastStates.SUCCESS, text: LocaleKeys.done.tr()));
-               */
               },
               icon: const Icon(
                 Icons.download,

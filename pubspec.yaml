@@ -38,6 +38,7 @@ dependencies:
   dartz: ^0.10.1
   device_preview: ^1.1.0
   dio: ^5.3.4
+  document_file_save_plus: ^2.0.0
   dotted_border: ^2.1.0
   dropdown_button2: ^2.3.9
   easy_localization: ^3.0.3
