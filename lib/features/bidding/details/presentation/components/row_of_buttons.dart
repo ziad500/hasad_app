@@ -28,7 +28,9 @@ class BiddingRowOfButtons extends StatelessWidget {
         }
         BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
         ProfileDataModel? user = cubit.directSellingDataModel?.owner;
-
+        if (user?.id.toString() == Constants.userId) {
+          return const SizedBox();
+        }
         return Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(

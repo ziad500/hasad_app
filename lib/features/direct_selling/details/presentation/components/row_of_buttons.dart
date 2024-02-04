@@ -23,7 +23,9 @@ class DirectSellingRowOfButtons extends StatelessWidget {
       builder: (context, state) {
         DirectSellingDetailsCubit cubit = DirectSellingDetailsCubit.get(context);
         ProfileDataModel? user = cubit.directSellingDataModel?.owner;
-
+        if (user?.id.toString() == Constants.userId) {
+          return const SizedBox();
+        }
         return Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(
