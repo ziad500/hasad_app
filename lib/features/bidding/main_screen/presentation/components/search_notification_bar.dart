@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/search_bar.dart';
 import 'package:hasad_app/utils/app_assets.dart';
-import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
 class SearchNotificationBar extends StatelessWidget {

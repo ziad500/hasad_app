@@ -58,9 +58,9 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
       'department_type_id',
       departmentTypeId,
     ));
-    priceInclusionIds.forEach((i) {
+    for (var i in priceInclusionIds) {
       _data.fields.add(MapEntry('price_inclusion_ids[]', i));
-    });
+    }
     _data.fields.add(MapEntry(
       'agriculture_type_id',
       agricultureTypeId,

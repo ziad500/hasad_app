@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/network_image.dart';
@@ -35,24 +34,13 @@ class MainItemWidget extends StatelessWidget {
               arguments: {"id": directSellingDataModel.id}),
       child: Container(
         width: double.maxFinite,
+        height: isbidding ? 170 : 130,
         decoration: AppDecorations.primaryDecoration,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(
-              child: Center(
-                child: directSellingDataModel.images!.isNotEmpty
-                    ? Image.network(
-                        directSellingDataModel.images![0],
-                        fit: BoxFit.cover,
-                      )
-                    : const SizedBox(),
-              ),
-            ),
-            //  _NetowrkImage(directSellingDataModel.images?[0]),
-            const SizedBox(
-              width: 10,
-            ),
+            _NetowrkImage(directSellingDataModel.images?[0], isbidding),
+            const SizedBox(width: 10),
             Expanded(flex: 3, child: _Description(isbidding, directSellingDataModel))
           ],
         ),
@@ -68,8 +56,8 @@ class _BiddingDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 35.h,
-      width: 75.w,
+      height: 35,
+      width: 75,
       decoration: BoxDecoration(
           color: AppColors.amber,
           borderRadius: BorderRadius.only(
@@ -82,11 +70,11 @@ class _BiddingDetails extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: DefaultText(
               text: LocaleKeys.totalBids.tr(),
-              textStyle: TextStyle(fontSize: 10.sp, color: AppColors.darkBlue),
+              textStyle: const TextStyle(fontSize: 10, color: AppColors.darkBlue),
             ),
           ),
-          SizedBox(
-            height: 2.h,
+          const SizedBox(
+            height: 2,
           ),
           Expanded(
             child: FittedBox(
@@ -96,7 +84,7 @@ class _BiddingDetails extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     SVGManager.bid,
-                    height: 18.sp,
+                    height: 18,
                     colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
                   ),
                   const SizedBox(
@@ -106,7 +94,7 @@ class _BiddingDetails extends StatelessWidget {
                       text: directSellingDataModel.numberOfAuctions == null
                           ? "0"
                           : directSellingDataModel.numberOfAuctions.toString(),
-                      textStyle: TextStyle(fontSize: 15.sp, color: AppColors.red)),
+                      textStyle: const TextStyle(fontSize: 15, color: AppColors.red)),
                 ],
               ),
             ),
@@ -118,16 +106,17 @@ class _BiddingDetails extends StatelessWidget {
 }
 
 class _NetowrkImage extends StatelessWidget {
-  const _NetowrkImage(this.image);
+  const _NetowrkImage(this.image, this.isBidding);
   final String? image;
+  final bool isBidding;
 
   @override
   Widget build(BuildContext context) {
     return NetworkImageWidget(
       image: image,
       imageBuilder: (_, image) => Container(
-        width: 70.w,
-        height: 100.h,
+        width: 80,
+        height: isBidding ? 170 : 130,
         decoration: BoxDecoration(
             image: DecorationImage(image: image, fit: BoxFit.cover),
             color: Colors.green,
@@ -138,8 +127,8 @@ class _NetowrkImage extends StatelessWidget {
                 bottomLeft: Radius.circular(Constants.isArabic ? 0 : 25))),
       ),
       errorWidget: Container(
-        width: 70.w,
-        height: 100.h,
+        width: 80,
+        height: isBidding ? 170 : 130,
         decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(25)),
       ),
     );
@@ -163,7 +152,11 @@ class _Description extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Expanded(child: TitleWidget(title: isEmpty(directSellingDataModel.title))),
+                  Expanded(
+                      child: TitleWidget(
+                    title: isEmpty(directSellingDataModel.title),
+                    size: 16,
+                  )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: FavoriteIcon(directSellingDataModel: directSellingDataModel))
@@ -173,8 +166,10 @@ class _Description extends StatelessWidget {
                 height: 5,
               ),
               SubTitleWidget(
-                  maxlines: isBidding ? 2 : 3,
-                  subTitle: isEmpty(directSellingDataModel.description)),
+                maxlines: 2,
+                subTitle: isEmpty(directSellingDataModel.description),
+                fontSize: 14,
+              ),
               const SizedBox(
                 height: 5,
               ),
@@ -192,6 +187,7 @@ class _Description extends StatelessWidget {
             ],
           ),
         ),
+        if (isBidding) const Spacer(),
         if (isBidding) _TimerWidget(directSellingDataModel),
       ],
     );
@@ -210,6 +206,8 @@ class LocationAndPrice extends StatelessWidget {
       children: [
         Expanded(
           child: IconAndText(
+            maxLines: 1,
+            size: 13,
             svg: SVGManager.location,
             title:
                 "${directSellingDataModel.region?.name} -${directSellingDataModel.city?.name} - ${directSellingDataModel.district?.name}",
@@ -219,7 +217,7 @@ class LocationAndPrice extends StatelessWidget {
         if (!isBidding)
           Padding(
               padding: const EdgeInsets.all(8.0),
-              child: PriceWidget(price: isEmpty(directSellingDataModel.price)))
+              child: PriceWidget(price: isEmpty(directSellingDataModel.price), size: 15))
       ],
     );
   }
@@ -231,8 +229,9 @@ class _PriceRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
+      spacing: 10,
+      runSpacing: 5,
       children: [
         DefaultText(
           text:
@@ -240,7 +239,7 @@ class _PriceRow extends StatelessWidget {
           textStyle: Theme.of(context)
               .textTheme
               .labelMedium
-              ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.red),
+              ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.red, fontSize: 13),
         ),
         const SizedBox(
           height: 5,
@@ -251,7 +250,7 @@ class _PriceRow extends StatelessWidget {
           textStyle: Theme.of(context)
               .textTheme
               .labelMedium
-              ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.blue),
+              ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.blue, fontSize: 13),
         ),
       ],
     );
@@ -277,7 +276,7 @@ class _TimerWidget extends StatelessWidget {
                       textStyle: Theme.of(context)
                           .textTheme
                           .bodySmall
-                          ?.copyWith(color: AppColors.primaryColor),
+                          ?.copyWith(color: AppColors.primaryColor, fontSize: 14),
                     ),
                   )
                 : BiddingTimeObject(
@@ -287,14 +286,17 @@ class _TimerWidget extends StatelessWidget {
                               text: (value == "0:0:00:00" || directSellingDataModel.closed == "1")
                                   ? LocaleKeys.ended.tr()
                                   : value,
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(color: AppColors.red, fontWeight: FontWeight.bold),
+                              maxlines: 1,
+                              textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontSize: 14,
+                                  color: AppColors.red,
+                                  fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.ellipsis),
                             ),
                           ),
                           svg: SVGManager.clock,
                           title: "${LocaleKeys.endsIn.tr()}:  ",
+                          size: 14,
                           color: AppColors.orangeColor,
                         ),
                     date: DateTime.parse(directSellingDataModel.expiryTime

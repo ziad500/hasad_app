@@ -4,11 +4,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 
 class IconAndText extends StatelessWidget {
-  const IconAndText({super.key, required this.svg, required this.title, this.color, this.widget});
+  const IconAndText(
+      {super.key,
+      required this.svg,
+      required this.title,
+      this.color,
+      this.widget,
+      this.maxLines,
+      this.size});
   final String svg;
   final String title;
   final Color? color;
   final Widget? widget;
+  final int? maxLines;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +34,19 @@ class IconAndText extends StatelessWidget {
             ? Expanded(
                 child: DefaultText(
                 text: title,
-                textStyle:
-                    Theme.of(context).textTheme.bodySmall?.copyWith(color: color, fontSize: 13.sp),
+                maxlines: maxLines,
+                textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: color, fontSize: size ?? 13.sp, overflow: TextOverflow.ellipsis),
               ))
             : Expanded(
                 child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   DefaultText(
+                    maxlines: maxLines,
                     text: title,
-                    textStyle: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: color, fontSize: 13.sp),
+                    textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: color, fontSize: size ?? 13.sp, overflow: TextOverflow.ellipsis),
                   ),
                   widget!
                 ],
