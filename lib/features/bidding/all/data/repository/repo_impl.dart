@@ -1,4 +1,5 @@
 import 'package:hasad_app/core/execute_error_handler.dart';
+import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:hasad_app/features/bidding/all/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/bidding/all/data/mapper/mapper.dart';
 import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
@@ -36,6 +37,22 @@ class BiddingListRepositoryImpl implements BiddingListRepository {
   Future<Either<Failure, BiddingOrdersListModel>> biddingOrdersList(String? page) {
     return executeAndHandleError<BiddingOrdersListModel>(() async {
       final response = await _biddingListRemoteDataSource.biddingOrdersList(page);
+      return response.toDomain();
+    });
+  }
+
+  @override
+  Future<Either<Failure, SuccessModel>> buyOrderAfterWin(String? advertisementId) {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response = await _biddingListRemoteDataSource.buyOrderAfterWin(advertisementId);
+      return response.toDomain();
+    });
+  }
+
+  @override
+  Future<Either<Failure, SuccessModel>> confirmOrder(String? purchaseInvoiceId) {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response = await _biddingListRemoteDataSource.confirmOrder(purchaseInvoiceId);
       return response.toDomain();
     });
   }

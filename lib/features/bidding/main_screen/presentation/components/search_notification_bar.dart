@@ -44,14 +44,14 @@ class _NotificationWidget extends StatelessWidget {
               child: SvgPicture.asset(SVGManager.notification),
             ),
           ),
-          CircleAvatar(
+          /*   CircleAvatar(
             backgroundColor: AppColors.primaryColor,
             radius: 10,
             child: Text(
               "15",
               style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Colors.white),
             ),
-          )
+          ) */
         ],
       ),
     );

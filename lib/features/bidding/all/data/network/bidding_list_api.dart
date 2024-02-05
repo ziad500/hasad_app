@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' hide Headers;
+import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:hasad_app/features/bidding/all/data/response/orders_response.dart';
 import 'package:hasad_app/features/direct_selling/all/data/response/response.dart';
 import 'package:retrofit/retrofit.dart';
@@ -32,4 +33,11 @@ abstract class BiddingListAppServiceClient {
 
   @GET("advertisement/auctions/winning-auctions")
   Future<BiddingOrdersListResponse> biddingOrdersList(@Query('page') String? page);
+
+  @POST("advertisement/auctions/purchase/after-winning")
+  Future<SuccessResponse> buyOrderAfterWin(@Part(name: 'advertisement_id') String? advertisementId);
+
+  @POST("advertisement/received-successfully")
+  Future<SuccessResponse> confirmOrder(
+      @Part(name: 'purchase_invoice_id') String? purchaseInvoiceId);
 }

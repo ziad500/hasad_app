@@ -1,18 +1,24 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/buy_order_after_win_usecase.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_orders_usecase.dart';
 
 part 'bidding_orders_state.dart';
 
 class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
   final GetBiddingOrdersListUseCase _getBiddingOrdersListUseCase;
-  BiddingOrdersCubit(this._getBiddingOrdersListUseCase) : super(BiddingOrdersOrdersInitial());
+  final BuyOrderAfterWinOrderUseCase _buyOrderAfterWinOrderUseCase;
+  final ConfirmOrderUseCase _confirmOrderUseCase;
+  BiddingOrdersCubit(this._getBiddingOrdersListUseCase, this._buyOrderAfterWinOrderUseCase,
+      this._confirmOrderUseCase)
+      : super(BiddingOrdersOrdersInitial());
   static BiddingOrdersCubit get(context) => BlocProvider.of(context);
 
   BiddingOrdersListModel? directSellingOrdersListModel;
   List<BiddingOrderModel> directSellingOrders = [];
   Future<void> getBiddingList() async {
-    if (_canFetchMore()) {
+    if (_canFetchMore() || directSellingOrdersListModel == null) {
       _emitLoadingState();
       await _getBiddingOrdersListUseCase.execude(getPageNumber() ?? "1").then((value) => value.fold(
           (l) => emit(GetBiddingOrdersListErrorState(l.message)), (r) => _handleSuccessState(r)));
@@ -57,5 +63,18 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
       nextPageNumber = "1";
     }
     return nextPageNumber;
+  }
+
+  Future<void> buyOrderAfterWin(String purchaseInvoiceId) async {
+    emit(BuyOrderAfterWinLoadingState());
+    await _buyOrderAfterWinOrderUseCase.execude(purchaseInvoiceId).then((value) => value.fold(
+        (l) => emit(BuyOrderAfterWinErrorState(l.message)),
+        (r) => emit(BuyOrderAfterWinSuccessState())));
+  }
+
+  Future<void> confirmOrder(String purchaseInvoiceId) async {
+    emit(ConfirmOrderLoadingState());
+    await _confirmOrderUseCase.execude(purchaseInvoiceId).then((value) => value.fold(
+        (l) => emit(ConfirmOrderErrorState(l.message)), (r) => emit(ConfirmOrderSuccessState())));
   }
 }

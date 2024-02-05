@@ -7,6 +7,7 @@ import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
+import 'package:hasad_app/features/bidding/all/presentation/controller/orders/cubit/bidding_orders_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -21,9 +22,11 @@ class BiddingOrderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.biddingInvoiceScreen, arguments: {
-        "id": biddingOrderModel.purchaseInvoiceId.toString(),
-      }),
+      onTap: () => biddingOrderModel.purchaseInvoiceId == null
+          ? null
+          : Navigator.pushNamed(context, Routes.biddingInvoiceScreen, arguments: {
+              "id": biddingOrderModel.purchaseInvoiceId.toString(),
+            }),
       child: Container(
         width: double.maxFinite,
         decoration: AppDecorations.primaryDecoration,
@@ -38,7 +41,6 @@ class BiddingOrderWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TitleWidget(title: isEmpty(biddingOrderModel.title)),
-                      // SubTitleWidget(subTitle: isEmpty(biddingOrderModel.description))
                     ],
                   ),
                 ),
@@ -102,9 +104,27 @@ class BiddingOrderWidget extends StatelessWidget {
                     buttonName: biddingOrderModel.biddingDate == null
                         ? LocaleKeys.pleasePay.tr()
                         : LocaleKeys.donePayment.tr(),
-                    buttonFunction: () {})
+                    buttonFunction: () {
+                      if (biddingOrderModel.biddingDate == null) {
+                        BiddingOrdersCubit.get(context)
+                            .buyOrderAfterWin(biddingOrderModel.advertisementId!);
+                      }
+                    })
               ],
-            )
+            ),
+            if (biddingOrderModel.biddingDate != null &&
+                biddingOrderModel.purchaseInvoiceId != null) ...[
+              const SizedBox(height: 10),
+              DefaultButton(
+                  height: 35,
+                  textSize: 12.sp,
+                  color: AppColors.red,
+                  buttonName: LocaleKeys.doneRecieve.tr(),
+                  buttonFunction: () {
+                    BiddingOrdersCubit.get(context)
+                        .confirmOrder(biddingOrderModel.purchaseInvoiceId!);
+                  })
+            ]
           ],
         ),
       ),

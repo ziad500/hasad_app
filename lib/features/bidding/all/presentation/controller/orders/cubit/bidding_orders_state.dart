@@ -20,3 +20,21 @@ final class GetBiddingOrdersListErrorState extends BiddingOrdersState {
 }
 
 final class BiddingOrdersListAllCaughtState extends BiddingOrdersState {}
+
+final class BuyOrderAfterWinLoadingState extends BiddingOrdersState {}
+
+final class BuyOrderAfterWinSuccessState extends BiddingOrdersState {}
+
+final class BuyOrderAfterWinErrorState extends BiddingOrdersState {
+  final String error;
+  const BuyOrderAfterWinErrorState(this.error);
+}
+
+final class ConfirmOrderLoadingState extends BiddingOrdersState {}
+
+final class ConfirmOrderSuccessState extends BiddingOrdersState {}
+
+final class ConfirmOrderErrorState extends BiddingOrdersState {
+  final String error;
+  const ConfirmOrderErrorState(this.error);
+}
