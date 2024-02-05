@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
 import 'package:hasad_app/features/bidding/all/presentation/screens/bidding_list_screen.dart';
+import 'package:hasad_app/features/bidding/all/presentation/screens/search_screen.dart';
 import 'package:hasad_app/features/bidding/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/categories/presentation/screens/categories_screen.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/screens/direct_selling_list_screen.dart';
+import 'package:hasad_app/features/direct_selling/all/presentation/screens/search_screen.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/screens/item_details_screen.dart';
 import 'package:hasad_app/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:hasad_app/features/filter/presentation/screens/filter_screen.dart';
@@ -50,6 +52,8 @@ class Routes {
   static const String walletScreenRoutes = "/WalletScreenRoutes";
   static const String uploadSlipScreen = "/UploadSlipScreen";
   static const String notificationsScreen = "/NotificationsScreen";
+  static const String biddingSearchScreen = "/BiddingSearchScreen";
+  static const String directSellingSearchScreen = "/directSellingSearchScreen";
 
   ////////
   ///
@@ -64,6 +68,18 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.biddingSearchScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const BiddingSearchScreen();
+          },
+        );
+      case Routes.directSellingSearchScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const DirectSellingSearchScreen();
+          },
+        );
       case Routes.categoriesScreen:
         return MaterialPageRoute(
           builder: (context) {

@@ -29,7 +29,8 @@ class DirectSellingListRemoteDataSourceImpl implements DirectSellingListRemoteDa
           getMainListRequest.lowestPrice,
           getMainListRequest.highestPrice,
           getMainListRequest.page,
-          getMainListRequest.departmentId);
+          getMainListRequest.departmentId,
+          getMainListRequest.title);
   @override
   Future<DirectSellingListResponse> myDirectSellingList(String? page) =>
       _directSellingListAppServiceClient.myDirectSellingList(page);

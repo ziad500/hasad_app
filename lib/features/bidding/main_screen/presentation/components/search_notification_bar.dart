@@ -11,13 +11,16 @@ class SearchNotificationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        Expanded(child: SearchBarWidget()),
-        SizedBox(
+        Expanded(
+            child: SearchBarWidget(
+          onTap: () => Navigator.pushNamed(context, Routes.biddingSearchScreen),
+        )),
+        const SizedBox(
           width: 10,
         ),
-        _NotificationWidget()
+        const _NotificationWidget()
       ],
     );
   }

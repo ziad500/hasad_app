@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/direct_selling/all/data/network/requests.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
@@ -16,14 +17,18 @@ class DirectSellingListCubit extends Cubit<DirectSellingListState> {
     }
   }
 
+  final TextEditingController searchController = TextEditingController();
 //////////////////////////// all direct selling list //////////////////////////////
   GetMainListRequest getMainListRequest = GetMainListRequest();
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> allDirectSelling = [];
-  Future<void> getDirectSellingList() async {
-    if (_canFetchMore()) {
+  Future<void> getDirectSellingList({bool isSearch = false}) async {
+    if (_canFetchMore() || directSellingListModel == null) {
       getMainListRequest.page = getPageNumber();
       getMainListRequest.departmentId = departmentMainId;
+      if (isSearch) {
+        getMainListRequest.title = searchController.text;
+      }
       _emitLoadingState();
       await _getDirectSellingListUseCase.execude(getMainListRequest).then((value) => value.fold(
           (l) => emit(GetDirectSellingListErrorState(l.message)), (r) => _handleSuccessState(r)));

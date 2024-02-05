@@ -30,7 +30,8 @@ class BiddingListRemoteDataSourceImpl implements BiddingListRemoteDataSource {
           getMainListRequest.lowestPrice,
           getMainListRequest.highestPrice,
           getMainListRequest.page,
-          getMainListRequest.departmentId);
+          getMainListRequest.departmentId,
+          getMainListRequest.title);
   @override
   Future<DirectSellingListResponse> myBiddingList(String? page) =>
       _directSellingListAppServiceClient.myBiddingList(page);

@@ -24,6 +24,7 @@ abstract class BiddingListAppServiceClient {
     @Query('highest_price') String? highestPrice,
     @Query('page') String? page,
     @Query('department_id') String? departmentId,
+    @Query('title') String? title,
   );
 
   @GET("advertisement/auctions/my")

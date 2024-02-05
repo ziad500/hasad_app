@@ -10,6 +10,7 @@ import 'package:hasad_app/features/direct_selling/all/presentation/components/di
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/cubit/direct_selling_list_dart_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,7 +28,8 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SearchBarWidget(),
+                SearchBarWidget(
+                    onTap: () => Navigator.pushNamed(context, Routes.directSellingSearchScreen)),
                 const CategoriesList(type: 1),
                 SizedBox(
                   height: 20.h,

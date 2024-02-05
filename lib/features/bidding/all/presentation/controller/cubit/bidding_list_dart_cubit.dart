@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_list_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/data/network/requests.dart';
@@ -18,6 +19,8 @@ class BiddingListCubit extends Cubit<BiddingListState> {
     }
   }
 
+  final TextEditingController searchController = TextEditingController();
+
 //////////////////////////// all direct selling list //////////////////////////////
   GetMainListRequest getMainListRequest = GetMainListRequest();
   DirectSellingListModel? directSellingListModel;
@@ -27,11 +30,13 @@ class BiddingListCubit extends Cubit<BiddingListState> {
 
   Completer<void>? completer;
 
-  Future<void> getBiddingList() async {
+  Future<void> getBiddingList({bool isSearch = false}) async {
     if (_canFetchMore()) {
       getMainListRequest.page = getPageNumber();
       getMainListRequest.departmentId = departmentMainId;
-
+      if (isSearch) {
+        getMainListRequest.title = searchController.text;
+      }
       _emitLoadingState();
       await _getBiddingListUseCase
           .execude(getMainListRequest, type)

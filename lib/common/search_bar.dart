@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 
 class SearchBarWidget extends StatelessWidget {
@@ -19,7 +21,7 @@ class SearchBarWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "البحث",
+              LocaleKeys.search.tr(),
               style: Theme.of(context).textTheme.labelLarge,
             ),
             SvgPicture.asset(
