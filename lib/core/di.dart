@@ -333,7 +333,8 @@ iniDirectSellingList() async {
     sl.registerFactory<MyDirectSellingListCubit>(() => MyDirectSellingListCubit(sl.call()));
   }
   if (!GetIt.I.isRegistered<DirectSellingOrdersCubit>()) {
-    sl.registerFactory<DirectSellingOrdersCubit>(() => DirectSellingOrdersCubit(sl.call()));
+    sl.registerFactory<DirectSellingOrdersCubit>(
+        () => DirectSellingOrdersCubit(sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -368,6 +369,9 @@ iniDirectSellingList() async {
   if (!GetIt.I.isRegistered<GetDirectSellingOrdersListUseCase>()) {
     sl.registerLazySingleton<GetDirectSellingOrdersListUseCase>(
         () => GetDirectSellingOrdersListUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<ConfirmOrderUseCase>()) {
+    sl.registerLazySingleton<ConfirmOrderUseCase>(() => ConfirmOrderUseCase(sl.call()));
   }
 }
 

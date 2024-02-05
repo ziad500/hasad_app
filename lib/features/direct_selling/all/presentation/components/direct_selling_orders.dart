@@ -1,9 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/core/pagenation/base_list_view.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/components/items/order_item.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/orders/cubit/direct_selling_orders_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 
 ///pagenated list view to fetch all the reports
 ///the page contains 8 reports , the '_ReportsListViewState' will has a 'ScrollController' variable
@@ -25,8 +28,16 @@ class _DirectSellingOrdersListViewState extends State<DirectSellingOrdersListVie
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<DirectSellingOrdersCubit>(context);
 
-    return BlocBuilder<DirectSellingOrdersCubit, DirectSellingOrdersState>(
-        builder: (context, state) {
+    return BlocConsumer<DirectSellingOrdersCubit, DirectSellingOrdersState>(
+        listener: (context, state) {
+      if (state is ConfirmOrderErrorState) {
+        showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+      }
+      if (state is ConfirmOrderSuccessState) {
+        showSnackbar(
+            context: context, text: LocaleKeys.doneRecieve.tr(), state: ToastStates.SUCCESS);
+      }
+    }, builder: (context, state) {
       //pass the cubit ,states and items type '<DirectSellingOrdersCubit, DirectSellingListDartState, ReportModel>'
       String? getError() {
         if (state is GetDirectSellingOrdersListErrorState) {

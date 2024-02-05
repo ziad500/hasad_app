@@ -14,14 +14,15 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<NotificationsCubit>()
-        ..readNotifications()
-        ..getNotificationsList(),
+      create: (context) => sl<NotificationsCubit>()..getNotificationsList(),
       child: BlocListener<NotificationsCubit, NotificationsStates>(
         listener: (context, state) {
           if (state is DeleteNotificationsSuccessState) {
             NotificationsCubit.get(context).reset();
             NotificationsCubit.get(context).getNotificationsList();
+          }
+          if (state is GetNotificationsListSuccessState) {
+            NotificationsCubit.get(context).readNotifications();
           }
         },
         child: DefaultScaffold(

@@ -20,3 +20,12 @@ final class GetDirectSellingOrdersListErrorState extends DirectSellingOrdersStat
 }
 
 final class DirectSellingOrdersListAllCaughtState extends DirectSellingOrdersState {}
+
+final class ConfirmOrderLoadingState extends DirectSellingOrdersState {}
+
+final class ConfirmOrderSuccessState extends DirectSellingOrdersState {}
+
+final class ConfirmOrderErrorState extends DirectSellingOrdersState {
+  final String error;
+  const ConfirmOrderErrorState(this.error);
+}

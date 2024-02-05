@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/network_image.dart';
@@ -115,7 +116,7 @@ class _NetowrkImage extends StatelessWidget {
     return NetworkImageWidget(
       image: image,
       imageBuilder: (_, image) => Container(
-        width: 80,
+        width: 90.w,
         height: isBidding ? 170 : 130,
         decoration: BoxDecoration(
             image: DecorationImage(image: image, fit: BoxFit.cover),
@@ -127,7 +128,7 @@ class _NetowrkImage extends StatelessWidget {
                 bottomLeft: Radius.circular(Constants.isArabic ? 0 : 25))),
       ),
       errorWidget: Container(
-        width: 80,
+        width: 90.w,
         height: isBidding ? 170 : 130,
         decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(25)),
       ),
