@@ -54,6 +54,7 @@ class SendWidgetSuffixIcon extends StatelessWidget {
           InkWell(
               onTap: () {
                 if (MessagesCubit.get(context).messageContoller.text.trim() != "") {
+                  print(userModel?.userId);
                   MessagesCubit.get(context).sendMessage(
                     MessageResponse(
                         created: Timestamp.now(),

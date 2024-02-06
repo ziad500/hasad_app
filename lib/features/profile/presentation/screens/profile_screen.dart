@@ -28,6 +28,8 @@ class ProfileScreen extends StatelessWidget {
       builder: (context, state) {
         ProfileDataModel? model = ProfileCubit.get(context).profileDataModel;
         return DefaultScaffold(
+          leadingWidth: 0,
+          appbarLeading: const SizedBox(),
           back: false,
           body: Column(
             children: [

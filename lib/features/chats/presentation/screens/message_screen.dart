@@ -62,12 +62,10 @@ class MessagesScreen extends StatelessWidget {
                       child: FirestorePagination(
                         isLive: true,
                         shrinkWrap: true,
-                        onEmpty: const EmptyList(),
+                        onEmpty: const EmptyList(scrollable: true),
                         viewType: ViewType.list,
                         reverse: true,
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 10,
-                        ),
+                        separatorBuilder: (context, index) => const SizedBox(height: 10),
                         limit: 10,
                         query: FirebaseFirestore.instance
                             .collection('users')

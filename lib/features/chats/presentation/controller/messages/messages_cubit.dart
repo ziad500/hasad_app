@@ -38,6 +38,11 @@ class MessagesCubit extends Cubit<MessagesState> {
 
   Future sendMessage(MessageResponse messageModel, UserChatsResponse recieverModel) async {
     ProfileDataModel? myProfile = ProfileCubit.get(navigatorKey.currentContext).profileDataModel;
+
+    if (myProfile == null) {
+      await ProfileCubit.get(navigatorKey.currentContext).getProfileData();
+      myProfile = ProfileCubit.get(navigatorKey.currentContext).profileDataModel;
+    }
     //me
     addChat(SendMessageRequest(
         messageModel: MessageResponse(
@@ -74,7 +79,7 @@ class MessagesCubit extends Cubit<MessagesState> {
           nameAr: myProfile?.name,
           nameEn: myProfile?.name,
           time: Timestamp.now().toString(),
-          userId: recieverModel.userId,
+          userId: Constants.userId,
         ),
         userId: recieverModel.userId!));
     //me

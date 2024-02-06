@@ -3,11 +3,11 @@ import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 bool validatePhoneNumber(String phoneNumber) {
-  String pattern = r'^\+?\d{1,4}?\s?\(?\d{1,3}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,9}$';
+  String pattern = r'^[0-9\s\-\+\(\)]*$';
 
   final regExp = RegExp(pattern);
 
-  final isMatch = regExp.hasMatch(phoneNumber) && phoneNumber.length == 11;
+  final isMatch = regExp.hasMatch(phoneNumber) && phoneNumber.length == 10;
 
   return isMatch;
 }

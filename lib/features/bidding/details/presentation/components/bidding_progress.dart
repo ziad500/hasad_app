@@ -19,6 +19,7 @@ class BiddingProgressWidget extends StatelessWidget {
   final double value;
   @override
   Widget build(BuildContext context) {
+    print("..................$value");
     return Center(
       child: SizedBox(
         height: 200.w,

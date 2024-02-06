@@ -98,11 +98,22 @@ double calculateTimePercentage(String startStr, String endStr) {
   Duration totalTime = end.difference(start);
   int totalTimeInHours = totalTime.inHours;
 
+  if (totalTimeInHours <= 0) {
+    // Handle the case where totalTimeInHours is zero or negative
+    return 0.0;
+  }
+
   DateTime now = DateTime.now();
   Duration timePassed = now.difference(start);
-  int timePassedInHours = timePassed.inHours;
+  int timePassedInHours = timePassed.inHours.abs();
 
   double percentage = (timePassedInHours / totalTimeInHours) * 100;
+
+  if (percentage.isNaN || percentage.isInfinite) {
+    // Handle the case where percentage is NaN or Infinite
+    return 0.0;
+  }
+
   return percentage;
 }
 

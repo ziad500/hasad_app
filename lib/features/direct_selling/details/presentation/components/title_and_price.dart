@@ -42,7 +42,10 @@ class ItemDetailsTitleAndPrice extends StatelessWidget {
                     child: DefaultText(
                         text: directSellingDataModel?.priceInclusions == null
                             ? " "
-                            : directSellingDataModel!.priceInclusions!.join(","),
+                            : directSellingDataModel!.priceInclusions!
+                                .map((e) => e.name)
+                                .toList()
+                                .join(","),
                         textStyle: Theme.of(context)
                             .textTheme
                             .bodyMedium

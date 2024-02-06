@@ -21,6 +21,9 @@ class ChatsScreen extends StatelessWidget {
         builder: (context, state) {
           return DefaultScaffold(
             appbarTitle: "Chats",
+            back: false,
+            leadingWidth: 0,
+            appbarLeading: const SizedBox(),
             appbarColor: Colors.white,
             scaffoldColor: const Color(0xffF0FAF7),
             body: Padding(

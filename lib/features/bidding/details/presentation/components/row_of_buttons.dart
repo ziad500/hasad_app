@@ -40,7 +40,13 @@ class BiddingRowOfButtons extends StatelessWidget {
                       buttonName: LocaleKeys.bidNow.tr(),
                       textColor: Colors.white,
                       color: AppColors.darkRed,
-                      buttonFunction: () => showBidBottomSheet(context, cubit: cubit))),
+                      buttonFunction: () {
+                        cubit.valueController.text =
+                            cubit.directSellingDataModel?.lastBid?.value == null
+                                ? "${cubit.directSellingDataModel!.auctionPrice}"
+                                : "${cubit.directSellingDataModel!.lastBid!.value! + 100}";
+                        showBidBottomSheet(context, cubit: cubit);
+                      })),
               SizedBox(
                 width: 10.w,
               ),

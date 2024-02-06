@@ -27,9 +27,7 @@ class ChatWidget extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MessagesScreen(
-                        userChatModel: userChatModel,
-                      )));
+                  builder: (context) => MessagesScreen(userChatModel: userChatModel)));
         },
         child: Row(
           children: [
@@ -63,9 +61,9 @@ class ChatWidget extends StatelessWidget {
                     height: 5,
                   ),
                   userChatModel!.lastMessage!.contains(ChatsConstants.fileKey)
-                      ? const Icon(
-                          Icons.attachment_outlined,
-                        )
+                      ? isImage(userChatModel?.lastMessage ?? "")
+                          ? const Icon(Icons.image, color: Colors.grey)
+                          : const Icon(Icons.attachment_outlined)
                       : Row(
                           children: [
                             Expanded(
