@@ -17,4 +17,5 @@ bool isImage(String link) =>
     link.contains(".jpeg") ||
     link.contains(".png") ||
     link.contains(".gif") ||
-    link.contains(".webp");
+    link.contains(".webp") ||
+    link.contains("jpg");

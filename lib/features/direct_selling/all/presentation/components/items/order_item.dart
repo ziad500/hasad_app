@@ -87,7 +87,8 @@ class DirectSellingOrderWidget extends StatelessWidget {
                 ),
               ],
             ),
-            if (directSellingOrderModel.purchaseInvoiceId != null) ...[
+            if (directSellingOrderModel.purchaseInvoiceId != null &&
+                directSellingOrderModel.receivedDate == null) ...[
               const SizedBox(height: 10),
               DefaultButton(
                   height: 35,

@@ -34,6 +34,8 @@ class _DirectSellingOrdersListViewState extends State<DirectSellingOrdersListVie
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }
       if (state is ConfirmOrderSuccessState) {
+        cubit.directSellingOrdersListModel = null;
+        cubit.getDirectSellingList();
         showSnackbar(
             context: context, text: LocaleKeys.doneRecieve.tr(), state: ToastStates.SUCCESS);
       }

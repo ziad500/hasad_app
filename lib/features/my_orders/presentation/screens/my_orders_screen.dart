@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/loading_frame.dart';
+import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/shared_tabbar.dart';
 import 'package:hasad_app/core/di.dart';
@@ -19,7 +20,9 @@ class MyOrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoadingFrame(
-      loadingStates: const [AddToFavLoading()],
+      loadingStates: const [
+        AddToFavLoading(),
+      ],
       child: DefaultTabController(
         length: 2,
         child: DefaultScaffold(
@@ -34,16 +37,41 @@ class MyOrdersScreen extends StatelessWidget {
                     child: TabBarView(children: [
                   BlocProvider(
                     create: (context) => sl<BiddingOrdersCubit>()..getBiddingList(),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: BiddingOrdersListView(),
+                    child: LoadingFrame(
+                      loadingStates: [
+                        BlocBuilder<BiddingOrdersCubit, BiddingOrdersState>(
+                          builder: (context, state) {
+                            if (state is BuyOrderAfterWinLoadingState ||
+                                state is ConfirmBiddingOrderLoadingState) {
+                              return const LoadingPage();
+                            }
+                            return const SizedBox();
+                          },
+                        )
+                      ],
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: BiddingOrdersListView(),
+                      ),
                     ),
                   ),
                   BlocProvider(
                     create: (context) => sl<DirectSellingOrdersCubit>()..getDirectSellingList(),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: DirectSellingOrdersListView(),
+                    child: LoadingFrame(
+                      loadingStates: [
+                        BlocBuilder<DirectSellingOrdersCubit, DirectSellingOrdersState>(
+                          builder: (context, state) {
+                            if (state is ConfirmOrderLoadingState) {
+                              return const LoadingPage();
+                            }
+                            return const SizedBox();
+                          },
+                        )
+                      ],
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: DirectSellingOrdersListView(),
+                      ),
                     ),
                   )
                 ]))

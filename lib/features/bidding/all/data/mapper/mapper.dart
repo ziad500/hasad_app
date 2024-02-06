@@ -20,6 +20,7 @@ extension BiddingOrderResponseMapper on BiddingOrderResponse? {
         this?.purchaseTax,
         this?.priceAfterTax,
         this?.price,
-        this?.paymentdate);
+        this?.paymentdate,
+        this?.receivedDate);
   }
 }

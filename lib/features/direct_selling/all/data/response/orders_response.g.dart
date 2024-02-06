@@ -39,6 +39,7 @@ DirectSellingOrderResponse _$DirectSellingOrderResponseFromJson(
       description: json['description'] as String?,
       price: json['price'] as num?,
       createdAt: json['created_at'] as String?,
+      receivedDate: json['received_date'] as String?,
     );
 
 Map<String, dynamic> _$DirectSellingOrderResponseToJson(
@@ -50,4 +51,5 @@ Map<String, dynamic> _$DirectSellingOrderResponseToJson(
       'description': instance.description,
       'price': instance.price,
       'created_at': instance.createdAt,
+      'received_date': instance.receivedDate,
     };

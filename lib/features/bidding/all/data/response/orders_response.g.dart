@@ -41,6 +41,7 @@ BiddingOrderResponse _$BiddingOrderResponseFromJson(
       priceAfterTax: json['price_after_tax'] as num?,
       price: json['price'] as num?,
       paymentdate: json['payment_date'] as String?,
+      receivedDate: json['received_date'] as String?,
     );
 
 Map<String, dynamic> _$BiddingOrderResponseToJson(
@@ -55,4 +56,5 @@ Map<String, dynamic> _$BiddingOrderResponseToJson(
       'price_after_tax': instance.priceAfterTax,
       'price': instance.price,
       'payment_date': instance.paymentdate,
+      'received_date': instance.receivedDate,
     };

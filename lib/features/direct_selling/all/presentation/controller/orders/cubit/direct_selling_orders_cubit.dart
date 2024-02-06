@@ -12,6 +12,12 @@ class DirectSellingOrdersCubit extends Cubit<DirectSellingOrdersState> {
   DirectSellingOrdersCubit(this._getDirectSellingOrdersListUseCase, this._confirmOrderUseCase)
       : super(DirectSellingOrdersOrdersInitial());
   static DirectSellingOrdersCubit get(context) => BlocProvider.of(context);
+  @override
+  void emit(state) {
+    if (!isClosed) {
+      super.emit(state);
+    }
+  }
 
   DirectSellingOrdersListModel? directSellingOrdersListModel;
   List<DirectSellingOrderModel> directSellingOrders = [];

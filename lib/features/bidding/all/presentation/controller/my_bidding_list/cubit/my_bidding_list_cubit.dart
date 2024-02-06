@@ -8,6 +8,12 @@ class MyBiddingListCubit extends Cubit<MyBiddingListState> {
   final GetMyBiddingListUseCase _myBiddingListUseCase;
   MyBiddingListCubit(this._myBiddingListUseCase) : super(MyBiddingListInitial());
   static MyBiddingListCubit get(context) => BlocProvider.of(context);
+  @override
+  void emit(state) {
+    if (!isClosed) {
+      super.emit(state);
+    }
+  }
 
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> myBidding = [];

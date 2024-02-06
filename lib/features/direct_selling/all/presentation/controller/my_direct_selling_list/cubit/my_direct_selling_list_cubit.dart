@@ -8,6 +8,12 @@ class MyDirectSellingListCubit extends Cubit<MyDirectSellingListState> {
   final GetMyDirectSellingListUseCase _myDirectSellingListUseCase;
   MyDirectSellingListCubit(this._myDirectSellingListUseCase) : super(MyDirectSellingListInitial());
   static MyDirectSellingListCubit get(context) => BlocProvider.of(context);
+  @override
+  void emit(state) {
+    if (!isClosed) {
+      super.emit(state);
+    }
+  }
 
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> myDirectSelling = [];

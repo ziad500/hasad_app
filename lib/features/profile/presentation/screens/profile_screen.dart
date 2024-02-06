@@ -28,6 +28,7 @@ class ProfileScreen extends StatelessWidget {
       builder: (context, state) {
         ProfileDataModel? model = ProfileCubit.get(context).profileDataModel;
         return DefaultScaffold(
+          back: false,
           body: Column(
             children: [
               state is GetProfileDataLoadingState

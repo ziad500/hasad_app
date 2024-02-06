@@ -19,15 +19,16 @@ class BiddingOrderModel {
   num? priceAfterTax;
   num? price;
   String? paymentdate;
+  String? receivedDate;
   BiddingOrderModel(
-    this.purchaseInvoiceId,
-    this.advertisementId,
-    this.title,
-    this.biddingDate,
-    this.expiryTime,
-    this.purchaseTax,
-    this.priceAfterTax,
-    this.price,
-    this.paymentdate,
-  );
+      this.purchaseInvoiceId,
+      this.advertisementId,
+      this.title,
+      this.biddingDate,
+      this.expiryTime,
+      this.purchaseTax,
+      this.priceAfterTax,
+      this.price,
+      this.paymentdate,
+      this.receivedDate);
 }

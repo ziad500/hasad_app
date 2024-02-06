@@ -5,7 +5,7 @@ import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model
 extension DirectSellingOrderResponseMapper on DirectSellingOrderResponse? {
   DirectSellingOrderModel toDomain() {
     return DirectSellingOrderModel(this?.purchaseInvoiceId, this?.advertisementId, this?.title,
-        this?.description, this?.price, this?.createdAt);
+        this?.description, this?.price, this?.createdAt, this?.receivedDate);
   }
 }
 

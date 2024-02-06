@@ -44,17 +44,19 @@ class BiddingOrderResponse {
   num? price;
   @JsonKey(name: "payment_date")
   String? paymentdate;
-  BiddingOrderResponse({
-    this.purchaseInvoiceId,
-    this.advertisementId,
-    this.title,
-    this.biddingDate,
-    this.expiryTime,
-    this.purchaseTax,
-    this.priceAfterTax,
-    this.price,
-    this.paymentdate,
-  });
+  @JsonKey(name: "received_date")
+  String? receivedDate;
+  BiddingOrderResponse(
+      {this.purchaseInvoiceId,
+      this.advertisementId,
+      this.title,
+      this.biddingDate,
+      this.expiryTime,
+      this.purchaseTax,
+      this.priceAfterTax,
+      this.price,
+      this.paymentdate,
+      this.receivedDate});
 
   // from json
   factory BiddingOrderResponse.fromJson(Map<String, dynamic> json) =>

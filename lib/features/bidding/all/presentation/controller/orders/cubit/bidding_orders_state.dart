@@ -30,7 +30,7 @@ final class BuyOrderAfterWinErrorState extends BiddingOrdersState {
   const BuyOrderAfterWinErrorState(this.error);
 }
 
-final class ConfirmOrderLoadingState extends BiddingOrdersState {}
+final class ConfirmBiddingOrderLoadingState extends BiddingOrdersState {}
 
 final class ConfirmOrderSuccessState extends BiddingOrdersState {}
 

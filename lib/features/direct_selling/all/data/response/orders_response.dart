@@ -38,14 +38,16 @@ class DirectSellingOrderResponse {
   num? price;
   @JsonKey(name: "created_at")
   String? createdAt;
-  DirectSellingOrderResponse({
-    this.purchaseInvoiceId,
-    this.advertisementId,
-    this.title,
-    this.description,
-    this.price,
-    this.createdAt,
-  });
+  @JsonKey(name: "received_date")
+  String? receivedDate;
+  DirectSellingOrderResponse(
+      {this.purchaseInvoiceId,
+      this.advertisementId,
+      this.title,
+      this.description,
+      this.price,
+      this.createdAt,
+      this.receivedDate});
 
   // from json
   factory DirectSellingOrderResponse.fromJson(Map<String, dynamic> json) =>

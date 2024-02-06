@@ -98,22 +98,23 @@ class BiddingOrderWidget extends StatelessWidget {
                     height: 35,
                     width: 100.w,
                     textSize: 12.sp,
-                    color: biddingOrderModel.biddingDate == null
+                    color: biddingOrderModel.paymentdate == null
                         ? AppColors.red
                         : AppColors.primaryColor,
-                    buttonName: biddingOrderModel.biddingDate == null
+                    buttonName: biddingOrderModel.paymentdate == null
                         ? LocaleKeys.pleasePay.tr()
                         : LocaleKeys.donePayment.tr(),
                     buttonFunction: () {
-                      if (biddingOrderModel.biddingDate == null) {
+                      if (biddingOrderModel.paymentdate == null) {
                         BiddingOrdersCubit.get(context)
                             .buyOrderAfterWin(biddingOrderModel.advertisementId!);
                       }
                     })
               ],
             ),
-            if (biddingOrderModel.biddingDate != null &&
-                biddingOrderModel.purchaseInvoiceId != null) ...[
+            if (biddingOrderModel.paymentdate != null &&
+                biddingOrderModel.purchaseInvoiceId != null &&
+                biddingOrderModel.receivedDate == null) ...[
               const SizedBox(height: 10),
               DefaultButton(
                   height: 35,

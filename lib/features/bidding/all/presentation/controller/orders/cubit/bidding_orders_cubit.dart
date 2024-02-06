@@ -14,6 +14,12 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
       this._confirmOrderUseCase)
       : super(BiddingOrdersOrdersInitial());
   static BiddingOrdersCubit get(context) => BlocProvider.of(context);
+  @override
+  void emit(state) {
+    if (!isClosed) {
+      super.emit(state);
+    }
+  }
 
   BiddingOrdersListModel? directSellingOrdersListModel;
   List<BiddingOrderModel> directSellingOrders = [];
@@ -73,7 +79,7 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
   }
 
   Future<void> confirmOrder(String purchaseInvoiceId) async {
-    emit(ConfirmOrderLoadingState());
+    emit(ConfirmBiddingOrderLoadingState());
     await _confirmOrderUseCase.execude(purchaseInvoiceId).then((value) => value.fold(
         (l) => emit(ConfirmOrderErrorState(l.message)), (r) => emit(ConfirmOrderSuccessState())));
   }

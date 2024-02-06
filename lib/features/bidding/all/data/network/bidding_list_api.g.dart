@@ -51,9 +51,9 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingListResponse>(Options(
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -79,9 +79,9 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
     final queryParameters = <String, dynamic>{r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingListResponse>(Options(
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -107,9 +107,9 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
     final queryParameters = <String, dynamic>{r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<BiddingOrdersListResponse>(Options(
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BiddingOrdersListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -142,22 +142,23 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
         advertisementId,
       ));
     }
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'advertisement/auctions/purchase/after-winning',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              'advertisement/auctions/purchase/after-winning',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
@@ -175,22 +176,23 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
         purchaseInvoiceId,
       ));
     }
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'advertisement/received-successfully',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              'advertisement/received-successfully',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
