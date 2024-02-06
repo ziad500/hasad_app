@@ -40,11 +40,13 @@ class DirectSellingSearchScreen extends StatelessWidget {
                         ? const LoadingWidget()
                         : cubit.allDirectSelling.isEmpty
                             ? const Expanded(child: EmptyList(scrollable: true))
-                            : DefaultListView(
-                                itemBuilder: (context, index) => MainItemWidget(
-                                    isbidding: false,
-                                    directSellingDataModel: cubit.allDirectSelling[index]),
-                                count: cubit.allDirectSelling.length)
+                            : Expanded(
+                                child: DefaultListView(
+                                    itemBuilder: (context, index) => MainItemWidget(
+                                        isbidding: false,
+                                        directSellingDataModel: cubit.allDirectSelling[index]),
+                                    count: cubit.allDirectSelling.length),
+                              )
                   ],
                 ),
               ));

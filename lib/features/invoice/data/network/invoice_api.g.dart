@@ -21,14 +21,17 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
   String? baseUrl;
 
   @override
-  Future<DirectSellingInvoiceResponse> directSellingInvoice(String? purchaseId) async {
+  Future<DirectSellingInvoiceResponse> directSellingInvoice(
+      String? purchaseId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'purchase_invoice_id': purchaseId};
+    final queryParameters = <String, dynamic>{
+      r'purchase_invoice_id': purchaseId
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingInvoiceResponse>(Options(
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingInvoiceResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -51,12 +54,14 @@ class _InvoiceAppServiceClient implements InvoiceAppServiceClient {
   @override
   Future<BiddingInvoiceResponse> biddingInvoice(String? purchaseId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'purchase_invoice_id': purchaseId};
+    final queryParameters = <String, dynamic>{
+      r'purchase_invoice_id': purchaseId
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<BiddingInvoiceResponse>(Options(
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BiddingInvoiceResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,

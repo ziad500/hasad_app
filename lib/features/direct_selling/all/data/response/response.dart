@@ -40,11 +40,11 @@ class DirectSellingDataResponse {
   @JsonKey(name: "harvest_date")
   String? harvestDate;
   @JsonKey(name: "department")
-  String? department;
+  LocationResponse? department;
   @JsonKey(name: "advertisement_type")
   String? advertisementType;
   @JsonKey(name: "department_type")
-  String? departmentType;
+  LocationResponse? departmentType;
   @JsonKey(name: "video")
   String? video;
   @JsonKey(name: "created_at")
@@ -72,9 +72,9 @@ class DirectSellingDataResponse {
   @JsonKey(name: "number_of_auctions")
   num? numberOfAuctions;
   @JsonKey(name: "images")
-  List<String>? images;
+  List<LocationResponse>? images;
   @JsonKey(name: "price_inclusions")
-  List<String>? priceInclusions;
+  List<LocationResponse>? priceInclusions;
   @JsonKey(name: "bidding_date")
   String? biddingDate;
   @JsonKey(name: "purchase_tax")
@@ -139,8 +139,10 @@ class TypeResponse {
   String? name;
   @JsonKey(name: "image")
   String? image;
+  @JsonKey(name: "id")
+  int? id;
 
-  TypeResponse({this.image, this.name});
+  TypeResponse({this.image, this.name, this.id});
 
   // from json
   factory TypeResponse.fromJson(Map<String, dynamic> json) => _$TypeResponseFromJson(json);

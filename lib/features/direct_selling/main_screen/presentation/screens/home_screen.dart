@@ -38,9 +38,8 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                const DirectSellingListView(
-                  expanded: false,
-                )
+                const DirectSellingListView(expanded: false),
+                const SizedBox(height: 100),
               ],
             ),
           )),

@@ -13,7 +13,7 @@ extension InvoiceadvertisementResponseMapper on DirectSellingInvoiceadvertisemen
         this?.city.toDomain(),
         this?.district.toDomain(),
         this?.price,
-        this?.images);
+        this?.images?.map((e) => e.toDomain()).toList());
   }
 }
 

@@ -17,9 +17,9 @@ class DirectSellingDataModel {
   TypeModel? agricultureType;
   TypeModel? packagingType;
   String? harvestDate;
-  String? department;
+  LocationModel? department;
   String? advertisementType;
-  String? departmentType;
+  LocationModel? departmentType;
   String? video;
   String? createdAt;
   ProfileDataModel? owner;
@@ -28,8 +28,8 @@ class DirectSellingDataModel {
   LocationModel? city;
   LocationModel? district;
   num? price;
-  List<String>? images;
-  List<String>? priceInclusions;
+  List<LocationModel>? images;
+  List<LocationModel>? priceInclusions;
   num? purchasingPrice;
   num? auctionPrice;
   String? expiryTime;
@@ -72,8 +72,9 @@ class DirectSellingDataModel {
 class TypeModel {
   String? name;
   String? image;
+  int? id;
 
-  TypeModel(this.image, this.name);
+  TypeModel(this.image, this.name, this.id);
 }
 
 class UserModel {

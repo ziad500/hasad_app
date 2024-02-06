@@ -119,6 +119,8 @@ class BiddingDetailsScreen extends StatelessWidget {
                                 list: [
                                   cubit.directSellingDataModel?.video,
                                   ...cubit.directSellingDataModel!.images!
+                                      .map((e) => e.name)
+                                      .toList()
                                 ],
                                 onPageChanged: (index, _) => cubit.onSliderChanged(index)),
                             BiddingNumbersWidget(

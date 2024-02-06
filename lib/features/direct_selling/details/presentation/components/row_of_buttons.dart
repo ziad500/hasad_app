@@ -55,7 +55,7 @@ class DirectSellingRowOfButtons extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => MessagesScreen(
                                           userChatModel: UserChatModel(
-                                              image: cubit.directSellingDataModel?.images?[0],
+                                              image: cubit.directSellingDataModel?.images?[0].name,
                                               nameEn: cubit.directSellingDataModel?.title,
                                               nameAr: cubit.directSellingDataModel?.title,
                                               userId: user?.id.toString()),

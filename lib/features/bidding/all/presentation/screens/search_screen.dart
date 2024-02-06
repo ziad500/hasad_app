@@ -32,20 +32,23 @@ class BiddingSearchScreen extends StatelessWidget {
                       controller: cubit.searchController,
                       onFieldSubmitted: (value) {
                         cubit.reset();
-                        cubit.type = biddingupcoming;
+                        cubit.type = biddingStillAvailable;
                         cubit.getBiddingList(isSearch: true);
                       },
                     ),
                     SizedBox(height: 20.h),
                     (state is GetBiddingListLoadingState)
                         ? const LoadingWidget()
-                        : cubit.biddingupcomingList.isEmpty
+                        : cubit.biddingStillAvailableList.isEmpty
                             ? const Expanded(child: EmptyList(scrollable: true))
-                            : DefaultListView(
-                                itemBuilder: (context, index) => MainItemWidget(
-                                    isbidding: true,
-                                    directSellingDataModel: cubit.biddingupcomingList[index]),
-                                count: cubit.biddingupcomingList.length)
+                            : Expanded(
+                                child: DefaultListView(
+                                    itemBuilder: (context, index) => MainItemWidget(
+                                        isbidding: true,
+                                        directSellingDataModel:
+                                            cubit.biddingStillAvailableList[index]),
+                                    count: cubit.biddingStillAvailableList.length),
+                              )
                   ],
                 ),
               ));

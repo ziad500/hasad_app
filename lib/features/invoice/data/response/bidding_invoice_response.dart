@@ -78,7 +78,7 @@ class BiddingInvoiceadvertisementResponse {
   @JsonKey(name: "number_of_auctions")
   num? numberOfAuctions;
   @JsonKey(name: "images")
-  List<String>? images;
+  List<LocationResponse>? images;
   BiddingInvoiceadvertisementResponse({
     this.id,
     this.advertisementTypeId,

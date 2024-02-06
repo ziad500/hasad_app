@@ -73,7 +73,7 @@ BiddingInvoiceadvertisementResponse
           closed: json['closed'] as String?,
           numberOfAuctions: json['number_of_auctions'] as num?,
           images: (json['images'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) => LocationResponse.fromJson(e as Map<String, dynamic>))
               .toList(),
         );
 

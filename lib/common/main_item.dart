@@ -40,7 +40,7 @@ class MainItemWidget extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            _NetowrkImage(directSellingDataModel.images?[0], isbidding),
+            _NetowrkImage(directSellingDataModel.images?[0].name, isbidding),
             const SizedBox(width: 10),
             Expanded(flex: 3, child: _Description(isbidding, directSellingDataModel))
           ],

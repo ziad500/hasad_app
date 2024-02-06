@@ -69,7 +69,7 @@ DirectSellingInvoiceadvertisementResponse
                   json['district'] as Map<String, dynamic>),
           price: json['price'] as num?,
           images: (json['images'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) => LocationResponse.fromJson(e as Map<String, dynamic>))
               .toList(),
         );
 

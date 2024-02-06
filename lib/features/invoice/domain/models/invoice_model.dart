@@ -32,7 +32,7 @@ class DirectSellingInvoiceadvertisementModel {
   LocationModel? city;
   LocationModel? district;
   num? price;
-  List<String>? images;
+  List<LocationModel>? images;
   DirectSellingInvoiceadvertisementModel(
     this.id,
     this.advertisementTypeId,

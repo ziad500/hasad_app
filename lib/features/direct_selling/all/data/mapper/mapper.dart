@@ -5,7 +5,7 @@ import 'package:hasad_app/features/profile/data/mapper/profile_mapper.dart';
 
 extension TypeResponseMapper on TypeResponse? {
   TypeModel toDomain() {
-    return TypeModel(this?.image, this?.name);
+    return TypeModel(this?.image, this?.name, this?.id);
   }
 }
 
@@ -16,20 +16,20 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.description,
         this?.district.toDomain(),
         this?.id,
-        this?.images,
+        this?.images?.map((e) => e.toDomain()).toList(),
         this?.price,
         this?.region.toDomain(),
         this?.title,
         this?.advertisementType,
         this?.agricultureType.toDomain(),
         this?.createdAt,
-        this?.department,
-        this?.departmentType,
+        this?.department.toDomain(),
+        this?.departmentType.toDomain(),
         this?.harvestDate,
         this?.packagingType.toDomain(),
         this?.owner.toDomain(),
         this?.video,
-        this?.priceInclusions,
+        this?.priceInclusions?.map((e) => e.toDomain()).toList(),
         this?.auctionPrice,
         this?.closed,
         this?.expiryTime,

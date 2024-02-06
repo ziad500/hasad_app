@@ -36,7 +36,7 @@ class BiddingInvoiceadvertisementModel {
   String? expiryTime;
   String? closed;
   num? numberOfAuctions;
-  List<String>? images;
+  List<LocationModel>? images;
   BiddingInvoiceadvertisementModel(
     this.id,
     this.advertisementTypeId,

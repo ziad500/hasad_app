@@ -18,7 +18,7 @@ extension InvoiceadvertisementResponseMapper on BiddingInvoiceadvertisementRespo
         this?.expiryTime,
         this?.closed,
         this?.numberOfAuctions,
-        this?.images);
+        this?.images?.map((e) => e.toDomain()).toList());
   }
 }
 

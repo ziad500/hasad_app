@@ -68,7 +68,7 @@ class DirectSellingInvoiceadvertisementResponse {
   @JsonKey(name: "price")
   num? price;
   @JsonKey(name: "images")
-  List<String>? images;
+  List<LocationResponse>? images;
   DirectSellingInvoiceadvertisementResponse({
     this.id,
     this.advertisementTypeId,

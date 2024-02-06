@@ -109,7 +109,7 @@ class ItemDetailsScreen extends StatelessWidget {
                             currentIndex: cubit.currentIndex,
                             list: [
                               cubit.directSellingDataModel?.video,
-                              ...cubit.directSellingDataModel!.images!
+                              ...cubit.directSellingDataModel!.images!.map((e) => e.name).toList()
                             ],
                             onPageChanged: (index, _) => cubit.onSliderChanged(index));
                       },

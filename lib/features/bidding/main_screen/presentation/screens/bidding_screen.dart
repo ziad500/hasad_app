@@ -47,9 +47,8 @@ class BiddingScreen extends StatelessWidget {
                       SizedBox(
                         height: 15.h,
                       ),
-                      const BiddingListView(
-                        useExpanded: false,
-                      )
+                      const BiddingListView(useExpanded: false),
+                      const SizedBox(height: 100),
                     ],
                   ),
                 ),

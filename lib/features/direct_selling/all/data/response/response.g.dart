@@ -41,8 +41,9 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
           ? null
           : LocationResponse.fromJson(json['district'] as Map<String, dynamic>),
       id: json['id'] as int?,
-      images:
-          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => LocationResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       price: json['price'] as num?,
       region: json['region'] == null
           ? null
@@ -54,8 +55,14 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
           : TypeResponse.fromJson(
               json['agriculture_type'] as Map<String, dynamic>),
       createdAt: json['created_at'] as String?,
-      department: json['department'] as String?,
-      departmentType: json['department_type'] as String?,
+      department: json['department'] == null
+          ? null
+          : LocationResponse.fromJson(
+              json['department'] as Map<String, dynamic>),
+      departmentType: json['department_type'] == null
+          ? null
+          : LocationResponse.fromJson(
+              json['department_type'] as Map<String, dynamic>),
       harvestDate: json['harvest_date'] as String?,
       packagingType: json['packaging_type'] == null
           ? null
@@ -66,7 +73,7 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
           : ProfileDataResponse.fromJson(json['owner'] as Map<String, dynamic>),
       video: json['video'] as String?,
       priceInclusions: (json['price_inclusions'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => LocationResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       auctionPrice: json['auction_price'] as num?,
       closed: json['closed'] as String?,
@@ -128,12 +135,14 @@ Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) =>
 TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(
       image: json['image'] as String?,
       name: json['name'] as String?,
+      id: json['id'] as int?,
     );
 
 Map<String, dynamic> _$TypeResponseToJson(TypeResponse instance) =>
     <String, dynamic>{
       'name': instance.name,
       'image': instance.image,
+      'id': instance.id,
     };
 
 LastBidResponse _$LastBidResponseFromJson(Map<String, dynamic> json) =>
