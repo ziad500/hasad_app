@@ -20,7 +20,7 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.price,
         this?.region.toDomain(),
         this?.title,
-        this?.advertisementType,
+        this?.advertisementType.toDomain(),
         this?.agricultureType.toDomain(),
         this?.createdAt,
         this?.department.toDomain(),

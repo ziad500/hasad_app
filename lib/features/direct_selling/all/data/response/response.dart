@@ -42,7 +42,7 @@ class DirectSellingDataResponse {
   @JsonKey(name: "department")
   LocationResponse? department;
   @JsonKey(name: "advertisement_type")
-  String? advertisementType;
+  LocationResponse? advertisementType;
   @JsonKey(name: "department_type")
   LocationResponse? departmentType;
   @JsonKey(name: "video")

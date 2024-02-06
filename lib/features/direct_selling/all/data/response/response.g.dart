@@ -49,7 +49,10 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
           ? null
           : LocationResponse.fromJson(json['region'] as Map<String, dynamic>),
       title: json['title'] as String?,
-      advertisementType: json['advertisement_type'] as String?,
+      advertisementType: json['advertisement_type'] == null
+          ? null
+          : LocationResponse.fromJson(
+              json['advertisement_type'] as Map<String, dynamic>),
       agricultureType: json['agriculture_type'] == null
           ? null
           : TypeResponse.fromJson(

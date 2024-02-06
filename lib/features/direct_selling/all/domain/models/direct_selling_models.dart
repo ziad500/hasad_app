@@ -18,7 +18,7 @@ class DirectSellingDataModel {
   TypeModel? packagingType;
   String? harvestDate;
   LocationModel? department;
-  String? advertisementType;
+  LocationModel? advertisementType;
   LocationModel? departmentType;
   String? video;
   String? createdAt;
