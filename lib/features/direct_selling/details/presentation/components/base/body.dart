@@ -31,7 +31,7 @@ class ItemDetailsBody extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   actions: actions,
                   leading: IconButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => Navigator.pop(context, true),
                       icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,

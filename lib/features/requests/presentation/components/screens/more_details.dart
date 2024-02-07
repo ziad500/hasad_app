@@ -15,7 +15,6 @@ import 'package:hasad_app/features/requests/presentation/controller/cubit/add_re
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/date_helper.dart';
-import 'package:hasad_app/utils/routes_manager.dart';
 import 'package:hasad_app/utils/validation.dart';
 
 class MoreDetailsScreen extends StatelessWidget {
@@ -54,7 +53,7 @@ class MoreDetailsScreen extends StatelessWidget {
                 showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
               }
               if (state is EditRequestSuccessState) {
-                Navigator.pushReplacementNamed(context, Routes.homeScreenRoutes);
+                Navigator.pop(context, true);
                 showSnackbar(context: context, text: state.message, state: ToastStates.SUCCESS);
               }
             },

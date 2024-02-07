@@ -67,8 +67,15 @@ class ItemDetailsScreen extends StatelessWidget {
                   return cubit.directSellingDataModel?.owner?.id.toString() != Constants.userId
                       ? const SizedBox()
                       : InkWell(
-                          onTap: () => Navigator.pushNamed(context, Routes.addRequestScreen,
-                              arguments: cubit.directSellingDataModel),
+                          onTap: () {
+                            final result = Navigator.pushNamed(context, Routes.addRequestScreen,
+                                arguments: cubit.directSellingDataModel);
+                            result.then((value) {
+                              if (value == true) {
+                                cubit.getDirectSellingDetails(id);
+                              }
+                            });
+                          },
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

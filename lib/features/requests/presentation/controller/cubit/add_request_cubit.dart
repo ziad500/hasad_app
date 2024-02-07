@@ -167,7 +167,7 @@ class AddRequestCubit extends Cubit<AddRequestState> {
     emit(EditRequestLoadingState());
     await _editRequestUseCase.execude(_passEditRequestRequest(id)).then((value) => value.fold(
         (l) => emit(EditRequestErrorState(l.message)),
-        (r) => emit(EditRequestSuccessState(r['message'] ?? LocaleKeys.doneEdited.tr()))));
+        (r) => emit(EditRequestSuccessState(LocaleKeys.doneEdited.tr()))));
   }
 
   EditRequestRequest _passEditRequestRequest(String id) => EditRequestRequest(
