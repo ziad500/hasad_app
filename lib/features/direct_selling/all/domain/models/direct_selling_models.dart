@@ -38,6 +38,7 @@ class DirectSellingDataModel {
   String? biddingDate;
   num? purchaseTax;
   num? priceAfterTax;
+  String? biddingDuration;
 
   DirectSellingDataModel(
       this.city,
@@ -66,7 +67,8 @@ class DirectSellingDataModel {
       this.biddingDate,
       this.priceAfterTax,
       this.purchaseTax,
-      this.lastBid);
+      this.lastBid,
+      this.biddingDuration);
 }
 
 class TypeModel {

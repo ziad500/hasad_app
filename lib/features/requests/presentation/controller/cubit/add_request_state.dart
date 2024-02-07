@@ -32,3 +32,15 @@ final class AddRequestErrorState extends AddRequestState {
   final String error;
   AddRequestErrorState(this.error);
 }
+
+final class EditRequestLoadingState extends AddRequestState {}
+
+final class EditRequestSuccessState extends AddRequestState {
+  final String message;
+  EditRequestSuccessState(this.message);
+}
+
+final class EditRequestErrorState extends AddRequestState {
+  final String error;
+  EditRequestErrorState(this.error);
+}

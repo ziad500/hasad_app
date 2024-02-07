@@ -38,7 +38,8 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.biddingDate,
         this?.priceAfterTax,
         this?.purchaseTax,
-        this?.lastBid.toDomain());
+        this?.lastBid.toDomain(),
+        this?.biddingDuration);
   }
 }
 

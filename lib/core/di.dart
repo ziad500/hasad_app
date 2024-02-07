@@ -92,6 +92,7 @@ import 'package:hasad_app/features/requests/data/network/request_api.dart';
 import 'package:hasad_app/features/requests/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/requests/domain/repository/repo.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
+import 'package:hasad_app/features/requests/domain/use_cases/edit_request_usecase.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 import 'package:hasad_app/features/wallet/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/wallet/data/network/wallet_api.dart';
@@ -195,7 +196,7 @@ iniForgetPassword() async {
 initAddRequest() async {
   //cubit
   if (!GetIt.I.isRegistered<AddRequestCubit>()) {
-    sl.registerFactory<AddRequestCubit>(() => AddRequestCubit(sl.call()));
+    sl.registerFactory<AddRequestCubit>(() => AddRequestCubit(sl.call(), sl.call()));
   }
   //app service client instance
   if (!GetIt.I.isRegistered<RequestAppServiceClient>()) {
@@ -218,6 +219,9 @@ initAddRequest() async {
   //usecase
   if (!GetIt.I.isRegistered<AddRequestUseCase>()) {
     sl.registerLazySingleton<AddRequestUseCase>(() => AddRequestUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<EditRequestUseCase>()) {
+    sl.registerLazySingleton<EditRequestUseCase>(() => EditRequestUseCase(sl.call()));
   }
 }
 

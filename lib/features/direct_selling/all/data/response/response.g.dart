@@ -89,6 +89,7 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       lastBid: json['last_bid'] == null
           ? null
           : LastBidResponse.fromJson(json['last_bid'] as Map<String, dynamic>),
+      biddingDuration: json['bidding_duration'] as String?,
     );
 
 Map<String, dynamic> _$DirectSellingDataResponseToJson(
@@ -121,6 +122,7 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'bidding_date': instance.biddingDate,
       'purchase_tax': instance.purchaseTax,
       'price_after_tax': instance.priceAfterTax,
+      'bidding_duration': instance.biddingDuration,
     };
 
 LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>

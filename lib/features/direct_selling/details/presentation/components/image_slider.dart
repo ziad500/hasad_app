@@ -15,12 +15,14 @@ class ItemDetailsSlider extends StatefulWidget {
       this.onPageChanged,
       required this.currentIndex,
       this.borderRadius,
-      this.height});
+      this.height,
+      required this.isMine});
   final List<String?>? list;
   final dynamic Function(int, CarouselPageChangedReason)? onPageChanged;
   final int currentIndex;
   final double? borderRadius;
   final double? height;
+  final bool isMine;
 
   @override
   State<ItemDetailsSlider> createState() => _ItemDetailsSliderState();

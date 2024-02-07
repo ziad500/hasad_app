@@ -24,13 +24,17 @@ String formatDateString(String inputDate) {
 }
 
 String convertDateFormat(String inputDate) {
-  DateFormat originalFormat = DateFormat('EEE, d MMM yyyy', Constants.isArabic ? 'ar' : 'en');
-  DateFormat desiredFormat = DateFormat('yyyy-MM-dd', "en");
+  try {
+    DateFormat originalFormat = DateFormat('EEE, d MMM yyyy', Constants.isArabic ? 'ar' : 'en');
+    DateFormat desiredFormat = DateFormat('yyyy-MM-dd', "en");
 
-  DateTime dateTime = originalFormat.parse(inputDate);
-  String formattedDate = desiredFormat.format(dateTime);
+    DateTime dateTime = originalFormat.parse(inputDate);
+    String formattedDate = desiredFormat.format(dateTime);
 
-  return formattedDate;
+    return formattedDate;
+  } catch (e) {
+    return inputDate;
+  }
 }
 
 Future<DateTime?> showDatePickerFunction(BuildContext context) async {

@@ -33,7 +33,12 @@ class AddressDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<ListsCubit>()..getRegionsList(),
+      create: (context) => sl<ListsCubit>()
+        ..getRegionsList()
+        ..getCitisList(RegionsListRequest([int.parse(cityController.text)]),
+            call: cityController.text != "")
+        ..getDitrictsList(RegionsListRequest([int.parse(cityController.text)]),
+            call: districtController.text != ""),
       child: BlocConsumer<ListsCubit, ListsState>(
         listener: (context, state) {
           if (state is GetRegionsErrorState) {
@@ -63,6 +68,8 @@ class AddressDropDown extends StatelessWidget {
                       ? const LoadingWidget()
                       : Expanded(
                           child: CustomDropDown(
+                            initialValue:
+                                ListsCubit.get(context).getRegionsValue(cityController.text),
                             list: ListsCubit.get(context).regionsModel == null
                                 ? []
                                 : ListsCubit.get(context)
@@ -78,9 +85,10 @@ class AddressDropDown extends StatelessWidget {
 
                               districtController.clear();
                               ListsCubit.get(context)
-                                  .getCitisList(RegionsListRequest([int.parse(p0.id)]));
-                              ListsCubit.get(context)
-                                  .getDitrictsList(RegionsListRequest([int.parse(p0.id)]));
+                                  .getCitisList(RegionsListRequest([int.parse(p0.id)]), call: true);
+                              ListsCubit.get(context).getDitrictsList(
+                                  RegionsListRequest([int.parse(p0.id)]),
+                                  call: true);
                             },
                             onTap: () {},
                           ),
@@ -92,6 +100,8 @@ class AddressDropDown extends StatelessWidget {
                       ? const LoadingWidget()
                       : Expanded(
                           child: CustomDropDown(
+                            initialValue:
+                                ListsCubit.get(context).getCityValue(provinceController.text),
                             list: ListsCubit.get(context).citiesModel == null
                                 ? []
                                 : ListsCubit.get(context)
@@ -116,6 +126,8 @@ class AddressDropDown extends StatelessWidget {
                   ? const LoadingWidget()
                   : CustomDropDown(
                       width: 135.w,
+                      initialValue:
+                          ListsCubit.get(context).getDitrictValue(districtController.text),
                       list: ListsCubit.get(context).districtsModel == null
                           ? []
                           : ListsCubit.get(context)

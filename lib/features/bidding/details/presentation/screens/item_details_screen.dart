@@ -9,6 +9,7 @@ import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/done_request_screen.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/core/func/payment_faild_dialog.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/bidding_progress.dart';
@@ -65,6 +66,35 @@ class BiddingDetailsScreen extends StatelessWidget {
             actions: [
               BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
                 builder: (context, state) {
+                  BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
+
+                  return cubit.directSellingDataModel?.owner?.id.toString() != Constants.userId
+                      ? const SizedBox()
+                      : InkWell(
+                          onTap: () => Navigator.pushNamed(context, Routes.addRequestScreen,
+                              arguments: cubit.directSellingDataModel),
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                                color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                children: [
+                                  DefaultText(
+                                      text: LocaleKeys.edit.tr(), color: AppColors.blueAccent),
+                                  const SizedBox(width: 5),
+                                  const Icon(Icons.edit, color: AppColors.blueAccent, size: 15),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                },
+              ),
+              BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
+                builder: (context, state) {
                   if (BiddingDetailsCubit.get(context).directSellingDataModel != null) {
                     return BlocConsumer<FavoritesCubit, FavoritesState>(listener: (context, state) {
                       if (state is AddToFavoritesListErrorState) {
@@ -113,6 +143,8 @@ class BiddingDetailsScreen extends StatelessWidget {
                           alignment: Alignment.bottomCenter,
                           children: [
                             ItemDetailsSlider(
+                                isMine: cubit.directSellingDataModel?.owner?.id.toString() ==
+                                    Constants.userId,
                                 height: 250.h,
                                 borderRadius: 0,
                                 currentIndex: cubit.currentIndex,

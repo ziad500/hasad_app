@@ -49,8 +49,8 @@ class _MyDirectSellingListViewState extends State<MyDirectSellingListView> {
         }),
         controller: controller,
         //build this widget for the cureent screen
-        childBuilder: (index) =>
-            MainItemWidget(isbidding: false, directSellingDataModel: cubit.myDirectSelling[index]),
+        childBuilder: (index) => MainItemWidget(
+            isbidding: false, directSellingDataModel: cubit.myDirectSelling[index], mine: true),
         items: cubit.myDirectSelling,
         //indicates that you do not has any other pages to fetch
         allCaught: state is MyDirectSellingListAllCaughtState,

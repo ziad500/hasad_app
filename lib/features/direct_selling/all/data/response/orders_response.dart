@@ -40,6 +40,7 @@ class DirectSellingOrderResponse {
   String? createdAt;
   @JsonKey(name: "received_date")
   String? receivedDate;
+
   DirectSellingOrderResponse(
       {this.purchaseInvoiceId,
       this.advertisementId,

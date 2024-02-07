@@ -4,4 +4,6 @@ import 'package:hasad_app/features/requests/data/network/requests.dart';
 
 abstract class RequestsRepo {
   Future<Either<Failure, dynamic>> addRequest(AddRequestRequest addRequestRequest);
+
+  Future<Either<Failure, dynamic>> editRequest(EditRequestRequest editRequestRequest);
 }

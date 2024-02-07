@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/shared_list_tile.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
@@ -32,17 +33,34 @@ class ChooseTypeOfRequest extends StatelessWidget {
                       dense: true,
                       title: LocaleKeys.directSale.tr(),
                       isSelected: cubit.selectedType == 1,
-                      onTap: () => cubit.selectType(1),
+                      onTap: () {
+                        if (cubit.editId != null) {
+                          showSnackbar(
+                              context: context,
+                              text: LocaleKeys.youCannotEditThis.tr(),
+                              state: ToastStates.ERROR);
+                        } else {
+                          cubit.selectType(1);
+                        }
+                      },
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
                     SharedListTile(
-                      dense: true,
-                      title: LocaleKeys.auction.tr(),
-                      isSelected: cubit.selectedType == 2,
-                      onTap: () => cubit.selectType(2),
-                    )
+                        dense: true,
+                        title: LocaleKeys.auction.tr(),
+                        isSelected: cubit.selectedType == 2,
+                        onTap: () {
+                          if (cubit.editId != null) {
+                            showSnackbar(
+                                context: context,
+                                text: LocaleKeys.youCannotEditThis.tr(),
+                                state: ToastStates.ERROR);
+                          } else {
+                            cubit.selectType(2);
+                          }
+                        })
                   ],
                 ));
           },

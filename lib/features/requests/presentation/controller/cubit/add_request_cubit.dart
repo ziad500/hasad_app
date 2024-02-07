@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/pick_images_widget.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 import 'package:hasad_app/features/requests/data/network/requests.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
 import 'package:hasad_app/common/done_request_screen.dart';
+import 'package:hasad_app/features/requests/domain/use_cases/edit_request_usecase.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_department_request.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_of_agriculture_screen.dart';
 import 'package:hasad_app/features/requests/presentation/components/screens/choose_type_of_packaging.dart';
@@ -24,7 +27,8 @@ part 'add_request_state.dart';
 
 class AddRequestCubit extends Cubit<AddRequestState> {
   final AddRequestUseCase _addRequestUseCase;
-  AddRequestCubit(this._addRequestUseCase) : super(AddRequestInitial());
+  final EditRequestUseCase _editRequestUseCase;
+  AddRequestCubit(this._addRequestUseCase, this._editRequestUseCase) : super(AddRequestInitial());
   static AddRequestCubit get(context) => BlocProvider.of(context);
 
   @override
@@ -157,4 +161,67 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
       biddingdate: selectedbiddingDate,
       startingPrice: startPriceController.text == "" ? null : startPriceController.text);
+
+  ////////////////////////////// edit request //////////////////////////
+  Future editRequest(String id) async {
+    emit(EditRequestLoadingState());
+    await _editRequestUseCase.execude(_passEditRequestRequest(id)).then((value) => value.fold(
+        (l) => emit(EditRequestErrorState(l.message)),
+        (r) => emit(EditRequestSuccessState(r['message'] ?? LocaleKeys.doneEdited.tr()))));
+  }
+
+  EditRequestRequest _passEditRequestRequest(String id) => EditRequestRequest(
+      advertisementId: id,
+      advertisementTypeId: selectedType.toString(),
+      departmentId: selectedDepartment.toString(),
+      departmentTypeId: selectedTypeOfProduct.toString(),
+      priceInclusionIds: selectedPriceIncluding,
+      agricultureTypeId: selectedagriculture.toString(),
+      packagingTypeId: selectedPackaging.toString(),
+      harvestDate: convertDateFormat(selectedHarvestDate.toString()),
+      images: images.isEmpty ? null : images.map((e) => File(e.path)).toList(),
+      video: isNetworkImage(videoPath ?? "") ? null : File(videoPath!),
+      title: titleController.text,
+      description: descriptionController.text,
+      regionId: cityController.text,
+      cityId: provinceController.text,
+      districtId: districtController.text,
+      price: defaultPriceController.text,
+      biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
+      biddingdate: selectedbiddingDate,
+      startingPrice: startPriceController.text == "" ? null : startPriceController.text,
+      deletedImages: deletedImages);
+
+  List<LocationModel> imagesFromResponse = [];
+  List<String> deletedImages = [];
+
+  String? editId;
+  setController(DirectSellingDataModel? directSellingDataModel) {
+    if (directSellingDataModel != null) {
+      // ignore: prefer_null_aware_operators
+      editId = directSellingDataModel.id == null ? null : directSellingDataModel.id.toString();
+      selectedType = directSellingDataModel.advertisementType?.id;
+      selectedDepartment = directSellingDataModel.department?.id;
+      selectedTypeOfProduct = directSellingDataModel.departmentType?.id;
+      selectedPriceIncluding =
+          directSellingDataModel.priceInclusions!.map((e) => e.id.toString()).toList();
+      selectedagriculture = directSellingDataModel.agricultureType?.id.toString();
+      selectedPackaging = directSellingDataModel.packagingType?.id.toString();
+      selectedHarvestDate = directSellingDataModel.harvestDate;
+      titleController.text = directSellingDataModel.title ?? "";
+      descriptionController.text = directSellingDataModel.description ?? "";
+      cityController.text = directSellingDataModel.region!.id.toString();
+      provinceController.text = directSellingDataModel.city!.id.toString();
+      districtController.text = directSellingDataModel.district!.id.toString();
+      startPriceController.text = directSellingDataModel.auctionPrice == null
+          ? ""
+          : directSellingDataModel.auctionPrice.toString();
+      defaultPriceController.text = directSellingDataModel.price.toString();
+      videoPath = directSellingDataModel.video;
+      biddingLongController.text = directSellingDataModel.biddingDuration ?? "";
+      imagesFromResponse = directSellingDataModel.images ?? [];
+    } else {
+      editId = null;
+    }
+  }
 }

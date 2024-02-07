@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/default/custom_drop_down.dart';
+import 'package:hasad_app/utils/helpers.dart';
 
 import '../../../data/network/requests.dart';
 import '../../../domain/models/lists_model.dart';
@@ -25,28 +27,32 @@ class ListsCubit extends Cubit<ListsState> {
 
   ListsModel? citiesModel;
 
-  Future<void> getCitisList(RegionsListRequest regionsListRequest) async {
-    citiesModel = null;
-    emit(GetCitiesLoadingState());
-    await getCitiesListUseCase.execude(regionsListRequest).then((value) => value.fold((l) {
-          emit(GetCitiesErrorState(l.message));
-        }, (r) {
-          citiesModel = r;
-          emit(GetCitiesSuccessState());
-        }));
+  Future<void> getCitisList(RegionsListRequest regionsListRequest, {required bool call}) async {
+    if (call) {
+      citiesModel = null;
+      emit(GetCitiesLoadingState());
+      await getCitiesListUseCase.execude(regionsListRequest).then((value) => value.fold((l) {
+            emit(GetCitiesErrorState(l.message));
+          }, (r) {
+            citiesModel = r;
+            emit(GetCitiesSuccessState());
+          }));
+    }
   }
 
   ListsModel? districtsModel;
 
-  Future<void> getDitrictsList(RegionsListRequest regionsListRequest) async {
-    districtsModel = null;
-    emit(GetDistrictsLoadingState());
-    await getDistrictsListUseCase.execude(regionsListRequest).then((value) => value.fold((l) {
-          emit(GetDistrictsErrorState(l.message));
-        }, (r) {
-          districtsModel = r;
-          emit(GetDistrictsSuccessState());
-        }));
+  Future<void> getDitrictsList(RegionsListRequest regionsListRequest, {required bool call}) async {
+    if (call) {
+      districtsModel = null;
+      emit(GetDistrictsLoadingState());
+      await getDistrictsListUseCase.execude(regionsListRequest).then((value) => value.fold((l) {
+            emit(GetDistrictsErrorState(l.message));
+          }, (r) {
+            districtsModel = r;
+            emit(GetDistrictsSuccessState());
+          }));
+    }
   }
 
   ListsModel? regionsModel;
@@ -137,5 +143,41 @@ class ListsCubit extends Cubit<ListsState> {
               unKnownList = r.data ?? [];
               emit(GetUnKnownListSuccessState());
             }));
+  }
+
+  OptionItem? getRegionsValue(String value) {
+    if (regionsModel?.data != null &&
+        value != "" &&
+        regionsModel!.data!.any((element) => element.id.toString() == value)) {
+      ListsDataModel result =
+          regionsModel!.data!.firstWhere((element) => element.id.toString() == value);
+
+      return OptionItem(id: result.id.toString(), title: isEmpty(result.name));
+    }
+    return null;
+  }
+
+  OptionItem? getCityValue(String value) {
+    if (citiesModel?.data != null &&
+        value != "" &&
+        citiesModel!.data!.any((element) => element.id.toString() == value)) {
+      ListsDataModel result =
+          citiesModel!.data!.firstWhere((element) => element.id.toString() == value);
+
+      return OptionItem(id: result.id.toString(), title: isEmpty(result.name));
+    }
+    return null;
+  }
+
+  OptionItem? getDitrictValue(String value) {
+    if (districtsModel?.data != null &&
+        value != "" &&
+        districtsModel!.data!.any((element) => element.id.toString() == value)) {
+      ListsDataModel result =
+          districtsModel!.data!.firstWhere((element) => element.id.toString() == value);
+
+      return OptionItem(id: result.id.toString(), title: isEmpty(result.name));
+    }
+    return null;
   }
 }

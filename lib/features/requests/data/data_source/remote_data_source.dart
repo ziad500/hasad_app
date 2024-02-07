@@ -3,6 +3,7 @@ import 'package:hasad_app/features/requests/data/network/requests.dart';
 
 abstract class RequestsRemoteDataSource {
   Future<dynamic> addRequest(AddRequestRequest addRequestRequest);
+  Future<dynamic> editRequest(EditRequestRequest editRequestRequest);
 }
 
 class RequestsRemoteDataSourceImpl implements RequestsRemoteDataSource {
@@ -32,4 +33,28 @@ class RequestsRemoteDataSourceImpl implements RequestsRemoteDataSource {
           addRequestRequest.startingPrice,
           addRequestRequest.biddingdate,
           addRequestRequest.biddingDuration);
+
+  @override
+  Future editRequest(EditRequestRequest editRequestRequest) =>
+      _requestsAppServiceClient.editRequest(
+          editRequestRequest.advertisementId,
+          editRequestRequest.advertisementTypeId,
+          editRequestRequest.departmentId,
+          editRequestRequest.departmentTypeId,
+          editRequestRequest.priceInclusionIds,
+          editRequestRequest.agricultureTypeId,
+          editRequestRequest.packagingTypeId,
+          editRequestRequest.harvestDate,
+          editRequestRequest.images,
+          editRequestRequest.video,
+          editRequestRequest.title,
+          editRequestRequest.description,
+          editRequestRequest.regionId,
+          editRequestRequest.cityId,
+          editRequestRequest.districtId,
+          editRequestRequest.price,
+          editRequestRequest.startingPrice,
+          editRequestRequest.biddingdate,
+          editRequestRequest.biddingDuration,
+          editRequestRequest.deletedImages);
 }

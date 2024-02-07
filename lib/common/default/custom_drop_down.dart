@@ -27,7 +27,8 @@ class CustomDropDown extends StatelessWidget {
       this.prefix,
       this.borderColor,
       this.borderRadius,
-      this.textColor});
+      this.textColor,
+      this.initialValue});
 
   final List<OptionItem> list;
   final List<DropdownMenuItem<OptionItem>>? items;
@@ -48,6 +49,8 @@ class CustomDropDown extends StatelessWidget {
   final double? borderRadius;
   final TextEditingController textEditingController = TextEditingController();
   final Color? textColor;
+  final OptionItem? initialValue;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,6 +71,7 @@ class CustomDropDown extends StatelessWidget {
             children: [
               DropdownButtonFormField2<OptionItem>(
                 isExpanded: true,
+                value: initialValue,
                 decoration: InputDecoration(
                     prefixIcon: prefix,
                     prefixIconConstraints: BoxConstraints(

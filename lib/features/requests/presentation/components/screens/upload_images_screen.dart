@@ -8,6 +8,7 @@ import 'package:hasad_app/features/requests/presentation/components/base/add_req
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UploadImagesScreen extends StatelessWidget {
   const UploadImagesScreen({super.key});
@@ -23,7 +24,7 @@ class UploadImagesScreen extends StatelessWidget {
             AddRequestCubit cubit = AddRequestCubit.get(context);
             return AddRequestBaseContainer(
                 buttonFunction: () {
-                  if (cubit.images.length < 3) {
+                  if ((cubit.images.length + cubit.imagesFromResponse.length) < 3) {
                     showSnackbar(
                         context: context,
                         text: LocaleKeys.uploadThreeImages.tr(),
@@ -42,9 +43,30 @@ class UploadImagesScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     PickImagesWidget(
-                        imagesStatic: cubit.images.map((e) => e.path).toList(),
+                        imagesStatic: cubit.imagesFromResponse.isEmpty
+                            ? cubit.images.map((e) => e.path).toList()
+                            : cubit.imagesFromResponse.map((e) => e.name!).toList(),
+                        onRemove: (value) {
+                          if (isNetworkImage(value)) {
+                            int? id = cubit.imagesFromResponse
+                                .firstWhere((element) => element.name == value)
+                                .id;
+                            if (id != null) {
+                              if (!cubit.deletedImages.contains(id.toString())) {
+                                cubit.deletedImages.add(id.toString());
+                              }
+                              cubit.imagesFromResponse.removeWhere((element) => element.id == id);
+                            }
+                          }
+                        },
                         onUpload: (value) {
-                          cubit.images = value;
+                          /*   cubit.images = value.map((e) {
+                            if (!isNetworkImage(e)) {
+                              return XFile(e);
+                            }
+                          }).toList(); */
+                          cubit.images =
+                              value.where((e) => !isNetworkImage(e)).map((e) => XFile(e)).toList();
                         }),
                     PickMediaWidget(
                         mediaType: MediaType.video,

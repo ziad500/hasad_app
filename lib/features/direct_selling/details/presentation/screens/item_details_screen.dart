@@ -8,6 +8,7 @@ import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/done_request_screen.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/core/func/payment_faild_dialog.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/base/body.dart';
@@ -61,6 +62,35 @@ class ItemDetailsScreen extends StatelessWidget {
             actions: [
               BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
                 builder: (context, state) {
+                  DirectSellingDetailsCubit cubit = DirectSellingDetailsCubit.get(context);
+
+                  return cubit.directSellingDataModel?.owner?.id.toString() != Constants.userId
+                      ? const SizedBox()
+                      : InkWell(
+                          onTap: () => Navigator.pushNamed(context, Routes.addRequestScreen,
+                              arguments: cubit.directSellingDataModel),
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                                color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                children: [
+                                  DefaultText(
+                                      text: LocaleKeys.edit.tr(), color: AppColors.blueAccent),
+                                  const SizedBox(width: 5),
+                                  const Icon(Icons.edit, color: AppColors.blueAccent, size: 15),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                },
+              ),
+              BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
+                builder: (context, state) {
                   if (DirectSellingDetailsCubit.get(context).directSellingDataModel != null) {
                     return BlocConsumer<FavoritesCubit, FavoritesState>(listener: (context, state) {
                       if (state is AddToFavoritesListErrorState) {
@@ -84,7 +114,7 @@ class ItemDetailsScreen extends StatelessWidget {
                   }
                   return const SizedBox();
                 },
-              )
+              ),
             ],
             body: BlocBuilder<DirectSellingDetailsCubit, DirectSellingDetailsState>(
               buildWhen: (a, b) =>
@@ -107,6 +137,8 @@ class ItemDetailsScreen extends StatelessWidget {
                       builder: (context, state) {
                         return ItemDetailsSlider(
                             currentIndex: cubit.currentIndex,
+                            isMine: cubit.directSellingDataModel?.owner?.id.toString() ==
+                                Constants.userId,
                             list: [
                               cubit.directSellingDataModel?.video,
                               ...cubit.directSellingDataModel!.images!.map((e) => e.name).toList()

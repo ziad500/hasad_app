@@ -17,4 +17,12 @@ class RequestsRepositoryImpl implements RequestsRepo {
       return response;
     });
   }
+
+  @override
+  Future<Either<Failure, dynamic>> editRequest(EditRequestRequest editRequestRequest) {
+    return executeAndHandleError<dynamic>(() async {
+      final response = await _requestsRemoteDataSource.editRequest(editRequestRequest);
+      return response;
+    });
+  }
 }

@@ -13,11 +13,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImagesWidget extends StatefulWidget {
-  const PickImagesWidget({Key? key, this.text, required this.onUpload, this.imagesStatic})
+  const PickImagesWidget(
+      {Key? key, this.text, required this.onUpload, this.imagesStatic, required this.onRemove})
       : super(key: key);
 
   final String? text;
-  final Function(List<XFile>) onUpload;
+  final Function(List<String>) onUpload;
+  final Function(String) onRemove;
   final List<String>? imagesStatic;
 
   @override
@@ -25,11 +27,11 @@ class PickImagesWidget extends StatefulWidget {
 }
 
 class _PickImagesWidgetState extends State<PickImagesWidget> {
-  List<XFile> images = [];
+  List<String> images = [];
   @override
   void initState() {
     if (widget.imagesStatic != null) {
-      images = widget.imagesStatic!.map((e) => XFile(e)).toList();
+      images = widget.imagesStatic!.map((e) => e).toList();
     }
     super.initState();
   }
@@ -74,7 +76,7 @@ class _PickImagesWidgetState extends State<PickImagesWidget> {
     );
   }
 
-  Widget buildImageContainer(int index, XFile image) {
+  Widget buildImageContainer(int index, String image) {
     return Stack(
       children: [
         Container(
@@ -87,18 +89,32 @@ class _PickImagesWidgetState extends State<PickImagesWidget> {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppColors.borderColor),
           ),
-          child: Image.file(
-            File(image.path),
+          child: isNetworkImage(image)
+              ? Image.network(
+                  image,
+                  height: 60,
+                  width: 60,
+                  fit: BoxFit.cover,
+                )
+              : Image.file(
+                  File(image),
+                  height: 60,
+                  width: 60,
+                  fit: BoxFit.cover,
+                ),
+          /* Image.file(
+            File(image),
             height: 60,
             width: 60,
             fit: BoxFit.cover,
-          ),
+          ), */
         ),
         Positioned(
           top: 0,
           right: 0,
           child: InkWell(
             onTap: () {
+              widget.onRemove(images[index]);
               removeImage(index);
               widget.onUpload(images);
             },
@@ -188,14 +204,14 @@ class _PickImagesWidgetState extends State<PickImagesWidget> {
         final pickedFile = await ImagePicker().pickImage(source: source);
         if (pickedFile != null) {
           setState(() {
-            images.add(pickedFile);
+            images.add(pickedFile.path);
           });
         }
       } else {
         final pickedFile = await ImagePicker().pickImage(source: source);
         if (pickedFile != null) {
           setState(() {
-            images.add(pickedFile);
+            images.add(pickedFile.path);
           });
         }
       }
@@ -212,4 +228,8 @@ class _PickImagesWidgetState extends State<PickImagesWidget> {
       images.removeAt(index);
     });
   }
+}
+
+bool isNetworkImage(String path) {
+  return path.startsWith('http') || path.startsWith('https');
 }

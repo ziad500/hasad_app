@@ -21,9 +21,14 @@ import 'package:hasad_app/utils/routes_manager.dart';
 import 'package:hasad_app/utils/date_helper.dart';
 
 class MainItemWidget extends StatelessWidget {
-  const MainItemWidget({super.key, required this.isbidding, required this.directSellingDataModel});
+  const MainItemWidget(
+      {super.key,
+      required this.isbidding,
+      required this.directSellingDataModel,
+      this.mine = false});
   final bool isbidding;
   final DirectSellingDataModel directSellingDataModel;
+  final bool mine;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +45,8 @@ class MainItemWidget extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            _NetowrkImage(directSellingDataModel.images?[0].name, isbidding),
+            _NetowrkImage(
+                directSellingDataModel.images?[0].name, isbidding, mine, directSellingDataModel),
             const SizedBox(width: 10),
             Expanded(flex: 3, child: _Description(isbidding, directSellingDataModel))
           ],
@@ -107,9 +113,11 @@ class _BiddingDetails extends StatelessWidget {
 }
 
 class _NetowrkImage extends StatelessWidget {
-  const _NetowrkImage(this.image, this.isBidding);
+  const _NetowrkImage(this.image, this.isBidding, this.mine, this.model);
   final String? image;
   final bool isBidding;
+  final bool mine;
+  final DirectSellingDataModel? model;
 
   @override
   Widget build(BuildContext context) {

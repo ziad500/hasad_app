@@ -58,9 +58,9 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
       'department_type_id',
       departmentTypeId,
     ));
-    for (var i in priceInclusionIds) {
+    priceInclusionIds.forEach((i) {
       _data.fields.add(MapEntry('price_inclusion_ids[]', i));
-    }
+    });
     _data.fields.add(MapEntry(
       'agriculture_type_id',
       agricultureTypeId,
@@ -136,6 +136,147 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
         .compose(
           _dio.options,
           'advertisement/add',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> editRequest(
+    String advertisementId,
+    String advertisementTypeId,
+    String departmentId,
+    String departmentTypeId,
+    List<String> priceInclusionIds,
+    String agricultureTypeId,
+    String packagingTypeId,
+    String harvestDate,
+    List<File>? images,
+    File? video,
+    String title,
+    String description,
+    String regionId,
+    String cityId,
+    String districtId,
+    String price,
+    String? startingPrice,
+    String? biddingDate,
+    String? biddingDuration,
+    List<String> deletedImages,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'advertisement_id',
+      advertisementId,
+    ));
+    _data.fields.add(MapEntry(
+      'advertisement_type_id',
+      advertisementTypeId,
+    ));
+    _data.fields.add(MapEntry(
+      'department_id',
+      departmentId,
+    ));
+    _data.fields.add(MapEntry(
+      'department_type_id',
+      departmentTypeId,
+    ));
+    priceInclusionIds.forEach((i) {
+      _data.fields.add(MapEntry('price_inclusion_ids[]', i));
+    });
+    _data.fields.add(MapEntry(
+      'agriculture_type_id',
+      agricultureTypeId,
+    ));
+    _data.fields.add(MapEntry(
+      'packaging_type_id',
+      packagingTypeId,
+    ));
+    _data.fields.add(MapEntry(
+      'harvest_date',
+      harvestDate,
+    ));
+    if (images != null) {
+      _data.files.addAll(images.map((i) => MapEntry(
+          'images[]',
+          MultipartFile.fromFileSync(
+            i.path,
+            filename: i.path.split(Platform.pathSeparator).last,
+          ))));
+    }
+    if (video != null) {
+      _data.files.add(MapEntry(
+        'video',
+        MultipartFile.fromFileSync(
+          video.path,
+          filename: video.path.split(Platform.pathSeparator).last,
+        ),
+      ));
+    }
+    _data.fields.add(MapEntry(
+      'title',
+      title,
+    ));
+    _data.fields.add(MapEntry(
+      'description',
+      description,
+    ));
+    _data.fields.add(MapEntry(
+      'region_id',
+      regionId,
+    ));
+    _data.fields.add(MapEntry(
+      'city_id',
+      cityId,
+    ));
+    _data.fields.add(MapEntry(
+      'district_id',
+      districtId,
+    ));
+    _data.fields.add(MapEntry(
+      'price',
+      price,
+    ));
+    if (startingPrice != null) {
+      _data.fields.add(MapEntry(
+        'starting_price',
+        startingPrice,
+      ));
+    }
+    if (biddingDate != null) {
+      _data.fields.add(MapEntry(
+        'bidding_date',
+        biddingDate,
+      ));
+    }
+    if (biddingDuration != null) {
+      _data.fields.add(MapEntry(
+        'bidding_duration',
+        biddingDuration,
+      ));
+    }
+    deletedImages.forEach((i) {
+      _data.fields.add(MapEntry('deleted_images[]', i));
+    });
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'advertisement/edit',
           queryParameters: queryParameters,
           data: _data,
         )

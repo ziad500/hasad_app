@@ -69,9 +69,9 @@ class AddressMainDropDown extends StatelessWidget {
 
                         districtController.clear();
                         ListsCubit.get(context)
-                            .getCitisList(RegionsListRequest([int.parse(p0.id)]));
+                            .getCitisList(RegionsListRequest([int.parse(p0.id)]), call: true);
                         ListsCubit.get(context)
-                            .getDitrictsList(RegionsListRequest([int.parse(p0.id)]));
+                            .getDitrictsList(RegionsListRequest([int.parse(p0.id)]), call: true);
                       },
                     ),
               SizedBox(
