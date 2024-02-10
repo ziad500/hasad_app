@@ -32,13 +32,14 @@ class AddressDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("...............${cityController.text != ""}");
     return BlocProvider(
-      create: (context) => sl<ListsCubit>()
-        ..getRegionsList()
-        ..getCitisList(RegionsListRequest([int.parse(cityController.text)]),
-            call: cityController.text != "")
-        ..getDitrictsList(RegionsListRequest([int.parse(cityController.text)]),
-            call: districtController.text != ""),
+      create: (context) => sl<ListsCubit>()..call(cityController) /* getRegionsList() */
+      /*  ..getCitisList(RegionsListRequest([int.parse(cityController.text)]),
+            call: cityController.text != "") */
+      /*  ..getDitrictsList(RegionsListRequest([int.parse(cityController.text)]),
+            call: districtController.text != "") */
+      ,
       child: BlocConsumer<ListsCubit, ListsState>(
         listener: (context, state) {
           if (state is GetRegionsErrorState) {

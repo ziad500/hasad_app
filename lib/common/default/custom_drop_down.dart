@@ -109,15 +109,12 @@ class CustomDropDown extends StatelessWidget {
                                   subtitle: item.subtitle,
                                   description: item.description,
                                   image: item.image),
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  item.title,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(color: Colors.grey, fontSize: 16),
-                                ),
+                              child: Text(
+                                item.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(color: Colors.grey, fontSize: 16),
                               ),
                             ))
                         .toList(),

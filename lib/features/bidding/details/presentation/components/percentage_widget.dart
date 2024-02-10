@@ -8,6 +8,7 @@ class PercentageWidget extends StatelessWidget {
   final bool notStarted;
   @override
   Widget build(BuildContext context) {
+    print("..........$value");
     return notStarted
         ? Center(
             child: SizedBox(

@@ -15,6 +15,7 @@ import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:hasad_app/utils/date_helper.dart';
 
 class BiddingRowOfButtons extends StatelessWidget {
   const BiddingRowOfButtons({super.key});
@@ -28,9 +29,11 @@ class BiddingRowOfButtons extends StatelessWidget {
         }
         BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
         ProfileDataModel? user = cubit.directSellingDataModel?.owner;
-        if (user?.id.toString() == Constants.userId) {
+        if (user?.id.toString() == Constants.userId ||
+            !isDatePast(cubit.directSellingDataModel?.biddingDate)) {
           return const SizedBox();
         }
+
         return Padding(
           padding: const EdgeInsets.all(15.0),
           child: Row(

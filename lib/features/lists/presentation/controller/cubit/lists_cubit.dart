@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/custom_drop_down.dart';
 import 'package:hasad_app/utils/helpers.dart';
@@ -22,6 +23,14 @@ class ListsCubit extends Cubit<ListsState> {
   void emit(state) {
     if (!isClosed) {
       super.emit(state);
+    }
+  }
+
+  call(TextEditingController city) async {
+    await getRegionsList();
+    if (city.text != "") {
+      await getCitisList(RegionsListRequest([int.parse(city.text)]), call: true);
+      await getDitrictsList(RegionsListRequest([int.parse(city.text)]), call: true);
     }
   }
 

@@ -216,10 +216,14 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       startPriceController.text = directSellingDataModel.auctionPrice == null
           ? ""
           : directSellingDataModel.auctionPrice.toString();
-      defaultPriceController.text = directSellingDataModel.price.toString();
+      defaultPriceController.text = directSellingDataModel.price == null
+          ? directSellingDataModel.auctionPrice.toString()
+          : directSellingDataModel.price.toString();
       videoPath = directSellingDataModel.video;
       biddingLongController.text = directSellingDataModel.biddingDuration ?? "";
       imagesFromResponse = directSellingDataModel.images ?? [];
+      selectedbiddingDate =
+          directSellingDataModel.biddingDate?.replaceAll("AM", "").replaceAll("PM", "");
     } else {
       editId = null;
     }

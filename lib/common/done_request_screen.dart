@@ -23,45 +23,47 @@ class DoneRequestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 100.h,
-          ),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              SvgPicture.asset(SVGManager.doneRequest),
-              donePageState == DonePageState.done
-                  ? const Icon(
-                      Icons.done,
-                      color: Colors.white,
-                      size: 100,
-                    )
-                  : donePageState == DonePageState.waiting
-                      ? SvgPicture.asset(SVGManager.infinity)
-                      : SvgPicture.asset(SVGManager.bidding)
-            ],
-          ),
-          SizedBox(
-            height: 30.h,
-          ),
-          DefaultText(
-            text: title,
-            textStyle: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 20),
-          DefaultText(text: subTitle, textStyle: Theme.of(context).textTheme.bodyLarge),
-          const Spacer(),
-          DefaultButton(
-              buttonName: buttonText ?? LocaleKeys.home.tr(),
-              buttonFunction: () {
-                Navigator.pushReplacementNamed(context, route);
-              })
-        ],
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 100.h,
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                SvgPicture.asset(SVGManager.doneRequest),
+                donePageState == DonePageState.done
+                    ? const Icon(
+                        Icons.done,
+                        color: Colors.white,
+                        size: 100,
+                      )
+                    : donePageState == DonePageState.waiting
+                        ? SvgPicture.asset(SVGManager.infinity)
+                        : SvgPicture.asset(SVGManager.bidding)
+              ],
+            ),
+            SizedBox(
+              height: 30.h,
+            ),
+            DefaultText(
+              text: title,
+              textStyle: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 20),
+            DefaultText(text: subTitle, textStyle: Theme.of(context).textTheme.bodyLarge),
+            const Spacer(),
+            DefaultButton(
+                buttonName: buttonText ?? LocaleKeys.home.tr(),
+                buttonFunction: () {
+                  Navigator.pushReplacementNamed(context, route);
+                })
+          ],
+        ),
       ),
     );
   }
