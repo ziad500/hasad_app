@@ -14,13 +14,10 @@ class DirectSellingInvoiceDataModel {
   num? tax;
   num? total;
   DirectSellingInvoiceadvertisementModel? advertisement;
+  String? createdAt;
+
   DirectSellingInvoiceDataModel(
-    this.invoiceNumber,
-    this.subtotal,
-    this.tax,
-    this.total,
-    this.advertisement,
-  );
+      this.invoiceNumber, this.subtotal, this.tax, this.total, this.advertisement, this.createdAt);
 }
 
 class DirectSellingInvoiceadvertisementModel {

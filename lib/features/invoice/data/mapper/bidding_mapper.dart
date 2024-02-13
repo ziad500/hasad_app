@@ -25,7 +25,7 @@ extension InvoiceadvertisementResponseMapper on BiddingInvoiceadvertisementRespo
 extension BiddingInvoiceDataResponseMapper on BiddingInvoiceDataResponse? {
   BiddingInvoiceDataModel toDomain() {
     return BiddingInvoiceDataModel(this?.invoiceNumber, this?.subtotal, this?.tax, this?.total,
-        this?.advertisement.toDomain());
+        this?.advertisement.toDomain(), this?.createdAt);
   }
 }
 

@@ -34,13 +34,15 @@ class DirectSellingInvoiceDataResponse {
   num? total;
   @JsonKey(name: "advertisement")
   DirectSellingInvoiceadvertisementResponse? advertisement;
-  DirectSellingInvoiceDataResponse({
-    this.invoiceNumber,
-    this.subtotal,
-    this.tax,
-    this.total,
-    this.advertisement,
-  });
+  @JsonKey(name: "created_at")
+  String? createdAt;
+  DirectSellingInvoiceDataResponse(
+      {this.invoiceNumber,
+      this.subtotal,
+      this.tax,
+      this.total,
+      this.advertisement,
+      this.createdAt});
 
   // from json
   factory DirectSellingInvoiceDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -69,17 +71,17 @@ class DirectSellingInvoiceadvertisementResponse {
   num? price;
   @JsonKey(name: "images")
   List<LocationResponse>? images;
-  DirectSellingInvoiceadvertisementResponse({
-    this.id,
-    this.advertisementTypeId,
-    this.title,
-    this.description,
-    this.region,
-    this.city,
-    this.district,
-    this.price,
-    this.images,
-  });
+
+  DirectSellingInvoiceadvertisementResponse(
+      {this.id,
+      this.advertisementTypeId,
+      this.title,
+      this.description,
+      this.region,
+      this.city,
+      this.district,
+      this.price,
+      this.images});
 
   // from json
   factory DirectSellingInvoiceadvertisementResponse.fromJson(Map<String, dynamic> json) =>

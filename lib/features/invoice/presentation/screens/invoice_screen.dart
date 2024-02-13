@@ -105,10 +105,10 @@ class _LogoAndData extends StatelessWidget {
                     color: AppColors.red,
                   )),
           DefaultText(
-              text: "${LocaleKeys.date.tr()} : ${invoiceModel?.data?.invoiceNumber ?? ""}",
+              text: "${LocaleKeys.date.tr()} : ${invoiceModel?.data?.createdAt ?? ""}",
               textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.blueAccent,
-                  ))
+                  )),
         ],
       ),
     ));
@@ -140,7 +140,26 @@ class _Summary extends StatelessWidget {
           ),
           CalcItem(
               title: LocaleKeys.totalPrice.tr(),
-              value: "${invoiceModel?.data?.total ?? 0} ${LocaleKeys.saudiRiyal.tr()}")
+              value: "${invoiceModel?.data?.total ?? 0} ${LocaleKeys.saudiRiyal.tr()}"),
+          const SizedBox(height: 10),
+          InkWell(
+            onTap: () {
+              InvoiceCubit.get(context).generatePDF(invoiceModel!);
+            },
+            child: Column(
+              children: [
+                const Icon(
+                  Icons.download_for_offline_outlined,
+                  color: AppColors.blueAccent,
+                ),
+                DefaultText(
+                    text: "تحميل",
+                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.blueAccent,
+                        )),
+              ],
+            ),
+          )
         ],
       ),
     ));

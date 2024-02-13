@@ -67,13 +67,14 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
   Future<MainUserAuthResponse> userSignUp(
     String name,
     int phone,
-    int stc,
+    int? stc,
     String password,
     String passwordConfirmation,
     String deviceToken,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry(
@@ -84,10 +85,12 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
       'phone',
       phone.toString(),
     ));
-    _data.fields.add(MapEntry(
-      'stc',
-      stc.toString(),
-    ));
+    if (stc != null) {
+      _data.fields.add(MapEntry(
+        'stc',
+        stc.toString(),
+      ));
+    }
     _data.fields.add(MapEntry(
       'password',
       password,

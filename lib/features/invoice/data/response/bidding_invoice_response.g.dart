@@ -36,6 +36,7 @@ BiddingInvoiceDataResponse _$BiddingInvoiceDataResponseFromJson(
           ? null
           : BiddingInvoiceadvertisementResponse.fromJson(
               json['advertisement'] as Map<String, dynamic>),
+      createdAt: json['created_at'] as String?,
     );
 
 Map<String, dynamic> _$BiddingInvoiceDataResponseToJson(
@@ -46,6 +47,7 @@ Map<String, dynamic> _$BiddingInvoiceDataResponseToJson(
       'tax': instance.tax,
       'total': instance.total,
       'advertisement': instance.advertisement,
+      'created_at': instance.createdAt,
     };
 
 BiddingInvoiceadvertisementResponse

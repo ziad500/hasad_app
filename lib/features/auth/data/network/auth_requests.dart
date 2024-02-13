@@ -8,7 +8,7 @@ class LoginRequest {
 class UserSignUpRequest {
   String name;
   int phone;
-  int stc;
+  int? stc;
   String password;
   String passwordConfirmation;
   String? deviceToken;

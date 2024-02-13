@@ -34,13 +34,15 @@ class BiddingInvoiceDataResponse {
   num? total;
   @JsonKey(name: "advertisement")
   BiddingInvoiceadvertisementResponse? advertisement;
-  BiddingInvoiceDataResponse({
-    this.invoiceNumber,
-    this.subtotal,
-    this.tax,
-    this.total,
-    this.advertisement,
-  });
+  @JsonKey(name: "created_at")
+  String? createdAt;
+  BiddingInvoiceDataResponse(
+      {this.invoiceNumber,
+      this.subtotal,
+      this.tax,
+      this.total,
+      this.advertisement,
+      this.createdAt});
 
   // from json
   factory BiddingInvoiceDataResponse.fromJson(Map<String, dynamic> json) =>

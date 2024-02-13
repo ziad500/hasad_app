@@ -20,7 +20,7 @@ extension InvoiceadvertisementResponseMapper on DirectSellingInvoiceadvertisemen
 extension InvoiceDataResponseMapper on DirectSellingInvoiceDataResponse? {
   DirectSellingInvoiceDataModel toDomain() {
     return DirectSellingInvoiceDataModel(this?.invoiceNumber, this?.subtotal, this?.tax,
-        this?.total, this?.advertisement.todomain());
+        this?.total, this?.advertisement.todomain(), this?.createdAt);
   }
 }
 

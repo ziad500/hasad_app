@@ -4,7 +4,6 @@ import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/default_text_button.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/icons/call_icon.dart';
-import 'package:hasad_app/common/icons/stc_icon.dart';
 import 'package:hasad_app/common/logo_widget.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -24,7 +23,6 @@ class UserSignUp extends StatelessWidget {
   const UserSignUp({super.key});
   static TextEditingController nameController = TextEditingController();
   static TextEditingController lastNameController = TextEditingController();
-  static TextEditingController stcController = TextEditingController();
   static TextEditingController phoneController = TextEditingController();
   static TextEditingController addressController = TextEditingController();
   static TextEditingController passwordController = TextEditingController();
@@ -86,16 +84,6 @@ class UserSignUp extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                        DefaultFormField(
-                            controller: stcController,
-                            hint: LocaleKeys.yourStcNumber.tr(),
-                            prefix: const IconSTC(
-                              color: AppColors.primaryColor,
-                            ),
-                            validator: defaultStcValidation),
-                        SizedBox(
-                          height: 10.h,
-                        ),
                         BlocBuilder<UserSignUpCubit, UserSignUpState>(
                           buildWhen: (previous, current) => current is ViewPasswordState,
                           builder: (context, state) {
@@ -146,7 +134,7 @@ class UserSignUp extends StatelessWidget {
                             userSignUpRequest: UserSignUpRequest(
                               name: nameController.text,
                               phone: int.tryParse(phoneController.text) ?? 0,
-                              stc: int.tryParse(stcController.text) ?? 0,
+                              stc: null,
                               password: passwordController.text,
                               passwordConfirmation: confirmPasswordController.text,
                             )),

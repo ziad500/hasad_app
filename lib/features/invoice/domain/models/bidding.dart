@@ -13,13 +13,10 @@ class BiddingInvoiceDataModel {
   num? tax;
   num? total;
   BiddingInvoiceadvertisementModel? advertisement;
+  String? createdAt;
+
   BiddingInvoiceDataModel(
-    this.invoiceNumber,
-    this.subtotal,
-    this.tax,
-    this.total,
-    this.advertisement,
-  );
+      this.invoiceNumber, this.subtotal, this.tax, this.total, this.advertisement, this.createdAt);
 }
 
 class BiddingInvoiceadvertisementModel {

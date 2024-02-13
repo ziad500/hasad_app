@@ -36,6 +36,7 @@ DirectSellingInvoiceDataResponse _$DirectSellingInvoiceDataResponseFromJson(
           ? null
           : DirectSellingInvoiceadvertisementResponse.fromJson(
               json['advertisement'] as Map<String, dynamic>),
+      createdAt: json['created_at'] as String?,
     );
 
 Map<String, dynamic> _$DirectSellingInvoiceDataResponseToJson(
@@ -46,6 +47,7 @@ Map<String, dynamic> _$DirectSellingInvoiceDataResponseToJson(
       'tax': instance.tax,
       'total': instance.total,
       'advertisement': instance.advertisement,
+      'created_at': instance.createdAt,
     };
 
 DirectSellingInvoiceadvertisementResponse
