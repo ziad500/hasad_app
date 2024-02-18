@@ -179,5 +179,6 @@ abstract class  LocaleKeys {
   static const buyBiddingNote = 'buyBiddingNote';
   static const doneRecieve = 'doneRecieve';
   static const youCannotEditThis = 'youCannotEditThis';
+  static const remainingQuantity = 'remainingQuantity';
 
 }

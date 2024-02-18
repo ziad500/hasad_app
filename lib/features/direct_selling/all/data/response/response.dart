@@ -83,6 +83,12 @@ class DirectSellingDataResponse {
   num? priceAfterTax;
   @JsonKey(name: "bidding_duration")
   String? biddingDuration;
+  @JsonKey(name: "type")
+  String? type;
+  @JsonKey(name: "main_quantity")
+  String? mainQuantity;
+  @JsonKey(name: "sub_quantity")
+  String? subQuantity;
 
   DirectSellingDataResponse(
       {this.city,
@@ -112,7 +118,10 @@ class DirectSellingDataResponse {
       this.priceAfterTax,
       this.purchaseTax,
       this.lastBid,
-      this.biddingDuration});
+      this.biddingDuration,
+      this.type,
+      this.mainQuantity,
+      this.subQuantity});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>

@@ -13,6 +13,7 @@ import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DirectSellingRowOfButtons extends StatelessWidget {
   const DirectSellingRowOfButtons({super.key});
@@ -30,16 +31,17 @@ class DirectSellingRowOfButtons extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Row(
             children: [
-              Expanded(
-                  child: DefaultButton(
-                buttonName: LocaleKeys.buyNow.tr(),
-                buttonFunction: () => showTaxBottomSheet(context,
-                    price: cubit.directSellingDataModel?.price,
-                    totalPrice: cubit.directSellingDataModel?.priceAfterTax,
-                    buttonFunction: () => cubit.buyDirectSelling()),
-                textColor: Colors.white,
-                color: AppColors.darkBlue,
-              )),
+              if (cubit.directSellingDataModel?.subQuantity != "0")
+                Expanded(
+                    child: DefaultButton(
+                  buttonName: LocaleKeys.buyNow.tr(),
+                  buttonFunction: () => showTaxBottomSheet(context,
+                      price: cubit.directSellingDataModel?.price,
+                      totalPrice: cubit.directSellingDataModel?.priceAfterTax,
+                      buttonFunction: () => cubit.buyDirectSelling()),
+                  textColor: Colors.white,
+                  color: AppColors.darkBlue,
+                )),
               if (user?.id.toString() != Constants.userId) ...[
                 SizedBox(
                   width: 15.w,
@@ -66,12 +68,17 @@ class DirectSellingRowOfButtons extends StatelessWidget {
               SizedBox(
                 width: 15.w,
               ),
-              CircleAvatar(
-                backgroundColor: AppColors.red,
-                radius: 25,
-                child: SvgPicture.asset(
-                  SVGManager.call,
-                  height: 20,
+              InkWell(
+                onTap: () async {
+                  await launchUrl(Uri.parse("tel:${cubit.directSellingDataModel?.owner?.phone}"));
+                },
+                child: CircleAvatar(
+                  backgroundColor: AppColors.red,
+                  radius: 25,
+                  child: SvgPicture.asset(
+                    SVGManager.call,
+                    height: 20,
+                  ),
                 ),
               )
             ],
