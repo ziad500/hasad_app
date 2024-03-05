@@ -1,3 +1,5 @@
+import 'package:hasad_app/core/responses/success_response.dart';
+
 import '../network/auth_app_api.dart';
 import '../network/auth_requests.dart';
 import '../responses/auth_response.dart';
@@ -5,8 +7,9 @@ import '../responses/auth_response.dart';
 abstract class AuthRemoteDataSource {
   Future<MainUserAuthResponse> userLogin(LoginRequest loginRequest);
 
-  Future<MainUserAuthResponse> userSignUp(UserSignUpRequest userSignUpRequest);
+  Future<SuccessResponse> userSignUp(UserSignUpRequest userSignUpRequest);
 
+  Future<MainUserAuthResponse> verifySignupCode(VerifyOtpRequest verifyOtpRequest);
   Future<dynamic> requestChangePassword(RequestChangePasswordRequest requestChangePasswordRequest);
   Future<dynamic> verifyOtp(VerifyOtpRequest verifyOtpRequest);
   Future<dynamic> resetPassword(ResetPasswordRequest resetPasswordRequest);
@@ -36,7 +39,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       .userLogin(loginRequest.phone, loginRequest.password, loginRequest.deviceToken);
 
   @override
-  Future<MainUserAuthResponse> userSignUp(UserSignUpRequest userSignUpRequest) =>
+  Future<SuccessResponse> userSignUp(UserSignUpRequest userSignUpRequest) =>
       _authAppServiceClient.userSignUp(
           userSignUpRequest.name,
           userSignUpRequest.phone,
@@ -44,4 +47,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           userSignUpRequest.password,
           userSignUpRequest.passwordConfirmation,
           userSignUpRequest.deviceToken!);
+
+  @override
+  Future<MainUserAuthResponse> verifySignupCode(VerifyOtpRequest verifyOtpRequest) =>
+      _authAppServiceClient.verifySignupCode(verifyOtpRequest.email, verifyOtpRequest.otp);
 }

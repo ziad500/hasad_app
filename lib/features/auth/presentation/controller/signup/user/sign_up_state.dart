@@ -20,3 +20,12 @@ class UserSignUpErrorState extends UserSignUpState {
   final String error;
   UserSignUpErrorState(this.error);
 }
+
+class VerifyOtpLoadingState extends UserSignUpState {}
+
+class VerifyOtpSuccessState extends UserSignUpState {}
+
+class VerifyOtpErrorState extends UserSignUpState {
+  final String error;
+  VerifyOtpErrorState(this.error);
+}

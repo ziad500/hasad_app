@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
+import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/main.dart';
 import 'package:hasad_app/features/bidding/all/presentation/screens/bidding_list_screen.dart';
 import 'package:hasad_app/features/bidding/all/presentation/screens/search_screen.dart';
 import 'package:hasad_app/features/bidding/details/presentation/screens/item_details_screen.dart';
@@ -224,7 +224,7 @@ class RouteGenerator {
       case Routes.signUpScreenRoutes:
         return MaterialPageRoute(
           builder: (context) {
-            return const UserSignUp();
+            return const SignUpMainScreen();
           },
         );
       case Routes.loginRoutes:

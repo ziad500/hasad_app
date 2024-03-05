@@ -7,7 +7,7 @@ bool validatePhoneNumber(String phoneNumber) {
 
   final regExp = RegExp(pattern);
 
-  final isMatch = regExp.hasMatch(phoneNumber) && phoneNumber.length == 10;
+  final isMatch = /* regExp.hasMatch(phoneNumber) && */ phoneNumber.length >= 10;
 
   return isMatch;
 }

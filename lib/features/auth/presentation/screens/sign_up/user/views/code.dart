@@ -3,7 +3,9 @@ import 'package:hasad_app/common/default/loading_frame.dart';
 import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/core/timer/cubit/presentation/timer_view.dart';
-import 'package:hasad_app/features/auth/data/network/auth_requests.dart';
+import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
+import 'package:hasad_app/features/auth/presentation/screens/forget_password/view/forget_password2/components/row_of_code_fields.dart';
+import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/components/verify_code_button.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 import 'package:hasad_app/generated/app_strings.g.dart';
@@ -12,12 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../controller/forget_password_cubit/forget_password_cubit.dart';
-import '../components/forget_password_button2.dart';
-import '../components/row_of_code_fields.dart';
-
-class ForgetPassword2 extends StatelessWidget {
-  ForgetPassword2({super.key});
+class SignUpCode extends StatelessWidget {
+  SignUpCode({super.key});
   final TextEditingController code1Controller = TextEditingController();
   final TextEditingController code2Controller = TextEditingController();
   final TextEditingController code3Controller = TextEditingController();
@@ -28,7 +26,7 @@ class ForgetPassword2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoadingFrame(
       loadingStates: [
-        BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+        BlocBuilder<UserSignUpCubit, UserSignUpState>(
           builder: (context, state) {
             if (state is VerifyOtpLoadingState) {
               return const LoadingPage();
@@ -36,18 +34,18 @@ class ForgetPassword2 extends StatelessWidget {
             return const SizedBox();
           },
         ),
-        BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+        /*   BlocBuilder<UserSignUpCubit, UserSignUpState>(
           builder: (context, state) {
             if (state is RequestResetPasswordLoadingState) {
               return const LoadingPage();
             }
             return const SizedBox();
           },
-        )
+        ) */
       ],
       child: DefaultScaffold(
         back: true,
-        backFunction: () => ForgetPasswordCubit.get(context)
+        backFunction: () => UserSignUpCubit.get(context)
             .pageController
             .previousPage(duration: const Duration(milliseconds: 500), curve: Curves.ease),
         body: SingleChildScrollView(
@@ -83,15 +81,11 @@ class ForgetPassword2 extends StatelessWidget {
                 ),
                 TimeObject(
                     date: DateTime.now().add(const Duration(minutes: 1)).toString(),
-                    onPressed: () {
-                      ForgetPasswordCubit.get(context).requestResetPasswod(
-                          RequestChangePasswordRequest(
-                              ForgetPasswordCubit.get(context).emailController.text));
-                    }),
+                    onPressed: () {}),
                 SizedBox(
                   height: 20.h,
                 ),
-                BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
+                BlocBuilder<UserSignUpCubit, UserSignUpState>(
                   builder: (context, state) {
                     if (state is VerifyOtpErrorState) {
                       return DefaultText(
@@ -108,7 +102,7 @@ class ForgetPassword2 extends StatelessWidget {
                 SizedBox(
                   height: 40.h,
                 ),
-                ForgetPasswordButton2(
+                VerifySignupCodeButton(
                     code1Controller: code1Controller,
                     code2Controller: code2Controller,
                     code3Controller: code3Controller,

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart' hide Headers;
+import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../../../core/constants.dart';
@@ -18,7 +19,7 @@ abstract class AuthAppServiceClient {
   );
 
   @POST("register")
-  Future<MainUserAuthResponse> userSignUp(
+  Future<SuccessResponse> userSignUp(
     @Part(name: "name") String name,
     @Part(name: "phone") int phone,
     @Part(name: "stc") int? stc,
@@ -26,6 +27,10 @@ abstract class AuthAppServiceClient {
     @Part(name: "password_confirmation") String passwordConfirmation,
     @Part(name: "device_token") String deviceToken,
   );
+
+  @POST("check-phone-active-code")
+  Future<MainUserAuthResponse> verifySignupCode(
+      @Part(name: "phone") String phone, @Part(name: "code") String code);
 
   @POST("send-reset-password-code")
   Future<dynamic> requestChangePassword(@Part(name: "phone") String phone);

@@ -1,4 +1,6 @@
 import 'package:hasad_app/core/network_info.dart';
+import 'package:hasad_app/features/auth/domain/usecase/request_change_password_usecase.dart';
+import 'package:hasad_app/features/auth/domain/usecase/verify_signup_code_usecase.dart';
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
 import 'package:hasad_app/features/bidding/all/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/bidding/all/data/network/bidding_list_api.dart';
@@ -148,7 +150,7 @@ iniLogin() async {
     sl.registerFactory<LoginCubit>(() => LoginCubit(sl.call()));
   }
   if (!GetIt.I.isRegistered<UserSignUpCubit>()) {
-    sl.registerFactory<UserSignUpCubit>(() => UserSignUpCubit(sl.call()));
+    sl.registerFactory<UserSignUpCubit>(() => UserSignUpCubit(sl.call(), sl.call()));
   }
   //app service client instance
   if (!GetIt.I.isRegistered<AuthAppServiceClient>()) {
@@ -175,6 +177,9 @@ iniLogin() async {
   if (!GetIt.I.isRegistered<UserSignUpUseCase>()) {
     sl.registerLazySingleton<UserSignUpUseCase>(() => UserSignUpUseCase(sl.call()));
   }
+  if (!GetIt.I.isRegistered<VerifySignupOtpUseCase>()) {
+    sl.registerLazySingleton<VerifySignupOtpUseCase>(() => VerifySignupOtpUseCase(sl.call()));
+  }
 }
 
 iniForgetPassword() async {
@@ -190,6 +195,10 @@ iniForgetPassword() async {
   }
   if (!GetIt.I.isRegistered<VerifyOtpUseCase>()) {
     sl.registerLazySingleton<VerifyOtpUseCase>(() => VerifyOtpUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<RequestChangePasswordUseCase>()) {
+    sl.registerLazySingleton<RequestChangePasswordUseCase>(
+        () => RequestChangePasswordUseCase(sl.call()));
   }
 }
 

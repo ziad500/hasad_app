@@ -64,7 +64,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
   }
 
   @override
-  Future<MainUserAuthResponse> userSignUp(
+  Future<SuccessResponse> userSignUp(
     String name,
     int phone,
     int? stc,
@@ -103,6 +103,44 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
       'device_token',
       deviceToken,
     ));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MainUserAuthResponse> verifySignupCode(
+    String phone,
+    String code,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'phone',
+      phone,
+    ));
+    _data.fields.add(MapEntry(
+      'code',
+      code,
+    ));
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MainUserAuthResponse>(Options(
       method: 'POST',
@@ -111,7 +149,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     )
             .compose(
               _dio.options,
-              'register',
+              'check-phone-active-code',
               queryParameters: queryParameters,
               data: _data,
             )

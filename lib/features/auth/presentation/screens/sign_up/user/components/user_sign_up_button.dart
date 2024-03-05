@@ -8,8 +8,6 @@ import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/services/firebase_messaging_service.dart';
 import 'package:hasad_app/utils/cache_helper.dart';
 import 'package:hasad_app/utils/cache_keys.dart';
-
-import '../../../../../../../../utils/routes_manager.dart';
 import '../../../../../data/network/auth_requests.dart';
 import '../../../../controller/signup/user/sign_up_cubit.dart';
 
@@ -24,9 +22,9 @@ class UserSignupButton extends StatelessWidget {
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }
       if (state is UserSignUpSuccessState) {
-        Navigator.pushNamed(context, Routes.homeScreenRoutes);
-        showSnackbar(
-            context: context, text: LocaleKeys.signUpSuccess.tr(), state: ToastStates.SUCCESS);
+        UserSignUpCubit.get(context)
+            .pageController
+            .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
       }
     }, builder: (context, state) {
       UserSignUpCubit cubit = UserSignUpCubit.get(context);

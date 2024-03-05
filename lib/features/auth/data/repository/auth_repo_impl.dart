@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:hasad_app/core/responses/success_response.dart';
 
 import '../../../../../core/error_handler.dart';
 import '../../../../../core/failure.dart';
@@ -73,9 +74,24 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, MainUserAuthModel>> userSignUp(UserSignUpRequest userSignUpRequest) async {
+  Future<Either<Failure, SuccessModel>> userSignUp(UserSignUpRequest userSignUpRequest) async {
     try {
       final response = await _authRemoteDataSource.userSignUp(userSignUpRequest);
+      return right(response.toDomain());
+    } catch (error) {
+      if (error is DioException) {
+        return left(hangdleResponseError(error));
+      } else {
+        return left(Failure(100, error.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, MainUserAuthModel>> verifySignupCode(
+      VerifyOtpRequest verifyOtpRequest) async {
+    try {
+      final response = await _authRemoteDataSource.verifySignupCode(verifyOtpRequest);
       return right(response.toDomain());
     } catch (error) {
       if (error is DioException) {
