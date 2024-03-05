@@ -10,6 +10,7 @@ abstract class AuthRepository {
 
   Future<Either<Failure, SuccessModel>> userSignUp(UserSignUpRequest userSignUpRequest);
   Future<Either<Failure, MainUserAuthModel>> verifySignupCode(VerifyOtpRequest verifyOtpRequest);
+  Future<Either<Failure, SuccessModel>> reSendSignupCode(String phone);
 
   Future<Either<Failure, dynamic>> requestChangePassword(
       RequestChangePasswordRequest requestChangePasswordRequest);

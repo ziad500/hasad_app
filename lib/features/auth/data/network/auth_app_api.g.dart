@@ -163,6 +163,37 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
   }
 
   @override
+  Future<SuccessResponse> reSendSignupCode(String phone) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'phone',
+      phone,
+    ));
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'resend-active-code',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<dynamic> requestChangePassword(String phone) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

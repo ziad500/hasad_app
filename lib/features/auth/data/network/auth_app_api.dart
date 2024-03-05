@@ -32,6 +32,9 @@ abstract class AuthAppServiceClient {
   Future<MainUserAuthResponse> verifySignupCode(
       @Part(name: "phone") String phone, @Part(name: "code") String code);
 
+  @POST("resend-active-code")
+  Future<SuccessResponse> reSendSignupCode(@Part(name: "phone") String phone);
+
   @POST("send-reset-password-code")
   Future<dynamic> requestChangePassword(@Part(name: "phone") String phone);
 

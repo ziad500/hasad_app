@@ -22,6 +22,11 @@ class VerifySignupCodeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserSignUpCubit, UserSignUpState>(listener: (context, state) {
+      if (state is ReSendOtpSuccessState) {
+        showSnackbar(context: context, text: LocaleKeys.codeSent.tr(), state: ToastStates.SUCCESS);
+      } else if (state is ReSendOtpErrorState) {
+        showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+      }
       if (state is VerifyOtpErrorState) {
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }

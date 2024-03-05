@@ -81,7 +81,9 @@ class SignUpCode extends StatelessWidget {
                 ),
                 TimeObject(
                     date: DateTime.now().add(const Duration(minutes: 1)).toString(),
-                    onPressed: () {}),
+                    onPressed: () {
+                      UserSignUpCubit.get(context).reSendCode();
+                    }),
                 SizedBox(
                   height: 20.h,
                 ),

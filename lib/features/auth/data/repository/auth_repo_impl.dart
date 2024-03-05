@@ -101,4 +101,18 @@ class AuthRepositoryImpl implements AuthRepository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, SuccessModel>> reSendSignupCode(String phone) async {
+    try {
+      final response = await _authRemoteDataSource.reSendSignupCode(phone);
+      return right(response.toDomain());
+    } catch (error) {
+      if (error is DioException) {
+        return left(hangdleResponseError(error));
+      } else {
+        return left(Failure(100, error.toString()));
+      }
+    }
+  }
 }

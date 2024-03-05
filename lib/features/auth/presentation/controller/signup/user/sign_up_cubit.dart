@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/features/auth/domain/usecase/resend_signup_code_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/verify_signup_code_usecase.dart';
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/code.dart';
 import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/user_signup.dart';
@@ -17,8 +18,10 @@ part 'sign_up_state.dart';
 class UserSignUpCubit extends Cubit<UserSignUpState> {
   final UserSignUpUseCase userSignUpUseCase;
   final VerifySignupOtpUseCase _verifySignupOtpUseCase;
-
-  UserSignUpCubit(this.userSignUpUseCase, this._verifySignupOtpUseCase) : super(SignUpInitial());
+  final ResendSignupCodeUseCase _resendSignupCodeUseCase;
+  UserSignUpCubit(
+      this.userSignUpUseCase, this._verifySignupOtpUseCase, this._resendSignupCodeUseCase)
+      : super(SignUpInitial());
 
   static UserSignUpCubit get(context) => BlocProvider.of(context);
   @override
@@ -122,6 +125,15 @@ class UserSignUpCubit extends Cubit<UserSignUpState> {
 
               emit(VerifyOtpSuccessState());
             }));
+  }
+
+  Future<void> reSendCode() async {
+    emit(ReSendOtpLoadingState());
+    await _resendSignupCodeUseCase.execude(phoneController.text).then((value) => value.fold((l) {
+          emit(ReSendOtpErrorState(l.message));
+        }, (r) {
+          emit(ReSendOtpSuccessState());
+        }));
   }
 
   void saveCredentials(MainUserAuthModel mainUserAuthModel) {

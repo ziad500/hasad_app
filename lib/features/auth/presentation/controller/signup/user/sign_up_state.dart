@@ -29,3 +29,12 @@ class VerifyOtpErrorState extends UserSignUpState {
   final String error;
   VerifyOtpErrorState(this.error);
 }
+
+class ReSendOtpLoadingState extends UserSignUpState {}
+
+class ReSendOtpSuccessState extends UserSignUpState {}
+
+class ReSendOtpErrorState extends UserSignUpState {
+  final String error;
+  ReSendOtpErrorState(this.error);
+}
