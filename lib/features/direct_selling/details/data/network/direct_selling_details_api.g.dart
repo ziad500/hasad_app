@@ -54,14 +54,26 @@ class _DirectSellingDetailsAppServiceClient
 
   @override
   Future<SuccessResponse> buyDirectSellingDetails(
-      String? advertisementId) async {
+    String? advertisementId,
+    int? quantity,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'advertisement_id': advertisementId
-    };
+    final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    final _data = FormData();
+    if (advertisementId != null) {
+      _data.fields.add(MapEntry(
+        'advertisement_id',
+        advertisementId,
+      ));
+    }
+    if (quantity != null) {
+      _data.fields.add(MapEntry(
+        'quantity',
+        quantity.toString(),
+      ));
+    }
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',

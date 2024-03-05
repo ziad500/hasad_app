@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/core/responses/success_response.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
@@ -20,6 +21,8 @@ class DirectSellingDetailsCubit extends Cubit<DirectSellingDetailsState> {
     }
   }
 
+  final TextEditingController quantityController = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   DirectSellingDataModel? directSellingDataModel;
   Future<void> getDirectSellingDetails(String id) async {
     emit(GetDirectSellingDetailsLoadingState());
@@ -41,7 +44,7 @@ class DirectSellingDetailsCubit extends Cubit<DirectSellingDetailsState> {
   Future<void> buyDirectSelling() async {
     emit(BuyDirectSellingLoadingState());
     await _buyDirectSellingUseCase
-        .execude(directSellingDataModel!.id.toString())
+        .execude(directSellingDataModel!.id.toString(), int.parse(quantityController.text))
         .then((value) => value.fold((l) => emit(BuyDirectSellingErrorState(l.message)), (r) {
               emit(BuyDirectSellingSuccessState(r));
             }));

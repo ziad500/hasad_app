@@ -125,6 +125,10 @@ class _Summary extends StatelessWidget {
       padding: const EdgeInsets.all(20.0).w,
       child: Column(
         children: [
+          CalcItem(title: LocaleKeys.quantity.tr(), value: "${invoiceModel?.data?.quantity ?? 1}"),
+          SizedBox(
+            height: 10.h,
+          ),
           CalcItem(
               title: LocaleKeys.price.tr(),
               value: "${invoiceModel?.data?.subtotal ?? 0} ${LocaleKeys.saudiRiyal.tr()}"),

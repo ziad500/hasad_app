@@ -24,10 +24,10 @@ class DirectSellingDetailsRepositoryImpl implements DirectSellingDetailsReposito
   }
 
   @override
-  Future<Either<Failure, SuccessModel>> buyDirectSelling(String advertisementId) {
+  Future<Either<Failure, SuccessModel>> buyDirectSelling(String advertisementId, int? quantity) {
     return executeAndHandleError<SuccessModel>(() async {
-      final response =
-          await _directSellingDetailsRemoteDataSource.buyDirectSellingDetails(advertisementId);
+      final response = await _directSellingDetailsRemoteDataSource.buyDirectSellingDetails(
+          advertisementId, quantity);
       return response.toDomain();
     });
   }

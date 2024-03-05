@@ -18,5 +18,6 @@ abstract class DirectSellingDetailsAppServiceClient {
 
   @POST("advertisement/direct-selling/purchase")
   Future<SuccessResponse> buyDirectSellingDetails(
-      @Query('advertisement_id') String? advertisementId);
+      @Part(name: 'advertisement_id') String? advertisementId,
+      @Part(name: 'quantity') int? quantity);
 }

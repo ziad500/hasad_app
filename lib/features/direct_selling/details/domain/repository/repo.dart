@@ -8,5 +8,5 @@ abstract class DirectSellingDetailsRepository {
   Future<Either<Failure, DirectSellingDetailsModel>> getDirectSellingDetails(
       String advertisementId);
 
-  Future<Either<Failure, SuccessModel>> buyDirectSelling(String advertisementId);
+  Future<Either<Failure, SuccessModel>> buyDirectSelling(String advertisementId, int? quantity);
 }

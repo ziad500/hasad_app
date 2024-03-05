@@ -32,6 +32,8 @@ class DirectSellingInvoiceDataResponse {
   num? tax;
   @JsonKey(name: "total")
   num? total;
+  @JsonKey(name: "quantity")
+  String? quantity;
   @JsonKey(name: "advertisement")
   DirectSellingInvoiceadvertisementResponse? advertisement;
   @JsonKey(name: "created_at")
@@ -42,7 +44,8 @@ class DirectSellingInvoiceDataResponse {
       this.tax,
       this.total,
       this.advertisement,
-      this.createdAt});
+      this.createdAt,
+      this.quantity});
 
   // from json
   factory DirectSellingInvoiceDataResponse.fromJson(Map<String, dynamic> json) =>

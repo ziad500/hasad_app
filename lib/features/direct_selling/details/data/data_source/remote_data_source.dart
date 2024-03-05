@@ -4,7 +4,7 @@ import 'package:hasad_app/features/direct_selling/details/data/response/response
 
 abstract class DirectSellingDetailsRemoteDataSource {
   Future<DirectSellingDetailsResponse> getDirectSellingDetails(String advertisementId);
-  Future<SuccessResponse> buyDirectSellingDetails(String? advertisementId);
+  Future<SuccessResponse> buyDirectSellingDetails(String? advertisementId, int? quantity);
 }
 
 class DirectSellingDetailsRemoteDataSourceImpl implements DirectSellingDetailsRemoteDataSource {
@@ -18,6 +18,6 @@ class DirectSellingDetailsRemoteDataSourceImpl implements DirectSellingDetailsRe
       _directSellingDetailsAppServiceClient.getDirectSellingDetails(advertisementId);
 
   @override
-  Future<SuccessResponse> buyDirectSellingDetails(String? advertisementId) =>
-      _directSellingDetailsAppServiceClient.buyDirectSellingDetails(advertisementId);
+  Future<SuccessResponse> buyDirectSellingDetails(String? advertisementId, int? quantity) =>
+      _directSellingDetailsAppServiceClient.buyDirectSellingDetails(advertisementId, quantity);
 }

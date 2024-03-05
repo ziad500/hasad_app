@@ -180,7 +180,10 @@
 "buyBiddingNote":"If you have paid the insurance in advance, the amount will be credited immediately after the purchase.",
 "doneRecieve":"Received",
 "youCannotEditThis":"You Can not edit this",
-"remainingQuantity":"Remaining Quantity"
+"remainingQuantity":"Remaining Quantity",
+"enterQuantity":"Enter Quantity",
+"quantityError":"The current quantity is not sufficient",
+"quantity":"Quantity"
 
 
 

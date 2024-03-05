@@ -180,5 +180,8 @@ abstract class  LocaleKeys {
   static const doneRecieve = 'doneRecieve';
   static const youCannotEditThis = 'youCannotEditThis';
   static const remainingQuantity = 'remainingQuantity';
+  static const enterQuantity = 'enterQuantity';
+  static const quantityError = 'quantityError';
+  static const quantity = 'quantity';
 
 }

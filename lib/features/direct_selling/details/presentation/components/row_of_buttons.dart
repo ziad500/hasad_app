@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_button.dart';
-import 'package:hasad_app/common/show_tax_dialog.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
 import 'package:hasad_app/features/chats/presentation/screens/message_screen.dart';
+import 'package:hasad_app/features/direct_selling/details/presentation/components/enter_quantity.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
@@ -35,10 +35,7 @@ class DirectSellingRowOfButtons extends StatelessWidget {
                 Expanded(
                     child: DefaultButton(
                   buttonName: LocaleKeys.buyNow.tr(),
-                  buttonFunction: () => showTaxBottomSheet(context,
-                      price: cubit.directSellingDataModel?.price,
-                      totalPrice: cubit.directSellingDataModel?.priceAfterTax,
-                      buttonFunction: () => cubit.buyDirectSelling()),
+                  buttonFunction: () => showQuantityBottomSheet(context, cubit: cubit),
                   textColor: Colors.white,
                   color: AppColors.darkBlue,
                 )),
