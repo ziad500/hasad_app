@@ -32,7 +32,9 @@ class RequestsRemoteDataSourceImpl implements RequestsRemoteDataSource {
           addRequestRequest.price,
           addRequestRequest.startingPrice,
           addRequestRequest.biddingdate,
-          addRequestRequest.biddingDuration);
+          addRequestRequest.biddingDuration,
+          addRequestRequest.type,
+          addRequestRequest.mainQuantity);
 
   @override
   Future editRequest(EditRequestRequest editRequestRequest) =>
@@ -56,5 +58,7 @@ class RequestsRemoteDataSourceImpl implements RequestsRemoteDataSource {
           editRequestRequest.startingPrice,
           editRequestRequest.biddingdate,
           editRequestRequest.biddingDuration,
-          editRequestRequest.deletedImages);
+          editRequestRequest.deletedImages,
+          editRequestRequest.type,
+          editRequestRequest.mainQuantity);
 }

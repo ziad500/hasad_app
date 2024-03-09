@@ -8,11 +8,13 @@ class DefaultRadioButton extends StatelessWidget {
       required this.label,
       required this.value,
       required this.groupValue,
-      required this.onChanged});
+      required this.onChanged,
+      this.color});
   final String label;
-  final Object value;
-  final Object groupValue;
-  final void Function(Object?) onChanged;
+  final dynamic value;
+  final dynamic groupValue;
+  final void Function(dynamic) onChanged;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -22,7 +24,8 @@ class DefaultRadioButton extends StatelessWidget {
             value: value,
             groupValue: groupValue,
             onChanged: onChanged,
-            activeColor: AppColors.primaryColor),
+            activeColor: AppColors.primaryColor,
+            fillColor: MaterialStatePropertyAll(color)),
         DefaultText(
           text: label,
           textStyle: Theme.of(context).textTheme.titleMedium,

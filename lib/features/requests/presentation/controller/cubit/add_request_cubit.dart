@@ -118,6 +118,13 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   }
 
   //////////// 8 //////////////
+  int? selectedQuantityType = 1;
+  void selectedQuantityTypeFunc(int value) {
+    selectedQuantityType = value;
+    emit(SelectQuantityTypeState());
+  }
+
+  //////////// 8 //////////////
   List<XFile> images = [];
   String? videoPath;
   //////////// 9 //////////////
@@ -129,6 +136,8 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   final TextEditingController startPriceController = TextEditingController();
   final TextEditingController defaultPriceController = TextEditingController();
   final TextEditingController biddingLongController = TextEditingController();
+  final TextEditingController quantityController = TextEditingController();
+
   String? selectedbiddingDate;
   void selectbiddingDate(String value) {
     selectedbiddingDate = value;
@@ -160,7 +169,13 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       price: defaultPriceController.text,
       biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
       biddingdate: selectedbiddingDate,
-      startingPrice: startPriceController.text == "" ? null : startPriceController.text);
+      startingPrice: startPriceController.text == "" ? null : startPriceController.text,
+      type: selectedType == 1 ? selectedQuantityType.toString() : "2",
+      mainQuantity: selectedType == 1
+          ? selectedQuantityType == 1
+              ? quantityController.text
+              : "1"
+          : "1");
 
   ////////////////////////////// edit request //////////////////////////
   Future editRequest(String id) async {
@@ -190,7 +205,9 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
       biddingdate: selectedbiddingDate,
       startingPrice: startPriceController.text == "" ? null : startPriceController.text,
-      deletedImages: deletedImages);
+      deletedImages: deletedImages,
+      type: selectedQuantityType.toString(),
+      mainQuantity: selectedQuantityType == 1 ? quantityController.text : "1");
 
   List<LocationModel> imagesFromResponse = [];
   List<String> deletedImages = [];
@@ -224,6 +241,8 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       imagesFromResponse = directSellingDataModel.images ?? [];
       selectedbiddingDate =
           directSellingDataModel.biddingDate?.replaceAll("AM", "").replaceAll("PM", "");
+      selectedQuantityType = int.parse(directSellingDataModel.type.toString());
+      quantityController.text = directSellingDataModel.mainQuantity ?? "";
     } else {
       editId = null;
     }

@@ -40,6 +40,8 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
     String? startingPrice,
     String? biddingDate,
     String? biddingDuration,
+    String? type,
+    String? mainQuantity,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -128,6 +130,18 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
         biddingDuration,
       ));
     }
+    if (type != null) {
+      _data.fields.add(MapEntry(
+        'type',
+        type,
+      ));
+    }
+    if (mainQuantity != null) {
+      _data.fields.add(MapEntry(
+        'main_quantity',
+        mainQuantity,
+      ));
+    }
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -170,6 +184,8 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
     String? biddingDate,
     String? biddingDuration,
     List<String> deletedImages,
+    String? type,
+    String? mainQuantity,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -269,6 +285,18 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
     deletedImages.forEach((i) {
       _data.fields.add(MapEntry('deleted_images[]', i));
     });
+    if (type != null) {
+      _data.fields.add(MapEntry(
+        'type',
+        type,
+      ));
+    }
+    if (mainQuantity != null) {
+      _data.fields.add(MapEntry(
+        'main_quantity',
+        mainQuantity,
+      ));
+    }
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,

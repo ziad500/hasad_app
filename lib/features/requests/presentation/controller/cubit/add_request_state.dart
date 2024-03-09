@@ -10,6 +10,8 @@ final class ChangePAgeViewIndexState extends AddRequestState {}
 
 final class SelectTypeState extends AddRequestState {}
 
+final class SelectQuantityTypeState extends AddRequestState {}
+
 final class SelectDepartmentState extends AddRequestState {}
 
 final class SelectTypeOfProductState extends AddRequestState {}

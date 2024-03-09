@@ -183,7 +183,9 @@
 "remainingQuantity":"Remaining Quantity",
 "enterQuantity":"Enter Quantity",
 "quantityError":"The current quantity is not sufficient",
-"quantity":"Quantity"
+"quantity":"Quantity",
+"sellPieces": "Sell in parts",
+"sellOne": "Sell as a single unit"
 
 
 

@@ -26,31 +26,33 @@ class ItemDetailsTitleAndPrice extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DefaultText(
-                      text: LocaleKeys.remainingQuantity.tr(),
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: AppColors.darkBlue, fontSize: 14.sp)),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: DefaultText(
-                        text: "${directSellingDataModel?.subQuantity ?? 0}",
+              if (directSellingDataModel?.type == "1") ...[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DefaultText(
+                        text: LocaleKeys.remainingQuantity.tr(),
                         textStyle: Theme.of(context)
                             .textTheme
                             .bodyMedium
-                            ?.copyWith(color: AppColors.primaryColor, fontSize: 14.sp)),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+                            ?.copyWith(color: AppColors.darkBlue, fontSize: 14.sp)),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: DefaultText(
+                          text: "${directSellingDataModel?.subQuantity ?? 0}",
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(color: AppColors.primaryColor, fontSize: 14.sp)),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

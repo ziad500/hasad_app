@@ -183,5 +183,7 @@ abstract class  LocaleKeys {
   static const enterQuantity = 'enterQuantity';
   static const quantityError = 'quantityError';
   static const quantity = 'quantity';
+  static const sellPieces = 'sellPieces';
+  static const sellOne = 'sellOne';
 
 }

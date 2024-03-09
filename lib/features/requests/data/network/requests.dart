@@ -20,26 +20,29 @@ class AddRequestRequest {
   String? startingPrice;
   String? biddingdate;
   String? biddingDuration;
-  AddRequestRequest({
-    required this.advertisementTypeId,
-    required this.departmentId,
-    required this.departmentTypeId,
-    required this.priceInclusionIds,
-    required this.agricultureTypeId,
-    required this.packagingTypeId,
-    required this.harvestDate,
-    required this.images,
-    required this.video,
-    required this.title,
-    required this.description,
-    required this.regionId,
-    required this.cityId,
-    required this.districtId,
-    required this.price,
-    this.startingPrice,
-    this.biddingdate,
-    this.biddingDuration,
-  });
+  String? type;
+  String? mainQuantity;
+  AddRequestRequest(
+      {required this.advertisementTypeId,
+      required this.departmentId,
+      required this.departmentTypeId,
+      required this.priceInclusionIds,
+      required this.agricultureTypeId,
+      required this.packagingTypeId,
+      required this.harvestDate,
+      required this.images,
+      required this.video,
+      required this.title,
+      required this.description,
+      required this.regionId,
+      required this.cityId,
+      required this.districtId,
+      required this.price,
+      this.startingPrice,
+      this.biddingdate,
+      this.biddingDuration,
+      this.type,
+      this.mainQuantity});
 }
 
 class EditRequestRequest {
@@ -63,6 +66,8 @@ class EditRequestRequest {
   String? biddingdate;
   String? biddingDuration;
   List<String> deletedImages;
+  String? type;
+  String? mainQuantity;
   EditRequestRequest(
       {required this.advertisementId,
       required this.advertisementTypeId,
@@ -83,5 +88,7 @@ class EditRequestRequest {
       this.startingPrice,
       this.biddingdate,
       this.biddingDuration,
-      required this.deletedImages});
+      required this.deletedImages,
+      this.type,
+      this.mainQuantity});
 }

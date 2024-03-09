@@ -113,7 +113,8 @@ class DefaultFormField extends StatelessWidget {
             onTap: onTap,
             decoration: InputDecoration(
               counterText: "",
-              errorMaxLines: 3, fillColor: fillColor, filled: fillColor != null,
+              errorMaxLines: 3, fillColor: enabled ? fillColor : Colors.grey,
+              filled: fillColor != null,
 
               isDense: true,
               prefixIconColor: AppColors.iconColor,

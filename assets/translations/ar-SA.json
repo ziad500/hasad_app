@@ -181,7 +181,9 @@
     "remainingQuantity":"الكمية المتبقيه",
     "enterQuantity":"أدخل الكمية",
     "quantityError":"الكمية الحاليه لا تكفي",
-    "quantity":"الكمية"
+    "quantity":"الكمية",
+    "sellPieces":"بيع علي اجزاء",
+    "sellOne":"بيع جملة واحده"
 
 
 
