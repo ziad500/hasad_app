@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import '../../../../../../../utils/routes_manager.dart';
 import '../../../../controller/signup/user/sign_up_cubit.dart';
@@ -31,6 +32,7 @@ class VerifySignupCodeButton extends StatelessWidget {
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }
       if (state is VerifyOtpSuccessState) {
+        LayoutCubit.get(context).changeScreen(0);
         Navigator.pushNamedAndRemoveUntil(context, Routes.homeScreenRoutes, (route) => false);
         showSnackbar(
             context: context, text: LocaleKeys.signUpSuccess.tr(), state: ToastStates.SUCCESS);

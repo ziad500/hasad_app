@@ -53,6 +53,29 @@ class DirectSellingOrderWidget extends StatelessWidget {
               height: 10.h,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DefaultText(
+                  text: LocaleKeys.quantity.tr(),
+                  textStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.darkRed),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Flexible(
+                  child: DefaultText(
+                    text: isEmpty(directSellingOrderModel.quantity),
+                    textStyle: Theme.of(context).textTheme.bodySmall,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
               children: [
                 Flexible(
                     child: Row(

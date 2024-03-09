@@ -17,7 +17,8 @@ class DirectSellingOrderModel {
   num? price;
   String? createdAt;
   String? receivedDate;
+  int? quantity;
 
   DirectSellingOrderModel(this.purchaseInvoiceId, this.advertisementId, this.title,
-      this.description, this.price, this.createdAt, this.receivedDate);
+      this.description, this.price, this.createdAt, this.receivedDate, this.quantity);
 }

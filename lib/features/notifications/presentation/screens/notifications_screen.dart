@@ -21,7 +21,10 @@ class NotificationsScreen extends StatelessWidget {
             NotificationsCubit.get(context).reset();
             NotificationsCubit.get(context).getNotificationsList();
           }
-          if (state is GetNotificationsListSuccessState) {
+          if (state is GetNotificationsListSuccessState &&
+              NotificationsCubit.get(context)
+                  .notifications
+                  .any((element) => element.isRead == false)) {
             NotificationsCubit.get(context).readNotifications();
           }
         },

@@ -73,7 +73,8 @@ Future showQuantityBottomSheet(context2, {DirectSellingDetailsCubit? cubit}) =>
                                 showTaxBottomSheet(context2,
                                     price: cubit.directSellingDataModel!.price! *
                                         int.parse(cubit.quantityController.text),
-                                    totalPrice: cubit.directSellingDataModel!.price! *
+                                    tax: (cubit.directSellingDataModel!.price! -
+                                            cubit.directSellingDataModel!.priceAfterTax!) *
                                         int.parse(cubit.quantityController.text),
                                     buttonFunction: () => cubit.buyDirectSelling());
                               }

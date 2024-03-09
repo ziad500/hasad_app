@@ -59,7 +59,8 @@ class BiddingRowOfButtons extends StatelessWidget {
                 buttonFunction: () => showTaxBottomSheet(context,
                     price: cubit.directSellingDataModel?.purchasingPrice,
                     note: LocaleKeys.buyBiddingNote.tr(),
-                    totalPrice: cubit.directSellingDataModel?.priceAfterTax,
+                    tax: cubit.directSellingDataModel!.purchasingPrice! -
+                        cubit.directSellingDataModel!.priceAfterTax!,
                     buttonFunction: () => cubit.buyBidding()),
                 textColor: Colors.white,
                 color: AppColors.darkBlue,

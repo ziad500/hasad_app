@@ -8,10 +8,7 @@ import 'package:hasad_app/features/invoice/presentation/components/calc_item.dar
 import 'package:hasad_app/generated/app_strings.g.dart';
 
 Future showTaxBottomSheet(context,
-        {required num? price,
-        required num? totalPrice,
-        required Function buttonFunction,
-        String? note}) =>
+        {required num? price, required num? tax, required Function buttonFunction, String? note}) =>
     defaultshowModalBottomSheet(
       context: context,
       child: Center(
@@ -24,15 +21,13 @@ Future showTaxBottomSheet(context,
               height: 10.h,
             ),
             CalcItem(
-                title: LocaleKeys.tax.tr(),
-                value:
-                    "${(totalPrice! - price!).toStringAsFixed(2)} ${LocaleKeys.saudiRiyal.tr()}"),
+                title: LocaleKeys.tax.tr(), value: "${tax!.abs()} ${LocaleKeys.saudiRiyal.tr()}"),
             SizedBox(
               height: 10.h,
             ),
             CalcItem(
                 title: LocaleKeys.totalPrice.tr(),
-                value: "$totalPrice ${LocaleKeys.saudiRiyal.tr()}"),
+                value: "${price! + tax.abs()} ${LocaleKeys.saudiRiyal.tr()}"),
             if (note != null) ...[
               SizedBox(height: 20.h),
               DefaultText(
