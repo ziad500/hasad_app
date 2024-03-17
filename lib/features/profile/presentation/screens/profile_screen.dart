@@ -9,13 +9,14 @@ import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/common/user_image.dart';
 import 'package:hasad_app/core/constants.dart';
+import 'package:hasad_app/features/auth/data/network/auth_requests.dart';
+import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/features/profile/presentation/components/settings_item.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
-import 'package:hasad_app/utils/cache_helper.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
@@ -144,8 +145,8 @@ List<_SettingsModel> _settingsList() => [
             Icons.logout,
             color: Colors.white,
           ),
-          func: (context) {
-            CacheHelper.clearData();
+          func: (context) async {
+            LoginCubit.get(context).userLogOut(LogOutRequest());
             Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoutes, (route) => false);
           },
           route: ""),

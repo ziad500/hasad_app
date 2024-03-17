@@ -15,6 +15,8 @@ abstract class AuthRemoteDataSource {
   Future<dynamic> requestChangePassword(RequestChangePasswordRequest requestChangePasswordRequest);
   Future<dynamic> verifyOtp(VerifyOtpRequest verifyOtpRequest);
   Future<dynamic> resetPassword(ResetPasswordRequest resetPasswordRequest);
+
+  Future<dynamic> logout(LogOutRequest logoutRequest);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -57,4 +59,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<SuccessResponse> reSendSignupCode(String phone) =>
       _authAppServiceClient.reSendSignupCode(phone);
+
+  @override
+  Future logout(LogOutRequest logoutRequest) => _authAppServiceClient.logout();
 }

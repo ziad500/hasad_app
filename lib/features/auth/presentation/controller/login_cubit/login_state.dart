@@ -18,3 +18,12 @@ class LoginErrorState extends LoginState {
   final String error;
   LoginErrorState(this.error);
 }
+
+class LogoutLoadingState extends LoginState {}
+
+class UserLogoutSuccessState extends LoginState {}
+
+class LogoutErrorState extends LoginState {
+  final String error;
+  LogoutErrorState(this.error);
+}

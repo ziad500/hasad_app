@@ -36,7 +36,9 @@ class BiddingDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => sl<BiddingDetailsCubit>()..getBiddingDetails(id),
+        create: (context) => sl<BiddingDetailsCubit>()
+          ..getBiddingDetails(id)
+          ..listenToBid(),
         child: LoadingFrame(
           loadingStates: [
             BlocConsumer<BiddingDetailsCubit, BiddingDetailsState>(
@@ -131,7 +133,8 @@ class BiddingDetailsScreen extends StatelessWidget {
               buildWhen: (a, b) =>
                   b is GetBiddingDetailsSuccessState ||
                   b is GetBiddingDetailsErrorState ||
-                  b is GetBiddingDetailsLoadingState,
+                  b is GetBiddingDetailsLoadingState ||
+                  b is NewBidState,
               builder: (context, state) {
                 BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
                 if (state is GetBiddingDetailsLoadingState) {

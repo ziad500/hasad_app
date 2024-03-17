@@ -115,4 +115,18 @@ class AuthRepositoryImpl implements AuthRepository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, dynamic>> logout(LogOutRequest logOutRequest) async {
+    try {
+      final response = await _authRemoteDataSource.logout(logOutRequest);
+      return right(response);
+    } catch (error) {
+      if (error is DioException) {
+        return left(hangdleResponseError(error));
+      } else {
+        return left(Failure(100, error.toString()));
+      }
+    }
+  }
 }

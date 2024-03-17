@@ -118,8 +118,6 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
       },
     );
   }
-
-  bool _isLastItem(int index) => index == items.length - 1;
 }
 
 class _LoadingWidget extends StatelessWidget {

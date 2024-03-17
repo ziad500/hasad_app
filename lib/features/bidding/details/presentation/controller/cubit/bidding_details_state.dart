@@ -52,3 +52,5 @@ final class PayInsuranceBiddingErrorState extends BiddingDetailsState {
   final String error;
   const PayInsuranceBiddingErrorState(this.error);
 }
+
+final class NewBidState extends BiddingDetailsState {}

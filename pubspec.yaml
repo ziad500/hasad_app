@@ -74,6 +74,7 @@ dependencies:
   url_launcher: ^6.2.3
   video_player: ^2.8.2
   webview_flutter: ^4.4.2
+  pusher_channels_flutter: ^2.2.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0

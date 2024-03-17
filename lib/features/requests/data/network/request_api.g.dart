@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 part of 'request_api.dart';
 
 // **************************************************************************

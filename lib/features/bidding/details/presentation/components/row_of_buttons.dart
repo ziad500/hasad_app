@@ -29,8 +29,11 @@ class BiddingRowOfButtons extends StatelessWidget {
         }
         BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
         ProfileDataModel? user = cubit.directSellingDataModel?.owner;
-        if (user?.id.toString() == Constants.userId ||
-            !isDatePast(cubit.directSellingDataModel?.biddingDate)) {
+        if (user?.id.toString() == Constants.userId) {
+          return const SizedBox();
+        }
+        if (!isDatePast(cubit.directSellingDataModel?.biddingDate) ||
+            cubit.directSellingDataModel?.biddingDate == null) {
           return const SizedBox();
         }
 
@@ -47,7 +50,7 @@ class BiddingRowOfButtons extends StatelessWidget {
                         cubit.valueController.text =
                             cubit.directSellingDataModel?.lastBid?.value == null
                                 ? "${cubit.directSellingDataModel!.auctionPrice}"
-                                : "${cubit.directSellingDataModel!.lastBid!.value! + 100}";
+                                : "${cubit.directSellingDataModel!.lastBid!.value! + 1}";
                         showBidBottomSheet(context, cubit: cubit);
                       })),
               SizedBox(

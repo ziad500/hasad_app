@@ -97,3 +97,5 @@ class SignInWithAppleRequest {
 
   SignInWithAppleRequest(this.identityToken, this.authorizationCode);
 }
+
+class LogOutRequest {}

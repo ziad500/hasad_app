@@ -43,7 +43,7 @@ class CategoriesList extends StatelessWidget {
                   return const LoadingWidget();
                 }
                 if (cubit.categories.isEmpty) {
-                  return const Text("No Categories Found");
+                  return const Text("لا يوجد اقسام");
                 }
                 return DefaultListView(
                     height: 110.h,

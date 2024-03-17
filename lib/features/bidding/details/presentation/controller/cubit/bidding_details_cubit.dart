@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/core/responses/success_response.dart';
+import 'package:hasad_app/features/bidding/details/domain/models/event_model.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/bid_usecase.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/buy_bidding_advertisement_usecase.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/get_bidding_details_usecase.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/pay_insurance_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
+import 'package:hasad_app/services/pusher.dart';
 
 part 'bidding_details_state.dart';
 
@@ -72,5 +76,29 @@ class BiddingDetailsCubit extends Cubit<BiddingDetailsState> {
         .then((value) => value.fold((l) => emit(PayInsuranceBiddingErrorState(l.message)), (r) {
               emit(PayInsuranceBiddingSuccessState(r));
             }));
+  }
+
+  listenToBid() {
+    PusherService.init(
+      onEvent: (event) {
+        Map<String, dynamic> jsonMap = jsonDecode(event.data.toString());
+        EventDataModel? eventDataModel = EventDataModel.fromJson(jsonMap);
+        if (event.eventName == "new_bid_event" &&
+            eventDataModel.advertisementId == directSellingDataModel?.id.toString()) {
+          directSellingDataModel?.lastBid = LastBidModel(double.parse(eventDataModel.value),
+              eventDataModel.userName, eventDataModel.userAvatar, eventDataModel.createdAt);
+          emit(NewBidState());
+        }
+      },
+    );
+    PusherService.subscribe(channelName: bidChannel);
+    PusherService.connect();
+  }
+
+  @override
+  close() async {
+    await PusherService.unsubscribe(channelName: bidChannel);
+    await PusherService.disconnect();
+    await super.close();
   }
 }

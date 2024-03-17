@@ -1,4 +1,5 @@
 import 'package:hasad_app/core/network_info.dart';
+import 'package:hasad_app/features/auth/domain/usecase/logout_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/request_change_password_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/resend_signup_code_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/verify_signup_code_usecase.dart';
@@ -97,6 +98,12 @@ import 'package:hasad_app/features/requests/domain/repository/repo.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/edit_request_usecase.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/features/slider/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/slider/data/network/api.dart';
+import 'package:hasad_app/features/slider/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/slider/domain/repository/repo.dart';
+import 'package:hasad_app/features/slider/domain/use_cases/get_sliders_usecase.dart';
+import 'package:hasad_app/features/slider/presentation/controller/cubit/slider_cubit.dart';
 import 'package:hasad_app/features/wallet/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/wallet/data/network/wallet_api.dart';
 import 'package:hasad_app/features/wallet/data/repository/repo_impl.dart';
@@ -143,12 +150,13 @@ Future<void> initAppModule() async {
   initChatsModule();
   iniWallet();
   initNotifications();
+  iniSlider();
 }
 
 iniLogin() async {
   //cubit
   if (!GetIt.I.isRegistered<LoginCubit>()) {
-    sl.registerFactory<LoginCubit>(() => LoginCubit(sl.call()));
+    sl.registerFactory<LoginCubit>(() => LoginCubit(sl.call(), sl.call()));
   }
   if (!GetIt.I.isRegistered<UserSignUpCubit>()) {
     sl.registerFactory<UserSignUpCubit>(() => UserSignUpCubit(sl.call(), sl.call(), sl.call()));
@@ -184,6 +192,9 @@ iniLogin() async {
   if (!GetIt.I.isRegistered<ResendSignupCodeUseCase>()) {
     sl.registerLazySingleton<ResendSignupCodeUseCase>(() => ResendSignupCodeUseCase(sl.call()));
   }
+  if (!GetIt.I.isRegistered<LogoutUseCase>()) {
+    sl.registerLazySingleton<LogoutUseCase>(() => LogoutUseCase(sl.call()));
+  }
 }
 
 iniForgetPassword() async {
@@ -203,6 +214,9 @@ iniForgetPassword() async {
   if (!GetIt.I.isRegistered<RequestChangePasswordUseCase>()) {
     sl.registerLazySingleton<RequestChangePasswordUseCase>(
         () => RequestChangePasswordUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<LogoutUseCase>()) {
+    sl.registerLazySingleton<LogoutUseCase>(() => LogoutUseCase(sl.call()));
   }
 }
 
@@ -640,6 +654,36 @@ iniWallet() async {
   }
   if (!GetIt.I.isRegistered<CollectMoneyUseCase>()) {
     sl.registerLazySingleton<CollectMoneyUseCase>(() => CollectMoneyUseCase(sl.call()));
+  }
+}
+
+iniSlider() async {
+  //cubit
+
+  if (!GetIt.I.isRegistered<SliderCubit>()) {
+    sl.registerFactory<SliderCubit>(() => SliderCubit(sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<SlidersAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<SlidersAppServiceClient>(() => SlidersAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<SliderRepo>()) {
+    sl.registerLazySingleton<SliderRepo>(() => SliderRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<SliderRemoteDataSource>()) {
+    sl.registerLazySingleton<SliderRemoteDataSource>(() => SliderRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetSlidersUseCase>()) {
+    sl.registerLazySingleton<GetSlidersUseCase>(() => GetSlidersUseCase(sl.call()));
   }
 }
 

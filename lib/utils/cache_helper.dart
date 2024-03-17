@@ -1,12 +1,9 @@
-import '../core/constants.dart';
-import 'cache_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
   static SharedPreferences? sharedPreferences;
   static init() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    Constants.token = getData(key: CacheKeys.token) ?? "";
   }
 
   static dynamic getData({required String key}) {

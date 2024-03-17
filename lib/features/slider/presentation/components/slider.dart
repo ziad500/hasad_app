@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/network_image.dart';
+import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import '../controller/cubit/slider_cubit.dart';
 import 'page_indicator_widget.dart';
@@ -21,18 +22,29 @@ class _OffersSliderState extends State<OffersSlider> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SliderCubit(),
+      create: (context) => sl<SliderCubit>()..getSliders(),
       child: Column(
         children: [
           BlocConsumer<SliderCubit, SliderState>(
             listener: (context, state) {},
             builder: (context, state) {
+              if (state is SliderLoadingState) {
+                return Container(
+                  height: 180.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.0)),
+                  child: const Center(
+                    child: LoadingWidget(),
+                  ),
+                );
+              }
               return CarouselSlider(
                   carouselController: carouselController,
-                  items: listttt
+                  items: SliderCubit.get(context)
+                      .sliders
                       .map(
                         (offer) => NetworkImageWidget(
-                          image: offer,
+                          image: offer.path,
                           errorWidget: Container(
                             height: 180.h,
                             width: double.infinity,
@@ -79,7 +91,7 @@ class _OffersSliderState extends State<OffersSlider> {
           BlocBuilder<SliderCubit, SliderState>(
             buildWhen: (previous, current) => current is ChangeIndexSliderstate,
             builder: (context, state) {
-              int length = listttt.length;
+              int length = SliderCubit.get(context).sliders.length;
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -104,8 +116,3 @@ class _OffersSliderState extends State<OffersSlider> {
     );
   }
 }
-
-List<String> listttt = [
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYscfUBUbqwGd_DHVhG-ZjCOD7MUpxp4uhNe7toUg4ug&s',
-  "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"
-];

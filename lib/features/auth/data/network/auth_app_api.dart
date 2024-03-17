@@ -46,4 +46,7 @@ abstract class AuthAppServiceClient {
       @Part(name: "phone") String phone,
       @Part(name: "password") String password,
       @Part(name: "password_confirmation") String confirmPassword);
+
+  @POST("profile/logout")
+  Future<dynamic> logout();
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/features/auth/domain/usecase/logout_usecase.dart';
 
 import '../../../../../../core/constants.dart';
 import '../../../../../../utils/app_colors.dart';
@@ -13,8 +14,9 @@ part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final UserLoginUseCase userLoginUseCase;
+  final LogoutUseCase logoutUseCase;
 
-  LoginCubit(this.userLoginUseCase) : super(LoginInitial());
+  LoginCubit(this.userLoginUseCase, this.logoutUseCase) : super(LoginInitial());
   static LoginCubit get(context) => BlocProvider.of(context);
   @override
   void emit(state) {
@@ -84,5 +86,15 @@ class LoginCubit extends Cubit<LoginState> {
       Constants.token = CacheHelper.getData(key: CacheKeys.token);
     });
     //save refresh token in cache
+  }
+
+  Future<void> userLogOut(LogOutRequest logOutRequest) async {
+    emit(LogoutLoadingState());
+    await logoutUseCase.execude(logOutRequest).then((value) => value.fold((l) {
+          emit(LogoutErrorState(l.message));
+        }, (r) {
+          CacheHelper.clearData();
+          emit(UserLogoutSuccessState());
+        }));
   }
 }

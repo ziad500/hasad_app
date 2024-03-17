@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_colors.dart';
@@ -45,6 +46,7 @@ ThemeData getApplicationTheme() {
           titleSpacing: 0,
           color: AppColors.white,
           iconTheme: const IconThemeData(color: AppColors.black, size: 20),
+          systemOverlayStyle: const SystemUiOverlayStyle(statusBarIconBrightness: Brightness.dark),
           elevation: AppSize.s0,
           shadowColor: AppColors.primaryColor.withOpacity(0.5),
           titleTextStyle: getRegularStyle(color: AppColors.black, fontSize: 16)),

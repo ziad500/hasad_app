@@ -2,10 +2,8 @@ import 'package:hasad_app/features/auth/presentation/controller/login_cubit/logi
 import 'package:hasad_app/features/auth/presentation/controller/signup/user/sign_up_cubit.dart';
 import 'package:hasad_app/features/favorites/presentation/controller/cubit/favorites_cubit.dart';
 import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/main_functions.dart';
-import 'package:hasad_app/services/firebase_messaging_service.dart';
 import 'utils/language_manager.dart';
 import 'utils/routes_manager.dart';
 import 'utils/theme_manager.dart';
@@ -18,9 +16,11 @@ import 'core/di.dart' as di;
 import 'core/network_cubit.dart';
 
 void main() async {
-  await APPInit.init();
+  await APPInit
+      .init(); /* 
   print(await FirebaseMessagingService.getToken());
-  print(Constants.token);
+  print(Constants.token); */
+
   runApp(LanguageManager.easyLocalizationInit(child: const MyApp()));
 }
 

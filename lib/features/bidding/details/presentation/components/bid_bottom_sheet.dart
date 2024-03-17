@@ -33,7 +33,7 @@ Future showBidBottomSheet(context, {BiddingDetailsCubit? cubit}) => defaultshowM
             }
             if (state is BidBiddingSuccessState) {
               BiddingDetailsCubit.get(context).valueController.clear();
-              cubit.getBiddingDetails(cubit.directSellingDataModel!.id.toString());
+              // cubit.getBiddingDetails(cubit.directSellingDataModel!.id.toString());
               Navigator.pop(context);
               showSnackbar(
                   context: context, text: LocaleKeys.doneAdd.tr(), state: ToastStates.SUCCESS);
