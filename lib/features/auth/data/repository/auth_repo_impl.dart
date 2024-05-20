@@ -129,4 +129,18 @@ class AuthRepositoryImpl implements AuthRepository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, dynamic>> deleteAccount() async {
+    try {
+      final response = await _authRemoteDataSource.deleteAccount();
+      return right(response);
+    } catch (error) {
+      if (error is DioException) {
+        return left(hangdleResponseError(error));
+      } else {
+        return left(Failure(100, error.toString()));
+      }
+    }
+  }
 }

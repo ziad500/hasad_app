@@ -1,4 +1,5 @@
 import 'package:hasad_app/core/network_info.dart';
+import 'package:hasad_app/features/auth/domain/usecase/delete_account_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/logout_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/request_change_password_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/resend_signup_code_usecase.dart';
@@ -156,7 +157,7 @@ Future<void> initAppModule() async {
 iniLogin() async {
   //cubit
   if (!GetIt.I.isRegistered<LoginCubit>()) {
-    sl.registerFactory<LoginCubit>(() => LoginCubit(sl.call(), sl.call()));
+    sl.registerFactory<LoginCubit>(() => LoginCubit(sl.call(), sl.call(), sl.call()));
   }
   if (!GetIt.I.isRegistered<UserSignUpCubit>()) {
     sl.registerFactory<UserSignUpCubit>(() => UserSignUpCubit(sl.call(), sl.call(), sl.call()));
@@ -181,6 +182,9 @@ iniLogin() async {
   //usecase
   if (!GetIt.I.isRegistered<UserLoginUseCase>()) {
     sl.registerLazySingleton<UserLoginUseCase>(() => UserLoginUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<DeleteAccountUseCase>()) {
+    sl.registerLazySingleton<DeleteAccountUseCase>(() => DeleteAccountUseCase(sl.call()));
   }
 
   if (!GetIt.I.isRegistered<UserSignUpUseCase>()) {

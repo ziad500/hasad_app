@@ -17,6 +17,7 @@ abstract class AuthRemoteDataSource {
   Future<dynamic> resetPassword(ResetPasswordRequest resetPasswordRequest);
 
   Future<dynamic> logout(LogOutRequest logoutRequest);
+  Future<dynamic> deleteAccount();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -62,4 +63,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future logout(LogOutRequest logoutRequest) => _authAppServiceClient.logout();
+
+  @override
+  Future deleteAccount() => _authAppServiceClient.deleteAccount();
 }

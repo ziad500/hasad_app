@@ -49,4 +49,7 @@ abstract class AuthAppServiceClient {
 
   @POST("profile/logout")
   Future<dynamic> logout();
+
+  @POST("profile/delete-account")
+  Future<dynamic> deleteAccount();
 }

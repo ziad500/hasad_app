@@ -8,6 +8,7 @@ import '../models/login_model.dart';
 abstract class AuthRepository {
   Future<Either<Failure, MainUserAuthModel>> userLogin(LoginRequest loginRequest);
   Future<Either<Failure, dynamic>> logout(LogOutRequest logOutRequest);
+  Future<Either<Failure, dynamic>> deleteAccount();
 
   Future<Either<Failure, SuccessModel>> userSignUp(UserSignUpRequest userSignUpRequest);
   Future<Either<Failure, MainUserAuthModel>> verifySignupCode(VerifyOtpRequest verifyOtpRequest);

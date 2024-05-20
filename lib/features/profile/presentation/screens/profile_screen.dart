@@ -150,6 +150,19 @@ List<_SettingsModel> _settingsList() => [
             Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoutes, (route) => false);
           },
           route: ""),
+      _SettingsModel(
+          color: AppColors.red,
+          icon: SVGManager.lock,
+          title: Constants.isArabic ? "حذف الحساب" : "Delete Account",
+          iconWidget: const Icon(
+            Icons.logout,
+            color: Colors.white,
+          ),
+          func: (context) async {
+            LoginCubit.get(context).deleteAccount();
+            Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoutes, (route) => false);
+          },
+          route: ""),
     ];
 
 class _SettingsModel {

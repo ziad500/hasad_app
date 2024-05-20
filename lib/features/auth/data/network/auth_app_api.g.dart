@@ -42,8 +42,8 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
       'device_token',
       deviceToken,
     ));
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MainUserAuthResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MainUserAuthResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -103,22 +103,23 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
       'device_token',
       deviceToken,
     ));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'register',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              'register',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
@@ -140,8 +141,8 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
       'code',
       code,
     ));
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MainUserAuthResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MainUserAuthResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -171,22 +172,23 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
       'phone',
       phone,
     ));
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'resend-active-code',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              'resend-active-code',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
@@ -305,7 +307,7 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -314,6 +316,32 @@ class _AuthAppServiceClient implements AuthAppServiceClient {
         .compose(
           _dio.options,
           'profile/logout',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> deleteAccount() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'profile/delete-account',
           queryParameters: queryParameters,
           data: _data,
         )

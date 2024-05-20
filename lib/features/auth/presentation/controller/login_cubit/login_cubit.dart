@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/features/auth/domain/usecase/delete_account_usecase.dart';
 import 'package:hasad_app/features/auth/domain/usecase/logout_usecase.dart';
 
 import '../../../../../../core/constants.dart';
@@ -15,8 +16,10 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final UserLoginUseCase userLoginUseCase;
   final LogoutUseCase logoutUseCase;
+  final DeleteAccountUseCase deleteAccountUseCase;
 
-  LoginCubit(this.userLoginUseCase, this.logoutUseCase) : super(LoginInitial());
+  LoginCubit(this.userLoginUseCase, this.logoutUseCase, this.deleteAccountUseCase)
+      : super(LoginInitial());
   static LoginCubit get(context) => BlocProvider.of(context);
   @override
   void emit(state) {
@@ -91,6 +94,16 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> userLogOut(LogOutRequest logOutRequest) async {
     emit(LogoutLoadingState());
     await logoutUseCase.execude(logOutRequest).then((value) => value.fold((l) {
+          emit(LogoutErrorState(l.message));
+        }, (r) {
+          CacheHelper.clearData();
+          emit(UserLogoutSuccessState());
+        }));
+  }
+
+  Future<void> deleteAccount() async {
+    emit(LogoutLoadingState());
+    await deleteAccountUseCase.execude().then((value) => value.fold((l) {
           emit(LogoutErrorState(l.message));
         }, (r) {
           CacheHelper.clearData();
