@@ -25,7 +25,7 @@ class _SlidersAppServiceClient implements SlidersAppServiceClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SliderResponse>(Options(
       method: 'GET',
       headers: _headers,

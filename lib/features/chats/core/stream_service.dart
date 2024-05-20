@@ -11,12 +11,12 @@ class MyStream {
     const interval = Duration(seconds: 3);
     _subscription = Stream.periodic(interval, (count) {
       // Perform some action here
-      print('Action performed at $count');
+      //  print('Action performed at $count');
       return false;
     }).listen((event) {
       // Do something with the event
       onStart();
-      print('Received event: $event');
+      //  print('Received event: $event');
     });
   }
 
