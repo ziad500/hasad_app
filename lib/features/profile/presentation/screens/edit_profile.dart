@@ -14,6 +14,7 @@ import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/default/user_image.dart';
 import 'package:hasad_app/common/icons/call_icon.dart';
 import 'package:hasad_app/common/icons/stc_icon.dart';
+import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/features/profile/presentation/components/change_password_bottomsheet.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
@@ -49,6 +50,7 @@ class EditProfileScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const _ProfileImage(),
                       SizedBox(
@@ -73,6 +75,13 @@ class EditProfileScreen extends StatelessWidget {
                           hint: "",
                           prefix: const IconCall(color: Color(0xffD62464)),
                           validator: defaultPhoneNumberValidation),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      SubTitleWidget(
+                        subTitle: LocaleKeys.whatsappHint.tr(),
+                        color: Colors.red,
+                      ),
                       SizedBox(
                         height: 20.h,
                       ),

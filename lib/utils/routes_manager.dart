@@ -17,6 +17,7 @@ import 'package:hasad_app/features/my_advertisement/presentation/screens/my_adve
 import 'package:hasad_app/features/my_orders/presentation/screens/my_orders_screen.dart';
 import 'package:hasad_app/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:hasad_app/features/payment/presentation/screens/payment_screen.dart';
+import 'package:hasad_app/features/profile/presentation/screens/about_hasad.dart';
 import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
@@ -55,6 +56,7 @@ class Routes {
   static const String notificationsScreen = "/NotificationsScreen";
   static const String biddingSearchScreen = "/BiddingSearchScreen";
   static const String directSellingSearchScreen = "/directSellingSearchScreen";
+  static const String aboutAppRoutes = "/aboutAppRoutes";
 
   ////////
   ///
@@ -69,6 +71,12 @@ class Routes {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.aboutAppRoutes:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const AboutApp();
+          },
+        );
       case Routes.biddingSearchScreen:
         return MaterialPageRoute(
           builder: (context) {

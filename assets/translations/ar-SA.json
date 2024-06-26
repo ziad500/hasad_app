@@ -43,7 +43,7 @@
     "retypePassword": "إعادة كتابة كلمة المرور",
     "alreadyHaveAccount": "تمتلك حسابا بالفعل؟",
     "enterVerificationCode": "ادخل رمز التاكيد",
-    "verificationCodeSent": "تم ارسال رمز تأكيد الي رقم الجوال الخاص بك",
+    "verificationCodeSent": "يرجي ادخال رقم otp الذي تم استلامه علي رسائل واتس اب ",
     "resendCodeIn": "إعادة ارسال الرمز في",
     "confirm": "تأكيد",
     "newPassword": "كلمة المرور الجديدة",
@@ -183,7 +183,26 @@
     "quantityError":"الكمية الحاليه لا تكفي",
     "quantity":"الكمية",
     "sellPieces":"بيع علي اجزاء",
-    "sellOne":"بيع جملة واحده"
+    "sellOne":"بيع جملة واحده",
+    "publishedOn":"تم النشر بتاريخ",
+    "WriteYourMessageHere":"إكتب هنا رسالتك",
+    "depositInstruction":"يمكنك الإيداع في هذا الحساب ومن ثم رفع الوصل  ",
+    "accountInformation":"معلومات الحساب",
+    "holderName": "اسم صاحب الحساب",
+  "accountNumber": "رقم الحساب",
+  "iban": "رقم الآيبان",
+  "whatsappHint":"يرجى استخدام رقم مفعل على واتس اب.",
+  "deleteAccountHint": "هل أنت متأكد من حذف الحساب نهائيا وكل الإعلانات الخاصه به",
+  "cancel":"إلغاء",
+  "deleteAccount":"حذف الحساب"
+
+
+
+
+
+
+
+
 
 
 

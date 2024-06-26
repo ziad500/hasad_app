@@ -26,9 +26,11 @@ class DefaultRadioButton extends StatelessWidget {
             onChanged: onChanged,
             activeColor: AppColors.primaryColor,
             fillColor: MaterialStatePropertyAll(color)),
-        DefaultText(
-          text: label,
-          textStyle: Theme.of(context).textTheme.titleMedium,
+        Flexible(
+          child: DefaultText(
+            text: label,
+            textStyle: Theme.of(context).textTheme.titleMedium,
+          ),
         )
       ],
     );

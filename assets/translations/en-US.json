@@ -46,7 +46,7 @@
 "retypePassword": "Retype Password",
 "alreadyHaveAccount": "Already have an account?",
 "enterVerificationCode": "Enter Verification Code",
-"verificationCodeSent": "Verification code sent to your phone number",
+"verificationCodeSent":"Please enter the OTP received via WhatsApp messages.",
 "resendCodeIn": "Resend code in",
 "confirm": "Confirm",
 "newPassword": "New Password",
@@ -185,7 +185,32 @@
 "quantityError":"The current quantity is not sufficient",
 "quantity":"Quantity",
 "sellPieces": "Sell in parts",
-"sellOne": "Sell as a single unit"
+"sellOne": "Sell as a single unit",
+"publishedOn":"Published on",
+"WriteYourMessageHere":"Write your message here",
+ "depositInstruction": "You can deposit into this account and then upload the receipt",
+  "accountInformation": "Account information",
+  "holderNamer":"Holder Name",
+  "accountNumber":"Account Number",
+  "iban":"IBAN",
+  "whatsappHint":"Please provide a number that is enabled for WhatsApp.",
+  "deleteAccountHint":"Are you sure you want to permanently delete the account and all its associated ads?",
+  "cancel":"Cancel",
+  "deleteAccount":"Delete Account"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -100,8 +100,7 @@ class LoginScreen extends StatelessWidget {
                                         text: LocaleKeys.noAccount.tr(),
                                         color: AppColors.blue,
                                         onPressed: () {
-                                          Navigator.pushReplacementNamed(
-                                              context, Routes.signUpScreenRoutes);
+                                          Navigator.pushNamed(context, Routes.signUpScreenRoutes);
                                         },
                                       ),
                                     )

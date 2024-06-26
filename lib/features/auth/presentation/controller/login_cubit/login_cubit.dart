@@ -96,18 +96,27 @@ class LoginCubit extends Cubit<LoginState> {
     await logoutUseCase.execude(logOutRequest).then((value) => value.fold((l) {
           emit(LogoutErrorState(l.message));
         }, (r) {
-          CacheHelper.clearData();
+          CacheHelper.removeData(key: CacheKeys.fcmId);
+          CacheHelper.removeData(key: CacheKeys.token);
+          CacheHelper.removeData(key: CacheKeys.userId);
+          CacheHelper.removeData(key: CacheKeys.refreshToken);
+          CacheHelper.removeData(key: CacheKeys.password);
+
           emit(UserLogoutSuccessState());
         }));
   }
 
   Future<void> deleteAccount() async {
-    emit(LogoutLoadingState());
+    emit(UserDeleteLoadingState());
     await deleteAccountUseCase.execude().then((value) => value.fold((l) {
-          emit(LogoutErrorState(l.message));
+          emit(UserDeleteErrorState(l.message));
         }, (r) {
-          CacheHelper.clearData();
-          emit(UserLogoutSuccessState());
+          CacheHelper.removeData(key: CacheKeys.fcmId);
+          CacheHelper.removeData(key: CacheKeys.token);
+          CacheHelper.removeData(key: CacheKeys.userId);
+          CacheHelper.removeData(key: CacheKeys.refreshToken);
+          CacheHelper.removeData(key: CacheKeys.password);
+          emit(UserDeleteSuccessState());
         }));
   }
 }

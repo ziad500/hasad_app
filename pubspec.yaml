@@ -57,7 +57,7 @@ dependencies:
   flutter_svg: ^2.0.8
   fluttertoast: ^8.2.4
   get_it: ^7.6.4
-  image_picker: ^1.0.5
+  image_picker: ^1.1.2
   internet_connection_checker: ^1.0.0+1
   intl: ^0.18.1
   json_annotation: ^4.8.0

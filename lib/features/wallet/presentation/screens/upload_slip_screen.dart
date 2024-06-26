@@ -45,19 +45,84 @@ class UploadSlipScreen extends StatelessWidget {
           ),
         ),
         appbarTitle: LocaleKeys.uploadReceipt.tr(),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SubTitleWidget(
-                subTitle: LocaleKeys.uploadFile.tr(),
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-              const SizedBox(height: 10),
-              const UploadSlipMainItem(),
-            ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SubTitleWidget(
+                  subTitle: LocaleKeys.uploadFile.tr(),
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(height: 10),
+                const UploadSlipMainItem(),
+                const SizedBox(height: 20),
+                SubTitleWidget(
+                  subTitle: LocaleKeys.depositInstruction.tr(),
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(height: 10),
+                SubTitleWidget(
+                  subTitle: "${LocaleKeys.accountInformation.tr()} :",
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(height: 10),
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: "${LocaleKeys.holderName.tr()} : ",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(fontWeight: FontWeight.bold, color: Colors.black)),
+                    TextSpan(
+                        text: "The harvest plat for auctions est",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(fontWeight: FontWeight.normal, color: Colors.black))
+                  ]),
+                ),
+                const SizedBox(height: 5),
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: "${LocaleKeys.accountNumber.tr()} : ",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(fontWeight: FontWeight.bold, color: Colors.black)),
+                    TextSpan(
+                        text: "R0247400184 - SAR",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(fontWeight: FontWeight.normal, color: Colors.black))
+                  ]),
+                ),
+                const SizedBox(height: 5),
+                RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: "${LocaleKeys.iban.tr()} : ",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(fontWeight: FontWeight.bold, color: Colors.black)),
+                    TextSpan(
+                        text: "SA82 5500 0000 0R02 4740 0184",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(fontWeight: FontWeight.normal, color: Colors.black))
+                  ]),
+                )
+              ],
+            ),
           ),
         ),
       ),

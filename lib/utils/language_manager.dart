@@ -33,7 +33,7 @@ class LanguageManager {
       path: ASSET_PATH_LOCALIZATION,
       saveLocale: true,
       startLocale: ARABIC_LOCAL,
-      fallbackLocale: ENGLISH_LOCAL,
+      fallbackLocale: ARABIC_LOCAL,
       child: child);
 
   static Future<Locale> getLocal() async {

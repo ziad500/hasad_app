@@ -61,7 +61,7 @@ class DefaultButton extends StatelessWidget {
         height: height,
         color: color ?? (isSecondary ? AppColors.white : AppColors.primaryColor),
         onPressed: isLoading
-            ? null
+            ? () {}
             : () {
                 buttonFunction();
               },

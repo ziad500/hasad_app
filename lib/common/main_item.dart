@@ -188,6 +188,7 @@ class _Description extends StatelessWidget {
                   height: 5,
                 ),
               ],
+              if (!isBidding) const SizedBox(height: 10),
               LocationAndPrice(
                   isBidding: isBidding, directSellingDataModel: directSellingDataModel),
               const SizedBox(

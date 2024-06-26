@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/common/default/default_button.dart';
 
 import 'package:hasad_app/common/default/default_divider.dart';
 import 'package:hasad_app/common/default/default_list_view.dart';
@@ -9,6 +10,7 @@ import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/common/user_image.dart';
 import 'package:hasad_app/core/constants.dart';
+import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/auth/data/network/auth_requests.dart';
 import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
@@ -18,6 +20,7 @@ import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/helpers.dart';
+import 'package:hasad_app/utils/language_manager.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -25,6 +28,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.locale;
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         ProfileDataModel? model = ProfileCubit.get(context).profileDataModel;
@@ -48,22 +52,22 @@ class ProfileScreen extends StatelessWidget {
                     child: DefaultListView(
                         itemBuilder: (context, index) => InkWell(
                               onTap: () {
-                                if (_settingsList()[index].func != null) {
-                                  _settingsList()[index].func!(context);
+                                if (_settingsList(context)[index].func != null) {
+                                  _settingsList(context)[index].func!(context);
                                 } else {
-                                  Navigator.pushNamed(context, _settingsList()[index].route);
+                                  Navigator.pushNamed(context, _settingsList(context)[index].route);
                                 }
                               },
                               child: SettingsItem(
-                                  icon: _settingsList()[index].icon,
-                                  title: _settingsList()[index].title,
+                                  icon: _settingsList(context)[index].icon,
+                                  title: _settingsList(context)[index].title,
                                   balance: index == 0 ? "${model?.balance ?? ""}" : null,
-                                  iconWidget: _settingsList()[index].iconWidget,
-                                  color: _settingsList()[index].color,
+                                  iconWidget: _settingsList(context)[index].iconWidget,
+                                  color: _settingsList(context)[index].color,
                                   pendingBalance:
                                       index == 0 ? "${model?.reservedBalance ?? ""}" : null),
                             ),
-                        count: _settingsList().length),
+                        count: _settingsList(context).length),
                   ),
                 ),
               )
@@ -125,7 +129,7 @@ class _UserRow extends StatelessWidget {
   }
 }
 
-List<_SettingsModel> _settingsList() => [
+List<_SettingsModel> _settingsList(context) => [
       _SettingsModel(
           icon: SVGManager.wallet, title: LocaleKeys.wallet.tr(), route: Routes.walletScreenRoutes),
       _SettingsModel(
@@ -134,7 +138,14 @@ List<_SettingsModel> _settingsList() => [
           icon: SVGManager.note, title: LocaleKeys.orders.tr(), route: Routes.myOrdersScreen),
       _SettingsModel(
           icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: Routes.favoritesRoutes),
-      _SettingsModel(icon: SVGManager.flag, title: LocaleKeys.aboutHarvest.tr(), route: ""),
+      _SettingsModel(
+          iconWidget: const Icon(Icons.language, weight: 0.5, color: Colors.white),
+          icon: "",
+          title: Constants.isArabic ? "English" : "العربية",
+          func: (p0) => LanguageManager.changeAppLanguage(context),
+          route: ""),
+      _SettingsModel(
+          icon: SVGManager.flag, title: LocaleKeys.aboutHarvest.tr(), route: Routes.aboutAppRoutes),
       _SettingsModel(icon: SVGManager.archive, title: LocaleKeys.termsOfUse.tr(), route: ""),
       _SettingsModel(icon: SVGManager.shield, title: LocaleKeys.privacyPolicy.tr(), route: ""),
       _SettingsModel(
@@ -153,14 +164,73 @@ List<_SettingsModel> _settingsList() => [
       _SettingsModel(
           color: AppColors.red,
           icon: SVGManager.lock,
-          title: Constants.isArabic ? "حذف الحساب" : "Delete Account",
+          title: LocaleKeys.deleteAccount.tr(),
           iconWidget: const Icon(
             Icons.logout,
             color: Colors.white,
           ),
           func: (context) async {
-            LoginCubit.get(context).deleteAccount();
-            Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoutes, (route) => false);
+            showDialog(
+              context: context,
+              builder: (context) {
+                return BlocProvider(
+                  create: (context) => sl<LoginCubit>(),
+                  child: BlocConsumer<LoginCubit, LoginState>(
+                    listener: (context, state) {
+                      if (state is UserDeleteSuccessState) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, Routes.loginRoutes, (route) => false);
+                      }
+                    },
+                    builder: (context, state) {
+                      return Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  TitleWidget(
+                                    title: LocaleKeys.deleteAccount.tr(),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  const SizedBox(height: 15),
+                                  SubTitleWidget(subTitle: LocaleKeys.deleteAccountHint.tr()),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Expanded(
+                                          child: DefaultButton(
+                                              buttonName: LocaleKeys.cancel.tr(),
+                                              buttonFunction: () => Navigator.pop(context))),
+                                      const SizedBox(width: 15),
+                                      Expanded(
+                                          child: DefaultButton(
+                                              color: Colors.red,
+                                              isLoading: state is UserDeleteLoadingState,
+                                              buttonName: LocaleKeys.deleteAccount.tr(),
+                                              buttonFunction: () {
+                                                LoginCubit.get(context).deleteAccount();
+                                              })),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            );
           },
           route: ""),
     ];

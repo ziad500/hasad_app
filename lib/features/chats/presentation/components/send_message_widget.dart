@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/features/chats/domain/model/user_model.dart';
 import 'package:hasad_app/features/chats/presentation/components/sen_message_suffix_widget.dart';
 import 'package:hasad_app/features/chats/presentation/controller/messages/messages_cubit.dart';
+import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
 class SendMessageWidget extends StatelessWidget {
@@ -18,9 +20,9 @@ class SendMessageWidget extends StatelessWidget {
         builder: (context, state) {
           var cubit = MessagesCubit.get(context);
           return DefaultFormField(
-              fillColor: AppColors.scaffoldColor,
+              fillColor: AppColors.white,
               controller: cubit.messageContoller,
-              hint: "send",
+              hint: LocaleKeys.WriteYourMessageHere.tr(),
               suffixWidth: 100,
               suffix: SendWidgetSuffixIcon(userModel: userModel),
               validator: (value) {

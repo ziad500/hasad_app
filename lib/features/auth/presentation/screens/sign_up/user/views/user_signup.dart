@@ -5,6 +5,7 @@ import 'package:hasad_app/common/default/default_text_button.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/icons/call_icon.dart';
 import 'package:hasad_app/common/logo_widget.dart';
+import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -73,6 +74,13 @@ class UserSignUp extends StatelessWidget {
                               prefix: const IconCall(),
                               validator: defaultPhoneNumberValidation),
                           SizedBox(
+                            height: 5.h,
+                          ),
+                          SubTitleWidget(
+                            subTitle: LocaleKeys.whatsappHint.tr(),
+                            color: Colors.red,
+                          ),
+                          SizedBox(
                             height: 10.h,
                           ),
                           BlocBuilder<UserSignUpCubit, UserSignUpState>(
@@ -137,7 +145,7 @@ class UserSignUp extends StatelessWidget {
                               text: LocaleKeys.alreadyHaveAccount.tr(),
                               color: AppColors.blue,
                               onPressed: () {
-                                Navigator.pushReplacementNamed(context, Routes.signUpScreenRoutes);
+                                Navigator.pop(context);
                               },
                             ),
                           )

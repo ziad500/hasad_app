@@ -216,6 +216,7 @@ class _PickImagesWidgetState extends State<PickImagesWidget> {
         }
       }
     } catch (e) {
+      print(e);
       showSnackbar(
           context: navigatorKey.currentContext,
           text: LocaleKeys.pleaseEnsureToAttachImages.tr(),

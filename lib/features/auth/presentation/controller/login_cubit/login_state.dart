@@ -27,3 +27,12 @@ class LogoutErrorState extends LoginState {
   final String error;
   LogoutErrorState(this.error);
 }
+
+class UserDeleteLoadingState extends LoginState {}
+
+class UserDeleteSuccessState extends LoginState {}
+
+class UserDeleteErrorState extends LoginState {
+  final String error;
+  UserDeleteErrorState(this.error);
+}
