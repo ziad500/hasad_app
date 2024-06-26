@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to pick files.</string>
+	<string>Access to your camera is required for selecting a profile image and adding ad images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library to pick files.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
