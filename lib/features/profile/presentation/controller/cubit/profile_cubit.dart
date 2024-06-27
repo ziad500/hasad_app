@@ -76,7 +76,15 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void setController() {
     nameController.text = profileDataModel?.name ?? "";
-    phoneController.text = profileDataModel?.phone.toString() ?? "";
-    stcController.text = profileDataModel?.stc.toString() ?? "";
+    phoneController.text = profileDataModel?.phone != null
+        ? !profileDataModel!.phone!.toString().startsWith("0")
+            ? "0${profileDataModel?.phone.toString() ?? ""}"
+            : profileDataModel?.phone.toString() ?? ""
+        : "";
+    stcController.text = profileDataModel?.stc != null
+        ? !profileDataModel!.stc!.toString().startsWith("0")
+            ? "0${profileDataModel?.stc.toString() ?? ""}"
+            : profileDataModel?.stc.toString() ?? ""
+        : "";
   }
 }

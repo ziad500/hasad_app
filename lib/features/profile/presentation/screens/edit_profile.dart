@@ -80,7 +80,7 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                       SubTitleWidget(
                         subTitle: LocaleKeys.whatsappHint.tr(),
-                        color: Colors.red,
+                        color: AppColors.darkBlue,
                       ),
                       SizedBox(
                         height: 20.h,

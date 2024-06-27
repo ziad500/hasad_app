@@ -101,7 +101,12 @@ class _UserRow extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              SubTitleWidget(subTitle: isEmpty(profileDataModel?.phone))
+              SubTitleWidget(
+                  subTitle: profileDataModel?.phone != null
+                      ? !profileDataModel!.phone!.toString().startsWith("0")
+                          ? "0${profileDataModel?.phone.toString() ?? ""}"
+                          : profileDataModel?.phone.toString() ?? ""
+                      : "")
             ],
           )),
           InkWell(
