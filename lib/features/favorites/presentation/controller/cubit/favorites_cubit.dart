@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 import 'package:hasad_app/features/favorites/data/network/requests.dart';
 import 'package:hasad_app/features/favorites/domain/use_cases/add_to_favorites_usecase.dart';
@@ -23,13 +24,15 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> allFavorites = [];
   Future<void> getFavoritesList({bool reset = true}) async {
-    if (reset) {
-      allFavorites = [];
+    if (Constants.token != "") {
+      if (reset) {
+        allFavorites = [];
+      }
+      _emitLoadingState();
+      await _getFavoritesListUseCase.execude(GetFavoritesListReqeust(page: null)).then((value) =>
+          value.fold(
+              (l) => emit(GetFavoritesListErrorState(l.message)), (r) => _handleSuccessState(r)));
     }
-    _emitLoadingState();
-    await _getFavoritesListUseCase.execude(GetFavoritesListReqeust(page: null)).then((value) =>
-        value.fold(
-            (l) => emit(GetFavoritesListErrorState(l.message)), (r) => _handleSuccessState(r)));
   }
 
   void _emitSuccessState() {

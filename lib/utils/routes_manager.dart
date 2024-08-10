@@ -19,6 +19,7 @@ import 'package:hasad_app/features/notifications/presentation/screens/notificati
 import 'package:hasad_app/features/payment/presentation/screens/payment_screen.dart';
 import 'package:hasad_app/features/profile/presentation/screens/about_hasad.dart';
 import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dart';
+import 'package:hasad_app/features/profile/presentation/screens/terms_conditions.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
@@ -57,6 +58,7 @@ class Routes {
   static const String biddingSearchScreen = "/BiddingSearchScreen";
   static const String directSellingSearchScreen = "/directSellingSearchScreen";
   static const String aboutAppRoutes = "/aboutAppRoutes";
+  static const String termsAndConditionsScreen = "/termsAndConditionsScreen";
 
   ////////
   ///
@@ -75,6 +77,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return const AboutApp();
+          },
+        );
+      case Routes.termsAndConditionsScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return TermsAndConditionsScreen(title: args?['title'] ?? "");
           },
         );
       case Routes.biddingSearchScreen:

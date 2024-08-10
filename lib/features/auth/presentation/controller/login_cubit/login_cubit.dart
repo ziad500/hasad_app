@@ -67,24 +67,25 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoadingState());
     await userLoginUseCase.execude(input).then((value) => value.fold((l) {
           emit(LoginErrorState(l.message));
-        }, (r) {
+        }, (r) async {
           //save password in cache
           CacheHelper.saveData(key: CacheKeys.password, value: input.password);
           //save credentials
-          saveCredentials(r);
+          await saveCredentials(r);
 
           emit(UserLoginSuccessState());
         }));
   }
 
-  void saveCredentials(MainUserAuthModel loginModel) {
+  Future saveCredentials(MainUserAuthModel loginModel) async {
     CacheHelper.saveData(key: CacheKeys.userId, value: loginModel.data?.user?.id.toString() ?? "")
         .then((value) {
       //set token value
       Constants.userId = CacheHelper.getData(key: CacheKeys.userId);
     });
     //save token in cache
-    CacheHelper.saveData(key: CacheKeys.token, value: loginModel.data?.token ?? "").then((value) {
+    await CacheHelper.saveData(key: CacheKeys.token, value: loginModel.data?.token ?? "")
+        .then((value) {
       //set token value
       Constants.token = CacheHelper.getData(key: CacheKeys.token);
     });

@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      nextScreen: Constants.token != "" ? const LayoutScreen() : const LoginScreen(),
+      nextScreen:const LayoutScreen() /* Constants.token != "" ?  : const HomeScreen() */,
       centered: true,
       backgroundColor: Colors.white,
       splashIconSize: MediaQuery.of(context).size.height,

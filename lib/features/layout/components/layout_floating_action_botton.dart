@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 import '../cubit/layout_cubit.dart';
 import '../../../utils/app_colors.dart';
@@ -10,7 +11,13 @@ class LayoutFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.addRequestScreen),
+      onTap: () {
+        if (Constants.token != "") {
+          Navigator.pushNamed(context, Routes.addRequestScreen);
+        } else {
+          Navigator.pushNamed(context, Routes.loginRoutes);
+        }
+      },
       child: Stack(
         alignment: Alignment.center,
         children: [

@@ -117,11 +117,11 @@ class UserSignUpCubit extends Cubit<UserSignUpState> {
         .execude(VerifyOtpRequest(phoneController.text, otp))
         .then((value) => value.fold((l) {
               emit(VerifyOtpErrorState(l.message));
-            }, (r) {
+            }, (r) async {
               //save password in cache
               CacheHelper.saveData(key: CacheKeys.password, value: passwordController.text);
               //save credentials
-              saveCredentials(r);
+              await saveCredentials(r);
 
               emit(VerifyOtpSuccessState());
             }));
@@ -136,9 +136,9 @@ class UserSignUpCubit extends Cubit<UserSignUpState> {
         }));
   }
 
-  void saveCredentials(MainUserAuthModel mainUserAuthModel) {
+  Future saveCredentials(MainUserAuthModel mainUserAuthModel) async {
     //save token in cache
-    CacheHelper.saveData(key: CacheKeys.token, value: mainUserAuthModel.data?.token ?? "")
+    await CacheHelper.saveData(key: CacheKeys.token, value: mainUserAuthModel.data?.token ?? "")
         .then((value) {
       //set token value
       Constants.token = CacheHelper.getData(key: CacheKeys.token);

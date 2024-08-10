@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/title_widget.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/bidding/all/presentation/components/bidding_list.dart';
 import 'package:hasad_app/features/bidding/all/presentation/controller/cubit/bidding_list_dart_cubit.dart';
@@ -19,7 +20,7 @@ class BiddingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<BiddingListCubit>()
-        ..setType(biddingAboutToEnd)
+        ..setType(Constants.token != "" ? biddingAboutToEnd : "all-about-to-end")
         ..getBiddingList(),
       child: Scaffold(
         backgroundColor: AppColors.scaffoldColor,

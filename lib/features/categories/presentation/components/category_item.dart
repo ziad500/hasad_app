@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/network_image.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/categories/domain/models/categories_model.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
@@ -14,15 +15,21 @@ class CategoriMainItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => type == 1
-          ? Navigator.pushNamed(context, Routes.directSellingListScreen, arguments: {
-              "id": categoryListModel.id.toString(),
-              "name": categoryListModel.name.toString()
-            })
-          : Navigator.pushNamed(context, Routes.biddingListScreen, arguments: {
-              "id": categoryListModel.id.toString(),
-              "name": categoryListModel.name.toString()
-            }),
+      onTap: () {
+        if (Constants.token == "") {
+          Navigator.pushNamed(context, Routes.loginRoutes);
+        } else {
+          type == 1
+              ? Navigator.pushNamed(context, Routes.directSellingListScreen, arguments: {
+                  "id": categoryListModel.id.toString(),
+                  "name": categoryListModel.name.toString()
+                })
+              : Navigator.pushNamed(context, Routes.biddingListScreen, arguments: {
+                  "id": categoryListModel.id.toString(),
+                  "name": categoryListModel.name.toString()
+                });
+        }
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         width: 95.w,

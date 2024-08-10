@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hasad_app/common/default/default_text.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/bidding/all/presentation/controller/cubit/bidding_list_dart_cubit.dart';
 
 import 'package:hasad_app/utils/app_colors.dart';
@@ -81,13 +82,13 @@ class _BiddingTabBarWidgetState extends State<BiddingTabBarWidget> {
 
   String _ontapFunc(int index) {
     if (index == 0) {
-      return biddingAboutToEnd;
+      return Constants.token != "" ? biddingAboutToEnd : "all-about-to-end";
     } else if (index == 1) {
       return biddingStillAvailable;
     } else if (index == 2) {
       return biddingupcoming;
     }
-    return biddingAboutToEnd;
+    return Constants.token != "" ? biddingAboutToEnd : "all-about-to-end";
   }
 }
 

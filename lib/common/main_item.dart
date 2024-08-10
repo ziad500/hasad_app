@@ -33,11 +33,17 @@ class MainItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => isbidding
-          ? Navigator.pushNamed(context, Routes.biddingDetailsScreen,
-              arguments: {"id": directSellingDataModel.id})
-          : Navigator.pushNamed(context, Routes.itemDetailsRoutes,
-              arguments: {"id": directSellingDataModel.id}),
+      onTap: () {
+        if (Constants.token == "") {
+          Navigator.pushNamed(context, Routes.loginRoutes);
+        } else {
+          isbidding
+              ? Navigator.pushNamed(context, Routes.biddingDetailsScreen,
+                  arguments: {"id": directSellingDataModel.id})
+              : Navigator.pushNamed(context, Routes.itemDetailsRoutes,
+                  arguments: {"id": directSellingDataModel.id});
+        }
+      },
       child: Container(
         width: double.maxFinite,
         height: isbidding ? 170 : 130,

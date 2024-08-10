@@ -59,7 +59,9 @@ class _DirectSellingListAppServiceClient implements DirectSellingListAppServiceC
     )
             .compose(
               _dio.options,
-              'advertisement/direct-selling',
+              Constants.token != ""
+                  ? 'advertisement/direct-selling'
+                  : 'advertisement/direct-selling-all',
               queryParameters: queryParameters,
               data: _data,
             )

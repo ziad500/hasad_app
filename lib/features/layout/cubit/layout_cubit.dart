@@ -12,6 +12,7 @@ class LayoutCubit extends Cubit<LayoutState> {
   static LayoutCubit get(context) => BlocProvider.of(context);
 
   final List<Widget> screens = [
+    //
     const BiddingScreen(),
     const HomeScreen(),
     const ChatsScreen(),

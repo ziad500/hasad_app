@@ -13,6 +13,7 @@ import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/auth/data/network/auth_requests.dart';
 import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
+import 'package:hasad_app/features/layout/cubit/layout_cubit.dart';
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/features/profile/presentation/components/settings_item.dart';
 import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
@@ -55,7 +56,8 @@ class ProfileScreen extends StatelessWidget {
                                 if (_settingsList(context)[index].func != null) {
                                   _settingsList(context)[index].func!(context);
                                 } else {
-                                  Navigator.pushNamed(context, _settingsList(context)[index].route);
+                                  Navigator.pushNamed(context, _settingsList(context)[index].route,
+                                      arguments: _settingsList(context)[index].arguments);
                                 }
                               },
                               child: SettingsItem(
@@ -151,8 +153,16 @@ List<_SettingsModel> _settingsList(context) => [
           route: ""),
       _SettingsModel(
           icon: SVGManager.flag, title: LocaleKeys.aboutHarvest.tr(), route: Routes.aboutAppRoutes),
-      _SettingsModel(icon: SVGManager.archive, title: LocaleKeys.termsOfUse.tr(), route: ""),
-      _SettingsModel(icon: SVGManager.shield, title: LocaleKeys.privacyPolicy.tr(), route: ""),
+      _SettingsModel(
+          icon: SVGManager.archive,
+          title: LocaleKeys.termsOfUse.tr(),
+          route: Routes.termsAndConditionsScreen,
+          arguments: {"title": LocaleKeys.termsOfUse.tr()}),
+      _SettingsModel(
+          icon: SVGManager.shield,
+          title: LocaleKeys.privacyPolicy.tr(),
+          route: Routes.termsAndConditionsScreen,
+          arguments: {"title": LocaleKeys.privacyPolicy.tr()}),
       _SettingsModel(
           color: AppColors.red,
           icon: SVGManager.shield,
@@ -163,7 +173,9 @@ List<_SettingsModel> _settingsList(context) => [
           ),
           func: (context) async {
             LoginCubit.get(context).userLogOut(LogOutRequest());
-            Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoutes, (route) => false);
+            Constants.token = "";
+            LayoutCubit.get(context).changeScreen(0);
+            //    Navigator.pushNamedAndRemoveUntil(context, Routes.loginRoutes, (route) => false);
           },
           route: ""),
       _SettingsModel(
@@ -244,6 +256,7 @@ class _SettingsModel {
   String icon;
   String title;
   String route;
+  dynamic arguments;
   Widget? iconWidget;
   Function(BuildContext)? func;
   final Color? color;
@@ -252,6 +265,7 @@ class _SettingsModel {
     required this.icon,
     required this.title,
     required this.route,
+    this.arguments,
     this.iconWidget,
     this.func,
     this.color,

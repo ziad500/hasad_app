@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/search_bar.dart';
 import 'package:hasad_app/common/title_widget.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/categories/presentation/components/category_list.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/components/direct_selling_list.dart';
@@ -28,8 +29,13 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SearchBarWidget(
-                    onTap: () => Navigator.pushNamed(context, Routes.directSellingSearchScreen)),
+                SearchBarWidget(onTap: () {
+                  if (Constants.token == "") {
+                    Navigator.pushNamed(context, Routes.loginRoutes);
+                  } else {
+                    Navigator.pushNamed(context, Routes.directSellingSearchScreen);
+                  }
+                }),
                 const CategoriesList(type: 1),
                 SizedBox(
                   height: 20.h,
