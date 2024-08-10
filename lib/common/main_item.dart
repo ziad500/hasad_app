@@ -165,6 +165,7 @@ class _Description extends StatelessWidget {
                       child: TitleWidget(
                     title: isEmpty(directSellingDataModel.title),
                     size: 16,
+                    maxlines: 1,
                   )),
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -188,7 +189,7 @@ class _Description extends StatelessWidget {
                   height: 5,
                 ),
               ],
-              if (!isBidding) const SizedBox(height: 10),
+              if (!isBidding) SizedBox(height: 2.h),
               LocationAndPrice(
                   isBidding: isBidding, directSellingDataModel: directSellingDataModel),
               const SizedBox(
