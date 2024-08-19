@@ -17,7 +17,8 @@ class OffersSlider extends StatefulWidget {
 }
 
 class _OffersSliderState extends State<OffersSlider> {
-  final CarouselController? carouselController = CarouselController();
+  final CarouselSliderController? carouselController =
+      CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,8 @@ class _OffersSliderState extends State<OffersSlider> {
                 return Container(
                   height: 180.h,
                   width: double.infinity,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.0)),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(24.0)),
                   child: const Center(
                     child: LoadingWidget(),
                   ),
@@ -48,7 +50,8 @@ class _OffersSliderState extends State<OffersSlider> {
                           errorWidget: Container(
                             height: 180.h,
                             width: double.infinity,
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.0)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24.0)),
                             child: const Center(
                               child: Icon(Icons.error),
                             ),
@@ -56,7 +59,8 @@ class _OffersSliderState extends State<OffersSlider> {
                           placeholder: (p0, p1) => Container(
                             height: 180.h,
                             width: double.infinity,
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.0)),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24.0)),
                             child: const Center(
                               child: LoadingWidget(),
                             ),
@@ -66,7 +70,8 @@ class _OffersSliderState extends State<OffersSlider> {
                               height: 180.h,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  image: DecorationImage(fit: BoxFit.fill, image: imageProvider),
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill, image: imageProvider),
                                   borderRadius: BorderRadius.circular(24.0)),
                             );
                           },

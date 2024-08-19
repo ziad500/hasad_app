@@ -29,7 +29,8 @@ class ItemDetailsSlider extends StatefulWidget {
 }
 
 class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
-  final CarouselController? carouselController = CarouselController();
+  final CarouselSliderController? carouselController =
+      CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +52,18 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => VideoPlayerFromPath(videoPath: offer))),
+                                    builder: (context) =>
+                                        VideoPlayerFromPath(videoPath: offer))),
                             child: Container(
                               height: widget.height ?? 240.h,
                               width: double.maxFinite,
                               decoration: BoxDecoration(
                                   color: AppColors.grey,
                                   borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(widget.borderRadius ?? 25),
-                                      bottomRight: Radius.circular(widget.borderRadius ?? 25))),
+                                      bottomLeft: Radius.circular(
+                                          widget.borderRadius ?? 25),
+                                      bottomRight: Radius.circular(
+                                          widget.borderRadius ?? 25))),
                               child: const Center(
                                 child: Icon(Icons.video_camera_back_sharp),
                               ),
@@ -73,8 +77,10 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                               width: double.maxFinite,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(widget.borderRadius ?? 25),
-                                      bottomRight: Radius.circular(widget.borderRadius ?? 25))),
+                                      bottomLeft: Radius.circular(
+                                          widget.borderRadius ?? 25),
+                                      bottomRight: Radius.circular(
+                                          widget.borderRadius ?? 25))),
                               child: const Center(
                                 child: Icon(Icons.error),
                               ),
@@ -84,8 +90,10 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                               width: double.maxFinite,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(widget.borderRadius ?? 25),
-                                      bottomRight: Radius.circular(widget.borderRadius ?? 25))),
+                                      bottomLeft: Radius.circular(
+                                          widget.borderRadius ?? 25),
+                                      bottomRight: Radius.circular(
+                                          widget.borderRadius ?? 25))),
                               child: const Center(
                                 child: LoadingWidget(),
                               ),
@@ -95,10 +103,14 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                                 height: widget.height ?? 240.h,
                                 width: double.maxFinite,
                                 decoration: BoxDecoration(
-                                    image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                                    image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover),
                                     borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(widget.borderRadius ?? 25),
-                                        bottomRight: Radius.circular(widget.borderRadius ?? 25))),
+                                        bottomLeft: Radius.circular(
+                                            widget.borderRadius ?? 25),
+                                        bottomRight: Radius.circular(
+                                            widget.borderRadius ?? 25))),
                               );
                             },
                           );
@@ -113,11 +125,14 @@ class _ItemDetailsSliderState extends State<ItemDetailsSlider> {
                     enableInfiniteScroll: true,
                     enlargeCenterPage: true)),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10).w,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10).w,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < (widget.list == null ? 0 : widget.list!.length); i++)
+                  for (int i = 0;
+                      i < (widget.list == null ? 0 : widget.list!.length);
+                      i++)
                     Padding(
                       padding: const EdgeInsets.all(2),
                       child: PageIndicatorWidget(
