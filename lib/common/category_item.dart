@@ -8,8 +8,10 @@ import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.categoryListModel});
+  const CategoryItem({super.key, required this.categoryListModel, this.height, this.width});
   final CategoryListModel categoryListModel;
+  final double? height;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     bool isSelected = AddRequestCubit.get(context).selectedDepartment == categoryListModel.id;
@@ -24,8 +26,8 @@ class CategoryItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(28).w),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10).w,
-          width: 80.w,
-          height: 150.h,
+          width: width ?? 80.w,
+          height: height ?? 150.h,
           decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25).w),
           child: Column(
             children: [

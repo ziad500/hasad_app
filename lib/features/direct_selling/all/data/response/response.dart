@@ -84,11 +84,11 @@ class DirectSellingDataResponse {
   @JsonKey(name: "bidding_duration")
   String? biddingDuration;
   @JsonKey(name: "type")
-  String? type;
+  num? type;
   @JsonKey(name: "main_quantity")
-  String? mainQuantity;
+  num? mainQuantity;
   @JsonKey(name: "sub_quantity")
-  String? subQuantity;
+  num? subQuantity;
 
   DirectSellingDataResponse(
       {this.city,

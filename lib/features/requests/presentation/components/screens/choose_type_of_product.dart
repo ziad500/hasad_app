@@ -1,19 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hasad_app/common/default/default_list_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasad_app/common/category_item.dart';
 import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
-import 'package:hasad_app/common/shared_list_tile.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/categories/presentation/controller/cubit/categories_cubit.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
-import 'package:hasad_app/features/requests/presentation/components/base/network_image.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
-import 'package:hasad_app/utils/helpers.dart';
 
 class ChooseTypeOfProductScreen extends StatelessWidget {
   const ChooseTypeOfProductScreen({super.key});
@@ -51,7 +49,17 @@ class ChooseTypeOfProductScreen extends StatelessWidget {
                       if (categoryCubit.categoriesTypes.isEmpty) {
                         return const EmptyList();
                       }
-                      return DefaultListView(
+                      return Wrap(
+                        alignment: WrapAlignment.spaceBetween,
+                        children: categoryCubit.categoriesTypes
+                            .map((e) => CategoryItem(
+                                  categoryListModel: e,
+                                  width: 90.w,
+                                  height: 90.h,
+                                ))
+                            .toList(),
+                      );
+                      /*               DefaultListView(
                           itemBuilder: (ontext, index) => SharedListTile(
                                 leading: RequestImageWidget(
                                     image: categoryCubit.categoriesTypes[index].image),
@@ -63,6 +71,7 @@ class ChooseTypeOfProductScreen extends StatelessWidget {
                                     int.parse(categoryCubit.categoriesTypes[index].id.toString())),
                               ),
                           count: categoryCubit.categoriesTypes.length);
+         */
                     },
                   ),
                 ));

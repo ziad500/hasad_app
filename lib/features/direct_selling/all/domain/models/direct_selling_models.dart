@@ -39,9 +39,9 @@ class DirectSellingDataModel {
   num? purchaseTax;
   num? priceAfterTax;
   String? biddingDuration;
-  String? type;
-  String? mainQuantity;
-  String? subQuantity;
+  num? type;
+  num? mainQuantity;
+  num? subQuantity;
   DirectSellingDataModel(
       this.city,
       this.description,

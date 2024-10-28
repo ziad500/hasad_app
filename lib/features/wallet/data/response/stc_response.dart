@@ -5,7 +5,7 @@ part 'stc_response.g.dart';
 @JsonSerializable()
 class StchRechargeResponse {
   @JsonKey(name: "status")
-  bool? status;
+  String? status;
   @JsonKey(name: "message")
   String? message;
   @JsonKey(name: "data")

@@ -1,5 +1,5 @@
 class StchRechargeModel {
-  bool? status;
+  String? status;
   String? message;
   String? url;
 

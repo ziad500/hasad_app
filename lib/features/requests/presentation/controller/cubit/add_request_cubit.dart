@@ -242,7 +242,9 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       selectedbiddingDate =
           directSellingDataModel.biddingDate?.replaceAll("AM", "").replaceAll("PM", "");
       selectedQuantityType = int.parse(directSellingDataModel.type.toString());
-      quantityController.text = directSellingDataModel.mainQuantity ?? "";
+      quantityController.text = directSellingDataModel.mainQuantity == null
+          ? ""
+          : directSellingDataModel.mainQuantity.toString();
     } else {
       editId = null;
     }

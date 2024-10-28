@@ -23,6 +23,7 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   WebViewController? controller;
+  bool fired = false;
 
   @override
   void initState() {
@@ -36,8 +37,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {
-            if (url.contains("Success")) {
-              WalletCubit.get(context).stcRecharge(extractPaymentId(url));
+            if (url.contains("success")) {
+              if (fired == false) {
+                WalletCubit.get(context).stcRecharge(extractPaymentId(url));
+              }
             }
           },
           onWebResourceError: (WebResourceError error) {},
@@ -68,7 +71,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
               (route) => false);
         }
         if (state is StcRechargErrorState) {
+          fired = false;
+
           showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+        }
+        if (state is StcRechargLoadingState) {
+          fired = true;
         }
       },
       builder: (context, state) {
@@ -83,9 +91,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
+  /// Extract the payment id from the given url, if it does not contain it, returns an empty string
+  ///
+  /// The payment id is expected to be in the url query parameters
+  ///
+  /// Example: https://example.com?payment_id=123456
+  ///
+  /// [url] The url to extract the payment id from
+  ///
+  /// Returns the payment id as a string, or an empty string if it does not exist
+/******  87cd17ef-0f33-4b9c-baf2-bd3477b70eb6  *******/
   String extractPaymentId(String url) {
     Uri uri = Uri.parse(url);
-    String paymentId = uri.queryParameters['PaymentId'] ?? '';
+    String paymentId = uri.queryParameters['payment_id'] ?? '';
     return paymentId;
   }
 }
