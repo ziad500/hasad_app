@@ -41,7 +41,8 @@ class ChooseDepartmentRequestScreen extends StatelessWidget {
                       buttonFunction: () {
                         if (cubit.selectedDepartment != null) {
                           cubit.pageController.nextPage(
-                              duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
                         } else {
                           showSnackbar(
                               context: context,
@@ -81,8 +82,8 @@ class _CategoriesList extends StatelessWidget {
                 width: 200.w,
                 padding: const EdgeInsets.all(20),
                 child: DefaultListView(
-                    itemBuilder: (context, index) =>
-                        CategoryItem(categoryListModel: cubit.categories[index]),
+                    itemBuilder: (context, index) => CategoryItem(
+                        categoryListModel: cubit.categories[index]),
                     count: cubit.categories.length));
           },
         ),

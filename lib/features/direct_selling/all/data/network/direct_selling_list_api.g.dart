@@ -8,7 +8,8 @@ part of 'direct_selling_list_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _DirectSellingListAppServiceClient implements DirectSellingListAppServiceClient {
+class _DirectSellingListAppServiceClient
+    implements DirectSellingListAppServiceClient {
   _DirectSellingListAppServiceClient(
     this._dio, {
     this.baseUrl,
@@ -45,14 +46,14 @@ class _DirectSellingListAppServiceClient implements DirectSellingListAppServiceC
       r'lowest_price': lowestPrice,
       r'highest_price': highestPrice,
       r'page': page,
-      r'department_id ': departmentId,
+      r'department_id': departmentId,
       r'title': title,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingListResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -81,8 +82,8 @@ class _DirectSellingListAppServiceClient implements DirectSellingListAppServiceC
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingListResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -103,14 +104,15 @@ class _DirectSellingListAppServiceClient implements DirectSellingListAppServiceC
   }
 
   @override
-  Future<DirectSellingOrdersListResponse> directSellingOrdersList(String? page) async {
+  Future<DirectSellingOrdersListResponse> directSellingOrdersList(
+      String? page) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<DirectSellingOrdersListResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingOrdersListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,

@@ -8,7 +8,8 @@ import 'package:hasad_app/features/bidding/all/presentation/controller/cubit/bid
 import 'package:hasad_app/utils/app_colors.dart';
 
 class BiddingTabBarWidget extends StatefulWidget {
-  const BiddingTabBarWidget({super.key, required this.list, required this.onTap});
+  const BiddingTabBarWidget(
+      {super.key, required this.list, required this.onTap});
   final List<TabBarModel> list;
   final void Function(String, int) onTap;
 
@@ -36,27 +37,44 @@ class _BiddingTabBarWidgetState extends State<BiddingTabBarWidget> {
                       padding: const EdgeInsets.symmetric(horizontal: 8).w,
                       height: 50.h,
                       margin: EdgeInsets.only(
-                          left: widget.list.indexOf(e) == 0 ? 5.w : 0,
-                          right: widget.list.indexOf(e) == widget.list.length - 1 ? 5.w : 0),
+                          left: widget.list.indexOf(e) == 0
+                              ? 5.w
+                              : Constants.isArabic
+                                  ? 0
+                                  : 5.w,
+                          right:
+                              widget.list.indexOf(e) == widget.list.length - 1
+                                  ? 5.w
+                                  : 0),
                       width: double.maxFinite,
                       decoration: BoxDecoration(
                           color: index == widget.list.indexOf(e)
                               ? AppColors.primaryColor
                               : AppColors.addRequestContainerColor,
                           borderRadius: BorderRadius.only(
-                              bottomLeft: widget.list.indexOf(e) == widget.list.length - 1
-                                  ? const Radius.circular(27)
-                                  : const Radius.circular(0),
+                              bottomLeft: widget.list.indexOf(e) ==
+                                      widget.list.length - 1
+                                  ? Radius.circular(Constants.isArabic ? 27 : 0)
+                                  : widget.list.indexOf(e) == 0
+                                      ? Radius.circular(
+                                          !Constants.isArabic ? 27 : 0)
+                                      : const Radius.circular(0),
                               bottomRight: widget.list.indexOf(e) == 0
-                                  ? const Radius.circular(27)
-                                  : const Radius.circular(0))),
+                                  ? Radius.circular(Constants.isArabic ? 27 : 0)
+                                  : widget.list.indexOf(e) ==
+                                          widget.list.length - 1
+                                      ? Radius.circular(
+                                          !Constants.isArabic ? 27 : 0)
+                                      : const Radius.circular(0))),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(e.icon,
                               height: 18.sp,
                               colorFilter: ColorFilter.mode(
-                                  index == widget.list.indexOf(e) ? Colors.white : Colors.black,
+                                  index == widget.list.indexOf(e)
+                                      ? Colors.white
+                                      : Colors.black,
                                   BlendMode.srcIn)),
                           SizedBox(
                             height: 3.h,
@@ -65,11 +83,14 @@ class _BiddingTabBarWidgetState extends State<BiddingTabBarWidget> {
                             child: DefaultText(
                               text: e.title,
                               maxlines: 1,
-                              textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  fontSize: 10.sp,
-                                  color: index == widget.list.indexOf(e)
-                                      ? Colors.white
-                                      : Colors.black),
+                              textStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(
+                                      fontSize: 10.sp,
+                                      color: index == widget.list.indexOf(e)
+                                          ? Colors.white
+                                          : Colors.black),
                             ),
                           )
                         ],

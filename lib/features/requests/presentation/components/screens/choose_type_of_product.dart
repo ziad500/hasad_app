@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/category_item.dart';
+import 'package:hasad_app/common/default/default_grid_view.dart';
 import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
@@ -28,8 +29,9 @@ class ChooseTypeOfProductScreen extends StatelessWidget {
             return AddRequestBaseContainer(
                 buttonFunction: () {
                   if (cubit.selectedTypeOfProduct != null) {
-                    cubit.pageController
-                        .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                    cubit.pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease);
                   } else {
                     showSnackbar(
                         context: context,
@@ -42,23 +44,43 @@ class ChooseTypeOfProductScreen extends StatelessWidget {
                     ..getCategoriesTypes(cubit.selectedDepartment.toString()),
                   child: BlocBuilder<CategoriesCubit, CategoriesState>(
                     builder: (context, state) {
-                      CategoriesCubit categoryCubit = CategoriesCubit.get(context);
+                      CategoriesCubit categoryCubit =
+                          CategoriesCubit.get(context);
                       if (state is GetCategoriesTypesLoadingState) {
                         return const LoadingWidget();
                       }
                       if (categoryCubit.categoriesTypes.isEmpty) {
                         return const EmptyList();
                       }
-                      return Wrap(
+                      return DefaultGridView(
+                          length: categoryCubit.categoriesTypes.length,
+                          childBuilder: (index) => CategoryItem(
+                                categoryListModel:
+                                    categoryCubit.categoriesTypes[index],
+                                onTap: () => cubit.selectTypeOfProduct(
+                                    int.parse(categoryCubit
+                                        .categoriesTypes[index].id
+                                        .toString())),
+                                defaultIsSelected:
+                                    cubit.selectedTypeOfProduct ==
+                                        categoryCubit.categoriesTypes[index].id,
+                                width: 90.w,
+                                height: 90.h,
+                              ));
+                      /*   Wrap(
                         alignment: WrapAlignment.spaceBetween,
                         children: categoryCubit.categoriesTypes
                             .map((e) => CategoryItem(
                                   categoryListModel: e,
+                                  onTap: () => cubit.selectTypeOfProduct(
+                                      int.parse(e.id.toString())),
+                                  defaultIsSelected:
+                                      cubit.selectedTypeOfProduct == e.id,
                                   width: 90.w,
                                   height: 90.h,
                                 ))
                             .toList(),
-                      );
+                      ); */
                       /*               DefaultListView(
                           itemBuilder: (ontext, index) => SharedListTile(
                                 leading: RequestImageWidget(

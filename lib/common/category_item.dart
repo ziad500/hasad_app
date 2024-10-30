@@ -8,17 +8,28 @@ import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/helpers.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.categoryListModel, this.height, this.width});
+  const CategoryItem(
+      {super.key,
+      required this.categoryListModel,
+      this.height,
+      this.width,
+      this.onTap,
+      this.defaultIsSelected});
   final CategoryListModel categoryListModel;
   final double? height;
+  final void Function()? onTap;
   final double? width;
+  final bool? defaultIsSelected;
   @override
   Widget build(BuildContext context) {
-    bool isSelected = AddRequestCubit.get(context).selectedDepartment == categoryListModel.id;
+    bool isSelected = defaultIsSelected ??
+        AddRequestCubit.get(context).selectedDepartment == categoryListModel.id;
     return InkWell(
-      onTap: () {
-        AddRequestCubit.get(context).selectDepartment(int.parse(categoryListModel.id.toString()));
-      },
+      onTap: onTap ??
+          () {
+            AddRequestCubit.get(context)
+                .selectDepartment(int.parse(categoryListModel.id.toString()));
+          },
       child: Container(
         padding: const EdgeInsets.all(3).w,
         decoration: BoxDecoration(
@@ -28,7 +39,8 @@ class CategoryItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10).w,
           width: width ?? 80.w,
           height: height ?? 150.h,
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(25).w),
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(25).w),
           child: Column(
             children: [
               Expanded(child: _NetowrkImage(categoryListModel.image)),
@@ -64,7 +76,8 @@ class _NetowrkImage extends StatelessWidget {
       ),
       errorWidget: Container(
         width: 230.w - 20.w,
-        decoration: BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(25)),
+        decoration: BoxDecoration(
+            color: Colors.green, borderRadius: BorderRadius.circular(25)),
       ),
     );
   }

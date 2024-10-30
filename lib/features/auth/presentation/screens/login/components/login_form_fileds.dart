@@ -13,7 +13,9 @@ import '../../../controller/login_cubit/login_cubit.dart';
 
 class LoginFormFields extends StatelessWidget {
   const LoginFormFields(
-      {super.key, required this.phoneController, required this.passwordController});
+      {super.key,
+      required this.phoneController,
+      required this.passwordController});
   final TextEditingController phoneController;
   final TextEditingController passwordController;
 
@@ -21,7 +23,8 @@ class LoginFormFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10).w,
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30)),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(30)),
       child: Column(
         children: [
           Padding(
@@ -29,6 +32,7 @@ class LoginFormFields extends StatelessWidget {
             child: DefaultFormField(
                 controller: phoneController,
                 hint: "966+",
+                textInputType: TextInputType.number,
                 prefix: const IconCall(),
                 validator: defaultPhoneNumberValidation),
           ),

@@ -24,7 +24,8 @@ class UploadImagesScreen extends StatelessWidget {
             AddRequestCubit cubit = AddRequestCubit.get(context);
             return AddRequestBaseContainer(
                 buttonFunction: () {
-                  if ((cubit.images.length + cubit.imagesFromResponse.length) < 3) {
+                  if ((cubit.images.length + cubit.imagesFromResponse.length) <
+                      3) {
                     showSnackbar(
                         context: context,
                         text: LocaleKeys.uploadThreeImages.tr(),
@@ -35,8 +36,9 @@ class UploadImagesScreen extends StatelessWidget {
                         text: LocaleKeys.uploadOneVideo.tr(),
                         state: ToastStates.ERROR);
                   } else {
-                    cubit.pageController
-                        .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                    cubit.pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease);
                   }
                 },
                 body: Column(
@@ -45,17 +47,21 @@ class UploadImagesScreen extends StatelessWidget {
                     PickImagesWidget(
                         imagesStatic: cubit.imagesFromResponse.isEmpty
                             ? cubit.images.map((e) => e.path).toList()
-                            : cubit.imagesFromResponse.map((e) => e.name!).toList(),
+                            : cubit.imagesFromResponse
+                                .map((e) => e.name!)
+                                .toList(),
                         onRemove: (value) {
                           if (isNetworkImage(value)) {
                             int? id = cubit.imagesFromResponse
                                 .firstWhere((element) => element.name == value)
                                 .id;
                             if (id != null) {
-                              if (!cubit.deletedImages.contains(id.toString())) {
+                              if (!cubit.deletedImages
+                                  .contains(id.toString())) {
                                 cubit.deletedImages.add(id.toString());
                               }
-                              cubit.imagesFromResponse.removeWhere((element) => element.id == id);
+                              cubit.imagesFromResponse
+                                  .removeWhere((element) => element.id == id);
                             }
                           }
                         },
@@ -65,14 +71,18 @@ class UploadImagesScreen extends StatelessWidget {
                               return XFile(e);
                             }
                           }).toList(); */
-                          cubit.images =
-                              value.where((e) => !isNetworkImage(e)).map((e) => XFile(e)).toList();
+                          cubit.images = value
+                              .where((e) => !isNetworkImage(e))
+                              .map((e) => XFile(e))
+                              .toList();
                         }),
                     PickMediaWidget(
                         mediaType: MediaType.video,
                         videoStatic: cubit.videoPath,
                         onUpload: (value) {
-                          cubit.videoPath = value;
+                          if (value != null) {
+                            cubit.videoPath = value;
+                          }
                         })
                   ],
                 ));

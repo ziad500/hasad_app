@@ -57,7 +57,8 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: BoxDecoration(
                   color: AppColors.pickImageColor,
-                  image: DecorationImage(image: Image.file(File(image!.path)).image),
+                  image: DecorationImage(
+                      image: Image.file(File(image!.path)).image),
                   border: Border.all(color: AppColors.borderColor),
                   borderRadius: BorderRadius.circular(10)),
             )
@@ -72,7 +73,8 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.borderColor),
                   ),
-                  child: const Center(child: Icon(Icons.video_library_outlined)),
+                  child:
+                      const Center(child: Icon(Icons.video_library_outlined)),
                 )
               : Container(
                   height: 60,
@@ -89,7 +91,8 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
                       fit: BoxFit.scaleDown,
                       child: Text(
                         widget.text ?? 'upload video +',
-                        style: TextStyle(fontSize: 24.sp, color: AppColors.iconColor),
+                        style: TextStyle(
+                            fontSize: 24.sp, color: AppColors.iconColor),
                       ),
                     ),
                   ),
@@ -102,8 +105,8 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.only(topLeft: Radius.circular(28), topRight: Radius.circular(28))),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(28), topRight: Radius.circular(28))),
       builder: (context) {
         return AnimatedPadding(
           duration: const Duration(milliseconds: 300),
@@ -112,8 +115,9 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
           ),
           child: Container(
             decoration: const BoxDecoration(
-                borderRadius:
-                    BorderRadius.only(topLeft: Radius.circular(28), topRight: Radius.circular(28))),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(28),
+                    topRight: Radius.circular(28))),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -125,10 +129,10 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
                     onTap: () {
                       if (widget.mediaType == MediaType.image) {
                         pickImage(ImageSource.gallery)
-                            .then((value) => widget.onUpload(image!.path));
+                            .then((value) => widget.onUpload(image?.path));
                       } else {
                         pickVideo(ImageSource.gallery)
-                            .then((value) => widget.onUpload(video!.path));
+                            .then((value) => widget.onUpload(video?.path));
                       }
                       Navigator.pop(context);
                     },
@@ -141,28 +145,32 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
                       text: LocaleKeys.gallary.tr(),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    dense: true,
-                    onTap: () {
-                      if (widget.mediaType == MediaType.image) {
-                        pickImage(ImageSource.camera).then((value) => widget.onUpload(image!.path));
-                      } else {
-                        pickVideo(ImageSource.camera).then((value) => widget.onUpload(video!.path));
-                      }
-                      Navigator.pop(context);
-                    },
-                    leading: const Icon(
-                      Icons.camera,
-                      size: 25,
+                  if (widget.mediaType == MediaType.image) ...[
+                    const SizedBox(
+                      height: 10,
                     ),
-                    title: DefaultText(
-                      text: LocaleKeys.camera.tr(),
-                    ),
-                  )
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      dense: true,
+                      onTap: () {
+                        if (widget.mediaType == MediaType.image) {
+                          pickImage(ImageSource.camera)
+                              .then((value) => widget.onUpload(image?.path));
+                        } else {
+                          pickVideo(ImageSource.camera)
+                              .then((value) => widget.onUpload(video?.path));
+                        }
+                        Navigator.pop(context);
+                      },
+                      leading: const Icon(
+                        Icons.camera,
+                        size: 25,
+                      ),
+                      title: DefaultText(
+                        text: LocaleKeys.camera.tr(),
+                      ),
+                    )
+                  ]
                 ],
               ),
             ),
@@ -197,6 +205,7 @@ class _PickMediaWidgetState extends State<PickMediaWidget> {
   Future<void> pickVideo(ImageSource source) async {
     try {
       final pickedFile = await ImagePicker().pickVideo(source: source);
+
       if (pickedFile != null) {
         setState(() {
           video = pickedFile;
