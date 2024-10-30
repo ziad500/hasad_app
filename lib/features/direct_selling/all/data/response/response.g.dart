@@ -89,7 +89,7 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       lastBid: json['last_bid'] == null
           ? null
           : LastBidResponse.fromJson(json['last_bid'] as Map<String, dynamic>),
-      biddingDuration: json['bidding_duration'] as String?,
+      biddingDuration: json['bidding_duration'] as num?,
       type: json['type'] as String?,
       mainQuantity: json['main_quantity'] as String?,
       subQuantity: json['sub_quantity'] as String?,

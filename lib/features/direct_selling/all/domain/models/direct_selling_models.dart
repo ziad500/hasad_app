@@ -38,7 +38,7 @@ class DirectSellingDataModel {
   String? biddingDate;
   num? purchaseTax;
   num? priceAfterTax;
-  String? biddingDuration;
+  num? biddingDuration;
   String? type;
   String? mainQuantity;
   String? subQuantity;

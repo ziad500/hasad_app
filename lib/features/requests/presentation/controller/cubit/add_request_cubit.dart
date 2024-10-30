@@ -28,7 +28,8 @@ part 'add_request_state.dart';
 class AddRequestCubit extends Cubit<AddRequestState> {
   final AddRequestUseCase _addRequestUseCase;
   final EditRequestUseCase _editRequestUseCase;
-  AddRequestCubit(this._addRequestUseCase, this._editRequestUseCase) : super(AddRequestInitial());
+  AddRequestCubit(this._addRequestUseCase, this._editRequestUseCase)
+      : super(AddRequestInitial());
   static AddRequestCubit get(context) => BlocProvider.of(context);
 
   @override
@@ -147,8 +148,9 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   ////////////////////////////// add request //////////////////////////
   Future addRequest() async {
     emit(AddRequestLoadingState());
-    await _addRequestUseCase.execude(_passAddRequestRequest()).then((value) => value.fold(
-        (l) => emit(AddRequestErrorState(l.message)), (r) => emit(AddRequestSuccessState())));
+    await _addRequestUseCase.execude(_passAddRequestRequest()).then((value) =>
+        value.fold((l) => emit(AddRequestErrorState(l.message)),
+            (r) => emit(AddRequestSuccessState())));
   }
 
   AddRequestRequest _passAddRequestRequest() => AddRequestRequest(
@@ -167,9 +169,11 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       cityId: provinceController.text,
       districtId: districtController.text,
       price: defaultPriceController.text,
-      biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
+      biddingDuration:
+          biddingLongController.text == "" ? null : biddingLongController.text,
       biddingdate: selectedbiddingDate,
-      startingPrice: startPriceController.text == "" ? null : startPriceController.text,
+      startingPrice:
+          startPriceController.text == "" ? null : startPriceController.text,
       type: selectedType == 1 ? selectedQuantityType.toString() : "2",
       mainQuantity: selectedType == 1
           ? selectedQuantityType == 1
@@ -180,9 +184,9 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   ////////////////////////////// edit request //////////////////////////
   Future editRequest(String id) async {
     emit(EditRequestLoadingState());
-    await _editRequestUseCase.execude(_passEditRequestRequest(id)).then((value) => value.fold(
-        (l) => emit(EditRequestErrorState(l.message)),
-        (r) => emit(EditRequestSuccessState(LocaleKeys.doneEdited.tr()))));
+    await _editRequestUseCase.execude(_passEditRequestRequest(id)).then(
+        (value) => value.fold((l) => emit(EditRequestErrorState(l.message)),
+            (r) => emit(EditRequestSuccessState(LocaleKeys.doneEdited.tr()))));
   }
 
   EditRequestRequest _passEditRequestRequest(String id) => EditRequestRequest(
@@ -202,9 +206,11 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       cityId: provinceController.text,
       districtId: districtController.text,
       price: defaultPriceController.text,
-      biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
+      biddingDuration:
+          biddingLongController.text == "" ? null : biddingLongController.text,
       biddingdate: selectedbiddingDate,
-      startingPrice: startPriceController.text == "" ? null : startPriceController.text,
+      startingPrice:
+          startPriceController.text == "" ? null : startPriceController.text,
       deletedImages: deletedImages,
       type: selectedQuantityType.toString(),
       mainQuantity: selectedQuantityType == 1 ? quantityController.text : "1");
@@ -216,13 +222,17 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   setController(DirectSellingDataModel? directSellingDataModel) {
     if (directSellingDataModel != null) {
       // ignore: prefer_null_aware_operators
-      editId = directSellingDataModel.id == null ? null : directSellingDataModel.id.toString();
+      editId = directSellingDataModel.id == null
+          ? null
+          : directSellingDataModel.id.toString();
       selectedType = directSellingDataModel.advertisementType?.id;
       selectedDepartment = directSellingDataModel.department?.id;
       selectedTypeOfProduct = directSellingDataModel.departmentType?.id;
-      selectedPriceIncluding =
-          directSellingDataModel.priceInclusions!.map((e) => e.id.toString()).toList();
-      selectedagriculture = directSellingDataModel.agricultureType?.id.toString();
+      selectedPriceIncluding = directSellingDataModel.priceInclusions!
+          .map((e) => e.id.toString())
+          .toList();
+      selectedagriculture =
+          directSellingDataModel.agricultureType?.id.toString();
       selectedPackaging = directSellingDataModel.packagingType?.id.toString();
       selectedHarvestDate = directSellingDataModel.harvestDate;
       titleController.text = directSellingDataModel.title ?? "";
@@ -237,10 +247,14 @@ class AddRequestCubit extends Cubit<AddRequestState> {
           ? directSellingDataModel.auctionPrice.toString()
           : directSellingDataModel.price.toString();
       videoPath = directSellingDataModel.video;
-      biddingLongController.text = directSellingDataModel.biddingDuration ?? "";
+      biddingLongController.text =
+          directSellingDataModel.biddingDuration == null
+              ? ""
+              : directSellingDataModel.biddingDuration.toString();
       imagesFromResponse = directSellingDataModel.images ?? [];
-      selectedbiddingDate =
-          directSellingDataModel.biddingDate?.replaceAll("AM", "").replaceAll("PM", "");
+      selectedbiddingDate = directSellingDataModel.biddingDate
+          ?.replaceAll("AM", "")
+          .replaceAll("PM", "");
       selectedQuantityType = int.parse(directSellingDataModel.type.toString());
       quantityController.text = directSellingDataModel.mainQuantity == null
           ? ""

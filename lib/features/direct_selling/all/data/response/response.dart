@@ -83,7 +83,7 @@ class DirectSellingDataResponse {
   @JsonKey(name: "price_after_tax")
   num? priceAfterTax;
   @JsonKey(name: "bidding_duration")
-  String? biddingDuration;
+  num? biddingDuration;
   @JsonKey(name: "type")
   String? type;
   @JsonKey(name: "main_quantity")
