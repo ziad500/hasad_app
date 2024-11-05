@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/category_item.dart';
 import 'package:hasad_app/common/default/default_button.dart';
-import 'package:hasad_app/common/default/default_list_view.dart';
+import 'package:hasad_app/common/default/default_grid_view.dart';
 import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
@@ -78,13 +78,17 @@ class _CategoriesList extends StatelessWidget {
             if (cubit.categories.isEmpty) {
               return const EmptyList();
             }
-            return Container(
+            return DefaultGridView(
+              length: cubit.categories.length,
+              childBuilder: (index) =>
+                  CategoryItem(categoryListModel: cubit.categories[index]),
+            ); /* Container(
                 width: 200.w,
                 padding: const EdgeInsets.all(20),
                 child: DefaultListView(
                     itemBuilder: (context, index) => CategoryItem(
                         categoryListModel: cubit.categories[index]),
-                    count: cubit.categories.length));
+                    count: cubit.categories.length)); */
           },
         ),
       ),

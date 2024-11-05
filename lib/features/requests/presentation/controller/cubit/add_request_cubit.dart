@@ -137,7 +137,7 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   final TextEditingController startPriceController = TextEditingController();
   final TextEditingController defaultPriceController = TextEditingController();
   final TextEditingController biddingLongController = TextEditingController();
-  final TextEditingController quantityController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
 
   String? selectedbiddingDate;
   void selectbiddingDate(String value) {

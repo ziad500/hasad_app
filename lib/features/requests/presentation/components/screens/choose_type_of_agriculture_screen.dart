@@ -1,19 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hasad_app/common/default/default_list_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hasad_app/common/default/default_grid_view.dart';
 import 'package:hasad_app/common/default/empty_list.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
-import 'package:hasad_app/common/shared_radio_button.dart';
+import 'package:hasad_app/common/gridview_item.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/lists/presentation/controller/cubit/lists_cubit.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
-import 'package:hasad_app/features/requests/presentation/components/base/network_image.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
-import 'package:hasad_app/utils/helpers.dart';
 
 class TypeOfAgricultureScreen extends StatelessWidget {
   const TypeOfAgricultureScreen({super.key});
@@ -30,8 +29,9 @@ class TypeOfAgricultureScreen extends StatelessWidget {
             return AddRequestBaseContainer(
                 buttonFunction: () {
                   if (cubit.selectedagriculture != null) {
-                    cubit.pageController
-                        .nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                    cubit.pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease);
                   } else {
                     showSnackbar(
                         context: context,
@@ -40,7 +40,8 @@ class TypeOfAgricultureScreen extends StatelessWidget {
                   }
                 },
                 body: BlocProvider(
-                  create: (context) => sl<ListsCubit>()..getUnKnownList("agriculture-type"),
+                  create: (context) =>
+                      sl<ListsCubit>()..getUnKnownList("agriculture-type"),
                   child: BlocBuilder<ListsCubit, ListsState>(
                     builder: (context, state) {
                       ListsCubit listCubit = ListsCubit.get(context);
@@ -50,7 +51,20 @@ class TypeOfAgricultureScreen extends StatelessWidget {
                       if (listCubit.unKnownList.isEmpty) {
                         return const EmptyList();
                       }
-                      return DefaultListView(
+                      return DefaultGridView(
+                          length: listCubit.unKnownList.length,
+                          childBuilder: (index) => GridviewItem(
+                                onTap: () => cubit.selectagriculture(
+                                    listCubit.unKnownList[index].id.toString()),
+                                defaultIsSelected: cubit.selectedagriculture ==
+                                    listCubit.unKnownList[index].id.toString(),
+                                id: listCubit.unKnownList[index].id.toString(),
+                                image: listCubit.unKnownList[index].image ?? "",
+                                name: listCubit.unKnownList[index].name ?? "",
+                                width: 90.w,
+                                height: 90.h,
+                              ));
+                      /*   DefaultListView(
                           itemBuilder: (ontext, index) => SharedCheckBoxButton(
                                 title: isEmpty(listCubit.unKnownList[index].name),
                                 image:
@@ -60,7 +74,7 @@ class TypeOfAgricultureScreen extends StatelessWidget {
                                 onChanged: (value) => cubit
                                     .selectagriculture(listCubit.unKnownList[index].id.toString()),
                               ),
-                          count: listCubit.unKnownList.length);
+                          count: listCubit.unKnownList.length); */
                     },
                   ),
                 ));
