@@ -22,7 +22,8 @@ class SelectHarvestDateScreen extends StatelessWidget {
         number: "7",
         title: LocaleKeys.harvestDate.tr(),
         body: BlocBuilder<AddRequestCubit, AddRequestState>(
-          buildWhen: (a, b) => b is SelectHarvestDateState || b is SelectQuantityTypeState,
+          buildWhen: (a, b) =>
+              b is SelectHarvestDateState || b is SelectQuantityTypeState,
           builder: (context, state) {
             AddRequestCubit cubit = AddRequestCubit.get(context);
             return AddRequestBaseContainer(
@@ -30,8 +31,22 @@ class SelectHarvestDateScreen extends StatelessWidget {
                   if (cubit.selectedHarvestDate != null) {
                     if (cubit.selectedType == 1) {
                       if (cubit.selectedQuantityType != null) {
-                        cubit.pageController.nextPage(
-                            duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                        if (cubit.selectedQuantityType == 1) {
+                          if (cubit.quantityController.text != "") {
+                            cubit.pageController.nextPage(
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                          } else {
+                            showSnackbar(
+                                context: context,
+                                text: LocaleKeys.enterQuantity.tr(),
+                                state: ToastStates.ERROR);
+                          }
+                        } else {
+                          cubit.pageController.nextPage(
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                        }
                       } else {
                         showSnackbar(
                             context: context,
@@ -40,7 +55,8 @@ class SelectHarvestDateScreen extends StatelessWidget {
                       }
                     } else {
                       cubit.pageController.nextPage(
-                          duration: const Duration(milliseconds: 500), curve: Curves.ease);
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.ease);
                     }
                   } else {
                     showSnackbar(
@@ -53,16 +69,19 @@ class SelectHarvestDateScreen extends StatelessWidget {
                   children: [
                     SharedListTile(
                       dense: true,
-                      title: cubit.selectedHarvestDate ?? LocaleKeys.selectDate.tr(),
+                      title: cubit.selectedHarvestDate ??
+                          LocaleKeys.selectDate.tr(),
                       isSelected: false,
                       trailing: const SizedBox(),
                       leading: const Icon(
                         Icons.date_range_outlined,
                         color: AppColors.primaryColor,
                       ),
-                      onTap: () => showDatePickerFunction(context).then((value) => value == null
-                          ? null
-                          : cubit.selectHarvestDate(formatDateString(value.toString()))),
+                      onTap: () => showDatePickerFunction(context).then(
+                          (value) => value == null
+                              ? null
+                              : cubit.selectHarvestDate(
+                                  formatDateString(value.toString()))),
                     ),
                     if (cubit.selectedType == 1) ...[
                       const SizedBox(height: 16),
@@ -74,7 +93,10 @@ class SelectHarvestDateScreen extends StatelessWidget {
                               label: LocaleKeys.sellOne.tr(),
                               value: 2,
                               groupValue: cubit.selectedQuantityType,
-                              onChanged: (value) => cubit.selectedQuantityTypeFunc(2),
+                              onChanged: (value) {
+                                cubit.selectedQuantityTypeFunc(2);
+                                cubit.quantityController.text = "";
+                              },
                             ),
                           ),
                           const SizedBox(width: 10),
@@ -84,7 +106,8 @@ class SelectHarvestDateScreen extends StatelessWidget {
                               label: LocaleKeys.sellPieces.tr(),
                               value: 1,
                               groupValue: cubit.selectedQuantityType,
-                              onChanged: (value) => cubit.selectedQuantityTypeFunc(1),
+                              onChanged: (value) =>
+                                  cubit.selectedQuantityTypeFunc(1),
                             ),
                           ),
                         ],
