@@ -3,7 +3,8 @@
 import 'dart:convert';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/timezone.dart' as tz;
+/* import 'package:timezone/timezone.dart' as tz;
+ */
 import 'package:timezone/data/latest.dart' as tz;
 
 import '../main.dart';
@@ -21,10 +22,12 @@ class LocalNotificationsService {
     var initializationSettings = const InitializationSettings(
       android: AndroidInitializationSettings('mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(
-          defaultPresentAlert: false,
-          defaultPresentBadge: false,
-          defaultPresentSound: false,
-          onDidReceiveLocalNotification: onDidReceiveLocalNotification),
+        defaultPresentAlert: false,
+        defaultPresentBadge: false,
+        defaultPresentSound:
+            false, /* 
+          onDidReceiveLocalNotification: onDidReceiveLocalNotification */
+      ),
     );
     notifications.initialize(initializationSettings);
 
@@ -131,11 +134,11 @@ class LocalNotificationsService {
     const NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(notificationId, title, body,
+    /*   await flutterLocalNotificationsPlugin.zonedSchedule(notificationId, title, body,
         tz.TZDateTime.from(endDate, tz.local), platformChannelSpecifics,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
-        payload: "Hello");
+        payload: "Hello"); */
   }
 
   // Handle local notification received
