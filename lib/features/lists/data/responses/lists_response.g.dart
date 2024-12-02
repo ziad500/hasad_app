@@ -24,7 +24,7 @@ Map<String, dynamic> _$ListsResponseToJson(ListsResponse instance) =>
 
 ListsDataResponse _$ListsDataResponseFromJson(Map<String, dynamic> json) =>
     ListsDataResponse(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       image: json['image'] as String?,
     );

@@ -112,6 +112,18 @@ class _UserRow extends StatelessWidget {
             ],
           )),
           InkWell(
+            onTap: () => Navigator.pushNamed(context, Routes.profileQrCodeScreen, arguments: {
+              "qrData": profileDataModel?.id.toString(),
+              "profileDataModel": profileDataModel
+            }),
+            child: const Icon(
+              Icons.qr_code_2,
+              color: AppColors.blue,
+              size: 40,
+            ),
+          ),
+          const SizedBox(width: 10),
+          InkWell(
             onTap: () {
               ProfileCubit.get(context).profileImage = null;
               ProfileCubit.get(context).setController();

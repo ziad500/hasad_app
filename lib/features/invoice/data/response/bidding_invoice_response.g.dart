@@ -53,7 +53,7 @@ Map<String, dynamic> _$BiddingInvoiceDataResponseToJson(
 BiddingInvoiceadvertisementResponse
     _$BiddingInvoiceadvertisementResponseFromJson(Map<String, dynamic> json) =>
         BiddingInvoiceadvertisementResponse(
-          id: json['id'] as int?,
+          id: (json['id'] as num?)?.toInt(),
           advertisementTypeId: json['advertisement_type_id'] as String?,
           title: json['title'] as String?,
           description: json['description'] as String?,

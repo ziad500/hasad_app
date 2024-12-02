@@ -53,7 +53,7 @@ Map<String, dynamic> _$NotificationsResponseToJson(
 HasUnReadNotificationsResponse _$HasUnReadNotificationsResponseFromJson(
         Map<String, dynamic> json) =>
     HasUnReadNotificationsResponse(
-      count: json['count'] as int?,
+      count: (json['count'] as num?)?.toInt(),
       hasUnreadNotifications: json['hasUnreadNotifications'] as bool?,
     );
 

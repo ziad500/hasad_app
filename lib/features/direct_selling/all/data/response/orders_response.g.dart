@@ -33,14 +33,14 @@ Map<String, dynamic> _$DirectSellingOrdersListResponseToJson(
 DirectSellingOrderResponse _$DirectSellingOrderResponseFromJson(
         Map<String, dynamic> json) =>
     DirectSellingOrderResponse(
-      purchaseInvoiceId: json['purchase_invoice_id'] as int?,
-      advertisementId: json['advertisement_id'] as int?,
+      purchaseInvoiceId: (json['purchase_invoice_id'] as num?)?.toInt(),
+      advertisementId: (json['advertisement_id'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
       price: json['price'] as num?,
       createdAt: json['created_at'] as String?,
       receivedDate: json['received_date'] as String?,
-      quantity: json['quantity'] as int?,
+      quantity: (json['quantity'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DirectSellingOrderResponseToJson(

@@ -40,7 +40,7 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       district: json['district'] == null
           ? null
           : LocationResponse.fromJson(json['district'] as Map<String, dynamic>),
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       images: (json['images'] as List<dynamic>?)
           ?.map((e) => LocationResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -133,7 +133,7 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
 
 LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
     LocationResponse(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 
@@ -146,7 +146,7 @@ Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) =>
 TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(
       image: json['image'] as String?,
       name: json['name'] as String?,
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$TypeResponseToJson(TypeResponse instance) =>

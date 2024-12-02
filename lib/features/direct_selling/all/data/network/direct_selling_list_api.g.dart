@@ -51,7 +51,7 @@ class _DirectSellingListAppServiceClient
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
@@ -60,9 +60,7 @@ class _DirectSellingListAppServiceClient
     )
             .compose(
               _dio.options,
-              Constants.token != ""
-                  ? 'advertisement/direct-selling'
-                  : 'advertisement/direct-selling-all',
+              'advertisement/direct-selling',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -81,7 +79,7 @@ class _DirectSellingListAppServiceClient
     final queryParameters = <String, dynamic>{r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DirectSellingListResponse>(Options(
       method: 'GET',
@@ -110,7 +108,7 @@ class _DirectSellingListAppServiceClient
     final queryParameters = <String, dynamic>{r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DirectSellingOrdersListResponse>(Options(
       method: 'GET',

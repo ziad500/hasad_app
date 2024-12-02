@@ -8,11 +8,11 @@ part of 'pagination_response.dart';
 
 PaginationResponse _$PaginationResponseFromJson(Map<String, dynamic> json) =>
     PaginationResponse(
-      currentPage: json['current_page'] as int?,
-      lastPage: json['last_page'] as int?,
+      currentPage: (json['current_page'] as num?)?.toInt(),
+      lastPage: (json['last_page'] as num?)?.toInt(),
       nextPageUrl: json['next_page_url'] as String?,
       prevPageUrl: json['prev_page_url'] as String?,
-      total: json['total'] as int?,
+      total: (json['total'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$PaginationResponseToJson(PaginationResponse instance) =>

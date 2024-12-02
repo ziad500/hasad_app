@@ -105,6 +105,12 @@ import 'package:hasad_app/features/slider/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/slider/domain/repository/repo.dart';
 import 'package:hasad_app/features/slider/domain/use_cases/get_sliders_usecase.dart';
 import 'package:hasad_app/features/slider/presentation/controller/cubit/slider_cubit.dart';
+import 'package:hasad_app/features/users_search/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/users_search/data/network/users_search_api.dart';
+import 'package:hasad_app/features/users_search/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/users_search/domain/repository/repo.dart';
+import 'package:hasad_app/features/users_search/domain/use_cases/get_users_usecase.dart';
+import 'package:hasad_app/features/users_search/presentation/controller/cubit/users_search_cubit.dart';
 import 'package:hasad_app/features/wallet/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/wallet/data/network/wallet_api.dart';
 import 'package:hasad_app/features/wallet/data/repository/repo_impl.dart';
@@ -152,6 +158,7 @@ Future<void> initAppModule() async {
   iniWallet();
   initNotifications();
   iniSlider();
+  initUsersSearch();
 }
 
 iniLogin() async {
@@ -688,6 +695,37 @@ iniSlider() async {
   //usecase
   if (!GetIt.I.isRegistered<GetSlidersUseCase>()) {
     sl.registerLazySingleton<GetSlidersUseCase>(() => GetSlidersUseCase(sl.call()));
+  }
+}
+
+initUsersSearch() async {
+  //cubit
+
+  if (!GetIt.I.isRegistered<UsersSearchCubit>()) {
+    sl.registerFactory<UsersSearchCubit>(() => UsersSearchCubit(sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<UsersSearchAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<UsersSearchAppServiceClient>(() => UsersSearchAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<UsersSearchRepository>()) {
+    sl.registerLazySingleton<UsersSearchRepository>(() => UsersSearchRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<UsersSearchRemoteDataSource>()) {
+    sl.registerLazySingleton<UsersSearchRemoteDataSource>(
+        () => UsersSearchRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetUsersUseCase>()) {
+    sl.registerLazySingleton<GetUsersUseCase>(() => GetUsersUseCase(sl.call()));
   }
 }
 

@@ -56,7 +56,7 @@ DirectSellingInvoiceadvertisementResponse
     _$DirectSellingInvoiceadvertisementResponseFromJson(
             Map<String, dynamic> json) =>
         DirectSellingInvoiceadvertisementResponse(
-          id: json['id'] as int?,
+          id: (json['id'] as num?)?.toInt(),
           advertisementTypeId: json['advertisement_type_id'] as String?,
           title: json['title'] as String?,
           description: json['description'] as String?,

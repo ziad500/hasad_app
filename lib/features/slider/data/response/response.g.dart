@@ -24,7 +24,7 @@ Map<String, dynamic> _$SliderResponseToJson(SliderResponse instance) =>
 
 SliderDataResponse _$SliderDataResponseFromJson(Map<String, dynamic> json) =>
     SliderDataResponse(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       path: json['path'] as String?,
     );
 

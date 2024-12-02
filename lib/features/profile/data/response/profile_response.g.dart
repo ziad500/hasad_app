@@ -24,10 +24,10 @@ Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
 
 ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) =>
     ProfileDataResponse(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      phone: json['phone'] as int?,
-      stc: json['stc'] as int?,
+      phone: (json['phone'] as num?)?.toInt(),
+      stc: (json['stc'] as num?)?.toInt(),
       image: json['image'] as String?,
       balance: json['balance'] as num?,
       reservedBalance: json['reserved_balance'] as num?,

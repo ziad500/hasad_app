@@ -22,6 +22,7 @@ import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dar
 import 'package:hasad_app/features/profile/presentation/screens/terms_conditions.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
+import 'package:hasad_app/features/users_search/presentation/screens/qr_code_screen.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
 import 'package:hasad_app/features/wallet/presentation/screens/upload_slip_screen.dart';
 import 'package:hasad_app/features/wallet/presentation/screens/wallet_screen.dart';
@@ -41,6 +42,8 @@ class Routes {
   static const String addRequestScreen = "/AddRequestScreen";
   static const String itemDetailsRoutes = "/itemDetailsRoutes";
   static const String biddingDetailsScreen = "/BiddingDetailsScreen";
+  static const String profileQrCodeScreen = "/profileQrCodeScreen";
+  static const String scanQrCodeScreen = "/scanQrCodeScreen";
 
   static const String directSellingListScreen = "/directSellingListScreen";
   static const String myOrdersScreen = "/MyOrdersScreen";
@@ -79,6 +82,19 @@ class RouteGenerator {
             return const AboutApp();
           },
         );
+
+      case Routes.profileQrCodeScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return MyQrCode(
+              qrData: args?['qrData'] ?? "",
+              profileDataModel: args?['profileDataModel'],
+            );
+          },
+        );
+
       case Routes.termsAndConditionsScreen:
         return MaterialPageRoute(
           builder: (context) {
