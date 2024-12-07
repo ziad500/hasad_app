@@ -35,71 +35,71 @@ class UsersResponse {
 @JsonSerializable()
 class UserDataResponse {
   @JsonKey(name: "id")
-  int id;
+  num? id;
 
   @JsonKey(name: "daftra_user_id")
-  int daftraUserId;
+  num? daftraUserId;
 
   @JsonKey(name: "name")
-  String name;
+  String? name;
 
   @JsonKey(name: "email")
   String? email;
 
   @JsonKey(name: "phone")
-  int phone;
+  num? phone;
 
   @JsonKey(name: "stc")
-  int stc;
+  num? stc;
 
   @JsonKey(name: "role_id")
-  int roleId;
+  num? roleId;
 
   @JsonKey(name: "phone_verified_at")
-  String phoneVerifiedAt;
+  String? phoneVerifiedAt;
 
   @JsonKey(name: "image")
-  String image;
+  String? image;
 
   @JsonKey(name: "lang")
-  String lang;
+  String? lang;
 
   @JsonKey(name: "device_token")
-  String deviceToken;
+  String? deviceToken;
 
   @JsonKey(name: "created_at")
-  String createdAt;
+  String? createdAt;
 
   @JsonKey(name: "updated_at")
-  String updatedAt;
-
+  String? updatedAt;
+/* 
   @JsonKey(name: "balance")
   BalanceResponse balance;
 
   @JsonKey(name: "advertisements")
-  List<DirectSellingDataResponse> advertisements;
+  List<DirectSellingDataResponse>? advertisements;
 
   @JsonKey(name: "advertisement_direct_sale")
-  List<DirectSellingDataResponse> advertisementDirectSale;
+  List<DirectSellingDataResponse>? advertisementDirectSale;
 
   @JsonKey(name: "advertisement_auction")
-  List<DirectSellingDataResponse> advertisementAuction;
+  List<DirectSellingDataResponse>? advertisementAuction;
 
   @JsonKey(name: "auctions")
-  List<dynamic> auctions;
+  List<dynamic>? auctions;
 
   @JsonKey(name: "favourites")
-  List<DirectSellingDataResponse> favourites;
+  List<DirectSellingDataResponse>? favourites;
 
   @JsonKey(name: "purchases")
-  List<dynamic> purchases;
+  List<dynamic>? purchases;
 
   @JsonKey(name: "log_reserved_balances")
-  List<dynamic> logReservedBalances;
+  List<dynamic>? logReservedBalances;
 
   @JsonKey(name: "winning_auctions")
-  List<DirectSellingDataResponse> winningAuctions;
-
+  List<DirectSellingDataResponse>? winningAuctions;
+ */
   UserDataResponse(
     this.id,
     this.daftraUserId,
@@ -114,7 +114,7 @@ class UserDataResponse {
     this.deviceToken,
     this.createdAt,
     this.updatedAt,
-    this.balance,
+    /*  this.balance,
     this.advertisements,
     this.advertisementDirectSale,
     this.advertisementAuction,
@@ -122,7 +122,7 @@ class UserDataResponse {
     this.favourites,
     this.purchases,
     this.logReservedBalances,
-    this.winningAuctions,
+    this.winningAuctions, */
   );
 
   // from json
@@ -135,22 +135,22 @@ class UserDataResponse {
 @JsonSerializable()
 class BalanceResponse {
   @JsonKey(name: "id")
-  int id;
+  num? id;
 
   @JsonKey(name: "balance")
-  String balance;
+  String? balance;
 
   @JsonKey(name: "reserved_balance")
-  String reservedBalance;
+  String? reservedBalance;
 
   @JsonKey(name: "user_id")
-  int userId;
+  num? userId;
 
   @JsonKey(name: "created_at")
-  String createdAt;
+  String? createdAt;
 
   @JsonKey(name: "updated_at")
-  String updatedAt;
+  String? updatedAt;
 
   BalanceResponse(
     this.id,

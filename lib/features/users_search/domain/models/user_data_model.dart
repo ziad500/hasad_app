@@ -19,50 +19,51 @@ class UsersModel {
 }
 
 class UserProfileModel {
-  int id;
+  num? id;
 
-  int daftraUserId;
+  num? daftraUserId;
 
-  String name;
+  String? name;
 
   String? email;
 
-  int phone;
+  num? phone;
 
-  int stc;
+  num? stc;
 
-  int roleId;
+  num? roleId;
 
-  String phoneVerifiedAt;
+  String? phoneVerifiedAt;
 
-  String image;
+  String? image;
 
-  String lang;
+  String? lang;
 
-  String deviceToken;
+  String? deviceToken;
 
-  String createdAt;
+  String? createdAt;
 
-  String updatedAt;
+  String?
+      updatedAt; /* 
 
-  BalanceModel balance;
+  BalanceModel? balance;
 
-  List<DirectSellingDataModel> advertisements;
+  List<DirectSellingDataModel>? advertisements;
 
-  List<DirectSellingDataModel> advertisementDirectSale;
+  List<DirectSellingDataModel>? advertisementDirectSale;
 
-  List<DirectSellingDataModel> advertisementAuction;
+  List<DirectSellingDataModel>? advertisementAuction;
 
-  List<dynamic> auctions;
+  List<dynamic>? auctions;
 
-  List<DirectSellingDataModel> favourites;
+  List<DirectSellingDataModel>? favourites;
 
-  List<dynamic> purchases;
+  List<dynamic>? purchases;
 
-  List<dynamic> logReservedBalances;
+  List<dynamic>? logReservedBalances;
 
-  List<DirectSellingDataModel> winningAuctions;
-
+  List<DirectSellingDataModel>? winningAuctions;
+ */
   UserProfileModel(
     this.id,
     this.daftraUserId,
@@ -77,7 +78,7 @@ class UserProfileModel {
     this.deviceToken,
     this.createdAt,
     this.updatedAt,
-    this.balance,
+    /*   this.balance,
     this.advertisements,
     this.advertisementDirectSale,
     this.advertisementAuction,
@@ -85,22 +86,22 @@ class UserProfileModel {
     this.favourites,
     this.purchases,
     this.logReservedBalances,
-    this.winningAuctions,
+    this.winningAuctions, */
   );
 }
 
 class BalanceModel {
-  int id;
+  num? id;
 
-  String balance;
+  String? balance;
 
-  String reservedBalance;
+  String? reservedBalance;
 
-  int userId;
+  num? userId;
 
-  String createdAt;
+  String? createdAt;
 
-  String updatedAt;
+  String? updatedAt;
 
   BalanceModel(
     this.id,

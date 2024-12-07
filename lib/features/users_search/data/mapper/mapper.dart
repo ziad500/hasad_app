@@ -30,15 +30,15 @@ extension UserDataResponseMapper on UserDataResponse {
       deviceToken,
       createdAt,
       updatedAt,
-      balance.toDomain(),
-      advertisements.map((e) => e.toDomain()).toList(),
-      advertisementDirectSale.map((e) => e.toDomain()).toList(),
-      advertisementAuction.map((e) => e.toDomain()).toList(),
+      /*   balance.toDomain(),
+      advertisements?.map((e) => e.toDomain()).toList(),
+      advertisementDirectSale?.map((e) => e.toDomain()).toList(),
+      advertisementAuction?.map((e) => e.toDomain()).toList(),
       auctions,
-      favourites.map((e) => e.toDomain()).toList(),
+      favourites?.map((e) => e.toDomain()).toList(),
       purchases,
       logReservedBalances,
-      winningAuctions.map((e) => e.toDomain()).toList(),
+      winningAuctions?.map((e) => e.toDomain()).toList(), */
     );
   }
 }

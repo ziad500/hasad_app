@@ -7,6 +7,7 @@ import 'package:hasad_app/common/shared_tabbar.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/common/user_image.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/bidding/all/presentation/components/my_bidding_list.dart';
 import 'package:hasad_app/features/bidding/all/presentation/controller/my_bidding_list/cubit/my_bidding_list_cubit.dart';
@@ -30,6 +31,7 @@ class UserProfileScreen extends StatelessWidget {
               (cubit.usersModel?.data == null || cubit.usersModel!.data!.isEmpty)
                   ? null
                   : cubit.usersModel?.data?[0];
+          print(".....${"${Constants.imagesUrl}uploads${model?.image ?? ""}"}");
           return DefaultTabController(
             length: 2,
             child: DefaultScaffold(
