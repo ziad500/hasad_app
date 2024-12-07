@@ -11,7 +11,8 @@ import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selli
 ///the cubit will call the fetching method to fetch the next page , this will happen only if the current state is not loading state
 ///which indicates that no fetchng request is happening now]
 class MyBiddingListView extends StatefulWidget {
-  const MyBiddingListView({super.key});
+  const MyBiddingListView({super.key, this.userId});
+  final String? userId;
 
   @override
   State<MyBiddingListView> createState() => _MyBiddingListViewState();
@@ -42,7 +43,7 @@ class _MyBiddingListViewState extends State<MyBiddingListView> {
           var currentLength = controller.position.pixels;
           if (currentLength >= percentageOftotalLength &&
               cubit.state is! MyGetBiddingListPaginationLoadingState) {
-            await cubit.getBiddingList();
+            await cubit.getBiddingList(userId: widget.userId);
           }
         }),
         controller: controller,

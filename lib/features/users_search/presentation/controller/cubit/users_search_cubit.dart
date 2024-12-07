@@ -16,17 +16,21 @@ class UsersSearchCubit extends Cubit<UsersSearchState> {
   UsersModel? usersModel;
   Future<void> getUsers(String? userId) async {
     emit(GetUsersLoadingState());
-    await _getUsersUseCase
-        .execude(nameContoller.text, userId)
-        .then((value) => value.fold((l) => emit(GetUsersErrorState(l.message)), (r) {
-              usersModel = r;
-              emit(GetUsersSuccessState());
-            }));
+    await _getUsersUseCase.execude(nameContoller.text, userId).then((value) => value.fold((l) {
+          print("error is : ${l.message}");
+          emit(GetUsersErrorState(l.message));
+        }, (r) {
+          usersModel = r;
+          emit(GetUsersSuccessState());
+        }));
   }
 
   scanQrCode() {
     QrCodeService.scanQR().then((e) {
-      getUsers(e);
+      print(".......$e");
+      if (e != "-1") {
+        emit(GetQrCodeSuccessState(e));
+      }
     });
   }
 }

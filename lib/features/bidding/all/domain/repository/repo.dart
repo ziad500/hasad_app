@@ -11,7 +11,7 @@ abstract class BiddingListRepository {
   Future<Either<Failure, DirectSellingListModel>> biddingList(
       GetMainListRequest getMainListRequest, String type);
 
-  Future<Either<Failure, DirectSellingListModel>> myBiddingList(String? page);
+  Future<Either<Failure, DirectSellingListModel>> myBiddingList(String? page, String? userId);
 
   Future<Either<Failure, BiddingOrdersListModel>> biddingOrdersList(String? page);
 

@@ -26,9 +26,9 @@ class BiddingListRepositoryImpl implements BiddingListRepository {
   }
 
   @override
-  Future<Either<Failure, DirectSellingListModel>> myBiddingList(String? page) {
+  Future<Either<Failure, DirectSellingListModel>> myBiddingList(String? page, String? userId) {
     return executeAndHandleError<DirectSellingListModel>(() async {
-      final response = await _biddingListRemoteDataSource.myBiddingList(page);
+      final response = await _biddingListRemoteDataSource.myBiddingList(page, userId);
       return response.toDomain();
     });
   }

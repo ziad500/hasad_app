@@ -6,7 +6,7 @@ class UsersModel {
 
   String? message;
 
-  List<UserDataModel>? data;
+  List<UserProfileModel>? data;
 
   PaginationModel? pagination;
 
@@ -18,7 +18,7 @@ class UsersModel {
   );
 }
 
-class UserDataModel {
+class UserProfileModel {
   int id;
 
   int daftraUserId;
@@ -63,7 +63,7 @@ class UserDataModel {
 
   List<DirectSellingDataModel> winningAuctions;
 
-  UserDataModel(
+  UserProfileModel(
     this.id,
     this.daftraUserId,
     this.name,

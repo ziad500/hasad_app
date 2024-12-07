@@ -7,7 +7,7 @@ import 'package:hasad_app/features/direct_selling/all/data/network/requests.dart
 abstract class BiddingListRemoteDataSource {
   Future<DirectSellingListResponse> biddingList(GetMainListRequest getMainListRequest, String type);
 
-  Future<DirectSellingListResponse> myBiddingList(String? page);
+  Future<DirectSellingListResponse> myBiddingList(String? page, String? userId);
 
   Future<BiddingOrdersListResponse> biddingOrdersList(String? page);
 
@@ -39,8 +39,8 @@ class BiddingListRemoteDataSourceImpl implements BiddingListRemoteDataSource {
           getMainListRequest.departmentId,
           getMainListRequest.title);
   @override
-  Future<DirectSellingListResponse> myBiddingList(String? page) =>
-      _directSellingListAppServiceClient.myBiddingList(page);
+  Future<DirectSellingListResponse> myBiddingList(String? page, String? userId) =>
+      _directSellingListAppServiceClient.myBiddingList(page, userId);
 
   @override
   Future<BiddingOrdersListResponse> biddingOrdersList(String? page) =>

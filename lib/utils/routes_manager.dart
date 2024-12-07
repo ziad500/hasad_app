@@ -23,6 +23,7 @@ import 'package:hasad_app/features/profile/presentation/screens/terms_conditions
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
 import 'package:hasad_app/features/users_search/presentation/screens/qr_code_screen.dart';
+import 'package:hasad_app/features/users_search/presentation/screens/user_profile_screen.dart';
 import 'package:hasad_app/features/wallet/presentation/controller/cubit/wallet_cubit.dart';
 import 'package:hasad_app/features/wallet/presentation/screens/upload_slip_screen.dart';
 import 'package:hasad_app/features/wallet/presentation/screens/wallet_screen.dart';
@@ -62,6 +63,7 @@ class Routes {
   static const String directSellingSearchScreen = "/directSellingSearchScreen";
   static const String aboutAppRoutes = "/aboutAppRoutes";
   static const String termsAndConditionsScreen = "/termsAndConditionsScreen";
+  static const String userProfileScreen = "/userProfileScreen";
 
   ////////
   ///
@@ -91,6 +93,16 @@ class RouteGenerator {
             return MyQrCode(
               qrData: args?['qrData'] ?? "",
               profileDataModel: args?['profileDataModel'],
+            );
+          },
+        );
+      case Routes.userProfileScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return UserProfileScreen(
+              userId: args!['userId'],
             );
           },
         );

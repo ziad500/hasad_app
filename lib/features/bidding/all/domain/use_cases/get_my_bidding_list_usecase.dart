@@ -10,7 +10,7 @@ class GetMyBiddingListUseCase {
     this._repository,
   );
 
-  Future<Either<Failure, DirectSellingListModel>> execude(String page) async {
-    return await _repository.myBiddingList(page);
+  Future<Either<Failure, DirectSellingListModel>> execude(String page, String? userId) async {
+    return await _repository.myBiddingList(page, userId);
   }
 }

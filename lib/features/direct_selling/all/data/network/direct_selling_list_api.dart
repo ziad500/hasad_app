@@ -30,6 +30,7 @@ abstract class DirectSellingListAppServiceClient {
   @GET("advertisement/direct-selling/my")
   Future<DirectSellingListResponse> myDirectSellingList(
     @Query('page') String? page,
+    @Query('user_id') String? userId,
   );
 
   @GET("advertisement/direct-selling/order")

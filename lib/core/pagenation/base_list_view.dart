@@ -133,7 +133,7 @@ class _Child<B extends StateStreamable<States>, States, DataType> extends Statel
           );
         }
         if (items.isEmpty) {
-          return const EmptyList();
+          return const EmptyList(scrollable: true);
         }
         return ListView.separated(
           //attach the scroll controller in order to listen on it

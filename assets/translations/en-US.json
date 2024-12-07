@@ -196,7 +196,8 @@
   "whatsappHint":"Please provide a number that is enabled for WhatsApp.",
   "deleteAccountHint":"Are you sure you want to permanently delete the account and all its associated ads?",
   "cancel":"Cancel",
-  "deleteAccount":"Delete Account"
+  "deleteAccount":"Delete Account",
+  "email":"Email"
 
 
 

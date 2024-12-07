@@ -14,3 +14,8 @@ final class GetUsersErrorState extends UsersSearchState {
   final String error;
   GetUsersErrorState(this.error);
 }
+
+final class GetQrCodeSuccessState extends UsersSearchState {
+  final String id;
+  GetQrCodeSuccessState(this.id);
+}

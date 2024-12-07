@@ -6,7 +6,7 @@ import 'package:hasad_app/features/direct_selling/all/data/response/response.dar
 abstract class DirectSellingListRemoteDataSource {
   Future<DirectSellingListResponse> directSellingList(GetMainListRequest getMainListRequest);
 
-  Future<DirectSellingListResponse> myDirectSellingList(String? page);
+  Future<DirectSellingListResponse> myDirectSellingList(String? page, String? userId);
 
   Future<DirectSellingOrdersListResponse> directSellingOrdersList(String? page);
 }
@@ -32,8 +32,8 @@ class DirectSellingListRemoteDataSourceImpl implements DirectSellingListRemoteDa
           getMainListRequest.departmentId,
           getMainListRequest.title);
   @override
-  Future<DirectSellingListResponse> myDirectSellingList(String? page) =>
-      _directSellingListAppServiceClient.myDirectSellingList(page);
+  Future<DirectSellingListResponse> myDirectSellingList(String? page, String? userId) =>
+      _directSellingListAppServiceClient.myDirectSellingList(page, userId);
 
   @override
   Future<DirectSellingOrdersListResponse> directSellingOrdersList(String? page) =>

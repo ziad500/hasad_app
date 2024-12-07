@@ -10,7 +10,7 @@ abstract class DirectSellingListRepository {
   Future<Either<Failure, DirectSellingListModel>> directSellingList(
       GetMainListRequest getMainListRequest);
 
-  Future<Either<Failure, DirectSellingListModel>> myDirectSellingList(String? page);
+  Future<Either<Failure, DirectSellingListModel>> myDirectSellingList(String? page, String? userId);
 
   Future<Either<Failure, DirectSellingOrdersListModel>> directSellingOrdersList(String? page);
 }

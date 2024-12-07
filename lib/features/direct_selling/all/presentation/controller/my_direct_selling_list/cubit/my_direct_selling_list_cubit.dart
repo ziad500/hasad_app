@@ -17,11 +17,12 @@ class MyDirectSellingListCubit extends Cubit<MyDirectSellingListState> {
 
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> myDirectSelling = [];
-  Future<void> getDirectSellingList() async {
+  Future<void> getDirectSellingList({String? userId}) async {
     if (_canFetchMore()) {
       _emitLoadingState();
-      await _myDirectSellingListUseCase.execude(getPageNumber() ?? "1").then((value) => value.fold(
-          (l) => emit(MyGetDirectSellingListErrorState(l.message)), (r) => _handleSuccessState(r)));
+      await _myDirectSellingListUseCase.execude(getPageNumber() ?? "1", userId).then((value) =>
+          value.fold((l) => emit(MyGetDirectSellingListErrorState(l.message)),
+              (r) => _handleSuccessState(r)));
     }
   }
 

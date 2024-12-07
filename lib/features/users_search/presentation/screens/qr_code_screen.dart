@@ -9,6 +9,7 @@ import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/features/profile/domain/models/profile_model.dart';
 import 'package:hasad_app/features/users_search/presentation/controller/cubit/users_search_cubit.dart';
 import 'package:hasad_app/utils/helpers.dart';
+import 'package:hasad_app/utils/routes_manager.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class MyQrCode extends StatefulWidget {
@@ -27,7 +28,12 @@ class _MyQrCodeState extends State<MyQrCode> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<UsersSearchCubit>(),
-      child: BlocBuilder<UsersSearchCubit, UsersSearchState>(
+      child: BlocConsumer<UsersSearchCubit, UsersSearchState>(
+        listener: (context, state) {
+          if (state is GetQrCodeSuccessState) {
+            Navigator.pushNamed(context, Routes.userProfileScreen, arguments: {"userId": state.id});
+          }
+        },
         builder: (context, state) {
           return DefaultScaffold(
               withAppbar: false,

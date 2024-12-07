@@ -26,9 +26,10 @@ class DirectSellingListRepositoryImpl implements DirectSellingListRepository {
   }
 
   @override
-  Future<Either<Failure, DirectSellingListModel>> myDirectSellingList(String? page) {
+  Future<Either<Failure, DirectSellingListModel>> myDirectSellingList(
+      String? page, String? userId) {
     return executeAndHandleError<DirectSellingListModel>(() async {
-      final response = await _directSellingListRemoteDataSource.myDirectSellingList(page);
+      final response = await _directSellingListRemoteDataSource.myDirectSellingList(page, userId);
       return response.toDomain();
     });
   }

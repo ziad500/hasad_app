@@ -17,11 +17,11 @@ class MyBiddingListCubit extends Cubit<MyBiddingListState> {
 
   DirectSellingListModel? directSellingListModel;
   List<DirectSellingDataModel> myBidding = [];
-  Future<void> getBiddingList() async {
+  Future<void> getBiddingList({String? userId}) async {
     if (_canFetchMore()) {
       _emitLoadingState();
-      await _myBiddingListUseCase.execude(getPageNumber() ?? "1").then((value) => value.fold(
-          (l) => emit(MyGetBiddingListErrorState(l.message)), (r) => _handleSuccessState(r)));
+      await _myBiddingListUseCase.execude(getPageNumber() ?? "1", userId).then((value) => value
+          .fold((l) => emit(MyGetBiddingListErrorState(l.message)), (r) => _handleSuccessState(r)));
     }
   }
 

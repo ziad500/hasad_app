@@ -29,7 +29,8 @@ abstract class BiddingListAppServiceClient {
   );
 
   @GET("advertisement/auctions/my")
-  Future<DirectSellingListResponse> myBiddingList(@Query('page') String? page);
+  Future<DirectSellingListResponse> myBiddingList(
+      @Query('page') String? page, @Query('user_id') String? userId);
 
   @GET("advertisement/auctions/winning-auctions")
   Future<BiddingOrdersListResponse> biddingOrdersList(@Query('page') String? page);

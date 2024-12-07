@@ -15,8 +15,8 @@ extension UsersResponseMapper on UsersResponse {
 }
 
 extension UserDataResponseMapper on UserDataResponse {
-  UserDataModel toDomain() {
-    return UserDataModel(
+  UserProfileModel toDomain() {
+    return UserProfileModel(
       id,
       daftraUserId,
       name,
