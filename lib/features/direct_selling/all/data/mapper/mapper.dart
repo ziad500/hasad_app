@@ -42,7 +42,8 @@ extension DirectSellingDataResponseMapper on DirectSellingDataResponse? {
         this?.biddingDuration,
         this?.type,
         this?.mainQuantity,
-        this?.subQuantity);
+        this?.subQuantity,
+        this?.cashbackPercentage);
   }
 }
 

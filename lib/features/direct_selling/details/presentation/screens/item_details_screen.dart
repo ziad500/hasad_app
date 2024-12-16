@@ -14,6 +14,7 @@ import 'package:hasad_app/core/func/payment_faild_dialog.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/base/body.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/description_item.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/image_slider.dart';
+import 'package:hasad_app/features/direct_selling/details/presentation/components/item_cash_back.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/location_widget.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/row_of_buttons.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/title_and_price.dart';
@@ -164,6 +165,8 @@ class ItemDetailsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ItemLocationWidget(
+                                  directSellingDataModel: cubit.directSellingDataModel),
+                              ItemCashBackWidget(
                                   directSellingDataModel: cubit.directSellingDataModel),
                               const SizedBox(
                                 height: 15,

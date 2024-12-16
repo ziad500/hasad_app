@@ -11,22 +11,26 @@ class IconAndText extends StatelessWidget {
       this.color,
       this.widget,
       this.maxLines,
-      this.size});
+      this.size,
+      this.svgWidget});
   final String svg;
   final String title;
   final Color? color;
   final Widget? widget;
   final int? maxLines;
   final double? size;
+  final Widget? svgWidget;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SvgPicture.asset(svg,
-            colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn)),
+        if (svgWidget != null) svgWidget!,
+        if (svgWidget == null)
+          SvgPicture.asset(svg,
+              colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn)),
         const SizedBox(
           width: 8,
         ),

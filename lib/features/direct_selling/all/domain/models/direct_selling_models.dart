@@ -42,6 +42,8 @@ class DirectSellingDataModel {
   String? type;
   String? mainQuantity;
   String? subQuantity;
+  String? cashbackPercentage;
+
   DirectSellingDataModel(
       this.city,
       this.description,
@@ -73,7 +75,8 @@ class DirectSellingDataModel {
       this.biddingDuration,
       this.type,
       this.mainQuantity,
-      this.subQuantity);
+      this.subQuantity,
+      this.cashbackPercentage);
 }
 
 class TypeModel {

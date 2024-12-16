@@ -16,8 +16,7 @@ class DirectSellingListResponse {
   @JsonKey(name: "pagination")
   PaginationResponse? pagination;
 
-  DirectSellingListResponse(
-      {this.status, this.message, this.data, this.pagination});
+  DirectSellingListResponse({this.status, this.message, this.data, this.pagination});
 
   // from json
   factory DirectSellingListResponse.fromJson(Map<String, dynamic> json) =>
@@ -90,7 +89,8 @@ class DirectSellingDataResponse {
   String? mainQuantity;
   @JsonKey(name: "sub_quantity")
   String? subQuantity;
-
+  @JsonKey(name: "cashback_percentage")
+  String? cashbackPercentage;
   DirectSellingDataResponse(
       {this.city,
       this.description,
@@ -122,7 +122,8 @@ class DirectSellingDataResponse {
       this.biddingDuration,
       this.type,
       this.mainQuantity,
-      this.subQuantity});
+      this.subQuantity,
+      this.cashbackPercentage});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -141,8 +142,7 @@ class LocationResponse {
   LocationResponse({this.id, this.name});
 
   // from json
-  factory LocationResponse.fromJson(Map<String, dynamic> json) =>
-      _$LocationResponseFromJson(json);
+  factory LocationResponse.fromJson(Map<String, dynamic> json) => _$LocationResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$LocationResponseToJson(this);
 }
@@ -159,8 +159,7 @@ class TypeResponse {
   TypeResponse({this.image, this.name, this.id});
 
   // from json
-  factory TypeResponse.fromJson(Map<String, dynamic> json) =>
-      _$TypeResponseFromJson(json);
+  factory TypeResponse.fromJson(Map<String, dynamic> json) => _$TypeResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$TypeResponseToJson(this);
 }
@@ -183,8 +182,7 @@ class LastBidResponse {
   });
 
   // from json
-  factory LastBidResponse.fromJson(Map<String, dynamic> json) =>
-      _$LastBidResponseFromJson(json);
+  factory LastBidResponse.fromJson(Map<String, dynamic> json) => _$LastBidResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$LastBidResponseToJson(this);
 }
