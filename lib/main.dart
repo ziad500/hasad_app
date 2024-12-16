@@ -21,9 +21,7 @@ void main() async {
   print(await FirebaseMessagingService.getToken());
   print(Constants.token); */
 
-  runApp(LanguageManager.easyLocalizationInit(
-    child: MyApp()
-  ));
+  runApp(LanguageManager.easyLocalizationInit(child: MyApp()));
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

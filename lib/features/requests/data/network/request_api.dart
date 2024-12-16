@@ -28,7 +28,8 @@ abstract class RequestAppServiceClient {
       @Part(name: 'bidding_date') String? biddingDate,
       @Part(name: 'bidding_duration') String? biddingDuration,
       @Part(name: 'type') String? type,
-      @Part(name: 'main_quantity') String? mainQuantity);
+      @Part(name: 'main_quantity') String? mainQuantity,
+      @Part(name: 'cashback_percentage') String? cashbackPercentage);
 
   @POST("advertisement/edit")
   Future<dynamic> editRequest(
@@ -53,5 +54,6 @@ abstract class RequestAppServiceClient {
       @Part(name: 'bidding_duration') String? biddingDuration,
       @Part(name: 'deleted_images[]') List<String> deletedImages,
       @Part(name: 'type') String? type,
-      @Part(name: 'main_quantity') String? mainQuantity);
+      @Part(name: 'main_quantity') String? mainQuantity,
+      @Part(name: 'cashback_percentage') String? cashbackPercentage);
 }

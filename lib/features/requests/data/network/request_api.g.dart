@@ -42,6 +42,7 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
     String? biddingDuration,
     String? type,
     String? mainQuantity,
+    String? cashbackPercentage,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -142,6 +143,12 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
         mainQuantity,
       ));
     }
+    if (cashbackPercentage != null) {
+      _data.fields.add(MapEntry(
+        'cashback_percentage',
+        cashbackPercentage,
+      ));
+    }
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'POST',
       headers: _headers,
@@ -186,6 +193,7 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
     List<String> deletedImages,
     String? type,
     String? mainQuantity,
+    String? cashbackPercentage,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -295,6 +303,12 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
       _data.fields.add(MapEntry(
         'main_quantity',
         mainQuantity,
+      ));
+    }
+    if (cashbackPercentage != null) {
+      _data.fields.add(MapEntry(
+        'cashback_percentage',
+        cashbackPercentage,
       ));
     }
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(

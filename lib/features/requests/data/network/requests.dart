@@ -22,6 +22,8 @@ class AddRequestRequest {
   String? biddingDuration;
   String? type;
   String? mainQuantity;
+  String? cashbackPercentage;
+
   AddRequestRequest(
       {required this.advertisementTypeId,
       required this.departmentId,
@@ -42,7 +44,8 @@ class AddRequestRequest {
       this.biddingdate,
       this.biddingDuration,
       this.type,
-      this.mainQuantity});
+      this.mainQuantity,
+      this.cashbackPercentage});
 }
 
 class EditRequestRequest {
@@ -68,6 +71,8 @@ class EditRequestRequest {
   List<String> deletedImages;
   String? type;
   String? mainQuantity;
+  String? cashbackPercentage;
+
   EditRequestRequest(
       {required this.advertisementId,
       required this.advertisementTypeId,
@@ -90,5 +95,6 @@ class EditRequestRequest {
       this.biddingDuration,
       required this.deletedImages,
       this.type,
-      this.mainQuantity});
+      this.mainQuantity,
+      this.cashbackPercentage});
 }
