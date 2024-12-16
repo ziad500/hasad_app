@@ -254,6 +254,9 @@ class AddRequestCubit extends Cubit<AddRequestState> {
       quantityController.text = directSellingDataModel.mainQuantity == null
           ? ""
           : directSellingDataModel.mainQuantity.toString();
+      cashBackControllerController.text = directSellingDataModel.cashbackPercentage == null
+          ? ""
+          : directSellingDataModel.cashbackPercentage.toString();
     } else {
       editId = null;
     }
