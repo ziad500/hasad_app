@@ -27,11 +27,10 @@ class UserProfileScreen extends StatelessWidget {
       child: BlocBuilder<UsersSearchCubit, UsersSearchState>(
         builder: (context, state) {
           UsersSearchCubit cubit = UsersSearchCubit.get(context);
-          UserProfileModel? model =
-              (cubit.usersModel?.data == null || cubit.usersModel!.data!.isEmpty)
-                  ? null
-                  : cubit.usersModel?.data?[0];
-          print(".....${"${Constants.imagesUrl}uploads${model?.image ?? ""}"}");
+          UserProfileModel? model = (cubit.usersModel?.data == null ||
+                  cubit.usersModel!.data!.isEmpty)
+              ? null
+              : cubit.usersModel?.data?[0];
           return DefaultTabController(
             length: 2,
             child: DefaultScaffold(
@@ -40,7 +39,8 @@ class UserProfileScreen extends StatelessWidget {
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          UserImageWidget(imageUrl: model?.image, radius: 40.sp),
+                          UserImageWidget(
+                              imageUrl: model?.image, radius: 40.sp),
                           const SizedBox(height: 10),
 
                           TitleWidget(title: isEmpty(model?.name)),
@@ -51,7 +51,8 @@ class UserProfileScreen extends StatelessWidget {
                                       ? "0${model.phone.toString()}"
                                       : model.phone.toString()
                                   : ""),
-                          if (model?.email != null) SubTitleWidget(subTitle: isEmpty(model?.email)),
+                          if (model?.email != null)
+                            SubTitleWidget(subTitle: isEmpty(model?.email)),
                           SizedBox(height: 20.h),
                           //////////////////
                           const SharedTabBar(),
@@ -59,18 +60,21 @@ class UserProfileScreen extends StatelessWidget {
                           Expanded(
                               child: TabBarView(children: [
                             BlocProvider(
-                              create: (context) =>
-                                  sl<MyBiddingListCubit>()..getBiddingList(userId: userId),
+                              create: (context) => sl<MyBiddingListCubit>()
+                                ..getBiddingList(userId: userId),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: MyBiddingListView(userId: userId),
                               ),
                             ),
                             BlocProvider(
-                              create: (context) => sl<MyDirectSellingListCubit>()
-                                ..getDirectSellingList(userId: userId),
+                              create: (context) =>
+                                  sl<MyDirectSellingListCubit>()
+                                    ..getDirectSellingList(userId: userId),
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 child: MyDirectSellingListView(userId: userId),
                               ),
                             )
