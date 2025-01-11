@@ -26,25 +26,22 @@ class BiddingInvoiceScreen extends StatelessWidget {
         builder: (context, state) {
           InvoiceCubit cubit = InvoiceCubit.get(context);
           BiddingInvoiceModel? model = cubit.biddingInvoiceModel;
-          if (state is GetBiddingLoadingState) {
-            return const LoadingWidget();
-          }
-          if (model == null) {
-            return const EmptyList();
-          }
+
           return DefaultScaffold(
               appbarTitle: LocaleKeys.orderDetails.tr(),
-              body: state is GetDirectSellingLoadingState
+              body: (state is GetBiddingLoadingState)
                   ? const LoadingWidget()
-                  : (state is GetDirectSellingErrorState)
-                      ? Center(child: Text(state.error))
-                      : Column(
-                          children: [
-                            _LogoAndData(invoiceModel: model),
-                            _Description(invoiceModel: model),
-                            _Summary(invoiceModel: model)
-                          ],
-                        ));
+                  : model == null
+                      ? const EmptyList()
+                      : (state is GetBiddingErrorState)
+                          ? Center(child: Text(state.error))
+                          : Column(
+                              children: [
+                                _LogoAndData(invoiceModel: model),
+                                _Description(invoiceModel: model),
+                                _Summary(invoiceModel: model)
+                              ],
+                            ));
         },
       ),
     );
