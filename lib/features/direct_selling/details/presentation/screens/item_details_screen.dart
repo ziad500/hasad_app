@@ -2,17 +2,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/common/default/default_divider.dart';
+import 'package:hasad_app/common/default/default_list_tile.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/loading_frame.dart';
 import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
 import 'package:hasad_app/common/done_request_screen.dart';
+import 'package:hasad_app/common/shared_bottom_sheet.dart';
 import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/di.dart';
 import 'package:hasad_app/core/func/payment_faild_dialog.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/base/body.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/description_item.dart';
+import 'package:hasad_app/features/direct_selling/details/presentation/components/edit_cashback.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/image_slider.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/item_cash_back.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/location_widget.dart';
@@ -31,7 +34,7 @@ class ItemDetailsScreen extends StatelessWidget {
   const ItemDetailsScreen({super.key, required this.id});
   final String id;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context3) {
     return BlocProvider(
         create: (context) => sl<DirectSellingDetailsCubit>()..getDirectSellingDetails(id),
         child: LoadingFrame(
@@ -69,13 +72,54 @@ class ItemDetailsScreen extends StatelessWidget {
                       ? const SizedBox()
                       : InkWell(
                           onTap: () {
-                            final result = Navigator.pushNamed(context, Routes.addRequestScreen,
-                                arguments: cubit.directSellingDataModel);
-                            result.then((value) {
-                              if (value == true) {
-                                cubit.getDirectSellingDetails(id);
-                              }
-                            });
+                            defaultshowModalBottomSheet(
+                              withHeader: false,
+                              context: context,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  DefaultListTile(
+                                    title: LocaleKeys.ad.tr(),
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    dense: true,
+                                    textStyle: const TextStyle(color: Colors.black),
+                                    leading: const Icon(
+                                      Icons.edit_document,
+                                      color: Colors.black,
+                                    ),
+                                    onTap: () {
+                                      final result = Navigator.pushNamed(
+                                          context, Routes.addRequestScreen,
+                                          arguments: cubit.directSellingDataModel);
+                                      result.then((value) {
+                                        if (value == true) {
+                                          cubit.getDirectSellingDetails(id);
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  const SizedBox(height: 10),
+                                  DefaultListTile(
+                                    title: LocaleKeys.cashBack.tr(),
+                                    dense: true,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    textStyle: const TextStyle(color: Colors.black),
+                                    leading: const Icon(
+                                      Icons.attach_money_outlined,
+                                      color: Colors.black,
+                                    ),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      cubit.cashBackController.text = cubit
+                                          .directSellingDataModel!.cashbackPercentage
+                                          .toString();
+                                      showCashBackBottomSheet(context3, cubit: cubit);
+                                    },
+                                  )
+                                ],
+                              ),
+                            );
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -128,7 +172,8 @@ class ItemDetailsScreen extends StatelessWidget {
               buildWhen: (a, b) =>
                   b is GetDirectSellingDetailsSuccessState ||
                   b is GetDirectSellingDetailsErrorState ||
-                  b is GetDirectSellingDetailsLoadingState,
+                  b is GetDirectSellingDetailsLoadingState ||
+                  b is EditCashBackSuccessState,
               builder: (context, state) {
                 DirectSellingDetailsCubit cubit = DirectSellingDetailsCubit.get(context);
                 if (state is GetDirectSellingDetailsLoadingState) {

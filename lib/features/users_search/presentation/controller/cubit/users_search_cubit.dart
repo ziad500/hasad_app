@@ -24,10 +24,10 @@ class UsersSearchCubit extends Cubit<UsersSearchState> {
         }));
   }
 
-  scanQrCode() {
-    QrCodeService.scanQR().then((e) {
+  scanQrCode(context) {
+    QrCodeService.scanQR(context).then((e) {
       if (e != "-1") {
-        emit(GetQrCodeSuccessState(e));
+        emit(GetQrCodeSuccessState(e ?? ""));
       }
     });
   }

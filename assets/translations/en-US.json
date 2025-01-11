@@ -198,8 +198,9 @@
   "cancel":"Cancel",
   "deleteAccount":"Delete Account",
   "email":"Email",
-  "cashBack":"CashBack"
-
+  "cashBack":"CashBack",
+  "ad":"Full Ad",
+"cashbackError":"The cashback amount must be less than 90"
 
 
 

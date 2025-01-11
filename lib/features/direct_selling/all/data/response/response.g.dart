@@ -6,19 +6,23 @@ part of 'response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DirectSellingListResponse _$DirectSellingListResponseFromJson(Map<String, dynamic> json) =>
+DirectSellingListResponse _$DirectSellingListResponseFromJson(
+        Map<String, dynamic> json) =>
     DirectSellingListResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => DirectSellingDataResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              DirectSellingDataResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       pagination: json['pagination'] == null
           ? null
-          : PaginationResponse.fromJson(json['pagination'] as Map<String, dynamic>),
+          : PaginationResponse.fromJson(
+              json['pagination'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$DirectSellingListResponseToJson(DirectSellingListResponse instance) =>
+Map<String, dynamic> _$DirectSellingListResponseToJson(
+        DirectSellingListResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
@@ -26,7 +30,8 @@ Map<String, dynamic> _$DirectSellingListResponseToJson(DirectSellingListResponse
       'pagination': instance.pagination,
     };
 
-DirectSellingDataResponse _$DirectSellingDataResponseFromJson(Map<String, dynamic> json) =>
+DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
+        Map<String, dynamic> json) =>
     DirectSellingDataResponse(
       city: json['city'] == null
           ? null
@@ -46,21 +51,26 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(Map<String, dynami
       title: json['title'] as String?,
       advertisementType: json['advertisement_type'] == null
           ? null
-          : LocationResponse.fromJson(json['advertisement_type'] as Map<String, dynamic>),
+          : LocationResponse.fromJson(
+              json['advertisement_type'] as Map<String, dynamic>),
       agricultureType: json['agriculture_type'] == null
           ? null
-          : TypeResponse.fromJson(json['agriculture_type'] as Map<String, dynamic>),
+          : TypeResponse.fromJson(
+              json['agriculture_type'] as Map<String, dynamic>),
       createdAt: json['created_at'] as String?,
       department: json['department'] == null
           ? null
-          : LocationResponse.fromJson(json['department'] as Map<String, dynamic>),
+          : LocationResponse.fromJson(
+              json['department'] as Map<String, dynamic>),
       departmentType: json['department_type'] == null
           ? null
-          : LocationResponse.fromJson(json['department_type'] as Map<String, dynamic>),
+          : LocationResponse.fromJson(
+              json['department_type'] as Map<String, dynamic>),
       harvestDate: json['harvest_date'] as String?,
       packagingType: json['packaging_type'] == null
           ? null
-          : TypeResponse.fromJson(json['packaging_type'] as Map<String, dynamic>),
+          : TypeResponse.fromJson(
+              json['packaging_type'] as Map<String, dynamic>),
       owner: json['owner'] == null
           ? null
           : ProfileDataResponse.fromJson(json['owner'] as Map<String, dynamic>),
@@ -86,7 +96,8 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(Map<String, dynami
       cashbackPercentage: json['cashback_percentage'] as String?,
     );
 
-Map<String, dynamic> _$DirectSellingDataResponseToJson(DirectSellingDataResponse instance) =>
+Map<String, dynamic> _$DirectSellingDataResponseToJson(
+        DirectSellingDataResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
@@ -119,15 +130,17 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(DirectSellingDataResponse
       'type': instance.type,
       'main_quantity': instance.mainQuantity,
       'sub_quantity': instance.subQuantity,
-      'cashback_percentage': instance.cashbackPercentage
+      'cashback_percentage': instance.cashbackPercentage,
     };
 
-LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) => LocationResponse(
+LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
+    LocationResponse(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 
-Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$LocationResponseToJson(LocationResponse instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'id': instance.id,
     };
@@ -138,20 +151,23 @@ TypeResponse _$TypeResponseFromJson(Map<String, dynamic> json) => TypeResponse(
       id: (json['id'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$TypeResponseToJson(TypeResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$TypeResponseToJson(TypeResponse instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'image': instance.image,
       'id': instance.id,
     };
 
-LastBidResponse _$LastBidResponseFromJson(Map<String, dynamic> json) => LastBidResponse(
+LastBidResponse _$LastBidResponseFromJson(Map<String, dynamic> json) =>
+    LastBidResponse(
       value: json['value'] as num?,
       name: json['name'] as String?,
       image: json['image'] as String?,
       createdAt: json['created_at'] as String?,
     );
 
-Map<String, dynamic> _$LastBidResponseToJson(LastBidResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$LastBidResponseToJson(LastBidResponse instance) =>
+    <String, dynamic>{
       'value': instance.value,
       'name': instance.name,
       'image': instance.image,

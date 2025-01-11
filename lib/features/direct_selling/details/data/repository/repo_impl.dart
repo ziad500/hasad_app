@@ -31,4 +31,14 @@ class DirectSellingDetailsRepositoryImpl implements DirectSellingDetailsReposito
       return response.toDomain();
     });
   }
+
+  @override
+  Future<Either<Failure, SuccessModel>> editCashBack(
+      String? advertisementId, String? cashbackPercentage) {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response = await _directSellingDetailsRemoteDataSource.editCashBack(
+          advertisementId, cashbackPercentage);
+      return response.toDomain();
+    });
+  }
 }

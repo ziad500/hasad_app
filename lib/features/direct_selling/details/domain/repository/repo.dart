@@ -9,4 +9,7 @@ abstract class DirectSellingDetailsRepository {
       String advertisementId);
 
   Future<Either<Failure, SuccessModel>> buyDirectSelling(String advertisementId, int? quantity);
+
+  Future<Either<Failure, SuccessModel>> editCashBack(
+      String? advertisementId, String? cashbackPercentage);
 }

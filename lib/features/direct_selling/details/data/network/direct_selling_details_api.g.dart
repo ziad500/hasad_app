@@ -95,6 +95,49 @@ class _DirectSellingDetailsAppServiceClient
     return value;
   }
 
+  @override
+  Future<SuccessResponse> editCashBack(
+    String? advertisementId,
+    String? cashbackPercentage,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (advertisementId != null) {
+      _data.fields.add(MapEntry(
+        'advertisement_id',
+        advertisementId,
+      ));
+    }
+    if (cashbackPercentage != null) {
+      _data.fields.add(MapEntry(
+        'cashback_percentage',
+        cashbackPercentage,
+      ));
+    }
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'advertisement/edit-cashback',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

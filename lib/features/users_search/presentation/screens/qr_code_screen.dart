@@ -138,7 +138,7 @@ class _MyQrCodeState extends State<MyQrCode> {
                       ),
                       IconButton(
                         onPressed: () async {
-                          UsersSearchCubit.get(context).scanQrCode();
+                          UsersSearchCubit.get(context).scanQrCode(context);
                         },
                         icon: const Icon(
                           Icons.qr_code_scanner_sharp,

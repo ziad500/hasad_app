@@ -20,4 +20,8 @@ abstract class DirectSellingDetailsAppServiceClient {
   Future<SuccessResponse> buyDirectSellingDetails(
       @Part(name: 'advertisement_id') String? advertisementId,
       @Part(name: 'quantity') int? quantity);
+
+  @POST("advertisement/edit-cashback")
+  Future<SuccessResponse> editCashBack(@Part(name: 'advertisement_id') String? advertisementId,
+      @Part(name: 'cashback_percentage') String? cashbackPercentage);
 }

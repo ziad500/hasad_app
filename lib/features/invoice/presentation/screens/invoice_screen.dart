@@ -26,25 +26,22 @@ class DirectSellingInvoiceScreen extends StatelessWidget {
         builder: (context, state) {
           InvoiceCubit cubit = InvoiceCubit.get(context);
           DirectSelligInvoiceModel? model = cubit.invoiceModel;
-          if (state is GetDirectSellingLoadingState) {
-            return const LoadingWidget();
-          }
-          if (model == null) {
-            return const EmptyList();
-          }
+
           return DefaultScaffold(
               appbarTitle: LocaleKeys.orderDetails.tr(),
               body: state is GetDirectSellingLoadingState
                   ? const LoadingWidget()
                   : (state is GetDirectSellingErrorState)
                       ? Center(child: Text(state.error))
-                      : Column(
-                          children: [
-                            _LogoAndData(invoiceModel: model),
-                            _Description(invoiceModel: model),
-                            _Summary(invoiceModel: model)
-                          ],
-                        ));
+                      : model == null
+                          ? const EmptyList()
+                          : Column(
+                              children: [
+                                _LogoAndData(invoiceModel: model),
+                                _Description(invoiceModel: model),
+                                _Summary(invoiceModel: model)
+                              ],
+                            ));
         },
       ),
     );

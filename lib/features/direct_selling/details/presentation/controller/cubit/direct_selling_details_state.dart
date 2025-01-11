@@ -28,3 +28,15 @@ final class BuyDirectSellingErrorState extends DirectSellingDetailsState {
   final String error;
   const BuyDirectSellingErrorState(this.error);
 }
+
+final class EditCashBackLoadingState extends DirectSellingDetailsState {}
+
+final class EditCashBackSuccessState extends DirectSellingDetailsState {
+  String cashBack;
+  EditCashBackSuccessState(this.cashBack);
+}
+
+final class EditCashBackErrorState extends DirectSellingDetailsState {
+  final String error;
+  const EditCashBackErrorState(this.error);
+}

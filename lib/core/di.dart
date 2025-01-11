@@ -49,6 +49,7 @@ import 'package:hasad_app/features/direct_selling/details/data/network/direct_se
 import 'package:hasad_app/features/direct_selling/details/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/repository/repo.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/use_cases/buy_direct_selling_usecase.dart';
+import 'package:hasad_app/features/direct_selling/details/domain/use_cases/edit_cashback_usecase.dart';
 import 'package:hasad_app/features/direct_selling/details/domain/use_cases/get_direct_selling_details_usecase.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
 import 'package:hasad_app/features/favorites/data/data_source/remote_data_source.dart';
@@ -421,7 +422,7 @@ iniDirectSellingDetails() async {
   //cubit
   if (!GetIt.I.isRegistered<DirectSellingDetailsCubit>()) {
     sl.registerFactory<DirectSellingDetailsCubit>(
-        () => DirectSellingDetailsCubit(sl.call(), sl.call()));
+        () => DirectSellingDetailsCubit(sl.call(), sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -451,6 +452,9 @@ iniDirectSellingDetails() async {
   }
   if (!GetIt.I.isRegistered<BuyDirectSellingUseCase>()) {
     sl.registerLazySingleton<BuyDirectSellingUseCase>(() => BuyDirectSellingUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<EditCashBackUseCase>()) {
+    sl.registerLazySingleton<EditCashBackUseCase>(() => EditCashBackUseCase(sl.call()));
   }
 }
 

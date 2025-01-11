@@ -31,10 +31,10 @@ class BiddingInvoiceScreen extends StatelessWidget {
               appbarTitle: LocaleKeys.orderDetails.tr(),
               body: (state is GetBiddingLoadingState)
                   ? const LoadingWidget()
-                  : model == null
-                      ? const EmptyList()
-                      : (state is GetBiddingErrorState)
-                          ? Center(child: Text(state.error))
+                  : (state is GetBiddingErrorState)
+                      ? Center(child: Text(state.error))
+                      : model == null
+                          ? const EmptyList()
                           : Column(
                               children: [
                                 _LogoAndData(invoiceModel: model),

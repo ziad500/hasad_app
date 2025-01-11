@@ -12,7 +12,9 @@ final class GetDirectSellingSuccessState extends InvoiceState {}
 
 final class GetDirectSellingErrorState extends InvoiceState {
   final String error;
-  GetDirectSellingErrorState(this.error);
+  GetDirectSellingErrorState(this.error) {
+    print("...$error");
+  }
 }
 
 final class GetBiddingLoadingState extends InvoiceState {}
