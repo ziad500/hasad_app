@@ -29,7 +29,8 @@ abstract class RequestAppServiceClient {
       @Part(name: 'bidding_duration') String? biddingDuration,
       @Part(name: 'type') String? type,
       @Part(name: 'main_quantity') String? mainQuantity,
-      @Part(name: 'cashback_percentage') String? cashbackPercentage);
+      @Part(name: 'cashback_percentage') String? cashbackPercentage,
+      @Part(name: 'available_payment_on_delivery') String? availablePaymentOnDelivery);
 
   @POST("advertisement/edit")
   Future<dynamic> editRequest(

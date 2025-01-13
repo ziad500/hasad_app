@@ -23,7 +23,7 @@ class AddRequestRequest {
   String? type;
   String? mainQuantity;
   String? cashbackPercentage;
-
+  String? availablePaymentOnDelivery;
   AddRequestRequest(
       {required this.advertisementTypeId,
       required this.departmentId,
@@ -45,7 +45,8 @@ class AddRequestRequest {
       this.biddingDuration,
       this.type,
       this.mainQuantity,
-      this.cashbackPercentage});
+      this.cashbackPercentage,
+      required this.availablePaymentOnDelivery});
 }
 
 class EditRequestRequest {

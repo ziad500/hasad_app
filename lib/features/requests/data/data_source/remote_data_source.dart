@@ -35,7 +35,8 @@ class RequestsRemoteDataSourceImpl implements RequestsRemoteDataSource {
           addRequestRequest.biddingDuration,
           addRequestRequest.type,
           addRequestRequest.mainQuantity,
-          addRequestRequest.cashbackPercentage);
+          addRequestRequest.cashbackPercentage,
+          addRequestRequest.availablePaymentOnDelivery);
 
   @override
   Future editRequest(EditRequestRequest editRequestRequest) =>

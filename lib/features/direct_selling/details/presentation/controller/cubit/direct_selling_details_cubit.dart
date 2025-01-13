@@ -48,7 +48,8 @@ class DirectSellingDetailsCubit extends Cubit<DirectSellingDetailsState> {
   Future<void> buyDirectSelling() async {
     emit(BuyDirectSellingLoadingState());
     await _buyDirectSellingUseCase
-        .execude(directSellingDataModel!.id.toString(), int.parse(quantityController.text))
+        .execude(directSellingDataModel!.id.toString(), int.parse(quantityController.text),
+            selectedPaymentMethod)
         .then((value) => value.fold((l) => emit(BuyDirectSellingErrorState(l.message)), (r) {
               emit(BuyDirectSellingSuccessState(r));
             }));
@@ -64,5 +65,11 @@ class DirectSellingDetailsCubit extends Cubit<DirectSellingDetailsState> {
               directSellingDataModel?.cashbackPercentage = cashBackController.text;
               emit(EditCashBackSuccessState(cashBackController.text));
             }));
+  }
+
+  int? selectedPaymentMethod = 0;
+  void selectedPaymentMethodFunc(int value) {
+    selectedPaymentMethod = value;
+    emit(SelectPaymentMethodState());
   }
 }

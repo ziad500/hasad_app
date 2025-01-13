@@ -15,6 +15,8 @@ abstract class LocaleKeys {
   static const cache_error = 'cache_error';
   static const no_internet_error = 'no_internet_error';
   static const cashbackError = 'cashbackError';
+  static const paymentOnDelivery = 'paymentOnDelivery';
+  static const choosePaymentMethod = 'choosePaymentMethod';
 
   static const ad = 'ad';
   static const search = 'search';

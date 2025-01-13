@@ -125,6 +125,13 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   }
 
   //////////// 8 //////////////
+  int? selectedPaymentMethod = 0;
+  void selectedPaymentMethodFunc(int value) {
+    selectedPaymentMethod = value;
+    emit(SelectPaymentMethodState());
+  }
+
+  //////////// 8 //////////////
   List<XFile> images = [];
   String? videoPath;
   //////////// 9 //////////////
@@ -153,33 +160,33 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   }
 
   AddRequestRequest _passAddRequestRequest() => AddRequestRequest(
-        advertisementTypeId: selectedType.toString(),
-        departmentId: selectedDepartment.toString(),
-        departmentTypeId: selectedTypeOfProduct.toString(),
-        priceInclusionIds: selectedPriceIncluding,
-        agricultureTypeId: selectedagriculture.toString(),
-        packagingTypeId: selectedPackaging.toString(),
-        harvestDate: convertDateFormat(selectedHarvestDate.toString()),
-        images: images.map((e) => File(e.path)).toList(),
-        video: File(videoPath!),
-        title: titleController.text,
-        description: descriptionController.text,
-        regionId: cityController.text,
-        cityId: provinceController.text,
-        districtId: districtController.text,
-        price: defaultPriceController.text,
-        biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
-        biddingdate: selectedbiddingDate,
-        startingPrice: startPriceController.text == "" ? null : startPriceController.text,
-        type: selectedType == 1 ? selectedQuantityType.toString() : "2",
-        mainQuantity: selectedType == 1
-            ? selectedQuantityType == 1
-                ? quantityController.text
-                : "1"
-            : "1",
-        cashbackPercentage:
-            cashBackControllerController.text == "" ? null : cashBackControllerController.text,
-      );
+      advertisementTypeId: selectedType.toString(),
+      departmentId: selectedDepartment.toString(),
+      departmentTypeId: selectedTypeOfProduct.toString(),
+      priceInclusionIds: selectedPriceIncluding,
+      agricultureTypeId: selectedagriculture.toString(),
+      packagingTypeId: selectedPackaging.toString(),
+      harvestDate: convertDateFormat(selectedHarvestDate.toString()),
+      images: images.map((e) => File(e.path)).toList(),
+      video: File(videoPath!),
+      title: titleController.text,
+      description: descriptionController.text,
+      regionId: cityController.text,
+      cityId: provinceController.text,
+      districtId: districtController.text,
+      price: defaultPriceController.text,
+      biddingDuration: biddingLongController.text == "" ? null : biddingLongController.text,
+      biddingdate: selectedbiddingDate,
+      startingPrice: startPriceController.text == "" ? null : startPriceController.text,
+      type: selectedType == 1 ? selectedQuantityType.toString() : "2",
+      mainQuantity: selectedType == 1
+          ? selectedQuantityType == 1
+              ? quantityController.text
+              : "1"
+          : "1",
+      cashbackPercentage:
+          cashBackControllerController.text == "" ? null : cashBackControllerController.text,
+      availablePaymentOnDelivery: selectedPaymentMethod.toString());
 
   ////////////////////////////// edit request //////////////////////////
   Future editRequest(String id) async {

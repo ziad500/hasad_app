@@ -71,6 +71,7 @@ Future showQuantityBottomSheet(context2, {DirectSellingDetailsCubit? cubit}) =>
                               if (cubit.formKey.currentState!.validate()) {
                                 Navigator.pop(context);
                                 showTaxBottomSheet(context2,
+                                    directSellingcubit: cubit,
                                     price: cubit.directSellingDataModel!.price! *
                                         int.parse(cubit.quantityController.text),
                                     tax: (cubit.directSellingDataModel!.price! -

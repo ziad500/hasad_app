@@ -11,7 +11,8 @@ class BuyDirectSellingUseCase {
     this._repository,
   );
 
-  Future<Either<Failure, SuccessModel>> execude(String advertisementId, int? quantity) async {
-    return await _repository.buyDirectSelling(advertisementId, quantity);
+  Future<Either<Failure, SuccessModel>> execude(
+      String advertisementId, int? quantity, int? paymentOnDelivery) async {
+    return await _repository.buyDirectSelling(advertisementId, quantity, paymentOnDelivery);
   }
 }

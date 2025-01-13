@@ -22,28 +22,28 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
 
   @override
   Future<dynamic> addRequest(
-    String advertisementTypeId,
-    String departmentId,
-    String departmentTypeId,
-    List<String> priceInclusionIds,
-    String agricultureTypeId,
-    String packagingTypeId,
-    String harvestDate,
-    List<File> images,
-    File video,
-    String title,
-    String description,
-    String regionId,
-    String cityId,
-    String districtId,
-    String price,
-    String? startingPrice,
-    String? biddingDate,
-    String? biddingDuration,
-    String? type,
-    String? mainQuantity,
-    String? cashbackPercentage,
-  ) async {
+      String advertisementTypeId,
+      String departmentId,
+      String departmentTypeId,
+      List<String> priceInclusionIds,
+      String agricultureTypeId,
+      String packagingTypeId,
+      String harvestDate,
+      List<File> images,
+      File video,
+      String title,
+      String description,
+      String regionId,
+      String cityId,
+      String districtId,
+      String price,
+      String? startingPrice,
+      String? biddingDate,
+      String? biddingDuration,
+      String? type,
+      String? mainQuantity,
+      String? cashbackPercentage,
+      String? availablePaymentOnDelivery) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -76,6 +76,13 @@ class _RequestAppServiceClient implements RequestAppServiceClient {
       'harvest_date',
       harvestDate,
     ));
+    if (availablePaymentOnDelivery != null) {
+      _data.fields.add(MapEntry(
+        'available_payment_on_delivery',
+        availablePaymentOnDelivery,
+      ));
+    }
+
     _data.files.addAll(images.map((i) => MapEntry(
         'images[]',
         MultipartFile.fromFileSync(

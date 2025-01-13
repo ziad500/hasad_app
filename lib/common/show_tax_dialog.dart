@@ -4,11 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/shared_bottom_sheet.dart';
+import 'package:hasad_app/features/direct_selling/details/presentation/components/show_choose_payment_mehod_bottomsheet.dart';
+import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
 import 'package:hasad_app/features/invoice/presentation/components/calc_item.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 
 Future showTaxBottomSheet(context,
-        {required num? price, required num? tax, required Function buttonFunction, String? note}) =>
+        {required num? price,
+        required num? tax,
+        required Function buttonFunction,
+        String? note,
+        DirectSellingDetailsCubit? directSellingcubit}) =>
     defaultshowModalBottomSheet(
       context: context,
       child: Center(
@@ -43,7 +49,14 @@ Future showTaxBottomSheet(context,
                 buttonName: LocaleKeys.buyNow.tr(),
                 buttonFunction: () {
                   Navigator.pop(context);
-                  buttonFunction();
+                  if (directSellingcubit != null) {
+                    showPaymentMethodBottomSheet(context, directSellingcubit: directSellingcubit,
+                        buttonFunction: () {
+                      buttonFunction();
+                    });
+                  } else {
+                    buttonFunction();
+                  }
                 })
           ],
         ),

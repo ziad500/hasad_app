@@ -40,3 +40,5 @@ final class EditCashBackErrorState extends DirectSellingDetailsState {
   final String error;
   const EditCashBackErrorState(this.error);
 }
+
+final class SelectPaymentMethodState extends DirectSellingDetailsState {}

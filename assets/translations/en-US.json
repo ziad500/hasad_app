@@ -200,7 +200,9 @@
   "email":"Email",
   "cashBack":"CashBack",
   "ad":"Full Ad",
-"cashbackError":"The cashback amount must be less than 90"
+"cashbackError":"The cashback amount must be less than 90",
+"paymentOnDelivery":"Payment On Delivery",
+"choosePaymentMethod":"Choose Payment Method"
 
 
 

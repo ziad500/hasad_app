@@ -237,6 +237,7 @@ initAddRequest() async {
   if (!GetIt.I.isRegistered<AddRequestCubit>()) {
     sl.registerFactory<AddRequestCubit>(() => AddRequestCubit(sl.call(), sl.call()));
   }
+
   //app service client instance
   if (!GetIt.I.isRegistered<RequestAppServiceClient>()) {
     Dio dio = await sl<DioFactory>().getDio();
