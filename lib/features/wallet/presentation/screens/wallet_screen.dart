@@ -7,6 +7,7 @@ import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/main_layout.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/core/di.dart';
+import 'package:hasad_app/features/wallet/presentation/components/cash_back_section.dart';
 import 'package:hasad_app/features/wallet/presentation/components/get_mony_section/get_money_section.dart';
 import 'package:hasad_app/features/wallet/presentation/components/recharge_section/recharge_section.dart';
 import 'package:hasad_app/features/wallet/presentation/components/wallet_widget.dart';
@@ -44,7 +45,10 @@ class WalletScreen extends StatelessWidget {
                   const WalletWidget(),
                   const RechargeSection(),
                   const SizedBox(height: 16),
-                  const GetMoneySection()
+                  const GetMoneySection(),
+                  const SizedBox(height: 16),
+                  const CashBackSection(),
+                  const SizedBox(height: 16),
                 ],
               ),
             )),

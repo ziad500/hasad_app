@@ -36,6 +36,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(GetProfileDataErrorState(l.message));
         }, (r) {
           profileDataModel = r.data;
+          print(".......${profileDataModel?.cashback?.length}");
           setController();
           emit(GetProfileDataSuccessState());
         }));

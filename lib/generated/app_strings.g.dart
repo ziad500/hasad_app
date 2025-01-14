@@ -3,6 +3,8 @@
 abstract class LocaleKeys {
   static const success = 'success';
   static const cashBack = 'cashBack';
+  static const earned = 'earned';
+
   static const bad_request_error = 'bad_request_error';
   static const forbidden_error = 'forbidden_error';
   static const unauthorized_error = 'unauthorized_error';

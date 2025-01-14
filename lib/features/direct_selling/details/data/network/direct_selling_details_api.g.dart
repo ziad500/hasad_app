@@ -8,7 +8,8 @@ part of 'direct_selling_details_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _DirectSellingDetailsAppServiceClient implements DirectSellingDetailsAppServiceClient {
+class _DirectSellingDetailsAppServiceClient
+    implements DirectSellingDetailsAppServiceClient {
   _DirectSellingDetailsAppServiceClient(
     this._dio, {
     this.baseUrl,
@@ -21,14 +22,17 @@ class _DirectSellingDetailsAppServiceClient implements DirectSellingDetailsAppSe
   String? baseUrl;
 
   @override
-  Future<DirectSellingDetailsResponse> getDirectSellingDetails(String? advertisementId) async {
+  Future<DirectSellingDetailsResponse> getDirectSellingDetails(
+      String? advertisementId) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'advertisement_id': advertisementId};
+    final queryParameters = <String, dynamic>{
+      r'advertisement_id': advertisementId
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<DirectSellingDetailsResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DirectSellingDetailsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -50,7 +54,10 @@ class _DirectSellingDetailsAppServiceClient implements DirectSellingDetailsAppSe
 
   @override
   Future<SuccessResponse> buyDirectSellingDetails(
-      String? advertisementId, int? quantity, int? paymentOnDelivery) async {
+    String? advertisementId,
+    int? quantity,
+    int? paymentOnDelivery,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -74,22 +81,23 @@ class _DirectSellingDetailsAppServiceClient implements DirectSellingDetailsAppSe
         paymentOnDelivery.toString(),
       ));
     }
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'advertisement/direct-selling/purchase',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              'advertisement/direct-selling/purchase',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }
@@ -116,22 +124,23 @@ class _DirectSellingDetailsAppServiceClient implements DirectSellingDetailsAppSe
         cashbackPercentage,
       ));
     }
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          'advertisement/edit-cashback',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              'advertisement/edit-cashback',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = SuccessResponse.fromJson(_result.data!);
     return value;
   }

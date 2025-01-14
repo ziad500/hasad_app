@@ -30,6 +30,8 @@ class DownloadFileService {
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
+import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/main.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as path;
@@ -56,7 +58,10 @@ class DownloadFileService {
 
       File file = File(filePath);
       await file.writeAsBytes(res);
-      print("PDF saved at: $filePath");
+      showSnackbar(
+          context: navigatorKey.currentContext,
+          text: "PDF saved at: $filePath",
+          state: ToastStates.SUCCESS);
     }
   }
 

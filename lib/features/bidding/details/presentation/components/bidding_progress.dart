@@ -64,7 +64,7 @@ class BiddingProgressWidget extends StatelessWidget {
                           ),
                           _UserWidget(
                             userModel: ProfileDataModel(null, directSellingDataModel?.lastBid?.name,
-                                null, null, directSellingDataModel?.lastBid?.image, null, null),
+                                null, null, directSellingDataModel?.lastBid?.image, null, null, []),
                           )
                         ]
                       ],
