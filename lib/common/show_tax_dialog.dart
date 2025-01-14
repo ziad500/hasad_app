@@ -14,6 +14,7 @@ Future showTaxBottomSheet(context,
         required num? tax,
         required Function buttonFunction,
         String? note,
+        int? cashOnDelivery,
         DirectSellingDetailsCubit? directSellingcubit}) =>
     defaultshowModalBottomSheet(
       context: context,
@@ -49,7 +50,7 @@ Future showTaxBottomSheet(context,
                 buttonName: LocaleKeys.buyNow.tr(),
                 buttonFunction: () {
                   Navigator.pop(context);
-                  if (directSellingcubit != null) {
+                  if (directSellingcubit != null && cashOnDelivery == 1) {
                     showPaymentMethodBottomSheet(context, directSellingcubit: directSellingcubit,
                         buttonFunction: () {
                       buttonFunction();

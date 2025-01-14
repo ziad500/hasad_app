@@ -91,6 +91,8 @@ class DirectSellingDataResponse {
   String? subQuantity;
   @JsonKey(name: "cashback_percentage")
   String? cashbackPercentage;
+  @JsonKey(name: "available_payment_on_delivery")
+  int? availablePaymentOnDelivery;
   DirectSellingDataResponse(
       {this.city,
       this.description,
@@ -123,7 +125,8 @@ class DirectSellingDataResponse {
       this.type,
       this.mainQuantity,
       this.subQuantity,
-      this.cashbackPercentage});
+      this.cashbackPercentage,
+      this.availablePaymentOnDelivery});
 
   // from json
   factory DirectSellingDataResponse.fromJson(Map<String, dynamic> json) =>

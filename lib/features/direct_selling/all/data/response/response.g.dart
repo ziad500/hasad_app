@@ -94,6 +94,8 @@ DirectSellingDataResponse _$DirectSellingDataResponseFromJson(
       mainQuantity: json['main_quantity'] as String?,
       subQuantity: json['sub_quantity'] as String?,
       cashbackPercentage: json['cashback_percentage'] as String?,
+      availablePaymentOnDelivery:
+          (json['available_payment_on_delivery'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DirectSellingDataResponseToJson(
@@ -131,6 +133,7 @@ Map<String, dynamic> _$DirectSellingDataResponseToJson(
       'main_quantity': instance.mainQuantity,
       'sub_quantity': instance.subQuantity,
       'cashback_percentage': instance.cashbackPercentage,
+      'available_payment_on_delivery': instance.availablePaymentOnDelivery,
     };
 
 LocationResponse _$LocationResponseFromJson(Map<String, dynamic> json) =>
