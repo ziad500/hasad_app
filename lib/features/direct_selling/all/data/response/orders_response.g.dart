@@ -41,6 +41,8 @@ DirectSellingOrderResponse _$DirectSellingOrderResponseFromJson(
       createdAt: json['created_at'] as String?,
       receivedDate: json['received_date'] as String?,
       quantity: (json['quantity'] as num?)?.toInt(),
+      isConfirmed: (json['is_confirmed'] as num?)?.toInt(),
+      isPaid: (json['is_paid'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$DirectSellingOrderResponseToJson(
@@ -54,4 +56,6 @@ Map<String, dynamic> _$DirectSellingOrderResponseToJson(
       'created_at': instance.createdAt,
       'received_date': instance.receivedDate,
       'quantity': instance.quantity,
+      'is_confirmed': instance.isConfirmed,
+      'is_paid': instance.isPaid,
     };

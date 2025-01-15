@@ -136,6 +136,90 @@ class _DirectSellingListAppServiceClient
     return value;
   }
 
+  @override
+  Future<dynamic> confirmOrder(
+    String? purchaseInvoiceId,
+    String? confirmationcode,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (purchaseInvoiceId != null) {
+      _data.fields.add(MapEntry(
+        'purchase_invoice_id',
+        purchaseInvoiceId,
+      ));
+    }
+    if (confirmationcode != null) {
+      _data.fields.add(MapEntry(
+        'confirmation_code',
+        confirmationcode,
+      ));
+    }
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'advertisement/confirm-code',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
+  @override
+  Future<dynamic> reCompletePayment(
+    String? purchaseInvoiceId,
+    String? paymentMethod,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (purchaseInvoiceId != null) {
+      _data.fields.add(MapEntry(
+        'purchase_invoice_id',
+        purchaseInvoiceId,
+      ));
+    }
+    if (paymentMethod != null) {
+      _data.fields.add(MapEntry(
+        'payment_method',
+        paymentMethod,
+      ));
+    }
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'advertisement/complete-payment',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

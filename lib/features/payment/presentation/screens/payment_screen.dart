@@ -24,7 +24,7 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   WebViewController? controller;
   bool fired = false;
-
+  bool isLoading = true;
   @override
   void initState() {
     controller = WebViewController()
@@ -33,7 +33,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            // Update loading bar.
+            if (progress >= 80) {
+              setState(() {
+                isLoading = false;
+              });
+            }
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {
@@ -81,7 +85,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
       },
       builder: (context, state) {
         return LoadingFrame(
-          loadingStates: [state is StcRechargLoadingState ? const LoadingPage() : const SizedBox()],
+          loadingStates: [
+            (state is StcRechargLoadingState || isLoading) ? const LoadingPage() : const SizedBox()
+          ],
           child: DefaultScaffold(
             back: true,
             body: WebViewWidget(controller: controller!),
@@ -91,16 +97,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  /// Extract the payment id from the given url, if it does not contain it, returns an empty string
-  ///
-  /// The payment id is expected to be in the url query parameters
-  ///
-  /// Example: https://example.com?payment_id=123456
-  ///
-  /// [url] The url to extract the payment id from
-  ///
-  /// Returns the payment id as a string, or an empty string if it does not exist
-/******  87cd17ef-0f33-4b9c-baf2-bd3477b70eb6  *******/
   String extractPaymentId(String url) {
     Uri uri = Uri.parse(url);
     String paymentId = uri.queryParameters['payment_id'] ?? '';

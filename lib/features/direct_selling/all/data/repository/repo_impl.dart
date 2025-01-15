@@ -41,4 +41,24 @@ class DirectSellingListRepositoryImpl implements DirectSellingListRepository {
       return response.toDomain();
     });
   }
+
+  @override
+  Future<Either<Failure, dynamic>> confirmOrder(
+      String? purchaseInvoiceId, String? confirmationcode) {
+    return executeAndHandleError<dynamic>(() async {
+      final response = await _directSellingListRemoteDataSource.confirmOrder(
+          purchaseInvoiceId, confirmationcode);
+      return response;
+    });
+  }
+
+  @override
+  Future<Either<Failure, dynamic>> reCompletePayment(
+      String? purchaseInvoiceId, String? paymentMethod) {
+    return executeAndHandleError<dynamic>(() async {
+      final response = await _directSellingListRemoteDataSource.reCompletePayment(
+          purchaseInvoiceId, paymentMethod);
+      return response;
+    });
+  }
 }

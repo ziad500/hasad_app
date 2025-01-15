@@ -9,6 +9,13 @@ abstract class DirectSellingListRemoteDataSource {
   Future<DirectSellingListResponse> myDirectSellingList(String? page, String? userId);
 
   Future<DirectSellingOrdersListResponse> directSellingOrdersList(String? page);
+
+  Future<dynamic> confirmOrder(String? purchaseInvoiceId, String? confirmationcode);
+
+  // 1 => wallet
+  // 2 => qrcode
+  // 3 => link
+  Future<dynamic> reCompletePayment(String? purchaseInvoiceId, String? paymentMethod);
 }
 
 class DirectSellingListRemoteDataSourceImpl implements DirectSellingListRemoteDataSource {
@@ -38,4 +45,11 @@ class DirectSellingListRemoteDataSourceImpl implements DirectSellingListRemoteDa
   @override
   Future<DirectSellingOrdersListResponse> directSellingOrdersList(String? page) =>
       _directSellingListAppServiceClient.directSellingOrdersList(page);
+
+  @override
+  Future confirmOrder(String? purchaseInvoiceId, String? confirmationcode) =>
+      _directSellingListAppServiceClient.confirmOrder(purchaseInvoiceId, confirmationcode);
+  @override
+  Future reCompletePayment(String? purchaseInvoiceId, String? paymentMethod) =>
+      _directSellingListAppServiceClient.reCompletePayment(purchaseInvoiceId, paymentMethod);
 }

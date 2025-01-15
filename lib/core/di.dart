@@ -38,9 +38,11 @@ import 'package:hasad_app/features/direct_selling/all/data/data_source/remote_da
 import 'package:hasad_app/features/direct_selling/all/data/network/direct_selling_list_api.dart';
 import 'package:hasad_app/features/direct_selling/all/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/repository/repo.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/use_cases/confirm_order_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_list_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_orders_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_my_direct_selling_list_usecase.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/use_cases/re_complete_payment_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/cubit/direct_selling_list_dart_cubit.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/my_direct_selling_list/cubit/my_direct_selling_list_cubit.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/orders/cubit/direct_selling_orders_cubit.dart';
@@ -378,7 +380,7 @@ iniDirectSellingList() async {
   }
   if (!GetIt.I.isRegistered<DirectSellingOrdersCubit>()) {
     sl.registerFactory<DirectSellingOrdersCubit>(
-        () => DirectSellingOrdersCubit(sl.call(), sl.call()));
+        () => DirectSellingOrdersCubit(sl.call(), sl.call(), sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -416,6 +418,12 @@ iniDirectSellingList() async {
   }
   if (!GetIt.I.isRegistered<ConfirmOrderUseCase>()) {
     sl.registerLazySingleton<ConfirmOrderUseCase>(() => ConfirmOrderUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<ConfirmOrderByCodeUseCase>()) {
+    sl.registerLazySingleton<ConfirmOrderByCodeUseCase>(() => ConfirmOrderByCodeUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<ReCompletePaymentUsecase>()) {
+    sl.registerLazySingleton<ReCompletePaymentUsecase>(() => ReCompletePaymentUsecase(sl.call()));
   }
 }
 

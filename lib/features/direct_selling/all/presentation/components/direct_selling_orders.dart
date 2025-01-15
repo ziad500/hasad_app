@@ -39,6 +39,25 @@ class _DirectSellingOrdersListViewState extends State<DirectSellingOrdersListVie
         showSnackbar(
             context: context, text: LocaleKeys.doneRecieve.tr(), state: ToastStates.SUCCESS);
       }
+      if (state is ReCompleteOrderPaymentSuccessState) {
+        if (cubit.selectedPaymentMethod == 1) {
+          cubit.getDirectSellingList();
+          Navigator.pop(context);
+          showSnackbar(
+              context: context, text: LocaleKeys.donePayment.tr(), state: ToastStates.SUCCESS);
+        }
+      }
+      if (state is AuthConfirmOrderSuccessState) {
+        cubit.directSellingOrdersListModel = null;
+        cubit.getDirectSellingList();
+        showSnackbar(context: context, text: LocaleKeys.doneSend.tr(), state: ToastStates.SUCCESS);
+      }
+      if (state is AuthConfirmOrderErrorState) {
+        showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+      }
+      if (state is ReCompleteOrderPaymentErrorState) {
+        showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+      }
     }, builder: (context, state) {
       //pass the cubit ,states and items type '<DirectSellingOrdersCubit, DirectSellingListDartState, ReportModel>'
       String? getError() {

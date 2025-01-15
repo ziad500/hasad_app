@@ -203,7 +203,12 @@
 "cashbackError":"The cashback amount must be less than 90",
 "paymentOnDelivery":"Payment On Delivery",
 "choosePaymentMethod":"Choose Payment Method",
-"earned":"Earned"
+"earned":"Earned",
+"pay":"Pay",
+"auth":"Auth",
+"enterCode":"Enter 6-Digit Code",
+"link":"Link",
+"qrCode":"Qr Code"
 
 
 

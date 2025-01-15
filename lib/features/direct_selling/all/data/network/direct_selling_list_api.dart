@@ -37,4 +37,19 @@ abstract class DirectSellingListAppServiceClient {
   Future<DirectSellingOrdersListResponse> directSellingOrdersList(
     @Query('page') String? page,
   );
+
+  @POST("advertisement/confirm-code")
+  Future<dynamic> confirmOrder(
+    @Part(name: 'purchase_invoice_id') String? purchaseInvoiceId,
+    @Part(name: 'confirmation_code') String? confirmationcode,
+  );
+
+  // 1 => wallet
+  // 2 => qrcode
+  // 3 => link
+  @POST("advertisement/complete-payment")
+  Future<dynamic> reCompletePayment(
+    @Part(name: 'purchase_invoice_id') String? purchaseInvoiceId,
+    @Part(name: 'payment_method') String? paymentMethod,
+  );
 }

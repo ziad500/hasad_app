@@ -22,7 +22,7 @@ class CashBackSection extends StatelessWidget {
         TitleWidget(
           title: LocaleKeys.cashBack.tr(),
           size: 14.sp,
-          color: AppColors.primaryColor,
+          color: AppColors.addRequestContainerColor,
         ),
         const DefaultDivider(indent: 20),
         const SizedBox(height: 16),

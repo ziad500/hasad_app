@@ -13,4 +13,13 @@ abstract class DirectSellingListRepository {
   Future<Either<Failure, DirectSellingListModel>> myDirectSellingList(String? page, String? userId);
 
   Future<Either<Failure, DirectSellingOrdersListModel>> directSellingOrdersList(String? page);
+
+  Future<Either<Failure, dynamic>> confirmOrder(
+      String? purchaseInvoiceId, String? confirmationcode);
+
+  // 1 => wallet
+  // 2 => qrcode
+  // 3 => link
+  Future<Either<Failure, dynamic>> reCompletePayment(
+      String? purchaseInvoiceId, String? paymentMethod);
 }

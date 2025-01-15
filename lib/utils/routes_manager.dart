@@ -16,6 +16,7 @@ import 'package:hasad_app/features/layout/layout.dart';
 import 'package:hasad_app/features/my_advertisement/presentation/screens/my_advertisement_screen.dart';
 import 'package:hasad_app/features/my_orders/presentation/screens/my_orders_screen.dart';
 import 'package:hasad_app/features/notifications/presentation/screens/notifications_screen.dart';
+import 'package:hasad_app/features/payment/presentation/screens/global_payment.dart';
 import 'package:hasad_app/features/payment/presentation/screens/payment_screen.dart';
 import 'package:hasad_app/features/profile/presentation/screens/about_hasad.dart';
 import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dart';
@@ -73,6 +74,7 @@ class Routes {
   static const String appPrivacyRoutes = "/appPrivacyRoutes";
   static const String termsConditionsPolicyRoutes = "/termsConditionsPolicyRoutes";
   static const String paymentRoutes = "/paymentRoutes";
+  static const String globalPaymentRoutes = "/globalPaymentRoutes";
 }
 
 class RouteGenerator {
@@ -162,6 +164,13 @@ class RouteGenerator {
               value: cubit,
               child: PaymentScreen(link: args['url'], value: args['value']),
             );
+          },
+        );
+      case Routes.globalPaymentRoutes:
+        return MaterialPageRoute(
+          builder: (context) {
+            final args = settings.arguments as Map<String, dynamic>?;
+            return GlobalPaymentScreen(link: args?['url'], value: args?['value']);
           },
         );
       case Routes.biddingInvoiceScreen:

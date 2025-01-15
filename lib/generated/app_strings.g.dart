@@ -4,6 +4,11 @@ abstract class LocaleKeys {
   static const success = 'success';
   static const cashBack = 'cashBack';
   static const earned = 'earned';
+  static const pay = 'pay';
+  static const auth = 'auth';
+  static const enterCode = 'enterCode';
+  static const link = 'link';
+  static const qrCode = 'qrCode';
 
   static const bad_request_error = 'bad_request_error';
   static const forbidden_error = 'forbidden_error';
