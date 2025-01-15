@@ -208,7 +208,8 @@
 "auth":"Auth",
 "enterCode":"Enter 6-Digit Code",
 "link":"Link",
-"qrCode":"Qr Code"
+"qrCode":"Qr Code",
+"payRequests":"Sales Orders"
 
 
 

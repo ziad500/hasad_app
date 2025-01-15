@@ -156,6 +156,10 @@ List<_SettingsModel> _settingsList(context) => [
       _SettingsModel(
           icon: SVGManager.note, title: LocaleKeys.orders.tr(), route: Routes.myOrdersScreen),
       _SettingsModel(
+          icon: SVGManager.note,
+          title: LocaleKeys.payRequests.tr(),
+          route: Routes.salesOrdersScreen),
+      _SettingsModel(
           icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: Routes.favoritesRoutes),
       _SettingsModel(
           iconWidget: const Icon(Icons.language, weight: 0.5, color: Colors.white),

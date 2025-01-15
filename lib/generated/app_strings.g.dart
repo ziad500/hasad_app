@@ -9,7 +9,7 @@ abstract class LocaleKeys {
   static const enterCode = 'enterCode';
   static const link = 'link';
   static const qrCode = 'qrCode';
-
+  static const payRequests = 'payRequests';
   static const bad_request_error = 'bad_request_error';
   static const forbidden_error = 'forbidden_error';
   static const unauthorized_error = 'unauthorized_error';

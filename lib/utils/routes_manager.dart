@@ -22,6 +22,7 @@ import 'package:hasad_app/features/profile/presentation/screens/about_hasad.dart
 import 'package:hasad_app/features/profile/presentation/screens/edit_profile.dart';
 import 'package:hasad_app/features/profile/presentation/screens/terms_conditions.dart';
 import 'package:hasad_app/features/requests/presentation/screens/requests_screen.dart';
+import 'package:hasad_app/features/sales_order/presentation/screens/sales_orders_screen.dart';
 import 'package:hasad_app/features/splash_screen/splash_screen.dart';
 import 'package:hasad_app/features/users_search/presentation/screens/qr_code_screen.dart';
 import 'package:hasad_app/features/users_search/presentation/screens/user_profile_screen.dart';
@@ -49,6 +50,8 @@ class Routes {
 
   static const String directSellingListScreen = "/directSellingListScreen";
   static const String myOrdersScreen = "/MyOrdersScreen";
+  static const String salesOrdersScreen = "/salesOrdersScreen";
+
   static const String invoiceRoutes = "/invoiceRoutes";
   static const String biddingInvoiceScreen = "/biddingInvoiceScreen";
   static const String categoriesScreen = "/categoriesScreen";
@@ -84,6 +87,12 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return const AboutApp();
+          },
+        );
+      case Routes.salesOrdersScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SalesOrdersScreen();
           },
         );
 
