@@ -126,7 +126,7 @@ class DirectSellingOrderWidget extends StatelessWidget {
                         buttonName: LocaleKeys.pay.tr(),
                         buttonFunction: () {
                           DirectSellingOrdersCubit cubit = DirectSellingOrdersCubit.get(context);
-                          cubit.paymentMethodResult = null;
+                          cubit.paymentUrlResult = null;
                           showModalSheet(
                               context,
                               ChoosePaymentMethodBottomSheet(

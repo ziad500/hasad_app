@@ -36,29 +36,29 @@ class ChoosePaymentMethodBottomSheet extends StatelessWidget {
               left: 20,
               right: 20,
             ),
-            child: cubit.paymentMethodResult != null
+            child: cubit.paymentUrlResult != null
                 ? Column(
                     children: [
-                      if (isNetworkImage(cubit.paymentMethodResult!)) ...[
-                        Image.network(cubit.paymentMethodResult!),
+                      if (cubit.paymentQrResult != null) ...[
+                        Image.network(cubit.paymentQrResult!),
                         const SizedBox(height: 20),
-                        PayButton(value: value, isLoading: false, url: cubit.paymentMethodResult!)
+                        PayButton(value: value, isLoading: false, url: cubit.paymentUrlResult!)
                       ],
-                      if (!isNetworkImage(cubit.paymentMethodResult!)) ...[
+                      if (cubit.paymentUrlResult != null && cubit.paymentQrResult == null) ...[
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             IconButton(
                               icon: const Icon(Icons.copy),
                               onPressed: () {
-                                copyToClipboard(context, cubit.paymentMethodResult ?? "");
+                                copyToClipboard(context, cubit.paymentUrlResult ?? "");
                               },
                             )
                           ],
                         ),
-                        DefaultText(text: cubit.paymentMethodResult ?? "", color: Colors.blue),
+                        DefaultText(text: cubit.paymentUrlResult ?? "", color: Colors.blue),
                         const SizedBox(height: 20),
-                        PayButton(value: value, isLoading: false, url: cubit.paymentMethodResult!)
+                        PayButton(value: value, isLoading: false, url: cubit.paymentUrlResult!)
                       ]
                     ],
                   )

@@ -61,7 +61,9 @@ class DirectSellingOrdersCubit extends Cubit<DirectSellingOrdersState> {
     }
   }
 
-  bool _canFetchMore() => /* state is! DirectSellingOrdersListAllCaughtState */
+  bool _canFetchMore() => directSellingOrdersListModel == null
+      ? true
+      : /* state is! DirectSellingOrdersListAllCaughtState */
       directSellingOrdersListModel?.pagination?.nextPageUrl != null;
 
   String? getPageNumber() {
@@ -96,7 +98,8 @@ class DirectSellingOrdersCubit extends Cubit<DirectSellingOrdersState> {
     await _reCompletePaymentUsecase
         .execude(purchaseInvoiceId, paymentMethod)
         .then((value) => value.fold((l) => emit(ReCompleteOrderPaymentErrorState(l.message)), (r) {
-              paymentMethodResult = r['payment_url'];
+              paymentUrlResult = r['payment_url'];
+              paymentQrResult = r['payment_qr_code'];
               emit(ReCompleteOrderPaymentSuccessState());
             }));
   }
@@ -107,9 +110,11 @@ class DirectSellingOrdersCubit extends Cubit<DirectSellingOrdersState> {
     emit(SelectPaymentMethodState());
   }
 
-  String? paymentMethodResult;
+  String? paymentQrResult;
+
+  String? paymentUrlResult;
   void setPaymentMethodResult(String value) {
-    paymentMethodResult = value;
+    paymentUrlResult = value;
     emit(SetPaymentMethodResultState());
   }
 }
