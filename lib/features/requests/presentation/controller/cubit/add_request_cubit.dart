@@ -183,7 +183,9 @@ class AddRequestCubit extends Cubit<AddRequestState> {
           ? selectedQuantityType == 1
               ? quantityController.text
               : "1"
-          : "1",
+          : quantityController.text == ""
+              ? "1"
+              : quantityController.text,
       cashbackPercentage:
           cashBackControllerController.text == "" ? null : cashBackControllerController.text,
       availablePaymentOnDelivery: selectedPaymentMethod.toString());
@@ -218,7 +220,13 @@ class AddRequestCubit extends Cubit<AddRequestState> {
         startingPrice: startPriceController.text == "" ? null : startPriceController.text,
         deletedImages: deletedImages,
         type: selectedQuantityType.toString(),
-        mainQuantity: selectedQuantityType == 1 ? quantityController.text : "1",
+        mainQuantity: selectedType == 1
+            ? selectedQuantityType == 1
+                ? quantityController.text
+                : "1"
+            : quantityController.text == ""
+                ? "1"
+                : quantityController.text,
         cashbackPercentage:
             cashBackControllerController.text == "" ? null : cashBackControllerController.text,
       );

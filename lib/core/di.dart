@@ -26,6 +26,13 @@ import 'package:hasad_app/features/bidding/details/domain/use_cases/buy_bidding_
 import 'package:hasad_app/features/bidding/details/domain/use_cases/get_bidding_details_usecase.dart';
 import 'package:hasad_app/features/bidding/details/domain/use_cases/pay_insurance_usecase.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
+import 'package:hasad_app/features/bidding_requests/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/bidding_requests/data/network/bidding_requests_api.dart';
+import 'package:hasad_app/features/bidding_requests/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/bidding_requests/domain/repository/repo.dart';
+import 'package:hasad_app/features/bidding_requests/domain/use_cases/accept_or_reject_usecase.dart';
+import 'package:hasad_app/features/bidding_requests/domain/use_cases/get_bidding_requests_usecse.dart';
+import 'package:hasad_app/features/bidding_requests/presentation/controller/bidding_requests_cubit.dart';
 import 'package:hasad_app/features/categories/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/categories/data/network/categories_api.dart';
 import 'package:hasad_app/features/categories/data/repository/repo_impl.dart';
@@ -169,6 +176,7 @@ Future<void> initAppModule() async {
   iniSlider();
   initUsersSearch();
   initSalesOrdersList();
+  initBiddingRequestsList();
 }
 
 iniLogin() async {
@@ -821,5 +829,41 @@ initSalesOrdersList() async {
   //usecase
   if (!GetIt.I.isRegistered<GetSalesOrdersUsecse>()) {
     sl.registerLazySingleton<GetSalesOrdersUsecse>(() => GetSalesOrdersUsecse(sl.call()));
+  }
+}
+
+initBiddingRequestsList() async {
+  //cubit
+  if (!GetIt.I.isRegistered<BiddingRequestsCubit>()) {
+    sl.registerFactory<BiddingRequestsCubit>(() => BiddingRequestsCubit(sl.call(), sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<BiddingRequestsAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<BiddingRequestsAppServiceClient>(
+        () => BiddingRequestsAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<BiddingRequestsRepository>()) {
+    sl.registerLazySingleton<BiddingRequestsRepository>(
+        () => BiddingRequestsRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<BiddingRequestsRemoteDataSource>()) {
+    sl.registerLazySingleton<BiddingRequestsRemoteDataSource>(
+        () => BiddingRequestsRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetBiddingRequestsUsecse>()) {
+    sl.registerLazySingleton<GetBiddingRequestsUsecse>(() => GetBiddingRequestsUsecse(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<AcceptOrRejectBiddingRequestsUsecase>()) {
+    sl.registerLazySingleton<AcceptOrRejectBiddingRequestsUsecase>(
+        () => AcceptOrRejectBiddingRequestsUsecase(sl.call()));
   }
 }

@@ -3,6 +3,7 @@ import 'package:hasad_app/features/auth/presentation/screens/sign_up/user/views/
 import 'package:hasad_app/features/bidding/all/presentation/screens/bidding_list_screen.dart';
 import 'package:hasad_app/features/bidding/all/presentation/screens/search_screen.dart';
 import 'package:hasad_app/features/bidding/details/presentation/screens/item_details_screen.dart';
+import 'package:hasad_app/features/bidding_requests/presentation/screens/bidding_requests_screen.dart';
 import 'package:hasad_app/features/categories/presentation/screens/categories_screen.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/direct_selling_models.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/screens/direct_selling_list_screen.dart';
@@ -51,6 +52,7 @@ class Routes {
   static const String directSellingListScreen = "/directSellingListScreen";
   static const String myOrdersScreen = "/MyOrdersScreen";
   static const String salesOrdersScreen = "/salesOrdersScreen";
+  static const String biddingRequestsScreen = "/biddingRequestsScreen";
 
   static const String invoiceRoutes = "/invoiceRoutes";
   static const String biddingInvoiceScreen = "/biddingInvoiceScreen";
@@ -93,6 +95,12 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) {
             return const SalesOrdersScreen();
+          },
+        );
+      case Routes.biddingRequestsScreen:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const BiddingRequestsScreen();
           },
         );
 

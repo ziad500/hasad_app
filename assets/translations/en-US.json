@@ -212,7 +212,11 @@
 "payRequests":"Sales Orders",
 "paid":"Paid",
 "confirmed":"Confirmed",
-"ConfirmationCode":"Confirmation Code"
+"ConfirmationCode":"Confirmation Code",
+"biddingRequests":"Bidding Requests",
+"expiryDate":"Expiry Date",
+"accept":"Accept",
+"reject":"Reject"
 
 
 

@@ -1,31 +1,32 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
-import 'package:hasad_app/common/icon_and_text_widget.dart';
-import 'package:hasad_app/common/sub_title_widget.dart';
+import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
-import 'package:hasad_app/features/direct_selling/all/presentation/controller/orders/cubit/direct_selling_orders_cubit.dart';
-import 'package:hasad_app/features/sales_order/domain/models/model.dart';
+import 'package:hasad_app/features/bidding_requests/domain/models/model.dart';
+import 'package:hasad_app/features/bidding_requests/presentation/controller/bidding_requests_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
-import 'package:hasad_app/utils/app_assets.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 import 'package:hasad_app/utils/app_decorations.dart';
 import 'package:hasad_app/utils/helpers.dart';
 import 'package:hasad_app/utils/routes_manager.dart';
 
-class SalesOrdersWidget extends StatelessWidget {
-  const SalesOrdersWidget({super.key, required this.model});
-  final SalesOrdersDataModel model;
-
+class BiddingRequestsWidget extends StatelessWidget {
+  const BiddingRequestsWidget({super.key, required this.model});
+  final BiddingRequestsDataModel model;
+  /*   1 pending 
+            2 accept 
+            3 reject */
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.invoiceRoutes, arguments: {
-        "id": model.purchaseInvoiceId.toString(),
-      }),
+      onTap: () {
+        Navigator.pushNamed(context, Routes.biddingDetailsScreen,
+            arguments: {"id": model.advertisementId});
+      },
       child: Container(
         width: double.maxFinite,
         decoration: AppDecorations.primaryDecoration,
@@ -40,18 +41,19 @@ class SalesOrdersWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TitleWidget(title: isEmpty(model.title)),
-                      SubTitleWidget(subTitle: isEmpty(model.description))
                     ],
                   ),
                 ),
-                SvgPicture.asset(
-                  SVGManager.star,
-                  height: 25.sp,
-                ),
+                if (model.acceptedByOwner == 1)
+                  Icon(Icons.pending, color: AppColors.yellow, size: 25.sp),
+                if (model.acceptedByOwner == 2)
+                  Icon(Icons.check_circle, color: Colors.green, size: 25.sp),
+                if (model.acceptedByOwner == 3)
+                  Icon(Icons.cancel, color: AppColors.darkRed, size: 25.sp)
               ],
             ),
-            SizedBox(
-              height: 10.h,
+            const SizedBox(
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -74,47 +76,6 @@ class SalesOrdersWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            IconAndText(
-                svg: "",
-                svgWidget: Icon(
-                  model.isConfirmed == 1 ? Icons.check_circle : Icons.cancel,
-                  color: model.isConfirmed == 1 ? Colors.green : Colors.red,
-                ),
-                title: LocaleKeys.confirmed.tr()),
-            IconAndText(
-                svg: "",
-                svgWidget: Icon(
-                  model.isPaid == 1 ? Icons.check_circle : Icons.cancel,
-                  color: model.isPaid == 1 ? Colors.green : Colors.red,
-                ),
-                title: LocaleKeys.paid.tr()),
-            SizedBox(
-              height: 10.h,
-            ),
-            if (model.confirmationCode != null)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DefaultText(
-                    text: LocaleKeys.confirmationCode.tr(),
-                    textStyle:
-                        Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.darkRed),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Flexible(
-                    child: DefaultText(
-                      text: isEmpty(model.confirmationCode),
-                      textStyle: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  )
-                ],
-              ),
-            SizedBox(
-              height: 10.h,
-            ),
             Row(
               children: [
                 Flexible(
@@ -123,7 +84,7 @@ class SalesOrdersWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DefaultText(
-                      text: "تم الطلب:",
+                      text: LocaleKeys.expiryDate.tr(),
                       textStyle: Theme.of(context)
                           .textTheme
                           .titleSmall
@@ -134,7 +95,7 @@ class SalesOrdersWidget extends StatelessWidget {
                     ),
                     Flexible(
                       child: DefaultText(
-                        text: isEmpty(model.createdAt),
+                        text: isEmpty(model.expiryTime),
                         textStyle: Theme.of(context).textTheme.bodySmall,
                       ),
                     )
@@ -150,21 +111,38 @@ class SalesOrdersWidget extends StatelessWidget {
                 ),
               ],
             ),
-            if (model.purchaseInvoiceId != null &&
-                model.receivedDate == null &&
-                model.isConfirmed == 1 &&
-                model.isPaid == 1) ...[
-              const SizedBox(height: 10),
-              DefaultButton(
-                  height: 35,
-                  textSize: 12.sp,
-                  color: AppColors.red,
-                  buttonName: LocaleKeys.doneRecieve.tr(),
-                  buttonFunction: () {
-                    DirectSellingOrdersCubit.get(context)
-                        .confirmOrder(model.purchaseInvoiceId.toString());
-                  })
-            ]
+            const SizedBox(height: 10),
+            if (model.acceptedByOwner == 1)
+              BlocBuilder<BiddingRequestsCubit, BiddingRequestsState>(
+                builder: (context, state) {
+                  if (state is GetAcceptOrRejectLoadingState) {
+                    return const LoadingWidget();
+                  }
+                  return Row(
+                    children: [
+                      Expanded(
+                          child: DefaultButton(
+                              height: 45,
+                              buttonName: LocaleKeys.accept.tr(),
+                              buttonFunction: () {
+                                BiddingRequestsCubit.get(context)
+                                    .acceptOrReject(isAccept: true, id: model.id.toString());
+                              })),
+                      const SizedBox(width: 15),
+                      Expanded(
+                          child: DefaultButton(
+                        height: 45,
+                        buttonName: LocaleKeys.reject.tr(),
+                        buttonFunction: () {
+                          BiddingRequestsCubit.get(context)
+                              .acceptOrReject(isAccept: false, id: model.id.toString());
+                        },
+                        color: AppColors.red,
+                      ))
+                    ],
+                  );
+                },
+              )
           ],
         ),
       ),

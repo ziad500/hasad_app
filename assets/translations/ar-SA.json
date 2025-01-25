@@ -210,7 +210,11 @@
 "payRequests":"طلبات البيع",
 "paid":"مدفوع",
 "confirmed":"تمت المصادقة",
-"ConfirmationCode":"رمز التحقق"
+"ConfirmationCode":"رمز التحقق",
+"biddingRequests":"طلبات المزاد",
+"expiryDate":"تاريخ الانتهاء",
+"accept":"قبول",
+"reject":"رفض"
   
 
 

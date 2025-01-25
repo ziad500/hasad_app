@@ -53,6 +53,9 @@ class ProfileScreen extends StatelessWidget {
                     child: DefaultListView(
                         itemBuilder: (context, index) => InkWell(
                               onTap: () {
+                                if (index == 0) {
+                                  ProfileCubit.get(context).getProfileData();
+                                }
                                 if (_settingsList(context)[index].func != null) {
                                   _settingsList(context)[index].func!(context);
                                 } else {
@@ -159,6 +162,10 @@ List<_SettingsModel> _settingsList(context) => [
           icon: SVGManager.note,
           title: LocaleKeys.payRequests.tr(),
           route: Routes.salesOrdersScreen),
+      _SettingsModel(
+          icon: SVGManager.bid,
+          title: LocaleKeys.biddingRequests.tr(),
+          route: Routes.biddingRequestsScreen),
       _SettingsModel(
           icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: Routes.favoritesRoutes),
       _SettingsModel(

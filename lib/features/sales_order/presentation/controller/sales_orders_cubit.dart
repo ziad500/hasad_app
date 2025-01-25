@@ -9,7 +9,7 @@ class SalesOrdersCubit extends Cubit<SalesOrdersState> {
   SalesOrdersCubit(this._getSalesOrdersUsecse) : super(SalesOrdersInitial());
   static SalesOrdersCubit get(context) => BlocProvider.of(context);
 
-  String? page = "1";
+  String? page;
   SalesOrdersModel? salesOrdersModel;
   List<SalesOrdersDataModel> allSalesOrders = [];
   Future<void> getSalesOrdersList() async {

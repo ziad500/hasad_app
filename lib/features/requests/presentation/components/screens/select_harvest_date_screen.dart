@@ -83,6 +83,15 @@ class SelectHarvestDateScreen extends StatelessWidget {
                             ? null
                             : cubit.selectHarvestDate(formatDateString(value.toString()))),
                       ),
+                      if (cubit.selectedType == 2) ...[
+                        const SizedBox(height: 16),
+                        DefaultFormField(
+                            enabled: cubit.selectedQuantityType == 1,
+                            hint: LocaleKeys.enterQuantity.tr(),
+                            textInputType: TextInputType.number,
+                            controller: cubit.quantityController,
+                            validator: defaultValidation)
+                      ],
                       if (cubit.selectedType == 1) ...[
                         const SizedBox(height: 16),
                         Row(

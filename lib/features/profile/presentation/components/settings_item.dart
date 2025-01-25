@@ -34,7 +34,11 @@ class SettingsItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.6)),
           child: Row(
             children: [
-              iconWidget ?? SvgPicture.asset(icon),
+              iconWidget ??
+                  SvgPicture.asset(
+                    icon,
+                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  ),
               Expanded(
                 child: Center(
                   child: TitleWidget(

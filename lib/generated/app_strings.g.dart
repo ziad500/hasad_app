@@ -8,6 +8,11 @@ abstract class LocaleKeys {
   static const auth = 'auth';
   static const enterCode = 'enterCode';
   static const confirmationCode = 'ConfirmationCode';
+  static const biddingRequests = 'biddingRequests';
+
+  static const expiryDate = 'expiryDate';
+  static const accept = 'accept';
+  static const reject = 'reject';
 
   static const link = 'link';
   static const qrCode = 'qrCode';
