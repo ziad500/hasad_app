@@ -77,6 +77,27 @@ class BiddingRequestsWidget extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DefaultText(
+                  text: LocaleKeys.auctionDate.tr(),
+                  textStyle:
+                      Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.darkRed),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Flexible(
+                  child: DefaultText(
+                    text: isEmpty(model.biddingDate),
+                    textStyle: Theme.of(context).textTheme.bodySmall,
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
               children: [
                 Flexible(
                     child: Row(
