@@ -102,6 +102,12 @@ import 'package:hasad_app/features/requests/domain/repository/repo.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/add_request_usecase.dart';
 import 'package:hasad_app/features/requests/domain/use_cases/edit_request_usecase.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
+import 'package:hasad_app/features/sales_order/data/data_source/remote_data_source.dart';
+import 'package:hasad_app/features/sales_order/data/network/sales_orders_api.dart';
+import 'package:hasad_app/features/sales_order/data/repository/repo_impl.dart';
+import 'package:hasad_app/features/sales_order/domain/repository/repo.dart';
+import 'package:hasad_app/features/sales_order/domain/use_cases/get_sales_orders_usecse.dart';
+import 'package:hasad_app/features/sales_order/presentation/controller/sales_orders_cubit.dart';
 import 'package:hasad_app/features/slider/data/data_source/remote_data_source.dart';
 import 'package:hasad_app/features/slider/data/network/api.dart';
 import 'package:hasad_app/features/slider/data/repository/repo_impl.dart';
@@ -162,6 +168,7 @@ Future<void> initAppModule() async {
   initNotifications();
   iniSlider();
   initUsersSearch();
+  initSalesOrdersList();
 }
 
 iniLogin() async {
@@ -784,5 +791,35 @@ initNotifications() async {
   }
   if (!GetIt.I.isRegistered<DeleteDeviceFcmUsecase>()) {
     sl.registerLazySingleton<DeleteDeviceFcmUsecase>(() => DeleteDeviceFcmUsecase(sl.call()));
+  }
+}
+
+initSalesOrdersList() async {
+  //cubit
+  if (!GetIt.I.isRegistered<SalesOrdersCubit>()) {
+    sl.registerFactory<SalesOrdersCubit>(() => SalesOrdersCubit(sl.call()));
+  }
+
+  //app service client instance
+  if (!GetIt.I.isRegistered<SalesOrdersAppServiceClient>()) {
+    Dio dio = await sl<DioFactory>().getDio();
+
+    sl.registerLazySingleton<SalesOrdersAppServiceClient>(() => SalesOrdersAppServiceClient(dio));
+  }
+
+  //repository instance
+  if (!GetIt.I.isRegistered<SalesOrdersRepository>()) {
+    sl.registerLazySingleton<SalesOrdersRepository>(() => SalesOrdersRepositoryImpl(sl.call()));
+  }
+
+  //remote data source instance
+  if (!GetIt.I.isRegistered<SalesOrdersRemoteDataSource>()) {
+    sl.registerLazySingleton<SalesOrdersRemoteDataSource>(
+        () => SalesOrdersRemoteDataSourceImpl(sl.call()));
+  }
+
+  //usecase
+  if (!GetIt.I.isRegistered<GetSalesOrdersUsecse>()) {
+    sl.registerLazySingleton<GetSalesOrdersUsecse>(() => GetSalesOrdersUsecse(sl.call()));
   }
 }

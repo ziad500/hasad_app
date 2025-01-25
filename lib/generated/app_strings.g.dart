@@ -7,6 +7,8 @@ abstract class LocaleKeys {
   static const pay = 'pay';
   static const auth = 'auth';
   static const enterCode = 'enterCode';
+  static const confirmationCode = 'ConfirmationCode';
+
   static const link = 'link';
   static const qrCode = 'qrCode';
   static const payRequests = 'payRequests';
@@ -24,6 +26,9 @@ abstract class LocaleKeys {
   static const cashbackError = 'cashbackError';
   static const paymentOnDelivery = 'paymentOnDelivery';
   static const choosePaymentMethod = 'choosePaymentMethod';
+
+  static const paid = 'paid';
+  static const confirmed = 'confirmed';
 
   static const ad = 'ad';
   static const search = 'search';
