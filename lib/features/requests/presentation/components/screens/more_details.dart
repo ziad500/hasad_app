@@ -107,21 +107,23 @@ class MoreDetailsScreen extends StatelessWidget {
                           const SizedBox(height: 16),
                           _BiddingPriceWidget(cubit: cubit),
                           const SizedBox(height: 16),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              DefaultFormField(
-                                  borderRadius: 3,
-                                  width: 150.w,
-                                  controller: cubit.cashBackControllerController,
-                                  title: LocaleKeys.cashBack.tr(),
-                                  hint: LocaleKeys.cashBack.tr(),
-                                  validator: defaultValidation),
-                              const SizedBox(width: 20),
-                              const Icon(Icons.percent)
-                            ],
-                          ),
-                          const SizedBox(height: 16),
+                          if (cubit.selectedType == 1) ...[
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                DefaultFormField(
+                                    borderRadius: 3,
+                                    width: 150.w,
+                                    controller: cubit.cashBackControllerController,
+                                    title: LocaleKeys.cashBack.tr(),
+                                    hint: LocaleKeys.cashBack.tr(),
+                                    validator: (e) => null),
+                                const SizedBox(width: 20),
+                                const Icon(Icons.percent)
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                          ],
                           if (cubit.selectedType == 2) ...[
                             _SelectDate(cubit: cubit),
                             const SizedBox(height: 16),

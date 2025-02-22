@@ -14,12 +14,14 @@ class BiddingRequestsCubit extends Cubit<BiddingRequestsState> {
   String? page;
   BiddingRequestsModel? biddingRequestsModel;
   List<BiddingRequestsDataModel> allBiddingRequests = [];
-  Future<void> getBiddingRequestsList() async {
+  String? advertismentId1;
+  Future<void> getBiddingRequestsList(String? advertismentId) async {
+    advertismentId1 = advertismentId;
     if (_canFetchMore() || biddingRequestsModel == null) {
       page = getPageNumber();
 
       _emitLoadingState();
-      await _getBiddingRequestsUsecse.execude(page!).then((value) => value.fold(
+      await _getBiddingRequestsUsecse.execude(page!, advertismentId).then((value) => value.fold(
           (l) => emit(GetBiddingRequestsListErrorState(l.message)), (r) => _handleSuccessState(r)));
     }
   }
@@ -71,7 +73,7 @@ class BiddingRequestsCubit extends Cubit<BiddingRequestsState> {
         .execude(isAccept ? "accept-winning-auction/$id" : "reject-winning-auction/$id")
         .then((value) => value.fold((l) => emit(GetAcceptOrRejectErrorState(l.message)), (r) {
               biddingRequestsModel = null;
-              getBiddingRequestsList();
+              getBiddingRequestsList(advertismentId1);
             }));
   }
 }

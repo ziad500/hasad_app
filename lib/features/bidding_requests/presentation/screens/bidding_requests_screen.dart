@@ -8,16 +8,21 @@ import 'package:hasad_app/features/bidding_requests/presentation/controller/bidd
 import 'package:hasad_app/generated/app_strings.g.dart';
 
 class BiddingRequestsScreen extends StatelessWidget {
-  const BiddingRequestsScreen({super.key});
+  const BiddingRequestsScreen({super.key, this.advertismentId});
+  final String? advertismentId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<BiddingRequestsCubit>()..getBiddingRequestsList(),
+      create: (context) => sl<BiddingRequestsCubit>()..getBiddingRequestsList(advertismentId),
       child: DefaultScaffold(
           appbarTitle: LocaleKeys.biddingRequests.tr(),
-          body: const Padding(
-              padding: EdgeInsets.all(20), child: BiddingRequestsListView(expanded: false))),
+          body: Padding(
+              padding: const EdgeInsets.all(20),
+              child: BiddingRequestsListView(
+                expanded: false,
+                advertismentId: advertismentId,
+              ))),
     );
   }
 }

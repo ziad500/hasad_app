@@ -2,7 +2,7 @@ import 'package:hasad_app/features/bidding_requests/data/network/bidding_request
 import 'package:hasad_app/features/bidding_requests/data/response/response.dart';
 
 abstract class BiddingRequestsRemoteDataSource {
-  Future<BiddingRequestsResponse> getBiddingRequests(String? page);
+  Future<BiddingRequestsResponse> getBiddingRequests(String? page, String? advertismentId);
 
   Future<dynamic> acceptOrReject(String? name);
 }
@@ -17,6 +17,6 @@ class BiddingRequestsRemoteDataSourceImpl implements BiddingRequestsRemoteDataSo
   Future acceptOrReject(String? name) => _directSellingListAppServiceClient.acceptOrReject(name);
 
   @override
-  Future<BiddingRequestsResponse> getBiddingRequests(String? page) =>
-      _directSellingListAppServiceClient.getBiddingRequests(page);
+  Future<BiddingRequestsResponse> getBiddingRequests(String? page, String? advertismentId) =>
+      _directSellingListAppServiceClient.getBiddingRequests(page, advertismentId);
 }

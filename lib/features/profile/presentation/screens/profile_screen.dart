@@ -165,7 +165,8 @@ List<_SettingsModel> _settingsList(context) => [
       _SettingsModel(
           icon: SVGManager.bid,
           title: LocaleKeys.biddingRequests.tr(),
-          route: Routes.biddingRequestsScreen),
+          route: Routes.biddingRequestsScreen,
+          arguments: {"id": null}),
       _SettingsModel(
           icon: SVGManager.heart, title: LocaleKeys.favorites.tr(), route: Routes.favoritesRoutes),
       _SettingsModel(

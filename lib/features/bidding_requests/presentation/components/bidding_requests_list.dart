@@ -12,8 +12,9 @@ import 'package:hasad_app/features/bidding_requests/presentation/controller/bidd
 ///the cubit will call the fetching method to fetch the next page , this will happen only if the current state is not loading state
 ///which indicates that no fetchng request is happening now]
 class BiddingRequestsListView extends StatefulWidget {
-  const BiddingRequestsListView({super.key, this.expanded = false});
+  const BiddingRequestsListView({super.key, this.expanded = false, required this.advertismentId});
   final bool expanded;
+  final String? advertismentId;
 
   @override
   State<BiddingRequestsListView> createState() => _BiddingRequestsListViewState();
@@ -48,7 +49,7 @@ class _BiddingRequestsListViewState extends State<BiddingRequestsListView> {
           var currentLength = controller.position.pixels;
           if (currentLength >= percentageOftotalLength &&
               cubit.state is! GetBiddingRequestsListPaginationLoadingState) {
-            await cubit.getBiddingRequestsList();
+            await cubit.getBiddingRequestsList(widget.advertismentId);
           }
         }),
         controller: controller,

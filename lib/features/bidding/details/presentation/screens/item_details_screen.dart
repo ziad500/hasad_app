@@ -104,6 +104,34 @@ class BiddingDetailsScreen extends StatelessWidget {
               ),
               BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
                 builder: (context, state) {
+                  BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
+
+                  return cubit.directSellingDataModel?.owner?.id.toString() != Constants.userId
+                      ? const SizedBox()
+                      : InkWell(
+                          onTap: () {
+                            final result = Navigator.pushNamed(
+                                context, Routes.biddingRequestsScreen,
+                                arguments: {"id": cubit.directSellingDataModel?.id.toString()});
+                            result.then((value) {
+                              if (value == true) {
+                                cubit.getBiddingDetails(id);
+                              }
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                                color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                            child: const Icon(Icons.notifications_active_rounded,
+                                color: AppColors.blueAccent, size: 15),
+                          ),
+                        );
+                },
+              ),
+              BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
+                builder: (context, state) {
                   if (BiddingDetailsCubit.get(context).directSellingDataModel != null) {
                     return BlocConsumer<FavoritesCubit, FavoritesState>(listener: (context, state) {
                       if (state is AddToFavoritesListErrorState) {

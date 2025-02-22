@@ -100,7 +100,11 @@ class RouteGenerator {
       case Routes.biddingRequestsScreen:
         return MaterialPageRoute(
           builder: (context) {
-            return const BiddingRequestsScreen();
+            final args = settings.arguments as Map<String, dynamic>?;
+
+            return BiddingRequestsScreen(
+              advertismentId: args?['id'],
+            );
           },
         );
 

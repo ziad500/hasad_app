@@ -9,7 +9,7 @@ class GetBiddingRequestsUsecse {
     this._repository,
   );
 
-  Future<Either<Failure, BiddingRequestsModel>> execude(String page) async {
-    return await _repository.getBiddingRequests(page);
+  Future<Either<Failure, BiddingRequestsModel>> execude(String page, String? advertismentId) async {
+    return await _repository.getBiddingRequests(page, advertismentId);
   }
 }

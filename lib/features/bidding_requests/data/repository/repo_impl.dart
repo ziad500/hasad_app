@@ -20,9 +20,11 @@ class BiddingRequestsRepositoryImpl implements BiddingRequestsRepository {
   }
 
   @override
-  Future<Either<Failure, BiddingRequestsModel>> getBiddingRequests(String? page) {
+  Future<Either<Failure, BiddingRequestsModel>> getBiddingRequests(
+      String? page, String? advertismentId) {
     return executeAndHandleError<BiddingRequestsModel>(() async {
-      final response = await _directSellingListRemoteDataSource.getBiddingRequests(page);
+      final response =
+          await _directSellingListRemoteDataSource.getBiddingRequests(page, advertismentId);
       return response.toDomain();
     });
   }
