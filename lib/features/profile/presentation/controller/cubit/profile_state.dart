@@ -34,3 +34,12 @@ final class ChangePasswordErrorState extends ProfileState {
   final String error;
   const ChangePasswordErrorState(this.error);
 }
+
+final class GetAppSettingsDataLoadingState extends ProfileState {}
+
+final class GetAppSettingsDataSuccessState extends ProfileState {}
+
+final class GetAppSettingsDataErrorState extends ProfileState {
+  final String error;
+  const GetAppSettingsDataErrorState(this.error);
+}

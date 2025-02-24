@@ -6,13 +6,15 @@ import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/common/quantity_button_widget.dart';
 import 'package:hasad_app/common/shared_bottom_sheet.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/core/func/payment_faild_dialog.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/pay_insurance.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
-import 'package:hasad_app/utils/validation.dart';
 
 Future showBidBottomSheet(context, {BiddingDetailsCubit? cubit}) => defaultshowModalBottomSheet(
       context: context,
@@ -66,11 +68,45 @@ Future showBidBottomSheet(context, {BiddingDetailsCubit? cubit}) => defaultshowM
                           ),
                           DefaultFormField(
                               fillColor: const Color(0xffF3FCF4),
+                              prefix: QuantityButtonWidget(
+                                  isIncrement: true,
+                                  onTap: () {
+                                    cubit.valueController.text =
+                                        (double.parse(cubit.valueController.text) +
+                                                (ProfileCubit.get(context)
+                                                        .settingsDataModel
+                                                        ?.auctionRateIncrement ??
+                                                    1.0))
+                                            .toString();
+                                  }),
+                              suffix: QuantityButtonWidget(
+                                  isIncrement: false,
+                                  onTap: () {
+                                    cubit.valueController.text =
+                                        (double.parse(cubit.valueController.text) -
+                                                (ProfileCubit.get(context)
+                                                        .settingsDataModel
+                                                        ?.auctionRateIncrement ??
+                                                    1.0))
+                                            .toString();
+                                  }),
                               borderRadius: 10,
                               borderColro: AppColors.blue,
+                              textAlign: TextAlign.center,
                               controller: cubit.valueController,
                               hint: LocaleKeys.bidNow.tr(),
-                              validator: defaultValidation),
+                              validator: (value) {
+                                if (value == null || value.toString().isEmpty) {
+                                  return LocaleKeys.thisFieldIsRequired.tr();
+                                }
+                                if (double.tryParse(value)! <=
+                                    (cubit.directSellingDataModel!.lastBid!.value!)) {
+                                  return Constants.isArabic
+                                      ? 'يجب أن يكون عرضك أكبر من ${cubit.directSellingDataModel!.lastBid!.value}'
+                                      : 'Your bid must be greater than the current bid of ${cubit.directSellingDataModel!.lastBid!.value}';
+                                }
+                                return null;
+                              }),
                           SizedBox(
                             height: 20.h,
                           ),

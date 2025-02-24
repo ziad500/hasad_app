@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:hasad_app/features/profile/domain/use_cases/change_password_usecase.dart';
+import 'package:hasad_app/features/profile/domain/use_cases/get_app_settings_usecase.dart';
 
 import '../../../data/network/requests.dart';
 import '../../../domain/use_cases/edit_profile_usecase.dart';
@@ -16,8 +17,11 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   final GetProfileUseCase getProfileUseCase;
   final EditProfileUseCase editProfileUseCase;
+  final GetAppSettingsUseCase getAppSettingsUseCase;
+
   final ChangePasswordUseCase changePasswordUseCase;
-  ProfileCubit(this.getProfileUseCase, this.editProfileUseCase, this.changePasswordUseCase)
+  ProfileCubit(this.getProfileUseCase, this.editProfileUseCase, this.changePasswordUseCase,
+      this.getAppSettingsUseCase)
       : super(ProfileInitial());
 
   static ProfileCubit get(context) => BlocProvider.of(context);
@@ -36,7 +40,6 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(GetProfileDataErrorState(l.message));
         }, (r) {
           profileDataModel = r.data;
-          print(".......${profileDataModel?.cashback?.length}");
           setController();
           emit(GetProfileDataSuccessState());
         }));
@@ -87,5 +90,17 @@ class ProfileCubit extends Cubit<ProfileState> {
             ? "0${profileDataModel?.stc.toString() ?? ""}"
             : profileDataModel?.stc.toString() ?? ""
         : "";
+  }
+
+  SettingsDataModel? settingsDataModel;
+  Future<void> getAppSettings() async {
+    emit(GetAppSettingsDataLoadingState());
+    await getAppSettingsUseCase.execude().then((value) => value.fold((l) {
+          emit(GetAppSettingsDataErrorState(l.message));
+        }, (r) {
+          print(".... ${r.data?.auctionRateIncrement}");
+          settingsDataModel = r.data;
+          emit(GetAppSettingsDataSuccessState());
+        }));
   }
 }

@@ -61,7 +61,9 @@ class _MyAppState extends State<MyApp> {
           create: (context) => LayoutCubit(),
         ),
         BlocProvider(
-          create: (context) => di.sl<ProfileCubit>()..getProfileData(),
+          create: (context) => di.sl<ProfileCubit>()
+            ..getProfileData()
+            ..getAppSettings(),
         ),
         BlocProvider(
           create: (context) => di.sl<FavoritesCubit>()..getFavoritesList(),

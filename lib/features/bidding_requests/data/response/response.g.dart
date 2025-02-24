@@ -6,19 +6,23 @@ part of 'response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BiddingRequestsResponse _$BiddingRequestsResponseFromJson(Map<String, dynamic> json) =>
+BiddingRequestsResponse _$BiddingRequestsResponseFromJson(
+        Map<String, dynamic> json) =>
     BiddingRequestsResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => BiddingRequestsDataResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              BiddingRequestsDataResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       pagination: json['pagination'] == null
           ? null
-          : PaginationResponse.fromJson(json['pagination'] as Map<String, dynamic>),
+          : PaginationResponse.fromJson(
+              json['pagination'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$BiddingRequestsResponseToJson(BiddingRequestsResponse instance) =>
+Map<String, dynamic> _$BiddingRequestsResponseToJson(
+        BiddingRequestsResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
@@ -26,7 +30,8 @@ Map<String, dynamic> _$BiddingRequestsResponseToJson(BiddingRequestsResponse ins
       'pagination': instance.pagination,
     };
 
-BiddingRequestsDataResponse _$BiddingRequestsDataResponseFromJson(Map<String, dynamic> json) =>
+BiddingRequestsDataResponse _$BiddingRequestsDataResponseFromJson(
+        Map<String, dynamic> json) =>
     BiddingRequestsDataResponse(
       id: (json['id'] as num?)?.toInt(),
       purchaseInvoiceId: json['purchase_invoice_id'] as String?,
@@ -40,10 +45,11 @@ BiddingRequestsDataResponse _$BiddingRequestsDataResponseFromJson(Map<String, dy
       priceAfterTax: json['price_after_tax'] as num?,
       receivedDate: json['received_date'] as String?,
       quantity: json['quantity'] as String?,
-      acceptedByOwner: json['accepted_by_owner'] as int?,
+      acceptedByOwner: (json['accepted_by_owner'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$BiddingRequestsDataResponseToJson(BiddingRequestsDataResponse instance) =>
+Map<String, dynamic> _$BiddingRequestsDataResponseToJson(
+        BiddingRequestsDataResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'purchase_invoice_id': instance.purchaseInvoiceId,

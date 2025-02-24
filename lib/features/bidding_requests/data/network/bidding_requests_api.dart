@@ -13,7 +13,7 @@ abstract class BiddingRequestsAppServiceClient {
 
   @GET("advertisement/auctions/my-pending-winning-auction")
   Future<BiddingRequestsResponse> getBiddingRequests(
-      @Query("page") String? page, @Query("advertisment_id") String? advertismentId);
+      @Query("page") String? page, @Query("advertisement_id") String? advertismentId);
 
   @GET("advertisement/auctions/{name}")
   Future<dynamic> acceptOrReject(@Path('name') String? name);

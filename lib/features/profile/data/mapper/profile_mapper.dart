@@ -22,3 +22,15 @@ extension CashBackResponseMapper on CashBack? {
         this?.advertisment.toDomain(), this?.createdAt, this?.updatedAt);
   }
 }
+
+extension SettingsResponseMapper on SettingsResponse? {
+  SettingsModel toDomain() {
+    return SettingsModel(this?.status, this?.message, this?.data.toDomain());
+  }
+}
+
+extension SettingsDataResponseMapper on SettingsDataResponse? {
+  SettingsDataModel toDomain() {
+    return SettingsDataModel(this?.id, this?.auctionRateIncrement, this?.cashbackRateIncrement);
+  }
+}

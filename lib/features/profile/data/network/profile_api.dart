@@ -27,4 +27,7 @@ abstract class ProfileAppServiceClient {
       @Part(name: "old_password") String? oldPassword,
       @Part(name: "password") String? password,
       @Part(name: "password_confirmation") String? passwordConfirmation);
+
+  @GET("settings")
+  Future<SettingsResponse> getAppSettings();
 }

@@ -56,4 +56,18 @@ class ProfileRepositoryImpl implements ProfileRepository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, SettingsModel>> getAppSettings() async {
+    try {
+      final response = await _profileRemoteDataSource.getAppSettings();
+      return right(response.toDomain());
+    } catch (error) {
+      if (error is DioException) {
+        return left(hangdleResponseError(error));
+      } else {
+        return left(Failure(100, error.toString()));
+      }
+    }
+  }
 }

@@ -6,9 +6,12 @@ import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/common/default/loading_frame.dart';
 import 'package:hasad_app/common/default/loading_page.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/common/quantity_button_widget.dart';
 import 'package:hasad_app/common/shared_list_tile.dart';
 import 'package:hasad_app/common/title_widget.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/lists/presentation/components/address_drop_down.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base.dart';
 import 'package:hasad_app/features/requests/presentation/components/base/add_request_base_container.dart';
 import 'package:hasad_app/features/requests/presentation/controller/cubit/add_request_cubit.dart';
@@ -112,12 +115,55 @@ class MoreDetailsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 DefaultFormField(
-                                    borderRadius: 3,
-                                    width: 150.w,
-                                    controller: cubit.cashBackControllerController,
-                                    title: LocaleKeys.cashBack.tr(),
-                                    hint: LocaleKeys.cashBack.tr(),
-                                    validator: (e) => null),
+                                  borderRadius: 3,
+                                  width: 150.w,
+                                  controller: cubit.cashBackControllerController,
+                                  title: LocaleKeys.cashBack.tr(),
+                                  hint: LocaleKeys.cashBack.tr(),
+                                  maxLength: 2,
+                                  textInputType: TextInputType.number,
+                                  validator: (value) {
+                                    if (value != null && value.toString().isNotEmpty) {
+                                      if (int.parse(value) > int.parse("90")) {
+                                        return LocaleKeys.cashbackError.tr();
+                                      }
+                                      if (double.tryParse(value)! <= 0) {
+                                        return Constants.isArabic
+                                            ? "يجب ان تكون قيمه الكاش باك بين 0 و 90"
+                                            : "The cashback value must be between 0 and 90.";
+                                      }
+                                    }
+
+                                    return null;
+                                  },
+                                  prefix: QuantityButtonWidget(
+                                      isIncrement: true,
+                                      onTap: () {
+                                        final currentValue = double.tryParse(
+                                                cubit.cashBackControllerController.text.trim()) ??
+                                            0.0;
+                                        final increment = ProfileCubit.get(context)
+                                                .settingsDataModel
+                                                ?.cashbackRateIncrement ??
+                                            1.0;
+                                        cubit.cashBackControllerController.text =
+                                            (currentValue + increment).toInt().toString();
+                                      }),
+                                  textAlign: TextAlign.center,
+                                  suffix: QuantityButtonWidget(
+                                      isIncrement: false,
+                                      onTap: () {
+                                        final currentValue = double.tryParse(
+                                                cubit.cashBackControllerController.text.trim()) ??
+                                            0.0;
+                                        final increment = ProfileCubit.get(context)
+                                                .settingsDataModel
+                                                ?.cashbackRateIncrement ??
+                                            1.0;
+                                        cubit.cashBackControllerController.text =
+                                            (currentValue - increment).toInt().toString();
+                                      }),
+                                ),
                                 const SizedBox(width: 20),
                                 const Icon(Icons.percent)
                               ],

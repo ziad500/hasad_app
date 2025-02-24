@@ -6,7 +6,10 @@ import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/common/default/default_text.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
+import 'package:hasad_app/common/quantity_button_widget.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
+import 'package:hasad_app/features/profile/presentation/controller/cubit/profile_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
 
@@ -74,7 +77,35 @@ Future showCashBackBottomSheet(
                               DefaultFormField(
                                 fillColor: const Color(0xffF3FCF4),
                                 borderRadius: 10,
+                                prefix: QuantityButtonWidget(
+                                    isIncrement: true,
+                                    onTap: () {
+                                      final currentValue =
+                                          double.tryParse(cubit.cashBackController.text.trim()) ??
+                                              0.0;
+                                      final increment = ProfileCubit.get(context)
+                                              .settingsDataModel
+                                              ?.cashbackRateIncrement ??
+                                          1.0;
+                                      cubit.cashBackController.text =
+                                          (currentValue + increment).toInt().toString();
+                                    }),
+                                suffix: QuantityButtonWidget(
+                                    isIncrement: false,
+                                    onTap: () {
+                                      final currentValue =
+                                          double.tryParse(cubit.cashBackController.text.trim()) ??
+                                              0.0;
+                                      final increment = ProfileCubit.get(context)
+                                              .settingsDataModel
+                                              ?.cashbackRateIncrement ??
+                                          1.0;
+                                      cubit.cashBackController.text =
+                                          (currentValue - increment).toInt().toString();
+                                    }),
                                 borderColro: AppColors.blue,
+                                textAlign: TextAlign.center,
+                                maxLength: 2,
                                 textInputType: TextInputType.number,
                                 controller: cubit.cashBackController,
                                 hint: LocaleKeys.cashBack.tr(),
@@ -84,6 +115,11 @@ Future showCashBackBottomSheet(
                                   }
                                   if (int.parse(value) > int.parse("90")) {
                                     return LocaleKeys.cashbackError.tr();
+                                  }
+                                  if (double.tryParse(value)! <= 0) {
+                                    return Constants.isArabic
+                                        ? "يجب ان تكون قيمه الكاش باك بين 0 و 90"
+                                        : "The cashback value must be between 0 and 90.";
                                   }
                                   return null;
                                 },

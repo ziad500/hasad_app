@@ -41,3 +41,19 @@ class CashBackModel {
     this.updatedAt,
   );
 }
+
+class SettingsModel {
+  bool? status;
+  String? message;
+  SettingsDataModel? data;
+
+  SettingsModel(this.status, this.message, this.data);
+}
+
+class SettingsDataModel {
+  int? id;
+  num? auctionRateIncrement;
+  num? cashbackRateIncrement;
+
+  SettingsDataModel(this.id, this.auctionRateIncrement, this.cashbackRateIncrement);
+}

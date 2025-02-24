@@ -96,3 +96,38 @@ class CashBack {
   /// To JSON
   Map<String, dynamic> toJson() => _$CashBackToJson(this);
 }
+
+@JsonSerializable()
+class SettingsResponse {
+  @JsonKey(name: "status")
+  bool? status;
+  @JsonKey(name: "message")
+  String? message;
+  @JsonKey(name: "data")
+  SettingsDataResponse? data;
+
+  SettingsResponse({this.status, this.message, this.data});
+
+  // from json
+  factory SettingsResponse.fromJson(Map<String, dynamic> json) => _$SettingsResponseFromJson(json);
+  // to json
+  Map<String, dynamic> toJson() => _$SettingsResponseToJson(this);
+}
+
+@JsonSerializable()
+class SettingsDataResponse {
+  @JsonKey(name: "id")
+  int? id;
+  @JsonKey(name: "auction_rate_increment")
+  num? auctionRateIncrement;
+  @JsonKey(name: "cashback_rate_increment")
+  num? cashbackRateIncrement;
+
+  SettingsDataResponse({this.id, this.auctionRateIncrement, this.cashbackRateIncrement});
+
+  // from json
+  factory SettingsDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$SettingsDataResponseFromJson(json);
+  // to json
+  Map<String, dynamic> toJson() => _$SettingsDataResponseToJson(this);
+}

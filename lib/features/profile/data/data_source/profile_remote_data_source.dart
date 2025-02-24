@@ -7,6 +7,7 @@ abstract class ProfileRemoteDataSource {
   Future<ProfileResponse> getProfile();
   Future<ProfileResponse> editProfile(EditProfileRequest editProfileRequest);
   Future<dynamic> changePassword(ChangePasswordRequest changePasswordRequest);
+  Future<SettingsResponse> getAppSettings();
 }
 
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
@@ -27,4 +28,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future changePassword(ChangePasswordRequest changePasswordRequest) =>
       _profileAppServiceClient.changePassword(changePasswordRequest.oldPassword,
           changePasswordRequest.password, changePasswordRequest.passwordConfirmation);
+
+  @override
+  Future<SettingsResponse> getAppSettings() => _profileAppServiceClient.getAppSettings();
 }
