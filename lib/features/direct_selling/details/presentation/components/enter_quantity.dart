@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_form_field.dart';
 import 'package:hasad_app/common/default/default_text.dart';
+import 'package:hasad_app/common/quantity_button_widget.dart';
 import 'package:hasad_app/common/shared_bottom_sheet.dart';
 import 'package:hasad_app/common/show_tax_dialog.dart';
+import 'package:hasad_app/core/constants.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/controller/cubit/direct_selling_details_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_colors.dart';
@@ -50,6 +52,23 @@ Future showQuantityBottomSheet(context2, {DirectSellingDetailsCubit? cubit}) =>
                             textInputType: TextInputType.number,
                             controller: cubit.quantityController,
                             hint: LocaleKeys.enterQuantity.tr(),
+                            textAlign: TextAlign.center,
+                            prefix: QuantityButtonWidget(
+                                isIncrement: true,
+                                onTap: () {
+                                  cubit.quantityController.text =
+                                      ((double.tryParse(cubit.quantityController.text) ?? 0) + 1)
+                                          .toInt()
+                                          .toString();
+                                }),
+                            suffix: QuantityButtonWidget(
+                                isIncrement: false,
+                                onTap: () {
+                                  cubit.quantityController.text =
+                                      ((double.tryParse(cubit.quantityController.text) ?? 0) - 1)
+                                          .toInt()
+                                          .toString();
+                                }),
                             validator: (value) {
                               if (value == null || value.toString().isEmpty) {
                                 return LocaleKeys.thisFieldIsRequired.tr();
@@ -57,6 +76,11 @@ Future showQuantityBottomSheet(context2, {DirectSellingDetailsCubit? cubit}) =>
                               if (int.parse(value) >
                                   int.parse("${cubit.directSellingDataModel?.subQuantity ?? 0}")) {
                                 return LocaleKeys.quantityError.tr();
+                              }
+                              if (int.parse(value) <= 0) {
+                                return Constants.isArabic
+                                    ? "يجب ان تكون القيمه اكبر من 0"
+                                    : "value must be greater than 0";
                               }
                               return null;
                             },
