@@ -99,8 +99,9 @@ Future showBidBottomSheet(context, {BiddingDetailsCubit? cubit}) => defaultshowM
                                 if (value == null || value.toString().isEmpty) {
                                   return LocaleKeys.thisFieldIsRequired.tr();
                                 }
-                                if (double.tryParse(value)! <=
-                                    (cubit.directSellingDataModel!.lastBid!.value!)) {
+                                if (cubit.directSellingDataModel?.lastBid?.value != null &&
+                                    double.tryParse(value)! <=
+                                        (cubit.directSellingDataModel!.lastBid!.value!)) {
                                   return Constants.isArabic
                                       ? 'يجب أن يكون عرضك أكبر من ${cubit.directSellingDataModel!.lastBid!.value}'
                                       : 'Your bid must be greater than the current bid of ${cubit.directSellingDataModel!.lastBid!.value}';
