@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/loading_widget.dart';
 import 'package:hasad_app/common/default/show_toast.dart';
@@ -53,12 +55,21 @@ class LoginButton extends StatelessWidget {
                 borderRAdius: 43,
                 buttonName: LocaleKeys.login.tr(),
                 buttonFunction: () async {
-                  CacheHelper.saveData(
-                      key: CacheKeys.fcmId, value: await FirebaseMessagingService.getToken());
+                  try {
+                    cubit.emitLoginLoading();
+                    String? fcmToken = await FirebaseMessagingService.getToken();
+                    CacheHelper.saveData(key: CacheKeys.fcmId, value: fcmToken);
 
-                  if (formKey.currentState!.validate()) {
-                    await cubit.login(LoginRequest(emailController.text, passwordController.text,
-                        await FirebaseMessagingService.getToken() ?? ""));
+                    if (formKey.currentState!.validate()) {
+                      await cubit.login(LoginRequest(
+                          emailController.text, passwordController.text, fcmToken ?? "00"));
+                    }
+                  } catch (e) {
+                    if (formKey.currentState!.validate()) {
+                      await cubit.login(
+                          LoginRequest(emailController.text, passwordController.text, "000"));
+                    }
+                    log(e.toString());
                   }
                 });
       },

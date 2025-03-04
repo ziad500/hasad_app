@@ -1,15 +1,26 @@
+import 'dart:developer';
+
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 
-String bidChannel = "bid_channel";
+String bidChannel = "auction-channel";
 
 class PusherService {
   static PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
 
   static init({dynamic Function(PusherEvent)? onEvent}) async {
     await pusher.init(
-      apiKey: "b7474dd013a791493467",
+      apiKey: "ba0c08cc56fa89a9be5a",
+      logToConsole: true,
+      enableStats: true,
       cluster: "eu",
       onEvent: onEvent ?? (event) {},
+      onSubscriptionError: (message, error) => log("pusher onSubscriptionError $error"),
+      onSubscriptionSucceeded: (channelName, data) => log("pusher $channelName"),
+      onError: (message, code, error) => log("pusher error $error"),
+      onConnectionStateChange: (currentState, previousState) =>
+          log("pusher onConnectionStateChange $currentState"),
+      onAuthorizer: (channelName, socketId, options) =>
+          log("pusher onAuthorizer $channelName  $options"),
     );
   }
 

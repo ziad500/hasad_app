@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,7 +84,9 @@ class BiddingDetailsCubit extends Cubit<BiddingDetailsState> {
       onEvent: (event) {
         Map<String, dynamic> jsonMap = jsonDecode(event.data.toString());
         EventDataModel? eventDataModel = EventDataModel.fromJson(jsonMap);
-        if (event.eventName == "new_bid_event" &&
+        log("pusher");
+        log("pusher : ${jsonMap}");
+        if (event.eventName == "bid_event" &&
             eventDataModel.advertisementId == directSellingDataModel?.id.toString()) {
           directSellingDataModel?.lastBid = LastBidModel(double.parse(eventDataModel.value),
               eventDataModel.userName, eventDataModel.userAvatar, eventDataModel.createdAt);

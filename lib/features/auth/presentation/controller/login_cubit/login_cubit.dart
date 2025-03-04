@@ -63,8 +63,11 @@ class LoginCubit extends Cubit<LoginState> {
     userLogin(loginRequest);
   }
 
-  Future<void> userLogin(LoginRequest input) async {
+  emitLoginLoading() {
     emit(LoginLoadingState());
+  }
+
+  Future<void> userLogin(LoginRequest input) async {
     await userLoginUseCase.execude(input).then((value) => value.fold((l) {
           emit(LoginErrorState(l.message));
         }, (r) async {
