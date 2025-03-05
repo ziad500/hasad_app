@@ -13,7 +13,10 @@ class PusherService {
       logToConsole: true,
       enableStats: true,
       cluster: "eu",
-      onEvent: onEvent ?? (event) {},
+      onEvent: onEvent ??
+          (event) {
+            log("pusherrrrr");
+          },
       onSubscriptionError: (message, error) => log("pusher onSubscriptionError $error"),
       onSubscriptionSucceeded: (channelName, data) => log("pusher $channelName"),
       onError: (message, code, error) => log("pusher error $error"),

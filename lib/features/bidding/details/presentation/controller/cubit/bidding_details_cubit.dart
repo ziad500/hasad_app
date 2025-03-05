@@ -83,11 +83,11 @@ class BiddingDetailsCubit extends Cubit<BiddingDetailsState> {
     PusherService.init(
       onEvent: (event) {
         Map<String, dynamic> jsonMap = jsonDecode(event.data.toString());
+
         EventDataModel? eventDataModel = EventDataModel.fromJson(jsonMap);
-        log("pusher");
-        log("pusher : ${jsonMap}");
+
         if (event.eventName == "bid_event" &&
-            eventDataModel.advertisementId == directSellingDataModel?.id.toString()) {
+            eventDataModel.advertisementId == directSellingDataModel?.id) {
           directSellingDataModel?.lastBid = LastBidModel(double.parse(eventDataModel.value),
               eventDataModel.userName, eventDataModel.userAvatar, eventDataModel.createdAt);
           emit(NewBidState());
@@ -95,6 +95,7 @@ class BiddingDetailsCubit extends Cubit<BiddingDetailsState> {
       },
     );
     PusherService.subscribe(channelName: bidChannel);
+
     PusherService.connect();
   }
 

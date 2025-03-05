@@ -31,7 +31,7 @@ class EventModel {
 }
 
 class EventDataModel {
-  String advertisementId;
+  num advertisementId;
   String userName;
   String userAvatar;
   String value;

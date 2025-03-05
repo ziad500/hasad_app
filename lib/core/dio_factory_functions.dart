@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:hasad_app/features/auth/data/network/auth_requests.dart';
+import 'package:hasad_app/features/auth/presentation/controller/login_cubit/login_cubit.dart';
+
 import '../common/default/show_toast.dart';
 import '../utils/cache_helper.dart';
 import '../utils/cache_keys.dart';
@@ -12,7 +15,13 @@ import 'dio_factory.dart';
 class DioFactoryFunctions {
   static void onError(DioException error, ErrorInterceptorHandler handler) async {
     if (error.response?.statusCode == 401 && Constants.token != "") {
-      Dio dio = Dio();
+      LoginCubit.get(navigatorKey.currentContext).userLogOut(LogOutRequest());
+      Constants.token = "";
+      showSnackbar(
+          context: navigatorKey.currentContext,
+          text: Constants.isArabic ? "من فضلك قم بتسجيل الدخول من جديد" : "please login again",
+          state: ToastStates.ERROR);
+      /*  Dio dio = Dio();
       try {
         final value = await dio.post('${Constants.baseUrl}auth/refreshToken',
             data: jsonEncode({"refreshToken": Constants.refreshToken}),
@@ -56,7 +65,7 @@ class DioFactoryFunctions {
         } else {
           handler.next(error);
         }
-      }
+      } */
     } else {
       handler.next(error);
     }
