@@ -41,6 +41,9 @@ class _BiddingOrdersListViewState extends State<BiddingOrdersListView> {
       if (state is ConfirmOrderErrorState) {
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }
+      if (state is AuthConfirmOrderErrorState) {
+        showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
+      }
       if (state is ConfirmOrderSuccessState) {
         cubit.directSellingOrdersListModel = null;
         cubit.getBiddingList();

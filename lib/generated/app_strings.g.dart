@@ -9,6 +9,7 @@ abstract class LocaleKeys {
   static const enterCode = 'enterCode';
   static const confirmationCode = 'ConfirmationCode';
   static const biddingRequests = 'biddingRequests';
+  static const rejectRecieve = 'rejectRecieve';
 
   static const expiryDate = 'expiryDate';
   static const accept = 'accept';

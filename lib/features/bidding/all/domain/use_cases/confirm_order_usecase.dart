@@ -9,7 +9,8 @@ class ConfirmOrderUseCase {
     this._repository,
   );
 
-  Future<Either<Failure, SuccessModel>> execude(String? purchaseInvoiceId) async {
-    return await _repository.confirmOrder(purchaseInvoiceId);
+  Future<Either<Failure, SuccessModel>> execude(
+      String? purchaseInvoiceId, String? isReceived, String? reason) async {
+    return await _repository.confirmOrder(purchaseInvoiceId, isReceived, reason);
   }
 }

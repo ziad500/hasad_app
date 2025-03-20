@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model.dart';
-import 'package:hasad_app/features/direct_selling/all/domain/use_cases/confirm_order_usecase.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/use_cases/confirm_order_usecase_otp.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_orders_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/re_complete_payment_usecase.dart';
 
@@ -78,10 +78,11 @@ class DirectSellingOrdersCubit extends Cubit<DirectSellingOrdersState> {
     return nextPageNumber;
   }
 
-  Future<void> confirmOrder(String purchaseInvoiceId) async {
+  Future<void> confirmOrder(String purchaseInvoiceId, String? isReceived, String? reason) async {
     emit(ConfirmOrderLoadingState());
-    await _confirmOrderUseCase.execude(purchaseInvoiceId).then((value) => value.fold(
-        (l) => emit(ConfirmOrderErrorState(l.message)), (r) => emit(ConfirmOrderSuccessState())));
+    await _confirmOrderUseCase.execude(purchaseInvoiceId, isReceived, reason).then((value) =>
+        value.fold((l) => emit(ConfirmOrderErrorState(l.message)),
+            (r) => emit(ConfirmOrderSuccessState())));
   }
 
   Future<void> authConfirmOrder(String purchaseInvoiceId, String confirmationcode) async {

@@ -6,7 +6,8 @@ part of 'profile_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) => ProfileResponse(
+ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) =>
+    ProfileResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
       data: json['data'] == null
@@ -14,13 +15,15 @@ ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) => ProfileR
           : ProfileDataResponse.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
+    <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
       'data': instance.data,
     };
 
-ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) => ProfileDataResponse(
+ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) =>
+    ProfileDataResponse(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       phone: (json['phone'] as num?)?.toInt(),
@@ -33,7 +36,9 @@ ProfileDataResponse _$ProfileDataResponseFromJson(Map<String, dynamic> json) => 
           .toList(),
     );
 
-Map<String, dynamic> _$ProfileDataResponseToJson(ProfileDataResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$ProfileDataResponseToJson(
+        ProfileDataResponse instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'phone': instance.phone,
@@ -51,7 +56,8 @@ CashBack _$CashBackFromJson(Map<String, dynamic> json) => CashBack(
       percentage: json['percentage'] as String?,
       advertisment: json['advertisment'] == null
           ? null
-          : DirectSellingDataResponse.fromJson(json['advertisment'] as Map<String, dynamic>),
+          : DirectSellingDataResponse.fromJson(
+              json['advertisment'] as Map<String, dynamic>),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
     );
@@ -66,7 +72,8 @@ Map<String, dynamic> _$CashBackToJson(CashBack instance) => <String, dynamic>{
       'updated_at': instance.updatedAt,
     };
 
-SettingsResponse _$SettingsResponseFromJson(Map<String, dynamic> json) => SettingsResponse(
+SettingsResponse _$SettingsResponseFromJson(Map<String, dynamic> json) =>
+    SettingsResponse(
       status: json['status'] as bool?,
       message: json['message'] as String?,
       data: json['data'] == null
@@ -74,20 +81,23 @@ SettingsResponse _$SettingsResponseFromJson(Map<String, dynamic> json) => Settin
           : SettingsDataResponse.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$SettingsResponseToJson(SettingsResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$SettingsResponseToJson(SettingsResponse instance) =>
+    <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
       'data': instance.data,
     };
 
-SettingsDataResponse _$SettingsDataResponseFromJson(Map<String, dynamic> json) =>
+SettingsDataResponse _$SettingsDataResponseFromJson(
+        Map<String, dynamic> json) =>
     SettingsDataResponse(
       id: (json['id'] as num?)?.toInt(),
-      auctionRateIncrement: (json['auction_rate_increment'] as num?),
-      cashbackRateIncrement: (json['cashback_rate_increment'] as num?),
+      auctionRateIncrement: json['auction_rate_increment'] as num?,
+      cashbackRateIncrement: json['cashback_rate_increment'] as num?,
     );
 
-Map<String, dynamic> _$SettingsDataResponseToJson(SettingsDataResponse instance) =>
+Map<String, dynamic> _$SettingsDataResponseToJson(
+        SettingsDataResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'auction_rate_increment': instance.auctionRateIncrement,

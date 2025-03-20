@@ -21,6 +21,7 @@ extension BiddingOrderResponseMapper on BiddingOrderResponse? {
         this?.priceAfterTax,
         this?.price,
         this?.paymentdate,
-        this?.receivedDate);
+        this?.receivedDate,
+        this?.isConfirmed);
   }
 }

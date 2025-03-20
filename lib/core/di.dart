@@ -11,6 +11,7 @@ import 'package:hasad_app/features/bidding/all/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/bidding/all/domain/repository/repo.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/buy_order_after_win_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase_otp.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_list_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_orders_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_my_bidding_list_usecase.dart';
@@ -45,7 +46,7 @@ import 'package:hasad_app/features/direct_selling/all/data/data_source/remote_da
 import 'package:hasad_app/features/direct_selling/all/data/network/direct_selling_list_api.dart';
 import 'package:hasad_app/features/direct_selling/all/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/repository/repo.dart';
-import 'package:hasad_app/features/direct_selling/all/domain/use_cases/confirm_order_usecase.dart';
+import 'package:hasad_app/features/direct_selling/all/domain/use_cases/confirm_order_usecase_otp.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_list_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_direct_selling_orders_usecase.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/use_cases/get_my_direct_selling_list_usecase.dart';
@@ -497,7 +498,7 @@ iniBiddingList() async {
   }
   if (!GetIt.I.isRegistered<BiddingOrdersCubit>()) {
     sl.registerFactory<BiddingOrdersCubit>(
-        () => BiddingOrdersCubit(sl.call(), sl.call(), sl.call()));
+        () => BiddingOrdersCubit(sl.call(), sl.call(), sl.call(), sl.call()));
   }
 
   //app service client instance
@@ -535,6 +536,10 @@ iniBiddingList() async {
   }
   if (!GetIt.I.isRegistered<ConfirmOrderUseCase>()) {
     sl.registerLazySingleton<ConfirmOrderUseCase>(() => ConfirmOrderUseCase(sl.call()));
+  }
+  if (!GetIt.I.isRegistered<BiddingConfirmOrderByCodeUseCase>()) {
+    sl.registerLazySingleton<BiddingConfirmOrderByCodeUseCase>(
+        () => BiddingConfirmOrderByCodeUseCase(sl.call()));
   }
 }
 

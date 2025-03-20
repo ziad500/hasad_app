@@ -4,9 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hasad_app/common/default/default_button.dart';
 import 'package:hasad_app/common/default/default_text.dart';
+import 'package:hasad_app/common/default/show_modal_bottom_sheet.dart';
 import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
+import 'package:hasad_app/features/bidding/all/presentation/components/auth_order_bottom_sheet.dart';
 import 'package:hasad_app/features/bidding/all/presentation/controller/orders/cubit/bidding_orders_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
@@ -98,34 +100,119 @@ class BiddingOrderWidget extends StatelessWidget {
                     height: 35,
                     width: 100.w,
                     textSize: 12.sp,
-                    color: biddingOrderModel.paymentdate == null
+                    color: (biddingOrderModel.paymentdate == null ||
+                            biddingOrderModel.paymentdate == "")
                         ? AppColors.red
                         : AppColors.primaryColor,
-                    buttonName: biddingOrderModel.paymentdate == null
+                    buttonName: (biddingOrderModel.paymentdate == null ||
+                            biddingOrderModel.paymentdate == "")
                         ? LocaleKeys.pleasePay.tr()
                         : LocaleKeys.donePayment.tr(),
                     buttonFunction: () {
-                      if (biddingOrderModel.paymentdate == null) {
+                      if ((biddingOrderModel.paymentdate == null ||
+                          biddingOrderModel.paymentdate == "")) {
                         BiddingOrdersCubit.get(context)
                             .buyOrderAfterWin(biddingOrderModel.advertisementId!);
                       }
                     })
               ],
             ),
-            if (biddingOrderModel.paymentdate != null &&
-                biddingOrderModel.purchaseInvoiceId != null &&
-                biddingOrderModel.receivedDate == null) ...[
-              const SizedBox(height: 10),
+            /* 
+            ... */
+            if (biddingOrderModel.isConfirmed == 0) ...[
+              SizedBox(
+                height: 10.h,
+              ),
               DefaultButton(
                   height: 35,
                   textSize: 12.sp,
-                  color: AppColors.red,
-                  buttonName: LocaleKeys.doneRecieve.tr(),
+                  color: AppColors.mainOpacity,
+                  textColor: AppColors.primaryColor,
+                  buttonName: LocaleKeys.auth.tr(),
                   buttonFunction: () {
-                    BiddingOrdersCubit.get(context)
-                        .confirmOrder(biddingOrderModel.purchaseInvoiceId!);
+                    BiddingOrdersCubit cubit = BiddingOrdersCubit.get(context);
+                    showModalSheet(
+                        context,
+                        BiddingAuthOrderBottomSheet(
+                            biddingOrdersCubit: cubit,
+                            purchaseInvoiceId: biddingOrderModel.purchaseInvoiceId.toString()));
                   })
+            ],
+
+            /*   if (directSellingOrderModel.purchaseInvoiceId != null &&
+                directSellingOrderModel.receivedDate == null &&
+                directSellingOrderModel.isConfirmed == 1 &&
+                directSellingOrderModel.isPaid == 1) ... */
+            if (biddingOrderModel.paymentdate != null &&
+                biddingOrderModel.purchaseInvoiceId != null &&
+                biddingOrderModel.receivedDate == null &&
+                biddingOrderModel.isConfirmed == 1) ...[
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: DefaultButton(
+                        height: 35,
+                        textSize: 12.sp,
+                        color: AppColors.primaryColor,
+                        buttonName: LocaleKeys.doneRecieve.tr(),
+                        buttonFunction: () {
+                          BiddingOrdersCubit.get(context)
+                              .confirmOrder(biddingOrderModel.purchaseInvoiceId!, "2", "");
+                        }),
+                  ),
+                  const SizedBox(height: 15),
+                  Expanded(
+                    child: DefaultButton(
+                        height: 35,
+                        textSize: 12.sp,
+                        color: AppColors.primaryColor,
+                        buttonName: LocaleKeys.rejectRecieve.tr(),
+                        buttonFunction: () {
+                          /* 
+                          BiddingOrdersCubit.get(context)
+                              .confirmOrder(biddingOrderModel.purchaseInvoiceId!,"3",""); */
+                        }),
+                  ),
+                ],
+              )
+            ] /* 
+            ... */
+            /*      if (biddingOrderModel.paymentdate != null &&
+                biddingOrderModel.purchaseInvoiceId != null &&
+                biddingOrderModel.receivedDate == null) ...[
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: DefaultButton(
+                        height: 35,
+                        textSize: 12.sp,
+                        color: AppColors.primaryColor,
+                        buttonName: LocaleKeys.doneRecieve.tr(),
+                        buttonFunction: () {
+                          BiddingOrdersCubit.get(context)
+                              .confirmOrder(biddingOrderModel.purchaseInvoiceId!);
+                        }),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: DefaultButton(
+                        height: 35,
+                        textSize: 12.sp,
+                        color: AppColors.red,
+                        buttonName: LocaleKeys.rejectRecieve.tr(),
+                        buttonFunction: () {
+                          BiddingOrdersCubit.get(context)
+                              .confirmOrder(biddingOrderModel.purchaseInvoiceId!);
+                        }),
+                  ),
+                ],
+              )
             ]
+        */
           ],
         ),
       ),

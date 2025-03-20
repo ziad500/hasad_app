@@ -158,11 +158,11 @@ class SalesOrdersWidget extends StatelessWidget {
               DefaultButton(
                   height: 35,
                   textSize: 12.sp,
-                  color: AppColors.red,
+                  color: AppColors.primaryColor,
                   buttonName: LocaleKeys.doneRecieve.tr(),
                   buttonFunction: () {
                     DirectSellingOrdersCubit.get(context)
-                        .confirmOrder(model.purchaseInvoiceId.toString());
+                        .confirmOrder(model.purchaseInvoiceId.toString(), "2", "");
                   })
             ]
           ],

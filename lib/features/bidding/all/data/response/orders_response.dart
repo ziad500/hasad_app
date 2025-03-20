@@ -46,6 +46,8 @@ class BiddingOrderResponse {
   String? paymentdate;
   @JsonKey(name: "received_date")
   String? receivedDate;
+  @JsonKey(name: "is_confirmed")
+  int? isConfirmed;
   BiddingOrderResponse(
       {this.purchaseInvoiceId,
       this.advertisementId,
@@ -56,7 +58,8 @@ class BiddingOrderResponse {
       this.priceAfterTax,
       this.price,
       this.paymentdate,
-      this.receivedDate});
+      this.receivedDate,
+      this.isConfirmed});
 
   // from json
   factory BiddingOrderResponse.fromJson(Map<String, dynamic> json) =>

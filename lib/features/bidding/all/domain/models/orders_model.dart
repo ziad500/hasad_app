@@ -20,6 +20,7 @@ class BiddingOrderModel {
   num? price;
   String? paymentdate;
   String? receivedDate;
+  int? isConfirmed;
   BiddingOrderModel(
       this.purchaseInvoiceId,
       this.advertisementId,
@@ -30,5 +31,6 @@ class BiddingOrderModel {
       this.priceAfterTax,
       this.price,
       this.paymentdate,
-      this.receivedDate);
+      this.receivedDate,
+      this.isConfirmed);
 }

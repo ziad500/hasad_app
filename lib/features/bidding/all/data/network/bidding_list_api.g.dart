@@ -170,7 +170,11 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
   }
 
   @override
-  Future<SuccessResponse> confirmOrder(String? purchaseInvoiceId) async {
+  Future<SuccessResponse> confirmOrder(
+    String? purchaseInvoiceId,
+    String? isReceived,
+    String? reason,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -180,6 +184,18 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
       _data.fields.add(MapEntry(
         'purchase_invoice_id',
         purchaseInvoiceId,
+      ));
+    }
+    if (isReceived != null) {
+      _data.fields.add(MapEntry(
+        'is_received',
+        isReceived,
+      ));
+    }
+    if (reason != null) {
+      _data.fields.add(MapEntry(
+        'reason',
+        reason,
       ));
     }
     final _result = await _dio
@@ -200,6 +216,48 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
               baseUrl,
             ))));
     final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<dynamic> confirmOrderByCode(
+    String? purchaseInvoiceId,
+    String? confirmationcode,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (purchaseInvoiceId != null) {
+      _data.fields.add(MapEntry(
+        'purchase_invoice_id',
+        purchaseInvoiceId,
+      ));
+    }
+    if (confirmationcode != null) {
+      _data.fields.add(MapEntry(
+        'confirmation_code',
+        confirmationcode,
+      ));
+    }
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'auctions/confirm-code',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data;
     return value;
   }
 

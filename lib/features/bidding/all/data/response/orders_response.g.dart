@@ -42,6 +42,7 @@ BiddingOrderResponse _$BiddingOrderResponseFromJson(
       price: json['price'] as num?,
       paymentdate: json['payment_date'] as String?,
       receivedDate: json['received_date'] as String?,
+      isConfirmed: (json['is_confirmed'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$BiddingOrderResponseToJson(
@@ -57,4 +58,5 @@ Map<String, dynamic> _$BiddingOrderResponseToJson(
       'price': instance.price,
       'payment_date': instance.paymentdate,
       'received_date': instance.receivedDate,
+      'is_confirmed': instance.isConfirmed,
     };

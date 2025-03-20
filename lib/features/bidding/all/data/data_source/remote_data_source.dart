@@ -13,7 +13,10 @@ abstract class BiddingListRemoteDataSource {
 
   Future<SuccessResponse> buyOrderAfterWin(String? advertisementId);
 
-  Future<SuccessResponse> confirmOrder(String? purchaseInvoiceId);
+  Future<SuccessResponse> confirmOrder(
+      String? purchaseInvoiceId, String? isReceived, String? reason);
+
+  Future<dynamic> confirmOrderByCode(String? purchaseInvoiceId, String? confirmationcode);
 }
 
 class BiddingListRemoteDataSourceImpl implements BiddingListRemoteDataSource {
@@ -51,6 +54,11 @@ class BiddingListRemoteDataSourceImpl implements BiddingListRemoteDataSource {
       _directSellingListAppServiceClient.buyOrderAfterWin(advertisementId);
 
   @override
-  Future<SuccessResponse> confirmOrder(String? purchaseInvoiceId) =>
-      _directSellingListAppServiceClient.confirmOrder(purchaseInvoiceId);
+  Future<SuccessResponse> confirmOrder(
+          String? purchaseInvoiceId, String? isReceived, String? reason) =>
+      _directSellingListAppServiceClient.confirmOrder(purchaseInvoiceId, isReceived, reason);
+
+  @override
+  Future confirmOrderByCode(String? purchaseInvoiceId, String? confirmationcode) =>
+      _directSellingListAppServiceClient.confirmOrderByCode(purchaseInvoiceId, confirmationcode);
 }

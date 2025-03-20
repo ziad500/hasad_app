@@ -38,3 +38,12 @@ final class ConfirmOrderErrorState extends BiddingOrdersState {
   final String error;
   const ConfirmOrderErrorState(this.error);
 }
+
+final class AuthConfirmOrderLoadingState extends BiddingOrdersState {}
+
+final class AuthConfirmOrderSuccessState extends BiddingOrdersState {}
+
+final class AuthConfirmOrderErrorState extends BiddingOrdersState {
+  final String error;
+  const AuthConfirmOrderErrorState(this.error);
+}

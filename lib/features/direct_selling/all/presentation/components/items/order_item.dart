@@ -163,15 +163,34 @@ class DirectSellingOrderWidget extends StatelessWidget {
                 directSellingOrderModel.isConfirmed == 1 &&
                 directSellingOrderModel.isPaid == 1) ...[
               const SizedBox(height: 10),
-              DefaultButton(
-                  height: 35,
-                  textSize: 12.sp,
-                  color: AppColors.red,
-                  buttonName: LocaleKeys.doneRecieve.tr(),
-                  buttonFunction: () {
-                    DirectSellingOrdersCubit.get(context)
-                        .confirmOrder(directSellingOrderModel.purchaseInvoiceId.toString());
-                  })
+              Row(
+                children: [
+                  Expanded(
+                    child: DefaultButton(
+                        height: 35,
+                        textSize: 12.sp,
+                        color: AppColors.primaryColor,
+                        buttonName: LocaleKeys.doneRecieve.tr(),
+                        buttonFunction: () {
+                          DirectSellingOrdersCubit.get(context).confirmOrder(
+                              directSellingOrderModel.purchaseInvoiceId.toString(), "2", "");
+                        }),
+                  ),
+                  const SizedBox(height: 15),
+                  Expanded(
+                    child: DefaultButton(
+                        height: 35,
+                        textSize: 12.sp,
+                        color: AppColors.primaryColor,
+                        buttonName: LocaleKeys.rejectRecieve.tr(),
+                        buttonFunction: () {
+                          /* 
+                          DirectSellingOrdersCubit.get(context).confirmOrder(
+                              directSellingOrderModel.purchaseInvoiceId.toString(), "3", ""); */
+                        }),
+                  ),
+                ],
+              )
             ]
           ],
         ),
