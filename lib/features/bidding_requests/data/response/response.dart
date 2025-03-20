@@ -39,7 +39,7 @@ class BiddingRequestsDataResponse {
   String? paymentDate;
 
   @JsonKey(name: "advertisement_id")
-  int? advertisementId;
+  String? advertisementId;
 
   @JsonKey(name: "title")
   String? title;

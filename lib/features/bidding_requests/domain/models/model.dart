@@ -21,7 +21,7 @@ class BiddingRequestsDataModel {
 
   String? paymentDate;
 
-  int? advertisementId;
+  String? advertisementId;
 
   String? title;
 
