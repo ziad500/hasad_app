@@ -46,8 +46,8 @@ class BiddingOrderResponse {
   String? paymentdate;
   @JsonKey(name: "received_date")
   String? receivedDate;
-  @JsonKey(name: "is_confirmed")
-  int? isConfirmed;
+  @JsonKey(name: "purchase")
+  PurchaseResponse? purchase;
   BiddingOrderResponse(
       {this.purchaseInvoiceId,
       this.advertisementId,
@@ -59,11 +59,39 @@ class BiddingOrderResponse {
       this.price,
       this.paymentdate,
       this.receivedDate,
-      this.isConfirmed});
+      this.purchase});
 
   // from json
   factory BiddingOrderResponse.fromJson(Map<String, dynamic> json) =>
       _$BiddingOrderResponseFromJson(json);
   // to json
   Map<String, dynamic> toJson() => _$BiddingOrderResponseToJson(this);
+}
+
+@JsonSerializable()
+class PurchaseResponse {
+  @JsonKey(name: "invoice_number")
+  int? invoiceNumber;
+  @JsonKey(name: "is_received")
+  int? isReceived;
+  @JsonKey(name: "is_confirmed")
+  int? isConfirmed;
+  @JsonKey(name: "is_paid")
+  int? isPaid;
+  @JsonKey(name: "is_refunded")
+  int? isRefunded;
+  @JsonKey(name: "reason")
+  String? rejectReason;
+
+  PurchaseResponse(
+      {this.invoiceNumber,
+      this.isReceived,
+      this.isConfirmed,
+      this.isPaid,
+      this.isRefunded,
+      this.rejectReason});
+
+  factory PurchaseResponse.fromJson(Map<String, dynamic> json) => _$PurchaseResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PurchaseResponseToJson(this);
 }

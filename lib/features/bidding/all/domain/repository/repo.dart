@@ -20,6 +20,9 @@ abstract class BiddingListRepository {
   Future<Either<Failure, SuccessModel>> confirmOrder(
       String? purchaseInvoiceId, String? isReceived, String? reason);
 
+  Future<Either<Failure, SuccessModel>> confirmBiddingOrder(
+      String? purchaseInvoiceId, String? isReceived, String? reason);
+
   Future<Either<Failure, dynamic>> confirmOrderByCode(
       String? purchaseInvoiceId, String? confirmationcode);
 }

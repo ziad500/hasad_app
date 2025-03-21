@@ -9,6 +9,7 @@ import 'package:hasad_app/common/sub_title_widget.dart';
 import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
 import 'package:hasad_app/features/bidding/all/presentation/components/auth_order_bottom_sheet.dart';
+import 'package:hasad_app/features/bidding/all/presentation/components/reject_bottomsheet.dart';
 import 'package:hasad_app/features/bidding/all/presentation/controller/orders/cubit/bidding_orders_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
@@ -100,17 +101,14 @@ class BiddingOrderWidget extends StatelessWidget {
                     height: 35,
                     width: 100.w,
                     textSize: 12.sp,
-                    color: (biddingOrderModel.paymentdate == null ||
-                            biddingOrderModel.paymentdate == "")
+                    color: biddingOrderModel.purchase?.isPaid == 0
                         ? AppColors.red
                         : AppColors.primaryColor,
-                    buttonName: (biddingOrderModel.paymentdate == null ||
-                            biddingOrderModel.paymentdate == "")
+                    buttonName: biddingOrderModel.purchase?.isPaid == 0
                         ? LocaleKeys.pleasePay.tr()
                         : LocaleKeys.donePayment.tr(),
                     buttonFunction: () {
-                      if ((biddingOrderModel.paymentdate == null ||
-                          biddingOrderModel.paymentdate == "")) {
+                      if (biddingOrderModel.purchase?.isPaid == 0) {
                         BiddingOrdersCubit.get(context)
                             .buyOrderAfterWin(biddingOrderModel.advertisementId!);
                       }
@@ -119,7 +117,7 @@ class BiddingOrderWidget extends StatelessWidget {
             ),
             /* 
             ... */
-            if (biddingOrderModel.isConfirmed == 0) ...[
+            if (biddingOrderModel.purchase?.isConfirmed == 0) ...[
               SizedBox(
                 height: 10.h,
               ),
@@ -143,10 +141,34 @@ class BiddingOrderWidget extends StatelessWidget {
                 directSellingOrderModel.receivedDate == null &&
                 directSellingOrderModel.isConfirmed == 1 &&
                 directSellingOrderModel.isPaid == 1) ... */
-            if (biddingOrderModel.paymentdate != null &&
+            if ((biddingOrderModel.purchase?.isReceived == 2 ||
+                biddingOrderModel.purchase?.isReceived == 3)) ...[
+              const SizedBox(height: 10),
+              DefaultButton(
+                  height: 35,
+                  textSize: 12.sp,
+                  color: biddingOrderModel.purchase?.isReceived == 2 ? Colors.green : Colors.red,
+                  buttonName: biddingOrderModel.purchase?.isReceived == 2
+                      ? LocaleKeys.doneRecieve.tr()
+                      : LocaleKeys.doneReject.tr(),
+                  buttonFunction: () {}),
+              if (biddingOrderModel.purchase?.rejectReason != null &&
+                  biddingOrderModel.purchase?.rejectReason != "") ...[
+                const SizedBox(height: 5),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.red.withOpacity(0.6), borderRadius: BorderRadius.circular(15)),
+                  child: SubTitleWidget(
+                    subTitle: biddingOrderModel.purchase?.rejectReason ?? "",
+                    color: Colors.white,
+                  ),
+                )
+              ]
+            ],
+            if (biddingOrderModel.purchase?.isPaid == 1 &&
                 biddingOrderModel.purchaseInvoiceId != null &&
-                biddingOrderModel.receivedDate == null &&
-                biddingOrderModel.isConfirmed == 1) ...[
+                (biddingOrderModel.purchase?.isReceived == 1) &&
+                biddingOrderModel.purchase?.isConfirmed == 1) ...[
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -161,17 +183,21 @@ class BiddingOrderWidget extends StatelessWidget {
                               .confirmOrder(biddingOrderModel.purchaseInvoiceId!, "2", "");
                         }),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(width: 15),
                   Expanded(
                     child: DefaultButton(
                         height: 35,
                         textSize: 12.sp,
-                        color: AppColors.primaryColor,
+                        color: AppColors.red,
                         buttonName: LocaleKeys.rejectRecieve.tr(),
                         buttonFunction: () {
-                          /* 
-                          BiddingOrdersCubit.get(context)
-                              .confirmOrder(biddingOrderModel.purchaseInvoiceId!,"3",""); */
+                          BiddingOrdersCubit cubit = BiddingOrdersCubit.get(context);
+                          showModalSheet(
+                              context,
+                              RejectOrderBottomSheet(
+                                  biddingOrdersCubit: cubit,
+                                  purchaseInvoiceId:
+                                      biddingOrderModel.purchaseInvoiceId.toString()));
                         }),
                   ),
                 ],

@@ -32,11 +32,16 @@ final class BuyOrderAfterWinErrorState extends BiddingOrdersState {
 
 final class ConfirmBiddingOrderLoadingState extends BiddingOrdersState {}
 
-final class ConfirmOrderSuccessState extends BiddingOrdersState {}
+final class ConfirmOrderSuccessState extends BiddingOrdersState {
+  final bool isReject;
+  ConfirmOrderSuccessState(this.isReject);
+}
 
 final class ConfirmOrderErrorState extends BiddingOrdersState {
   final String error;
-  const ConfirmOrderErrorState(this.error);
+  final bool isReject;
+
+  const ConfirmOrderErrorState(this.error, this.isReject);
 }
 
 final class AuthConfirmOrderLoadingState extends BiddingOrdersState {}

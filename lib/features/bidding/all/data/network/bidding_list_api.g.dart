@@ -220,6 +220,56 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
   }
 
   @override
+  Future<SuccessResponse> confirmBiddingOrder(
+    String? purchaseInvoiceId,
+    String? isReceived,
+    String? reason,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (purchaseInvoiceId != null) {
+      _data.fields.add(MapEntry(
+        'purchase_invoice_id',
+        purchaseInvoiceId,
+      ));
+    }
+    if (isReceived != null) {
+      _data.fields.add(MapEntry(
+        'is_received',
+        isReceived,
+      ));
+    }
+    if (reason != null) {
+      _data.fields.add(MapEntry(
+        'reason',
+        reason,
+      ));
+    }
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'advertisement/auctions/received-successfully',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SuccessResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<dynamic> confirmOrderByCode(
     String? purchaseInvoiceId,
     String? confirmationcode,
@@ -248,7 +298,7 @@ class _BiddingListAppServiceClient implements BiddingListAppServiceClient {
     )
         .compose(
           _dio.options,
-          'auctions/confirm-code',
+          'advertisement/auctions/confirm-code',
           queryParameters: queryParameters,
           data: _data,
         )

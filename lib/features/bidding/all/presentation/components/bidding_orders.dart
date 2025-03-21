@@ -33,7 +33,7 @@ class _BiddingOrdersListViewState extends State<BiddingOrdersListView> {
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }
       if (state is BuyOrderAfterWinSuccessState) {
-        cubit.directSellingOrdersListModel = null;
+        cubit.biddingOrdersListModel = null;
         cubit.getBiddingList();
         showSnackbar(
             context: context, text: LocaleKeys.donePayment.tr(), state: ToastStates.SUCCESS);
@@ -44,11 +44,18 @@ class _BiddingOrdersListViewState extends State<BiddingOrdersListView> {
       if (state is AuthConfirmOrderErrorState) {
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }
+      if (state is AuthConfirmOrderSuccessState) {
+        cubit.biddingOrdersListModel = null;
+        cubit.getBiddingList();
+        showSnackbar(context: context, text: LocaleKeys.doneSend.tr(), state: ToastStates.SUCCESS);
+      }
       if (state is ConfirmOrderSuccessState) {
-        cubit.directSellingOrdersListModel = null;
+        cubit.biddingOrdersListModel = null;
         cubit.getBiddingList();
         showSnackbar(
-            context: context, text: LocaleKeys.doneRecieve.tr(), state: ToastStates.SUCCESS);
+            context: context,
+            text: state.isReject ? LocaleKeys.doneReject.tr() : LocaleKeys.doneRecieve.tr(),
+            state: ToastStates.SUCCESS);
       }
     }, builder: (context, state) {
       //pass the cubit ,states and items type '<BiddingOrdersCubit, BiddingListDartState, ReportModel>'

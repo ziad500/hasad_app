@@ -177,6 +177,8 @@
     "notifications":"الأشعارات",
     "buyBiddingNote":"اذا قمت بدفع التأمين مسبقا سيتم ادراج المبلغ بعد الشراء مباشرة",
     "doneRecieve":"تم الاستلام",
+    "doneReject":"تم الرفض",
+
     "rejectRecieve":"رفض الاستلام",
     "youCannotEditThis":"لا يمكنك تعديل هذا",
     "remainingQuantity":"الكمية المتبقيه",

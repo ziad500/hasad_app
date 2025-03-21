@@ -16,6 +16,9 @@ abstract class BiddingListRemoteDataSource {
   Future<SuccessResponse> confirmOrder(
       String? purchaseInvoiceId, String? isReceived, String? reason);
 
+  Future<SuccessResponse> confirmBiddingOrder(
+      String? purchaseInvoiceId, String? isReceived, String? reason);
+
   Future<dynamic> confirmOrderByCode(String? purchaseInvoiceId, String? confirmationcode);
 }
 
@@ -61,4 +64,9 @@ class BiddingListRemoteDataSourceImpl implements BiddingListRemoteDataSource {
   @override
   Future confirmOrderByCode(String? purchaseInvoiceId, String? confirmationcode) =>
       _directSellingListAppServiceClient.confirmOrderByCode(purchaseInvoiceId, confirmationcode);
+
+  @override
+  Future<SuccessResponse> confirmBiddingOrder(
+          String? purchaseInvoiceId, String? isReceived, String? reason) =>
+      _directSellingListAppServiceClient.confirmBiddingOrder(purchaseInvoiceId, isReceived, reason);
 }

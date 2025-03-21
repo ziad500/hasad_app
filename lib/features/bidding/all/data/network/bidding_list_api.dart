@@ -42,7 +42,13 @@ abstract class BiddingListAppServiceClient {
   Future<SuccessResponse> confirmOrder(@Part(name: 'purchase_invoice_id') String? purchaseInvoiceId,
       @Part(name: 'is_received') String? isReceived, @Part(name: 'reason') String? reason);
 
-  @POST("auctions/confirm-code")
+  @POST("advertisement/auctions/received-successfully")
+  Future<SuccessResponse> confirmBiddingOrder(
+      @Part(name: 'purchase_invoice_id') String? purchaseInvoiceId,
+      @Part(name: 'is_received') String? isReceived,
+      @Part(name: 'reason') String? reason);
+
+  @POST("advertisement/auctions/confirm-code")
   Future<dynamic> confirmOrderByCode(
     @Part(name: 'purchase_invoice_id') String? purchaseInvoiceId,
     @Part(name: 'confirmation_code') String? confirmationcode,

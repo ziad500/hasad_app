@@ -10,6 +10,7 @@ import 'package:hasad_app/features/bidding/all/data/network/bidding_list_api.dar
 import 'package:hasad_app/features/bidding/all/data/repository/repo_impl.dart';
 import 'package:hasad_app/features/bidding/all/domain/repository/repo.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/buy_order_after_win_usecase.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_bidding_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase_otp.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_list_usecase.dart';
@@ -534,8 +535,9 @@ iniBiddingList() async {
     sl.registerLazySingleton<BuyOrderAfterWinOrderUseCase>(
         () => BuyOrderAfterWinOrderUseCase(sl.call()));
   }
-  if (!GetIt.I.isRegistered<ConfirmOrderUseCase>()) {
-    sl.registerLazySingleton<ConfirmOrderUseCase>(() => ConfirmOrderUseCase(sl.call()));
+  if (!GetIt.I.isRegistered<ConfirmBiddingOrderUseCase>()) {
+    sl.registerLazySingleton<ConfirmBiddingOrderUseCase>(
+        () => ConfirmBiddingOrderUseCase(sl.call()));
   }
   if (!GetIt.I.isRegistered<BiddingConfirmOrderByCodeUseCase>()) {
     sl.registerLazySingleton<BiddingConfirmOrderByCodeUseCase>(

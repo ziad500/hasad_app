@@ -68,4 +68,14 @@ class BiddingListRepositoryImpl implements BiddingListRepository {
       return response;
     });
   }
+
+  @override
+  Future<Either<Failure, SuccessModel>> confirmBiddingOrder(
+      String? purchaseInvoiceId, String? isReceived, String? reason) {
+    return executeAndHandleError<SuccessModel>(() async {
+      final response = await _biddingListRemoteDataSource.confirmBiddingOrder(
+          purchaseInvoiceId, isReceived, reason);
+      return response.toDomain();
+    });
+  }
 }

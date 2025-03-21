@@ -22,6 +22,13 @@ extension BiddingOrderResponseMapper on BiddingOrderResponse? {
         this?.price,
         this?.paymentdate,
         this?.receivedDate,
-        this?.isConfirmed);
+        this?.purchase.toDomain());
+  }
+}
+
+extension PurchaseResponseMapper on PurchaseResponse? {
+  PurchaseModel toDomain() {
+    return PurchaseModel(this?.invoiceNumber, this?.isReceived, this?.isConfirmed, this?.isPaid,
+        this?.isRefunded, this?.rejectReason);
   }
 }

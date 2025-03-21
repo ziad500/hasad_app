@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hasad_app/features/bidding/all/domain/models/orders_model.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/buy_order_after_win_usecase.dart';
-import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase.dart';
+import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_bidding_usecase.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/confirm_order_usecase_otp.dart';
 import 'package:hasad_app/features/bidding/all/domain/use_cases/get_bidding_orders_usecase.dart';
 
@@ -10,7 +10,7 @@ part 'bidding_orders_state.dart';
 class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
   final GetBiddingOrdersListUseCase _getBiddingOrdersListUseCase;
   final BuyOrderAfterWinOrderUseCase _buyOrderAfterWinOrderUseCase;
-  final ConfirmOrderUseCase _confirmOrderUseCase;
+  final ConfirmBiddingOrderUseCase _confirmOrderUseCase;
   final BiddingConfirmOrderByCodeUseCase biddingConfirmOrderByCodeUseCase;
   BiddingOrdersCubit(this._getBiddingOrdersListUseCase, this._buyOrderAfterWinOrderUseCase,
       this._confirmOrderUseCase, this.biddingConfirmOrderByCodeUseCase)
@@ -23,10 +23,10 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
     }
   }
 
-  BiddingOrdersListModel? directSellingOrdersListModel;
+  BiddingOrdersListModel? biddingOrdersListModel;
   List<BiddingOrderModel> directSellingOrders = [];
   Future<void> getBiddingList() async {
-    if (_canFetchMore() || directSellingOrdersListModel == null) {
+    if (_canFetchMore() || biddingOrdersListModel == null) {
       _emitLoadingState();
       await _getBiddingOrdersListUseCase.execude(getPageNumber() ?? "1").then((value) => value.fold(
           (l) => emit(GetBiddingOrdersListErrorState(l.message)), (r) => _handleSuccessState(r)));
@@ -35,24 +35,24 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
 
   void _emitSuccessState() {
     emit(GetBiddingOrdersListSuccessState());
-    if (directSellingOrdersListModel?.pagination?.nextPageUrl == null) {
+    if (biddingOrdersListModel?.pagination?.nextPageUrl == null) {
       emit(BiddingOrdersListAllCaughtState());
     }
   }
 
   void _handleSuccessState(BiddingOrdersListModel response) {
-    if (directSellingOrdersListModel == null) {
+    if (biddingOrdersListModel == null) {
       directSellingOrders = response.data ?? [];
-      directSellingOrdersListModel = response;
+      biddingOrdersListModel = response;
     } else {
       directSellingOrders.addAll(response.data ?? []);
-      directSellingOrdersListModel = response;
+      biddingOrdersListModel = response;
     }
     _emitSuccessState();
   }
 
   void _emitLoadingState() {
-    if (directSellingOrdersListModel == null) {
+    if (biddingOrdersListModel == null) {
       emit(GetBiddingOrdersListLoadingState());
     } else {
       emit(GetBiddingOrdersListPaginationLoadingState());
@@ -62,7 +62,7 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
   bool _canFetchMore() => state is! BiddingOrdersListAllCaughtState;
 
   String? getPageNumber() {
-    String? nextPageNumber = directSellingOrdersListModel?.pagination?.nextPageUrl
+    String? nextPageNumber = biddingOrdersListModel?.pagination?.nextPageUrl
         ?.split('?')
         .firstWhere((element) => element.contains("page"));
     try {
@@ -83,8 +83,8 @@ class BiddingOrdersCubit extends Cubit<BiddingOrdersState> {
   Future<void> confirmOrder(String purchaseInvoiceId, String? isReceived, String? reason) async {
     emit(ConfirmBiddingOrderLoadingState());
     await _confirmOrderUseCase.execude(purchaseInvoiceId, isReceived, reason).then((value) =>
-        value.fold((l) => emit(ConfirmOrderErrorState(l.message)),
-            (r) => emit(ConfirmOrderSuccessState())));
+        value.fold((l) => emit(ConfirmOrderErrorState(l.message, isReceived == "3")),
+            (r) => emit(ConfirmOrderSuccessState(isReceived == "3"))));
   }
 
   Future<void> authConfirmOrder(String purchaseInvoiceId, String confirmationcode) async {
