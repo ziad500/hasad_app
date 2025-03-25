@@ -14,7 +14,9 @@ extension DirectSellingOrderResponseMapper on DirectSellingOrderResponse? {
         this?.receivedDate,
         this?.quantity,
         this?.isConfirmed,
-        this?.isPaid);
+        this?.isPaid,
+        this?.isReceived,
+        this?.rejectReason);
   }
 }
 

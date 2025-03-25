@@ -20,6 +20,9 @@ class DirectSellingOrderModel {
   int? quantity;
   int? isConfirmed;
   int? isPaid;
+  int? isReceived;
+  String? rejectReason;
+
   DirectSellingOrderModel(
       this.purchaseInvoiceId,
       this.advertisementId,
@@ -30,5 +33,7 @@ class DirectSellingOrderModel {
       this.receivedDate,
       this.quantity,
       this.isConfirmed,
-      this.isPaid);
+      this.isPaid,
+      this.isReceived,
+      this.rejectReason);
 }

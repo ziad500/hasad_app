@@ -47,6 +47,11 @@ class DirectSellingOrderResponse {
   int? isConfirmed;
   @JsonKey(name: "is_paid")
   int? isPaid;
+  @JsonKey(name: "is_received")
+  int? isReceived;
+  @JsonKey(name: "reason")
+  String? rejectReason;
+
   DirectSellingOrderResponse(
       {this.purchaseInvoiceId,
       this.advertisementId,
@@ -57,7 +62,9 @@ class DirectSellingOrderResponse {
       this.receivedDate,
       this.quantity,
       this.isConfirmed,
-      this.isPaid});
+      this.isPaid,
+      this.isReceived,
+      this.rejectReason});
 
   // from json
   factory DirectSellingOrderResponse.fromJson(Map<String, dynamic> json) =>

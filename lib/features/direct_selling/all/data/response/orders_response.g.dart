@@ -12,13 +12,11 @@ DirectSellingOrdersListResponse _$DirectSellingOrdersListResponseFromJson(
       status: json['status'] as bool?,
       message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) =>
-              DirectSellingOrderResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => DirectSellingOrderResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       pagination: json['pagination'] == null
           ? null
-          : PaginationResponse.fromJson(
-              json['pagination'] as Map<String, dynamic>),
+          : PaginationResponse.fromJson(json['pagination'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DirectSellingOrdersListResponseToJson(
@@ -30,8 +28,7 @@ Map<String, dynamic> _$DirectSellingOrdersListResponseToJson(
       'pagination': instance.pagination,
     };
 
-DirectSellingOrderResponse _$DirectSellingOrderResponseFromJson(
-        Map<String, dynamic> json) =>
+DirectSellingOrderResponse _$DirectSellingOrderResponseFromJson(Map<String, dynamic> json) =>
     DirectSellingOrderResponse(
       purchaseInvoiceId: (json['purchase_invoice_id'] as num?)?.toInt(),
       advertisementId: (json['advertisement_id'] as num?)?.toInt(),
@@ -43,10 +40,11 @@ DirectSellingOrderResponse _$DirectSellingOrderResponseFromJson(
       quantity: (json['quantity'] as num?)?.toInt(),
       isConfirmed: (json['is_confirmed'] as num?)?.toInt(),
       isPaid: (json['is_paid'] as num?)?.toInt(),
+      isReceived: (json['is_received'] as num?)?.toInt(),
+      rejectReason: json['reason'] as String?,
     );
 
-Map<String, dynamic> _$DirectSellingOrderResponseToJson(
-        DirectSellingOrderResponse instance) =>
+Map<String, dynamic> _$DirectSellingOrderResponseToJson(DirectSellingOrderResponse instance) =>
     <String, dynamic>{
       'purchase_invoice_id': instance.purchaseInvoiceId,
       'advertisement_id': instance.advertisementId,
@@ -58,4 +56,6 @@ Map<String, dynamic> _$DirectSellingOrderResponseToJson(
       'quantity': instance.quantity,
       'is_confirmed': instance.isConfirmed,
       'is_paid': instance.isPaid,
+      'is_received': instance.isReceived,
+      'reason': instance.rejectReason
     };

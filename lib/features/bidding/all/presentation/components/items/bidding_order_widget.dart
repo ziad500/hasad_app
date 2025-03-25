@@ -117,7 +117,8 @@ class BiddingOrderWidget extends StatelessWidget {
             ),
             /* 
             ... */
-            if (biddingOrderModel.purchase?.isConfirmed == 0) ...[
+            if (biddingOrderModel.purchase?.isConfirmed == 0 &&
+                biddingOrderModel.purchase?.isPaid == 1) ...[
               SizedBox(
                 height: 10.h,
               ),
@@ -156,6 +157,7 @@ class BiddingOrderWidget extends StatelessWidget {
                   biddingOrderModel.purchase?.rejectReason != "") ...[
                 const SizedBox(height: 5),
                 Container(
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       color: Colors.red.withOpacity(0.6), borderRadius: BorderRadius.circular(15)),
                   child: SubTitleWidget(

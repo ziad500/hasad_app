@@ -10,6 +10,7 @@ import 'package:hasad_app/common/title_widget.dart';
 import 'package:hasad_app/features/direct_selling/all/domain/models/orders_model.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/components/bottomsheets/auth_order_bottom_sheet.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/components/bottomsheets/choose_payment_method_bottom_sheet.dart';
+import 'package:hasad_app/features/direct_selling/all/presentation/components/reject_bottomsheet.dart';
 import 'package:hasad_app/features/direct_selling/all/presentation/controller/orders/cubit/direct_selling_orders_cubit.dart';
 import 'package:hasad_app/generated/app_strings.g.dart';
 import 'package:hasad_app/utils/app_assets.dart';
@@ -158,8 +159,33 @@ class DirectSellingOrderWidget extends StatelessWidget {
                 ]
               ],
             ),
+            if ((directSellingOrderModel.isReceived == 2 ||
+                directSellingOrderModel.isReceived == 3)) ...[
+              const SizedBox(height: 10),
+              DefaultButton(
+                  height: 35,
+                  textSize: 12.sp,
+                  color: directSellingOrderModel.isReceived == 2 ? Colors.green : Colors.red,
+                  buttonName: directSellingOrderModel.isReceived == 2
+                      ? LocaleKeys.doneRecieve.tr()
+                      : LocaleKeys.doneReject.tr(),
+                  buttonFunction: () {}),
+              if (directSellingOrderModel.rejectReason != null &&
+                  directSellingOrderModel.rejectReason != "") ...[
+                const SizedBox(height: 5),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.red.withOpacity(0.6), borderRadius: BorderRadius.circular(15)),
+                  child: SubTitleWidget(
+                    subTitle: directSellingOrderModel.rejectReason ?? "",
+                    color: Colors.white,
+                  ),
+                )
+              ]
+            ],
             if (directSellingOrderModel.purchaseInvoiceId != null &&
-                directSellingOrderModel.receivedDate == null &&
+                directSellingOrderModel.isReceived == 1 &&
                 directSellingOrderModel.isConfirmed == 1 &&
                 directSellingOrderModel.isPaid == 1) ...[
               const SizedBox(height: 10),
@@ -176,17 +202,21 @@ class DirectSellingOrderWidget extends StatelessWidget {
                               directSellingOrderModel.purchaseInvoiceId.toString(), "2", "");
                         }),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(width: 15),
                   Expanded(
                     child: DefaultButton(
                         height: 35,
                         textSize: 12.sp,
-                        color: AppColors.primaryColor,
+                        color: AppColors.red,
                         buttonName: LocaleKeys.rejectRecieve.tr(),
                         buttonFunction: () {
-                          /* 
-                          DirectSellingOrdersCubit.get(context).confirmOrder(
-                              directSellingOrderModel.purchaseInvoiceId.toString(), "3", ""); */
+                          DirectSellingOrdersCubit cubit = DirectSellingOrdersCubit.get(context);
+                          showModalSheet(
+                              context,
+                              DirectSellingRejectOrderBottomSheet(
+                                  directSellingOrdersCubit: cubit,
+                                  purchaseInvoiceId:
+                                      directSellingOrderModel.purchaseInvoiceId.toString()));
                         }),
                   ),
                 ],

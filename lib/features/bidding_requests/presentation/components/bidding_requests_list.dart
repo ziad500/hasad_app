@@ -60,7 +60,8 @@ class _BiddingRequestsListViewState extends State<BiddingRequestsListView> {
         allCaught: state is BiddingRequestsListAllCaughtState,
         //indicates that you we currently fetching the next page
         isLoading: state is GetBiddingRequestsListPaginationLoadingState,
-        mainLoading: state is GetBiddingRequestsListLoadingState,
+        mainLoading:
+            state is GetBiddingRequestsListLoadingState || state is GetAcceptOrRejectLoadingState,
         isError: state is GetBiddingRequestsListErrorState, error: getError(),
       );
     });
