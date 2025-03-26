@@ -72,6 +72,7 @@ class BiddingRequestsCubit extends Cubit<BiddingRequestsState> {
     await _acceptOrRejectBiddingRequestsUsecase
         .execude(isAccept ? "accept-winning-auction/$id" : "reject-winning-auction/$id")
         .then((value) => value.fold((l) => emit(GetAcceptOrRejectErrorState(l.message)), (r) {
+              emit(GetAcceptOrRejectSuccessState());
               biddingRequestsModel = null;
               getBiddingRequestsList(advertismentId1);
             }));

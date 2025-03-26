@@ -15,6 +15,7 @@ import 'package:hasad_app/core/func/payment_faild_dialog.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/bidding_progress.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/bidding_timer_widget.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/bidding_widget.dart';
+import 'package:hasad_app/features/bidding/details/presentation/components/requests_list.dart';
 import 'package:hasad_app/features/bidding/details/presentation/components/row_of_buttons.dart';
 import 'package:hasad_app/features/bidding/details/presentation/controller/cubit/bidding_details_cubit.dart';
 import 'package:hasad_app/features/direct_selling/details/presentation/components/base/body.dart';
@@ -102,7 +103,7 @@ class BiddingDetailsScreen extends StatelessWidget {
                         );
                 },
               ),
-              BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
+              /*          BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
                 builder: (context, state) {
                   BiddingDetailsCubit cubit = BiddingDetailsCubit.get(context);
 
@@ -130,6 +131,7 @@ class BiddingDetailsScreen extends StatelessWidget {
                         );
                 },
               ),
+      */
               BlocBuilder<BiddingDetailsCubit, BiddingDetailsState>(
                 builder: (context, state) {
                   if (BiddingDetailsCubit.get(context).directSellingDataModel != null) {
@@ -241,6 +243,11 @@ class BiddingDetailsScreen extends StatelessWidget {
                               BiddingTimerWidget(
                                 directSellingDataModel: cubit.directSellingDataModel,
                               ),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              BiddingRequestsList(
+                                  advertismentId: cubit.directSellingDataModel!.id.toString()),
                               const SizedBox(
                                 height: 100,
                               ),

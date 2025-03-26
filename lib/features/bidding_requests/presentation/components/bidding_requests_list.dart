@@ -12,9 +12,11 @@ import 'package:hasad_app/features/bidding_requests/presentation/controller/bidd
 ///the cubit will call the fetching method to fetch the next page , this will happen only if the current state is not loading state
 ///which indicates that no fetchng request is happening now]
 class BiddingRequestsListView extends StatefulWidget {
-  const BiddingRequestsListView({super.key, this.expanded = false, required this.advertismentId});
+  const BiddingRequestsListView(
+      {super.key, this.expanded = false, required this.advertismentId, this.func});
   final bool expanded;
   final String? advertismentId;
+  final Function? func;
 
   @override
   State<BiddingRequestsListView> createState() => _BiddingRequestsListViewState();
@@ -28,6 +30,11 @@ class _BiddingRequestsListViewState extends State<BiddingRequestsListView> {
     var cubit = BlocProvider.of<BiddingRequestsCubit>(context);
 
     return BlocConsumer<BiddingRequestsCubit, BiddingRequestsState>(listener: (context, state) {
+      if (state is GetAcceptOrRejectSuccessState) {
+        if (widget.func != null) {
+          widget.func!();
+        }
+      }
       if (state is GetAcceptOrRejectErrorState) {
         showSnackbar(context: context, text: state.error, state: ToastStates.ERROR);
       }
